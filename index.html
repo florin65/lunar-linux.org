@@ -4,100 +4,108 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lunar Linux | It's out of this world!</title>
-  <meta name="description" content="Lunar Linux is a source-based Linux distribution for users who want full control over their system.">
+  <meta name="description" content="Lunar Linux is a source-based Linux distribution for administrators who want control, transparency, and optional dependency management.">
 
   <link rel="icon" href="assets/logo/lunar-logo.ico">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
       <a class="brand" href="index.html">
         <img src="assets/logo/lunar-logo.svg" alt="Lunar Linux">
       </a>
 
-      <nav class="site-nav" aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="pages/about.html">About</a>
-        <a href="pages/download.html">Download</a>
-        <a href="pages/docs.html">Docs</a>
-        <a href="pages/community.html">Community</a>
-        <a href="pages/development.html">Development</a>
-      </nav>
+      <p class="brand-slogan">It's out of this world!</p>
     </div>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-inner">
-        <p class="eyebrow">Source-based Linux distribution</p>
-        <h1>Lunar Linux</h1>
-        <p class="tagline">It’s out of this world!</p>
-        <p class="hero-text">
-          Lunar Linux is a source-based, rolling Linux distribution for users
-          who want to understand, build, and control their system from the ground up.
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="pages/about.html">About</a>
+      <a href="pages/download.html">Download</a>
+      <a href="pages/docs.html">Docs</a>
+      <a href="pages/community.html">Community</a>
+      <a href="pages/development.html">Development</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="frontpage">
+    <div class="container frontpage-grid">
+
+      <section class="intro-panel">
+        <p class="meta-line">
+          Started in 2002 · Source-based · Rolling release · Moonbase
+        </p>
+
+        <h1>Why Lunar Linux?</h1>
+
+        <ul class="offer-list">
+          <li>Build from source</li>
+          <li>Target-machine optimization</li>
+          <li>Optional dependency control</li>
+          <li>Minimal downstream patching</li>
+          <li>Close-to-upstream software</li>
+          <li>Rolling release model</li>
+        </ul>
+
+        <p class="closing-line">
+          Designed for administrators who want to stay close to the hardware
+          and Linux they run on it.
         </p>
 
         <div class="hero-actions">
-          <a class="button primary" href="pages/download.html">Download Lunar</a>
-          <a class="button secondary" href="pages/docs.html">Read the docs</a>
+          <a class="button primary" href="pages/download.html">Download</a>
+          <a class="button secondary" href="pages/docs.html">Documentation</a>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section">
-      <div class="container">
-        <h2>Why Lunar Linux?</h2>
+      <aside class="side-panels">
+        <section class="info-box">
+          <h2>Latest News</h2>
 
-        <div class="cards">
-          <article class="card">
-            <h3>Source-based</h3>
-            <p>Build the system from source and keep full control over compile-time choices.</p>
-          </article>
+          <ul class="dated-list">
+            <li><span>2026-05-31</span> Daily ISO builds available</li>
+            <li><span>2026-05-31</span> Moonbase maintenance continues</li>
+            <li><span>2026-05-31</span> Website modernization project</li>
+          </ul>
+        </section>
 
-          <article class="card">
-            <h3>Rolling release</h3>
-            <p>Stay current through Lunar’s own package tools and the moonbase module collection.</p>
-          </article>
+        <section class="info-box compact">
+          <h2>Latest Updates</h2>
 
-          <article class="card">
-            <h3>Transparent</h3>
-            <p>Simple module files, visible patches, and a build process that stays close to the user.</p>
-          </article>
+          <ul class="update-list">
+            <li><span>moonbase</span> updated</li>
+            <li><span>toolchain</span> refreshed</li>
+            <li><span>modules</span> maintained</li>
+            <li><span>daily ISO</span> available</li>
+          </ul>
+        </section>
+      </aside>
 
-          <article class="card">
-            <h3>Community driven</h3>
-            <p>Maintained by a small group of users and developers who value traditional Linux principles.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section split-section">
-      <div class="container split">
-        <div>
-          <h2>Built for control</h2>
-          <p>
-            Lunar Linux does not try to hide the system from you. It gives you
-            tools to build, update, inspect, and tune your installation.
-          </p>
-        </div>
-
-        <div class="terminal-box">
-          <span>$ lunar update</span>
-          <span>$ lin moonbase</span>
-          <span>$ lvu search kernel</span>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>&copy; Lunar Linux Project</p>
-      <p>Modernized website prototype.</p>
     </div>
-  </footer>
+  </section>
+
+  <section class="quickfacts">
+    <div class="container facts">
+      <div><strong>Source-based</strong></div>
+      <div><strong>Optional dependencies</strong></div>
+      <div><strong>Close to upstream</strong></div>
+      <div><strong>Administrator focused</strong></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© Lunar Linux Project</p>
+    <p>It's out of this world!</p>
+  </div>
+</footer>
+
 </body>
 </html>

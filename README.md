@@ -18,7 +18,7 @@ Project status
 [✓] Repository created
 [✓] Initial structure
 [✓] Visual assets imported
-[ ] Homepage prototype
+[✓] Homepage prototype
 [ ] Site navigation
 [ ] Content migration
 [ ] Responsive layout
