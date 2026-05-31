@@ -593,3 +593,92 @@ h1 {
   }
 }
 
+/* -------------------------------------------------- */
+/* Docs philosophy box */
+/* -------------------------------------------------- */
+
+.philosophy-box {
+  margin-top: 14px;
+}
+
+.philosophy-card {
+  text-align: center;
+}
+
+.philosophy-card h2 {
+  margin-bottom: 14px;
+}
+
+.philosophy-card p {
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.philosophy-card p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* -------------------------------------------------- */
+/* Docs page */
+/* -------------------------------------------------- */
+
+.docs-hero {
+  padding: 24px 0;
+  background:
+    radial-gradient(circle at top right, rgba(76,163,199,0.13), transparent 30%),
+    var(--bg);
+}
+
+.docs-hero-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.docs-hero-main h1 {
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: clamp(1.7rem, 2.6vw, 2.6rem);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.docs-hero-main .hero-description {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.docs-hero-quote {
+  align-self: center;
+}
+
+.docs-philosophy-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.docs-philosophy-row .philosophy-card {
+  text-align: left;
+}
+
+.docs-philosophy-row .philosophy-card p {
+  max-width: none;
+}
+
+.docs-learning-card h2 {
+  color: var(--accent);
+}
+
+@media (max-width: 980px) {
+  .docs-hero-grid,
+  .docs-philosophy-row {
+    grid-template-columns: 1fr;
+  }
+}
