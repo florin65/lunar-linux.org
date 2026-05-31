@@ -407,6 +407,10 @@ h1 {
   font-size: 1rem;
 }
 
+.community-hero-grid {
+    margin-top: -85px;
+}
+
 .hero-description {
     max-width: none !important;
 }
@@ -681,4 +685,60 @@ h1 {
   .docs-philosophy-row {
     grid-template-columns: 1fr;
   }
+}
+
+.community-hero-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.community-contact-card {
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 22px;
+}
+
+.community-contact-card h2 {
+  margin: 0 0 14px;
+  color: var(--text);
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+}
+
+@media (max-width: 980px) {
+  .community-hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.community-contact {
+  display: block;
+  max-height: 100px;
+  width: auto;
+  margin: 0 auto 14px auto;
+  opacity: 0.9;
+}
+
+.community-right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    position: relative;
+    top: -58px;
+}
+
+.compact-quote {
+  padding: 16px 20px;
+}
+
+.compact-quote p {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.compact-quote span {
+  font-size: 1.1rem;
 }
