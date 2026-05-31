@@ -743,12 +743,6 @@ h1 {
   font-size: 1.1rem;
 }
 
-.development-right-column {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
 /* -------------------------------------------------- */
 /* Development page */
 /* -------------------------------------------------- */
