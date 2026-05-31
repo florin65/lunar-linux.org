@@ -13,3 +13,13 @@ Goals:
 
 Status: Early development.
 
+Project status
+
+[✓] Repository created
+[✓] Initial structure
+[✓] Visual assets imported
+[ ] Homepage prototype
+[ ] Site navigation
+[ ] Content migration
+[ ] Responsive layout
+[ ] Production deployment
