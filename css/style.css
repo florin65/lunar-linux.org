@@ -742,3 +742,30 @@ h1 {
 .compact-quote span {
   font-size: 1.1rem;
 }
+
+.development-right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* -------------------------------------------------- */
+/* Development page */
+/* -------------------------------------------------- */
+
+.development-right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  top: -63px;
+}
+
+.development-hero {
+  position: relative;
+  top: -100px;
+}
+
+.development-hero + .content-section {
+    margin-top: -100px;
+}
