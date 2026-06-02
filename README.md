@@ -1,6 +1,6 @@
 # lunar-linux.org
 
-Source repository for the future Lunar Linux website.
+Source repository for a new proposed Lunar Linux website.
 
 Goals:
 
@@ -16,17 +16,10 @@ Status: Finished 1st release.
 Project status
 
 [✓] Repository created
-
 [✓] Initial structure
-
 [✓] Visual assets imported
-
 [✓] Homepage prototype
-
 [✓] Site navigation
-
 [✓] Content migration
-
 [✓] Responsive layout
-
 [✓] Evaluation deployment on GitHub Pages
