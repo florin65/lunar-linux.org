@@ -11,15 +11,22 @@ Goals:
 * Git-based workflow
 * Preserve the traditional Lunar Linux philosophy
 
-Status: Early development.
+Status: Finished 1st release.
 
 Project status
 
 [✓] Repository created
+
 [✓] Initial structure
+
 [✓] Visual assets imported
+
 [✓] Homepage prototype
+
 [✓] Site navigation
+
 [✓] Content migration
+
 [✓] Responsive layout
+
 [✓] Evaluation deployment on GitHub Pages
