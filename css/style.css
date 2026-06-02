@@ -1,15 +1,17 @@
 :root {
-  --bg: #06131b;
-  --panel: #0f2d3c;
-  --panel-soft: rgba(15, 45, 60, 0.82);
-  --text: #eef5f8;
-  --muted: #a9c1ca;
-  --accent: #4ca3c7;
-  --accent-strong: #36a7d8;
-  --line: rgba(255,255,255,0.16);
-  --line-soft: rgba(255,255,255,0.09);
-}
+  --bg: #030712;
+  --panel: #111827;
+  --panel-soft: rgba(31, 41, 55, 0.74);
 
+  --text: #f3f4f6;
+  --muted: #d1d5db;
+
+  --accent: #60a5fa;
+  --accent-strong: #93c5fd;
+
+  --line: rgba(99, 102, 241, 0.30);
+  --line-soft: rgba(148, 163, 184, 0.16);
+}
 * {
   box-sizing: border-box;
 }
@@ -17,8 +19,8 @@
 body {
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgba(54,167,216,0.12), transparent 28%),
-    var(--bg);
+    radial-gradient(circle at top left, rgba(96, 165, 250, 0.14), transparent 30%),
+    linear-gradient(135deg, #030712 0%, #111827 50%, #172554 100%);
   color: var(--text);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.36;
@@ -29,6 +31,14 @@ a {
   text-decoration: none;
 }
 
+/* Global text color enforcement */
+body, .site-nav, .site-nav a,
+h1, h2, h3, h4, h5, h6,
+p, li, span, div, td, th {
+  color: var(--text);
+}
+
+
 .container {
   width: min(1280px, calc(100% - 56px));
   margin: 0 auto;
@@ -37,8 +47,9 @@ a {
 /* Header */
 
 .site-header {
-  background: rgba(6,19,27,0.96);
+  background: rgba(3, 7, 18, 0.96);
   border-bottom: 1px solid var(--line);
+  box-shadow: 0 12px 32px rgba(49, 46, 129, 0.18);
 }
 
 .header-inner {
@@ -91,7 +102,7 @@ a {
 .frontpage {
   padding: 18px 0;
   background:
-    radial-gradient(circle at top right, rgba(76,163,199,0.15), transparent 34%);
+    radial-gradient(circle at top right, rgba(96, 165, 250, 0.15), transparent 34%);
 }
 
 .frontpage-grid {
@@ -163,8 +174,8 @@ h1 {
 }
 
 .button.primary {
-  background: var(--accent);
-  color: #041018;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #030712;
 }
 
 .button.primary:hover {
@@ -191,8 +202,9 @@ h1 {
 .info-box {
   background: var(--panel-soft);
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 18px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
 }
 
 .info-box h2 {
@@ -252,7 +264,7 @@ h1 {
 .quickfacts {
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  background: rgba(6,19,27,0.42);
+  background: rgba(3, 7, 18, 0.44);
 }
 
 .facts {
@@ -284,7 +296,7 @@ h1 {
 
 .footer-inner {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   color: var(--muted);
   font-size: 0.9rem;
 }
@@ -387,8 +399,8 @@ h1 {
 
 .page-main {
   background:
-    radial-gradient(circle at top right, rgba(76,163,199,0.13), transparent 30%),
-    var(--bg);
+    radial-gradient(circle at top right, rgba(96, 165, 250, 0.13), transparent 30%),
+    transparent;
 }
 
 .page-hero {
@@ -437,8 +449,9 @@ h1 {
 .quote-box {
   background: var(--panel-soft);
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 20px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
 }
 
 .content-card.wide {
@@ -468,7 +481,7 @@ h1 {
 }
 
 .muted-section {
-  background: rgba(6,19,27,0.36);
+  background: rgba(3, 7, 18, 0.38);
   border-top: 1px solid var(--line-soft);
   border-bottom: 1px solid var(--line-soft);
 }
@@ -557,8 +570,9 @@ h1 {
 .download-card {
   background: var(--panel-soft);
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 22px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
 }
 
 .download-card h2 {
@@ -631,8 +645,8 @@ h1 {
 .docs-hero {
   padding: 24px 0;
   background:
-    radial-gradient(circle at top right, rgba(76,163,199,0.13), transparent 30%),
-    var(--bg);
+    radial-gradient(circle at top right, rgba(96, 165, 250, 0.13), transparent 30%),
+    transparent;
 }
 
 .docs-hero-grid {
@@ -697,8 +711,9 @@ h1 {
 .community-contact-card {
   background: var(--panel-soft);
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 22px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
 }
 
 .community-contact-card h2 {
