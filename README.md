@@ -19,7 +19,7 @@ Project status
 [✓] Initial structure
 [✓] Visual assets imported
 [✓] Homepage prototype
-[ ] Site navigation
-[ ] Content migration
-[ ] Responsive layout
-[ ] Production deployment
+[✓] Site navigation
+[✓] Content migration
+[✓] Responsive layout
+[✓] Evaluation deployment on GitHub Pages
