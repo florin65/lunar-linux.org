@@ -562,10 +562,71 @@ h1 {
 
 .download-main {
   display: grid;
-  grid-template-columns: 1.45fr 1fr;
+  grid-template-columns: minmax(0, 3fr) minmax(280px, 1fr);
   gap: 18px;
-  align-items: stretch;
+  align-items: start;
 }
+
+.primary-download {
+  min-width: 0;
+}
+
+.download-main aside {
+  min-width: 0;
+}
+
+.primary-download h2 {
+  color: var(--accent);
+}
+
+.download-info {
+  margin: 18px 0;
+}
+
+.download-info p {
+  margin: 10px 0;
+}
+
+.download-info code {
+  display: block;
+
+  margin-top: 8px;
+  padding: 10px;
+
+  background: rgba(0,0,0,0.18);
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+
+  font-family: ui-monospace,
+               SFMono-Regular,
+               Menlo,
+               Consolas,
+               monospace;
+
+  font-size: 0.82rem;
+  line-height: 1.45;
+
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+
+  color: var(--text);
+}
+
+.download-info span {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.download-info {
+  margin: 18px 0;
+}
+
+.download-info p {
+  margin: 12px 0;
+}
+
+
 
 .download-card {
   background: var(--panel-soft);

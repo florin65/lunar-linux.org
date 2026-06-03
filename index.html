@@ -82,10 +82,9 @@ and Linux systems they manage.
           <h2>Latest Updates</h2>
 
           <ul class="update-list">
-            <li><span>moonbase</span> updated</li>
-            <li><span>toolchain</span> refreshed</li>
-            <li><span>modules</span> maintained</li>
-            <li><span>daily ISO</span> available</li>
+            <li><span>date</span> <strong id="moonbase-date">...</strong></li>
+            <li><span>modules</span> <strong id="moonbase-modules">...</strong></li>
+            <li><span>daily ISO</span> <strong id="daily-iso">...</strong></li>
           </ul>
         </section>
       </aside>
@@ -110,6 +109,71 @@ and Linux systems they manage.
     <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+(function () {
+  var modules = document.getElementById("moonbase-modules");
+  var date = document.getElementById("moonbase-date");
+
+  if (!modules || !date) {
+    return;
+  }
+
+  function currentDate() {
+    return new Date().toISOString().split("T")[0];
+  }
+
+  date.textContent = currentDate();
+
+  fetch("data/moonbase-stats.json", { cache: "no-store" })
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("moonbase stats unavailable");
+      }
+      return response.json();
+    })
+    .then(function (stats) {
+      if (typeof stats.modules === "number") {
+        modules.textContent =
+          stats.modules.toLocaleString("en-US");
+      } else {
+        modules.textContent = "unknown";
+      }
+    })
+    .catch(function () {
+      modules.textContent = "unknown";
+    });
+}());
+</script>
+
+<script>
+(function () {
+  var iso = document.getElementById("daily-iso");
+
+  if (!iso) {
+    return;
+  }
+
+  function shortIsoName(file) {
+    var match = String(file || "").match(/daily-[0-9]{8}/);
+    return match ? match[0] : "available";
+  }
+
+  fetch("data/daily-iso.json", { cache: "no-store" })
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("daily ISO unavailable");
+      }
+      return response.json();
+    })
+    .then(function (data) {
+      iso.textContent = shortIsoName(data.iso_file);
+    })
+    .catch(function () {
+      iso.textContent = "unknown";
+    });
+}());
+</script>
 
 </body>
 </html>
