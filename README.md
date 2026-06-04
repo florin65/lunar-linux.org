@@ -78,7 +78,8 @@ The first public release has been completed and published for community evaluati
 
 ### News System
 
-* [ ] Create News page
+* [✓] Create News page
+* [✓] Transform the website to a dynamic one, based on markdown pages
 * [ ] Create individual news entries
 * [ ] Generate News automatically from Git activity
 * [ ] Publish News archive
