@@ -567,6 +567,53 @@ h1 {
   align-items: start;
 }
 
+.download-main.download-stacked {
+    grid-template-columns: 1fr;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.download-section {
+  padding-top: 26px;
+}
+
+.primary-download h1 {
+  margin: 0 0 26px;
+  font-size: clamp(2.15rem, 3.2vw, 3.05rem);
+}
+
+.primary-download p {
+  max-width: 980px;
+  font-size: 1.04rem;
+}
+
+.primary-download .download-info p {
+  max-width: none;
+}
+
+.quick-notes-card {
+  padding-top: 26px;
+  padding-bottom: 26px;
+}
+
+.download-main.download-stacked .simple-list {
+  font-size: 1.02rem;
+}
+
+.download-main.download-stacked .hero-actions {
+  flex-wrap: wrap;
+}
+
+.download-main.download-stacked .simple-list {
+  columns: 2;
+  column-gap: 42px;
+}
+
+.download-main.download-stacked .simple-list li {
+  break-inside: avoid;
+}
+
 .primary-download {
   min-width: 0;
 }
@@ -669,6 +716,14 @@ h1 {
 @media (max-width: 980px) {
   .download-main {
     grid-template-columns: 1fr;
+  }
+
+  .download-main.download-stacked {
+    max-width: none;
+  }
+
+  .download-main.download-stacked .simple-list {
+    columns: 1;
   }
 }
 
