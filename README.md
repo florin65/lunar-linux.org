@@ -82,19 +82,19 @@ The first public release has been completed and published for community evaluati
 * [✓] Transform the website to a dynamic one, based on markdown pages
 * [✓] Create individual news entries
 * [✓] Generate News automatically from Git activity
-* [ ] Publish News archive
-
-### Activity Tracking
-
-* [ ] Add "Latest Activity" panel on Home
-* [ ] Aggregate activity from multiple Lunar repositories
-* [ ] Display recent project events automatically
 
 ### Automation
 
-* [ ] Markdown-driven content workflow
-* [ ] Static page generation
-* [ ] Automated site updates from repository activity
+* [✓] Markdown-driven content workflow
+* [✓] Static page generation
+* [✓] Automated site updates from repository activity
+
+### Activity Tracking
+
+* [ ] Publish News archive
+* [ ] Add "Latest Activity" panel on Home
+* [ ] Aggregate activity from multiple Lunar repositories
+* [ ] Display recent project events automatically
 
 ---
 
