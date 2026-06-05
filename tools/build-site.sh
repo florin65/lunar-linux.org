@@ -129,6 +129,7 @@ get_meta() {
 }
 
 load_dynamic_values() {
+
   latest_iso_file=$(json_get_string iso_file "$DAILY_ISO")
   latest_iso_url=$(json_get_string iso_url "$DAILY_ISO")
   latest_iso_date=$(json_get_string iso_date "$DAILY_ISO")
@@ -139,6 +140,13 @@ load_dynamic_values() {
   [ -n "$latest_iso_date" ] || latest_iso_date=$(json_get_string generated_at "$DAILY_ISO")
   [ -n "$latest_iso_date" ] || latest_iso_date="unavailable"
   [ -n "$moonbase_modules" ] || moonbase_modules="unavailable"
+
+  latest_iso_display=$(
+    printf '%s\n' "$latest_iso_file" |
+    sed -n 's/.*\(daily-[0-9]\{8\}\).*/\1/p'
+  )
+
+  [ -n "$latest_iso_display" ] || latest_iso_display="$latest_iso_file"
 }
 
 expand_variables() {
@@ -146,11 +154,13 @@ expand_variables() {
 
   awk \
     -v latest_iso_file="$latest_iso_file" \
+    -v latest_iso_display="$latest_iso_display" \
     -v latest_iso_url="$latest_iso_url" \
     -v latest_iso_date="$latest_iso_date" \
     -v moonbase_modules="$moonbase_modules" '
       {
         gsub(/\{\{[[:space:]]*latest_iso_file[[:space:]]*\}\}/, latest_iso_file)
+        gsub(/\{\{[[:space:]]*latest_iso_display[[:space:]]*\}\}/, latest_iso_display)
         gsub(/\{\{[[:space:]]*latest_iso_url[[:space:]]*\}\}/, latest_iso_url)
         gsub(/\{\{[[:space:]]*latest_iso_date[[:space:]]*\}\}/, latest_iso_date)
         gsub(/\{\{[[:space:]]*moonbase_modules[[:space:]]*\}\}/, moonbase_modules)
@@ -321,11 +331,13 @@ expand_template_file() {
 
   awk \
     -v latest_iso_file="$latest_iso_file" \
+    -v latest_iso_display="$latest_iso_display" \
     -v latest_iso_url="$latest_iso_url" \
     -v latest_iso_date="$latest_iso_date" \
     -v moonbase_modules="$moonbase_modules" '
       {
         gsub(/\{\{[[:space:]]*latest_iso_file[[:space:]]*\}\}/, latest_iso_file)
+        gsub(/\{\{[[:space:]]*latest_iso_display[[:space:]]*\}\}/, latest_iso_display)
         gsub(/\{\{[[:space:]]*latest_iso_url[[:space:]]*\}\}/, latest_iso_url)
         gsub(/\{\{[[:space:]]*latest_iso_date[[:space:]]*\}\}/, latest_iso_date)
         gsub(/\{\{[[:space:]]*moonbase_modules[[:space:]]*\}\}/, moonbase_modules)

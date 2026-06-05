@@ -33,4 +33,4 @@ Designed for administrators who want to stay close to the hardware and Linux sys
 
 - date — `{{ latest_iso_date }}`
 - modules — `{{ moonbase_modules }}`
-- daily ISO — `{{ latest_iso_file }}`
+- daily ISO — `{{ latest_iso_display }}`
