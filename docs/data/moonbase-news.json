@@ -1,0 +1,16 @@
+[
+  {"date":"2026-06-04","category":"Moonbase","repository":"other","module":"rtorrent","version":"0.16.13","commit":"eae90d27ef","title":"rtorrent updated to 0.16.13","summary":"version bumped to 0.16.13"},
+  {"date":"2026-06-04","category":"Moonbase","repository":"other","module":"libtorrent","version":"0.16.13","commit":"ce7a1d261f","title":"libtorrent updated to 0.16.13","summary":"version bumped to 0.16.13"},
+  {"date":"2026-06-04","category":"Moonbase","repository":"other","module":"","version":"","commit":"53eebcdce6","title":"sqlite: Fixing BUILD.","summary":"sqlite: Fixing BUILD."},
+  {"date":"2026-06-04","category":"Moonbase","repository":"other","module":"stress-ng","version":"0.21.02","commit":"335c616d65","title":"stress-ng updated to 0.21.02","summary":"version bumped to 0.21.02"},
+  {"date":"2026-06-04","category":"Moonbase","repository":"other","module":"radare2","version":"6.1.6","commit":"c9bba65076","title":"radare2 updated to 6.1.6","summary":"version bumped to 6.1.6"},
+  {"date":"2026-06-04","category":"Moonbase","repository":"other","module":"openjph","version":"0.27.4","commit":"88fc6d0f3e","title":"openjph updated to 0.27.4","summary":"version bumped to 0.27.4"},
+  {"date":"2026-06-04","category":"Moonbase","repository":"other","module":"elixir","version":"1.20.0","commit":"3684457184","title":"elixir updated to 1.20.0","summary":"version bumped to 1.20.0"},
+  {"date":"2026-06-04","category":"Moonbase","repository":"other","module":"jenkins","version":"2.567","commit":"ce11891532","title":"jenkins updated to 2.567","summary":"version bumped to 2.567"},
+  {"date":"2026-06-04","category":"Moonbase","repository":"other","module":"sqlite","version":"3.53.2","commit":"44d219ad48","title":"sqlite updated to 3.53.2","summary":"version bumped to 3.53.2"},
+  {"date":"2026-06-04","category":"Moonbase","repository":"other","module":"cri-o","version":"1.36.","commit":"e21454b81a","title":"cri-o updated to 1.36.","summary":"version bumped to 1.36."},
+  {"date":"2026-06-03","category":"Moonbase","repository":"other","module":"gmic-qt","version":"3.7.6.","commit":"ba88150534","title":"gmic-qt updated to 3.7.6.","summary":"bump to 3.7.6."},
+  {"date":"2026-06-04","category":"Moonbase","repository":"other","module":"ansible","version":"14.0.0","commit":"8aeb63a2da","title":"ansible updated to 14.0.0","summary":"version bumped to 14.0.0"},
+  {"date":"2026-06-04","category":"Moonbase","repository":"other","module":"wireless-regdb","version":"2026.05.30","commit":"2f2729331d","title":"wireless-regdb updated to 2026.05.30","summary":"version bumped to 2026.05.30"},
+  {"date":"2026-06-04","category":"Moonbase","repository":"xorg","module":"libinput","version":"1.31.3","commit":"b8041dd","title":"libinput updated to 1.31.3","summary":"version bumped to 1.31.3"}
+]

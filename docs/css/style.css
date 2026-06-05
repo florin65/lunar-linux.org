@@ -994,3 +994,158 @@ h1 {
 .compact-card h3 {
   margin-bottom: 8px;
 }
+
+
+/* -------------------------------------------------- */
+/* Moonbase commits journal */
+/* -------------------------------------------------- */
+
+.moonbase-section .container {
+  max-width: 1280px;
+}
+
+.moonbase-journal {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background:
+    linear-gradient(180deg,
+      rgba(31, 41, 55, 0.88),
+      rgba(17, 24, 39, 0.84));
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+  overflow-x: auto;
+}
+
+.moonbase-table {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: collapse;
+  table-layout: auto;
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.moonbase-col-commit {
+  width: 10rem;
+}
+
+.moonbase-col-repository {
+  width: 5rem;
+}
+
+.moonbase-col-module {
+  width: 11rem;
+}
+
+.moonbase-col-comment {
+  width: auto;
+}
+
+.moonbase-table th,
+.moonbase-table td {
+  padding: 9px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.moonbase-table th {
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(3, 7, 18, 0.40);
+  border-bottom: 1px solid var(--line);
+}
+
+.moonbase-table td {
+  color: var(--text);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.moonbase-table tbody tr:hover {
+  background: rgba(96, 165, 250, 0.085);
+}
+
+.moonbase-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.moonbase-table .commit-id {
+  white-space: nowrap;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+  font-size: 0.82rem;
+}
+
+.moonbase-table .commit-id a,
+.moonbase-table .commit-id a:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  padding: 2px 7px;
+
+  color: var(--accent-strong) !important;
+
+  background: rgba(96, 165, 250, 0.10);
+  border: 1px solid rgba(147, 197, 253, 0.42);
+  border-radius: 999px;
+
+  font-weight: 900;
+  text-decoration: none !important;
+}
+
+.moonbase-table .commit-id a::after {
+  content: "↗";
+  color: var(--accent);
+  font-size: 0.70rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.moonbase-table .commit-id a:hover {
+  color: #030712 !important;
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+}
+
+.moonbase-table .commit-id a:hover::after {
+  color: #030712;
+}
+
+.moonbase-table .repository-name {
+  color: var(--accent-strong);
+  font-weight: 800;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.moonbase-table .module-name {
+  color: var(--text);
+  font-weight: 800;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.moonbase-table .commit-comment {
+  color: var(--muted);
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 760px) {
+  .moonbase-table {
+    min-width: 860px;
+  }
+
+  .moonbase-table th,
+  .moonbase-table td {
+    padding: 8px 12px;
+  }
+}

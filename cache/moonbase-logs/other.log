@@ -1,0 +1,13 @@
+2026-06-04|eae90d27ef|rtorrent: Version bumped to 0.16.13
+2026-06-04|ce7a1d261f|libtorrent: Version bumped to 0.16.13
+2026-06-04|53eebcdce6|sqlite: Fixing BUILD.
+2026-06-04|335c616d65|stress-ng: Version bumped to 0.21.02
+2026-06-04|c9bba65076|radare2: Version bumped to 6.1.6
+2026-06-04|88fc6d0f3e|openjph: Version bumped to 0.27.4
+2026-06-04|3684457184|elixir: version bumped to 1.20.0
+2026-06-04|ce11891532|jenkins: version bumped to 2.567
+2026-06-04|44d219ad48|sqlite: version bumped to 3.53.2
+2026-06-04|e21454b81a|cri-o: version bumped to 1.36.
+2026-06-03|ba88150534|gmic-qt: Bump to 3.7.6.
+2026-06-04|8aeb63a2da|ansible: version bumped to 14.0.0
+2026-06-04|2f2729331d|wireless-regdb: version bumped to 2026.05.30

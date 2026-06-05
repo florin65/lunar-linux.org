@@ -22,18 +22,18 @@ Future development will focus on activity aggregation, automated News generation
 [View Website](../index.html)
 [Community](community.html)
 
-> Website 1.0 released.  
+> Website 2.0 released.  
 > A new chapter for Lunar Linux.
 
 ## Recent activity
 
-### Website 1.0 Released
+### Website 2.0 Released
 
-The first public release of the proposed Lunar Linux website has been completed and published for community evaluation.
+The public release of the proposed Lunar Linux website has been completed and published for community evaluation.
 
 The site now includes Home, News, About, Download, Documentation, Community and Development sections, together with a refreshed visual identity and GitHub Pages deployment.
 
-Future development will focus on automated activity tracking, Git-based News generation and project visibility.
+The development is now focused on automated activity tracking, Git-based News generation and project visibility.
 
 ### Website visual refresh completed
 
@@ -57,9 +57,9 @@ New pages explain how to contact the community, follow development and contribut
 
 ## Future direction
 
-The News page is the first step toward exposing the real activity of the Lunar Linux project directly on the website.
+The News page is a step toward exposing the real activity of the Lunar Linux project directly on the website.
 
-In the future, news and recent activity can be generated automatically from Git repository activity, commits, releases and documentation updates.
+The news and recent activity is generated automatically from Git repository activity, commits, releases and documentation updates.
 
 > Git is the journal.  
 > News page is the visible state.

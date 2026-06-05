@@ -54,19 +54,12 @@
         <div class="download-info">
           <p>
             <strong>ISO: </strong>
-            <span id="latest-iso-file">loading...</span>
+            <span>lunar-1.8.0-daily-20260605-x86_64.iso</span>
           </p>
         </div>
 
         <div class="hero-actions">
-          <a class="button primary" href="https://lunar.lart.ca/latest/">Download ISO</a>
-
-          <a
-            href="#"
-            class="button secondary"
-            id="copy-sha256">
-            Copy SHA256
-          </a>
+          <a class="button primary" href="https://lunar.lart.ca/dl/lunar-1.8.0-daily-20260605-x86_64.iso">Download ISO</a>
 
           <a class="button secondary" href="https://web.libera.chat/#lunar">IRC</a>
 
@@ -191,75 +184,6 @@
   </section>
 
 </main>
-
-<script>
-(function () {
-
-  var isoFile = document.getElementById("latest-iso-file");
-  var currentSha256 = "";
-
-  var downloadButton =
-    document.querySelector(".primary-download .button.primary");
-
-  fetch("data/daily-iso.json", { cache: "no-store" })
-    .then(function (response) {
-      if (!response.ok) {
-        throw new Error("daily ISO unavailable");
-      }
-      return response.json();
-    })
-    .then(function (data) {
-      currentSha256 = data.sha256 || "";
-
-      if (isoFile) {
-        isoFile.textContent = data.iso_file || "unavailable";
-      }
-
-      if (downloadButton && data.iso_url) {
-        if (data.iso_url.indexOf("http") === 0) {
-          downloadButton.href = data.iso_url;
-        } else {
-          downloadButton.href = "https://lunar.lart.ca" + data.iso_url;
-        }
-      }
-    })
-    .catch(function () {
-
-      if (isoFile) {
-        isoFile.textContent = "unavailable";
-      }
-    });
-
-var copyButton = document.getElementById("copy-sha256");
-
-if (copyButton) {
-
-  copyButton.addEventListener("click", function (e) {
-    e.preventDefault();
-
-    if (!currentSha256) {
-      return;
-    }
-
-    navigator.clipboard.writeText(currentSha256)
-      .then(function () {
-
-        copyButton.textContent = "SHA256 Copied";
-
-        setTimeout(function () {
-          copyButton.textContent = "Copy SHA256";
-        }, 2000);
-
-      })
-      .catch(function () {
-        copyButton.textContent = "Copy Failed";
-      });
-
-  });
-}
-
-}());
-</script>
 <footer class="site-footer">
   <div class="container footer-inner">
     <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
