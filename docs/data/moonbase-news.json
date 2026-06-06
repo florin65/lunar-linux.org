@@ -1,5 +1,9 @@
 [
   {"date":"2026-06-04","category":"Moonbase","repository":"kde","module":"applications","version":"26.04.2.","commit":"bfbcf49ee","title":"applications updated to 26.04.2.","summary":"bump to 26.04.2."},
+  {"date":"2026-06-05","category":"Moonbase","repository":"other","module":"hwdata","version":"0.408","commit":"0a91a831e8","title":"hwdata updated to 0.408","summary":"version bumped to 0.408"},
+  {"date":"2026-06-05","category":"Moonbase","repository":"other","module":"foomatic-db-nonfree","version":"20260604.","commit":"4c8cca21bd","title":"foomatic-db-nonfree updated to 20260604.","summary":"bump to 20260604."},
+  {"date":"2026-06-05","category":"Moonbase","repository":"other","module":"foomatic-db-engine","version":"20260604.","commit":"2b9e3885de","title":"foomatic-db-engine updated to 20260604.","summary":"bump to 20260604."},
+  {"date":"2026-06-05","category":"Moonbase","repository":"other","module":"foomatic-db","version":"20260604.","commit":"404ae26705","title":"foomatic-db updated to 20260604.","summary":"bump to 20260604."},
   {"date":"2026-06-05","category":"Moonbase","repository":"other","module":"socat","version":"1.8.1.1","commit":"78c3824a2b","title":"socat updated to 1.8.1.1","summary":"version bumped to 1.8.1.1"},
   {"date":"2026-06-05","category":"Moonbase","repository":"other","module":"paho-mqtt-c","version":"1.3.14","commit":"231c0b6041","title":"paho-mqtt-c updated to 1.3.14","summary":"version bumped to 1.3.14"},
   {"date":"2026-06-05","category":"Moonbase","repository":"other","module":"keepalived","version":"2.3.4","commit":"8885b8f6b1","title":"keepalived updated to 2.3.4","summary":"version bumped to 2.3.4"},

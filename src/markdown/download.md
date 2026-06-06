@@ -16,7 +16,6 @@ It is the recommended starting point for new installations because it reflects t
 **ISO:** `{{ latest_iso_file }}`
 
 [Download ISO]({{ latest_iso_url }})
-[Copy SHA256](#copy-sha256)
 [IRC](https://web.libera.chat/#lunar)
 [Installation Guide](http://wiki.lunar-linux.org/Lunar_Linux:Installation)
 

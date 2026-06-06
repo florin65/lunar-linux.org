@@ -1,7 +1,5 @@
----
-date: 2026-06-04
-title: Download page refreshed
-category: Website
----
+Date: 2026-06-04
+Category: Website
+Title: Download page refreshed
 
-The Lunar Linux download page has been refreshed with a clearer daily build section, quick notes and direct links to the ISO, checksum action, IRC and the installation guide.
+The Lunar Linux download page has been refreshed with a clearer daily build section, quick notes and direct links to the ISO, IRC and the installation guide.

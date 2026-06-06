@@ -34,3 +34,13 @@ Designed for administrators who want to stay close to the hardware and Linux sys
 - date — `{{ latest_iso_date }}`
 - modules — `{{ moonbase_modules }}`
 - daily ISO — `{{ latest_iso_display }}`
+
+
+## Quick facts
+
+- Source-based
+- Rolling release
+- Moonbase
+- Optional dependencies
+- KISS-oriented
+- Administrator focused

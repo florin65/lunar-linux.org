@@ -1,3 +1,5 @@
 [
-  {"date":"2026-06-04","category":"Website","title":"Download page refreshed","slug":"2026-06-04-download-page","summary":"The Lunar Linux download page has been refreshed with a clearer daily build section, quick notes and direct links to the ISO, checksum action, IRC and the installation guide."}
+  {"date":"2026-06-06 19:30","category":"Project","title":"Website 2.0 released","slug":"2026-06-06-website-2.0-released","summary":"The Lunar Linux Website 2.0 has been published for community evaluation."},
+  {"date":"2026-06-06 20:15","category":"Community","title":"Initial community feedback received","slug":"2026-06-06-community-feedback","summary":"Initial community feedback has been received after the Website 2.0 preview was announced."},
+  {"date":"2026-06-04","category":"Website","title":"Download page refreshed","slug":"2026-06-04-download-page","summary":"The Lunar Linux download page has been refreshed with a clearer daily build section, quick notes and direct links to the ISO, IRC and the installation guide."}
 ]

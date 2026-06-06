@@ -29,6 +29,8 @@ MOONBASE_STATS_JSON=${MOONBASE_STATS_JSON:-docs/data/moonbase-stats.json}
 DAILY_ISO_JSON=${DAILY_ISO_JSON:-docs/data/daily-iso.json}
 NEWS_JSON=${NEWS_JSON:-docs/data/news.json}
 MOONBASE_NEWS_JSON=${MOONBASE_NEWS_JSON:-docs/data/moonbase-news.json}
+COMMUNITY_NEWS_HTML=${COMMUNITY_NEWS_HTML:-cache/community-news.html}
+NEWS_ARTICLES_DIR=${NEWS_ARTICLES_DIR:-docs/news}
 GENERATE_NEWS_JSON=${GENERATE_NEWS_JSON:-yes}
 UPDATE_DYNAMIC_DATA=${UPDATE_DYNAMIC_DATA:-yes}
 
@@ -55,10 +57,12 @@ TOOLS=$(abs_path "$TOOLS_DIR")
 HEADER="$TEMPLATES/header.html"
 FOOTER="$TEMPLATES/footer.html"
 PAGE_TEMPLATES="$TEMPLATES/pages"
+RENDERER="$TOOLS/render-page.sh"
 MOONBASE_STATS=$(abs_path "$MOONBASE_STATS_JSON")
 DAILY_ISO=$(abs_path "$DAILY_ISO_JSON")
 NEWS_OUT=$(abs_path "$NEWS_JSON")
 MOONBASE_NEWS=$(abs_path "$MOONBASE_NEWS_JSON")
+COMMUNITY_NEWS=$(abs_path "$COMMUNITY_NEWS_HTML")
 
 mkdir -p "$PUBLIC" "$DATA"
 
@@ -410,9 +414,28 @@ EOF_MOONBASE
   ' "$MOONBASE_NEWS" > "$moonbase_commits_file"
 }
 
+
+prepare_community_values() {
+  community_news_file=$(mktemp)
+
+  if [ -f "$COMMUNITY_NEWS" ]; then
+    cat "$COMMUNITY_NEWS" > "$community_news_file"
+  else
+    cat > "$community_news_file" <<EOF_COMMUNITY
+      <div class="community-news-journal empty">
+        <p>No community or project news entries were found.</p>
+      </div>
+EOF_COMMUNITY
+  fi
+}
+
 cleanup_temp_files() {
   if [ -n "${moonbase_commits_file:-}" ]; then
     rm -f "$moonbase_commits_file"
+  fi
+
+  if [ -n "${community_news_file:-}" ]; then
+    rm -f "$community_news_file"
   fi
 }
 
@@ -431,13 +454,22 @@ expand_template_file() {
     -v moonbase_modules_changed="$moonbase_modules_changed" \
     -v moonbase_version_bumps="$moonbase_version_bumps" \
     -v moonbase_other_commits="$moonbase_other_commits" \
-    -v moonbase_commits_file="$moonbase_commits_file" '
+    -v moonbase_commits_file="$moonbase_commits_file" \
+    -v community_news_file="$community_news_file" '
       {
         if ($0 ~ /\{\{[[:space:]]*moonbase_commits_html[[:space:]]*\}\}/) {
           while ((getline line < moonbase_commits_file) > 0) {
             print line
           }
           close(moonbase_commits_file)
+          next
+        }
+
+        if ($0 ~ /\{\{[[:space:]]*community_news_html[[:space:]]*\}\}/) {
+          while ((getline line < community_news_file) > 0) {
+            print line
+          }
+          close(community_news_file)
           next
         }
 
@@ -461,7 +493,7 @@ write_page() {
   name=$(basename -- "$md" .md)
   out="$PUBLIC/$name.html"
   expanded=$(mktemp)
-  page_template="$PAGE_TEMPLATES/$name.html"
+  rendered=$(mktemp)
 
   title=$(get_meta title "$md")
   description=$(get_meta description "$md")
@@ -470,29 +502,12 @@ write_page() {
   [ -n "$description" ] || description="Lunar Linux website page."
 
   expand_variables "$md" > "$expanded"
+  sh "$RENDERER" "$name" "$expanded" > "$rendered"
 
   {
     write_html_head "$title" "$description"
     sed 's#{{root}}##g' "$HEADER"
-
-    if [ -f "$page_template" ]; then
-      expand_template_file "$page_template"
-    else
-      cat <<EOF_PAGE
-<main class="page-main">
-  <section class="content-section">
-    <div class="container content-card wide generated-page">
-EOF_PAGE
-
-      render_markdown_body "$expanded"
-
-      cat <<EOF_PAGE
-    </div>
-  </section>
-</main>
-EOF_PAGE
-    fi
-
+    expand_template_file "$rendered"
     cat "$FOOTER"
 
     cat <<EOF_PAGE
@@ -501,7 +516,7 @@ EOF_PAGE
 EOF_PAGE
   } > "$out"
 
-  rm -f "$expanded"
+  rm -f "$expanded" "$rendered"
   printf 'generated %s\n' "$(rel_from_project "$out")"
 }
 
@@ -518,28 +533,85 @@ first_paragraph() {
   ' "$1"
 }
 
+
+news_meta() {
+  key="$1"
+  file="$2"
+
+  sed -n 's/^'"$key"':[[:space:]]*//p' "$file" | head -n 1
+}
+
+news_summary() {
+  file="$1"
+
+  awk '
+    BEGIN { body = 0 }
+    body && NF {
+      print
+      exit
+    }
+    /^[[:space:]]*$/ {
+      body = 1
+      next
+    }
+  ' "$file"
+}
+
+news_has_body() {
+  file="$1"
+
+  awk '
+    BEGIN { body = 0; ok = 1 }
+    body && NF { ok = 0; exit }
+    /^[[:space:]]*$/ { body = 1; next }
+    END { exit ok }
+  ' "$file"
+}
+
+valid_news_date() {
+  printf '%s
+' "$1" |
+    grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}([[:space:]][0-9]{2}:[0-9]{2})?$'
+}
+
 build_news_json() {
   tmp="$NEWS_OUT.tmp"
   out_dir=$(dirname -- "$NEWS_OUT")
 
   mkdir -p "$out_dir"
-  printf '[\n' > "$tmp"
+  printf '[
+' > "$tmp"
   first=1
 
   if [ -d "$NEWS_SRC" ]; then
     find "$NEWS_SRC" -type f -name '*.md' | sort -r | while IFS= read -r md; do
-      date=$(get_meta date "$md")
-      title=$(get_meta title "$md")
-      category=$(get_meta category "$md")
-      summary=$(first_paragraph "$md")
+      date=$(news_meta Date "$md")
+      title=$(news_meta Title "$md")
+      category=$(news_meta Category "$md")
+      summary=$(news_summary "$md")
       slug=$(basename -- "$md" .md)
 
-      [ -n "$date" ] || date="unknown"
-      [ -n "$title" ] || title="$slug"
-      [ -n "$category" ] || category="News"
+      if [ -z "$date" ] || [ -z "$title" ] || [ -z "$category" ]; then
+        printf 'warning: rejecting invalid news file %s: missing Date, Category or Title
+' "$(rel_from_project "$md")" >&2
+        continue
+      fi
+
+      if ! valid_news_date "$date"; then
+        printf 'warning: rejecting invalid news file %s: invalid Date format
+' "$(rel_from_project "$md")" >&2
+        continue
+      fi
+
+      if ! news_has_body "$md"; then
+        printf 'warning: rejecting invalid news file %s: empty body
+' "$(rel_from_project "$md")" >&2
+        continue
+      fi
 
       if [ "$first" -eq 0 ]; then
-        printf ',\n' >> "$tmp"
+        printf ',
+' >> "$tmp"
       fi
       first=0
 
@@ -552,9 +624,12 @@ build_news_json() {
     done
   fi
 
-  printf '\n]\n' >> "$tmp"
+  printf '
+]
+' >> "$tmp"
   mv "$tmp" "$NEWS_OUT"
-  printf 'generated %s\n' "$(rel_from_project "$NEWS_OUT")"
+  printf 'generated %s
+' "$(rel_from_project "$NEWS_OUT")"
 }
 
 update_dynamic_data() {
@@ -567,6 +642,7 @@ update_dynamic_data() {
   "$TOOLS/get-iso-file-date.sh"
   "$TOOLS/build-moonbase-logs.sh"
   "$TOOLS/build-moonbase-news.sh"
+  "$TOOLS/build-community-news.sh"
 }
 
 main() {
@@ -585,9 +661,15 @@ main() {
     exit 1
   fi
 
+  if [ ! -f "$RENDERER" ]; then
+    printf 'missing renderer: %s\n' "$RENDERER" >&2
+    exit 1
+  fi
+
   update_dynamic_data
   load_dynamic_values
   prepare_moonbase_values
+  prepare_community_values
 
   for md in "$SRC"/*.md; do
     [ -f "$md" ] || continue

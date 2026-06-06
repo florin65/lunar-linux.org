@@ -85,6 +85,7 @@ The public release has been completed and published for the community evaluation
 * [✓] Static page generation
 * [✓] Automated site updates from repository activity
 * [✓] Add "Latest Activity" panel on Home
+* [✓] Add a personal Lunar related projects page for the community members
 
 ---
 
@@ -93,7 +94,7 @@ The public release has been completed and published for the community evaluation
 ### Activity Tracking
 
 * [ ] Add a Lunar Linux project history page
-* [ ] Add a personal Lunar related projects page for the community members
+* [ ] Add a page to centralize the community related projects (a Lunar Usert Repository)
 * [ ] More automation added to the site 
 
 ---
