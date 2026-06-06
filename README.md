@@ -38,7 +38,7 @@ Just static content, Git repositories and automation where it makes sense.
 
 **State:** Stable
 
-The first public release has been completed and published for community evaluation.
+The public release has been completed and published for the community evaluation.
 
 ---
 
@@ -72,10 +72,6 @@ The first public release has been completed and published for community evaluati
 * [✓] Public evaluation announced
 * [✓] Initial community feedback received
 
----
-
-## Roadmap
-
 ### News System
 
 * [✓] Create News page
@@ -88,13 +84,17 @@ The first public release has been completed and published for community evaluati
 * [✓] Markdown-driven content workflow
 * [✓] Static page generation
 * [✓] Automated site updates from repository activity
+* [✓] Add "Latest Activity" panel on Home
+
+---
+
+## Roadmap
 
 ### Activity Tracking
 
-* [ ] Publish News archive
-* [ ] Add "Latest Activity" panel on Home
-* [ ] Aggregate activity from multiple Lunar repositories
-* [ ] Display recent project events automatically
+* [ ] Add a Lunar Linux project history page
+* [ ] Add a personal Lunar related projects page for the community members
+* [ ] More automation added to the site 
 
 ---
 
@@ -137,9 +137,11 @@ Git Repositories
 
 ---
 
-## Project URL
+## Project URLs
 
-https://florin65.github.io/lunar-linux.org/
+Website project page:  https://florin65.github.io/lunar-linux.org/
+
+Website preview site:  https://florin65.github.io/lunar-linux.org/index.html
 
 ---
 
