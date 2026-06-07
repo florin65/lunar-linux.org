@@ -142,8 +142,6 @@ Git Repositories
 
 Website project page:  https://florin65.github.io/lunar-linux.org/
 
-Website preview site:  https://florin65.github.io/lunar-linux.org/index.html
-
 ---
 
 ## Lunar Linux
