@@ -34,7 +34,7 @@ Just static content, Git repositories and automation where it makes sense.
 
 ### Release Status
 
-**Version:** 1.0
+**Version:** 2.5
 
 **State:** Stable
 
