@@ -1,3 +1,12 @@
+2026-06-06|c024492010|liblogging: Bump to 1.0.8.
+2026-06-06|34df7d66ff|libgcal: Diabling tests and adding -DCMAKE_POLICY_VERSION_MINIMUM=3.5.
+2026-06-06|3514771787|mediastreamer: Bump to 5.4.119.
+2026-06-06|d99c36aa5f|bcmatroska2: Bump to 5.4.118.
+2026-06-06|d26c7b3188|mcrypt: Adjusting BUILD.
+2026-06-06|aeeefb3273|libmcrypt: Adding some patches.
+2026-06-06|d895192a8f|gpgmepp: Linting DETAILS.
+2026-06-06|0b2777e7d4|gnupg: Version bumped to 2.5.20
+2026-06-06|48e716e72e|Botan3: Bump to 3.12.0.
 2026-06-06|5fba73b1ac|dnsmasq: version bumped to 2.93
 2026-06-06|087753a718|rpm: Rmoving. Cannot find sources. All listings here;
 2026-06-06|8a064fe936|zfs, zfs-utils: version bumped to 2.4.2
