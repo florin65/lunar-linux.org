@@ -1,20 +1,16 @@
-2026-06-06|c024492010|liblogging: Bump to 1.0.8.
-2026-06-06|34df7d66ff|libgcal: Diabling tests and adding -DCMAKE_POLICY_VERSION_MINIMUM=3.5.
-2026-06-06|3514771787|mediastreamer: Bump to 5.4.119.
-2026-06-06|d99c36aa5f|bcmatroska2: Bump to 5.4.118.
-2026-06-06|d26c7b3188|mcrypt: Adjusting BUILD.
-2026-06-06|aeeefb3273|libmcrypt: Adding some patches.
-2026-06-06|d895192a8f|gpgmepp: Linting DETAILS.
-2026-06-06|0b2777e7d4|gnupg: Version bumped to 2.5.20
-2026-06-06|48e716e72e|Botan3: Bump to 3.12.0.
-2026-06-06|5fba73b1ac|dnsmasq: version bumped to 2.93
-2026-06-06|087753a718|rpm: Rmoving. Cannot find sources. All listings here;
-2026-06-06|8a064fe936|zfs, zfs-utils: version bumped to 2.4.2
-2026-06-06|e49ef3984a|ruby: version bumped to 4.0.5
-2026-06-06|c90e3f21c4|sqlite: fix the compile without tcl support
-2026-06-06|ad58e624d3|mutt: version bumped to 2.3.2
-2026-06-06|7aa43c11db|libreoffice-bin : version bumped to 26.2.4
-2026-06-06|d7d4caffa1|ImageMagick: version bumped to 7.1.2-25
-2026-06-06|ed42a20140|mariadb: Version bumped to 12.3.2
-2026-06-05|5f47fbeec0|firefox: Bump to 151.0.3.
-2026-06-06|76b0639921|octave: Version bumped to 11.3.0
+2026-06-07|4f4ebf667e|graphviz: Adjusting DEPENDS.
+2026-06-07|ca15c594ad|foot: Version bumped to 1.27.0
+2026-06-07|5634af1bc6|graphviz: Adjusting DEPENDS.
+2026-06-07|8376c11371|wayland-protocols: Version bumped to 1.49
+2026-06-07|7d60e621a6|uudeview: Bump to 20250320.
+2026-06-07|8816980aa5|graphviz: lint
+2026-06-07|0547a6bab9|graphviz: Going PSAFE=no.
+2026-06-07|6c93d722f8|graphviz: Twidle info.
+2026-06-07|8be5ca13f6|weechat: Version bumped to 4.9.2
+2026-06-07|b117c725ef|aom: Test.
+2026-06-07|85724e3e98|graphviz: Bump to 15.0.0.
+2026-06-07|084ec0c852|brave-bin: Add hicolor-icon-theme depends.
+2026-06-07|de352f7256|brave-bin: Bump to 1.91.168.
+2026-06-06|d9474a4b32|CGAL: Bump to 6.1.1.
+2026-06-07|0c64d6d1ca|hiredis: Version bumped to 1.4.0
+2026-06-07|1763594549|libpqxx: Version bumped to 7.10.7
