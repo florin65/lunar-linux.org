@@ -1,16 +1,19 @@
-2026-06-07|4f4ebf667e|graphviz: Adjusting DEPENDS.
-2026-06-07|ca15c594ad|foot: Version bumped to 1.27.0
-2026-06-07|5634af1bc6|graphviz: Adjusting DEPENDS.
-2026-06-07|8376c11371|wayland-protocols: Version bumped to 1.49
-2026-06-07|7d60e621a6|uudeview: Bump to 20250320.
-2026-06-07|8816980aa5|graphviz: lint
-2026-06-07|0547a6bab9|graphviz: Going PSAFE=no.
-2026-06-07|6c93d722f8|graphviz: Twidle info.
-2026-06-07|8be5ca13f6|weechat: Version bumped to 4.9.2
-2026-06-07|b117c725ef|aom: Test.
-2026-06-07|85724e3e98|graphviz: Bump to 15.0.0.
-2026-06-07|084ec0c852|brave-bin: Add hicolor-icon-theme depends.
-2026-06-07|de352f7256|brave-bin: Bump to 1.91.168.
-2026-06-06|d9474a4b32|CGAL: Bump to 6.1.1.
-2026-06-07|0c64d6d1ca|hiredis: Version bumped to 1.4.0
-2026-06-07|1763594549|libpqxx: Version bumped to 7.10.7
+2026-06-08|f5cec0971d|httpd: Version bumped to 2.4.68
+2026-06-08|7fe168176e|grpc: Version bumped to 1.81.1
+2026-06-08|94d63fffd3|audacious: Version bumped to 4.6.1 (#6894)
+2026-06-08|5b408fd095|gpm: add a patch to fix the compile with gnu-c32
+2026-06-08|9357f66f19|frei0r-plugins: Version bumped to 3.2.0
+2026-06-08|be06b48db5|audacious-plugins: version bumped to 4.6.1
+2026-06-08|87d3a9ffd5|upx: Version bumped to 5.2.0
+2026-06-08|a4f1d54bdf|postgis: Bump to 3.6.3.
+2026-06-08|01bb2d2f71|nlopt: Bump to 2.11.0.
+2026-06-08|beae6c4bd5|wxPython: Bump to 4.2.5.
+2026-06-08|b3b5e2c36c|python-beautifulsoup4: Bump to 4.15.0.
+2026-06-08|93f9eed8e0|tornado: Bump to 6.5.6.
+2026-06-08|db57c3901a|rpds-py: Bump to 2026.5.1.
+2026-06-08|fb50c3cdfa|snowballstemmer: Bump to 3.1.1.
+2026-06-08|0cb3ed64e2|simplejson: Bump to 4.1.1.
+2026-06-08|fb0f0a0021|neovim: Bump to 0.12.2 from their git nightly.
+2026-06-08|cc34b2714f|texstudio: Bump to 4.9.5.
+2026-06-08|5ac4049c96|Image-ExifTool: Bump to 13.59.
+2026-06-08|371c46355c|kitty: Version bumped to 0.47.2

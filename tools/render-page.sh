@@ -269,7 +269,9 @@ function render_feature_grid(title, a, b, muted,    i, nxt, seccls) {
     if (kind[i] != "h3") continue
     nxt = next_h3_or_end(i, b)
 
-    print "        <article class=\"feature-card\">"
+    wide = (inline(val[i]) == "Community support" ? " feature-card-wide" : "")
+
+    print "        <article class=\"feature-card" wide "\">"
     print "          <h3>" inline(val[i]) "</h3>"
     render_blocks(i + 1, nxt, "          ", 1, 1)
     print "        </article>"

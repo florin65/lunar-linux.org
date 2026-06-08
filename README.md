@@ -96,6 +96,21 @@ The public release has been completed and published for the community evaluation
 * [ ] Add a Lunar Linux project history page
 * [ ] Add a page to centralize the community related projects (a Lunar Usert Repository)
 * [ ] More automation added to the site 
+* [ ] The great plan can be summarizen in a simple way like this: 
+
+                 Archive
+                     ▲
+                     │
+                     │
+     Docs ◄──────────┼──────────► News
+       ▲             │              ▲
+       │             │              │
+       │             │              │
+Development ◄──── Website ────► Community
+       │                            ▲
+       │                            │
+       ▼                            │
+      LUR ──────────────────────────┘
 
 ---
 
