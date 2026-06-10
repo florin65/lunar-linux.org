@@ -1,0 +1,20 @@
+[
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"","version":"","commit":"eaf41eefdc","title":"gpm: add the patch file.","summary":"gpm: add the patch file."},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"podofo","version":"1.1.1","commit":"e5d4ac8644","title":"podofo updated to 1.1.1","summary":"version bumped to 1.1.1"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"firefox-bin","version":"151.0.4","commit":"8208fb9bf1","title":"firefox-bin updated to 151.0.4","summary":"version bumped to 151.0.4"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"SDL2_compat","version":"2.32.70. SDL3 does not conflict with anything.","commit":"0cd438ae39","title":"SDL2_compat updated to 2.32.70. SDL3 does not conflict with anything.","summary":"bump to 2.32.70. SDL3 does not conflict with anything."},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"linux-lts","version":"6.18.35","commit":"4a9d3990b3","title":"linux-lts updated to 6.18.35","summary":"version bumped to 6.18.35"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"allegro","version":"5.2.11.3.","commit":"4d7b0840bf","title":"allegro updated to 5.2.11.3.","summary":"bump to 5.2.11.3."},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"","version":"","commit":"63431a976d","title":"dumb: Adding -DCMAKE_POLICY_VERSION_MINIMUM=3.5 switch.","summary":"dumb: Adding -DCMAKE_POLICY_VERSION_MINIMUM=3.5 switch."},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"physfs","version":"3.2.0.","commit":"ad85a14acc","title":"physfs updated to 3.2.0.","summary":"bump to 3.2.0."},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"firefox","version":"151.0.4","commit":"5639f50001","title":"firefox updated to 151.0.4","summary":"version bumped to 151.0.4"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"msgpack-c","version":"7.0.1","commit":"f70e983448","title":"msgpack-c updated to 7.0.1","summary":"version bumped to 7.0.1"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"","version":"","commit":"e7519e6328","title":"ibackup: Moving to crater.","summary":"ibackup: Moving to crater."},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"frei0r-plugins","version":"3.2.1","commit":"a7ea4ccfd0","title":"frei0r-plugins updated to 3.2.1","summary":"version bumped to 3.2.1"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"rsync","version":"3.4.4","commit":"b2775b6fbc","title":"rsync updated to 3.4.4","summary":"version bumped to 3.4.4"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"just","version":"1.52.0","commit":"739bb7257a","title":"just updated to 1.52.0","summary":"version bumped to 1.52.0"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"squid","version":"7.6","commit":"996c35f06c","title":"squid updated to 7.6","summary":"version bumped to 7.6"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"entr","version":"5.8","commit":"432195ac93","title":"entr updated to 5.8","summary":"version bumped to 5.8"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"nut","version":"2.8.5","commit":"d72526ca37","title":"nut updated to 2.8.5","summary":"version bumped to 2.8.5"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"leiningen","version":"2.13.0","commit":"741c6dfa55","title":"leiningen updated to 2.13.0","summary":"version bumped to 2.13.0"}
+]

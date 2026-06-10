@@ -703,6 +703,99 @@ function render_development(    built, start, compact, links, tail, e, first_h3,
   print "</main>"
 }
 
+function render_archive_explore(title, a, b,    i, nxt, links, firstcard) {
+  print "  <section class=\"content-section muted-section archive-explore-section\">"
+  print "    <div class=\"container\">"
+  print "      <h2 class=\"section-title\">" inline(title) "</h2>"
+
+  firstcard = 0
+  for (i = a; i <= b; i++) {
+    if (kind[i] == "h3") { firstcard = i; break }
+  }
+
+  if (firstcard && firstcard > a)
+    render_blocks(a, firstcard - 1, "      ", 1, 1)
+  else if (!firstcard)
+    render_blocks(a, b, "      ", 1, 1)
+
+  print "      <div class=\"archive-explore-grid\">"
+
+  for (i = a; i <= b; i++) {
+    if (kind[i] != "h3") continue
+    nxt = next_h3_or_end(i, b)
+    links = first_links_in_range(i + 1, nxt)
+
+    print "        <article class=\"archive-explore-card\">"
+    print "          <h3>" inline(val[i]) "</h3>"
+    render_blocks(i + 1, nxt, "          ", 1, 1)
+    if (links != "") render_actions(links, "          ")
+    print "        </article>"
+
+    i = nxt
+  }
+
+  print "      </div>"
+  print "    </div>"
+  print "  </section>"
+}
+
+function render_archive(    overview, toc, commits, news, docs, lur) {
+  print "<main class=\"page-main archive-main\">"
+  render_hero(first_h1(), first_p())
+
+  overview = section_index("What the archive keeps")
+  if (overview) render_feature_grid("What the archive keeps", overview + 1, section_end(overview), 0)
+
+  toc = section_index("Table of contents")
+  if (toc) render_archive_explore("Table of contents", toc + 1, section_end(toc))
+
+  commits = section_index("Commit archive")
+  print "  <section id=\"commit-archive\" class=\"content-section muted-section archive-section\">"
+  print "    <div class=\"container\">"
+  print "      <h2 class=\"section-title\">Commit archive</h2>"
+  if (commits) render_blocks(commits + 1, section_end(commits), "      ", 0, 1)
+  print "{{ archive_commits_html }}"
+  print "      <div class=\"hero-actions archive-section-actions\">"
+  print "        <a class=\"button primary\" href=\"archive/commits/\">View complete commit archive →</a>"
+  print "      </div>"
+  print "    </div>"
+  print "  </section>"
+
+  news = section_index("News archive")
+  print "  <section id=\"news-archive\" class=\"content-section archive-section\">"
+  print "    <div class=\"container\">"
+  print "      <h2 class=\"section-title\">News archive</h2>"
+  if (news) render_blocks(news + 1, section_end(news), "      ", 0, 1)
+  print "{{ archive_news_html }}"
+  print "      <div class=\"hero-actions archive-section-actions\">"
+  print "        <a class=\"button primary\" href=\"archive/news/\">View complete news archive →</a>"
+  print "      </div>"
+  print "    </div>"
+  print "  </section>"
+
+  docs = section_index("Documentation archive")
+  if (docs) {
+    print "  <section id=\"documentation-archive\" class=\"content-section muted-section archive-section\">"
+    print "    <div class=\"container\">"
+    print "      <h2 class=\"section-title\">Documentation archive</h2>"
+    render_blocks(docs + 1, section_end(docs), "      ", 0, 0)
+    print "    </div>"
+    print "  </section>"
+  }
+
+  lur = section_index("LUR archive")
+  if (lur) {
+    print "  <section id=\"lur-archive\" class=\"content-section archive-section\">"
+    print "    <div class=\"container\">"
+    print "      <h2 class=\"section-title\">LUR archive</h2>"
+    render_blocks(lur + 1, section_end(lur), "      ", 0, 0)
+    print "    </div>"
+    print "  </section>"
+  }
+
+  print "</main>"
+}
+
 function render_generic(    s, e) {
   print "<main class=\"page-main\">"
   render_hero(first_h1(), first_p())
@@ -837,6 +930,7 @@ END {
   else if (page == "docs") render_docs()
   else if (page == "community") render_community()
   else if (page == "development") render_development()
+  else if (page == "archive") render_archive()
   else render_generic()
 }
 ' "$markdown_file"

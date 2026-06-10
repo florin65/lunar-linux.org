@@ -131,19 +131,32 @@ The website should expose this information automatically rather than requiring m
 
 ## Architecture
 
-```text
-Git Repositories
-        │
-        ▼
- Activity Generator
-        │
-        ▼
-     News Page
-        │
-        ▼
- Latest Activity
-      (Home)
-```
+``````
+
+                Home
+                  │
+          ┌───────┴────────┐
+          │                │
+       About            Download
+          │
+          │
+    ┌─────┴─────┐
+    │           │
+  News        LUR
+    │           │
+    ▼           ▼
+ Latest      Projects
+    │           │
+    └─────┬─────┘
+          ▼
+       Archive
+          │
+ ┌────────┼───────────┐
+ │        │           │
+News   Commits    Documentation
+ │        │           │
+ ▼        ▼           ▼
+History Timeline   Memory
 
 ---
 

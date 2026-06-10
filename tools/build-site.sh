@@ -63,6 +63,10 @@ DAILY_ISO=$(abs_path "$DAILY_ISO_JSON")
 NEWS_OUT=$(abs_path "$NEWS_JSON")
 MOONBASE_NEWS=$(abs_path "$MOONBASE_NEWS_JSON")
 COMMUNITY_NEWS=$(abs_path "$COMMUNITY_NEWS_HTML")
+ARCHIVE_COMMITS_HTML=${ARCHIVE_COMMITS_HTML:-cache/archive-commits.html}
+ARCHIVE_NEWS_HTML=${ARCHIVE_NEWS_HTML:-cache/archive-news.html}
+ARCHIVE_COMMITS=$(abs_path "$ARCHIVE_COMMITS_HTML")
+ARCHIVE_NEWS=$(abs_path "$ARCHIVE_NEWS_HTML")
 
 mkdir -p "$PUBLIC" "$DATA"
 
@@ -429,6 +433,37 @@ EOF_COMMUNITY
   fi
 }
 
+prepare_archive_values() {
+  archive_commits_file=$(mktemp)
+  archive_news_file=$(mktemp)
+
+  if [ -x "$TOOLS/build-archive-index.sh" ]; then
+    ARCHIVE_ROOT="$PROJECT_ROOT/archive" \
+    CACHE_DIR="$PROJECT_ROOT/cache" \
+      "$TOOLS/build-archive-index.sh" "$ARCHIVE_COMMITS" "$ARCHIVE_NEWS"
+  fi
+
+  if [ -f "$ARCHIVE_COMMITS" ]; then
+    cat "$ARCHIVE_COMMITS" > "$archive_commits_file"
+  else
+    cat > "$archive_commits_file" <<EOF_ARCHIVE_COMMITS
+      <div class="moonbase-journal empty">
+        <p>No archived commits were found.</p>
+      </div>
+EOF_ARCHIVE_COMMITS
+  fi
+
+  if [ -f "$ARCHIVE_NEWS" ]; then
+    cat "$ARCHIVE_NEWS" > "$archive_news_file"
+  else
+    cat > "$archive_news_file" <<EOF_ARCHIVE_NEWS
+      <div class="community-news-journal empty">
+        <p>No archived news entries were found.</p>
+      </div>
+EOF_ARCHIVE_NEWS
+  fi
+}
+
 cleanup_temp_files() {
   if [ -n "${moonbase_commits_file:-}" ]; then
     rm -f "$moonbase_commits_file"
@@ -436,6 +471,14 @@ cleanup_temp_files() {
 
   if [ -n "${community_news_file:-}" ]; then
     rm -f "$community_news_file"
+  fi
+
+  if [ -n "${archive_commits_file:-}" ]; then
+    rm -f "$archive_commits_file"
+  fi
+
+  if [ -n "${archive_news_file:-}" ]; then
+    rm -f "$archive_news_file"
   fi
 }
 
@@ -455,7 +498,9 @@ expand_template_file() {
     -v moonbase_version_bumps="$moonbase_version_bumps" \
     -v moonbase_other_commits="$moonbase_other_commits" \
     -v moonbase_commits_file="$moonbase_commits_file" \
-    -v community_news_file="$community_news_file" '
+    -v community_news_file="$community_news_file" \
+    -v archive_commits_file="$archive_commits_file" \
+    -v archive_news_file="$archive_news_file" '
       {
         if ($0 ~ /\{\{[[:space:]]*moonbase_commits_html[[:space:]]*\}\}/) {
           while ((getline line < moonbase_commits_file) > 0) {
@@ -470,6 +515,22 @@ expand_template_file() {
             print line
           }
           close(community_news_file)
+          next
+        }
+
+        if ($0 ~ /\{\{[[:space:]]*archive_commits_html[[:space:]]*\}\}/) {
+          while ((getline line < archive_commits_file) > 0) {
+            print line
+          }
+          close(archive_commits_file)
+          next
+        }
+
+        if ($0 ~ /\{\{[[:space:]]*archive_news_html[[:space:]]*\}\}/) {
+          while ((getline line < archive_news_file) > 0) {
+            print line
+          }
+          close(archive_news_file)
           next
         }
 
@@ -667,6 +728,19 @@ update_archive() {
     "$TOOLS/archive.sh" news "$NEWS_SRC"
 }
 
+publish_archive_assets() {
+  src="$PROJECT_ROOT/archive"
+  dst="$PUBLIC/archive"
+
+  [ -d "$src" ] || return 0
+
+  rm -rf "$dst"
+  mkdir -p "$dst"
+
+  (cd "$src" && tar cf - .) | (cd "$dst" && tar xf -)
+  printf 'published %s\n' "$(rel_from_project "$dst")"
+}
+
 main() {
   if [ ! -d "$SRC" ]; then
     printf 'missing source directory: %s\n' "$SRC" >&2
@@ -689,9 +763,18 @@ main() {
   fi
 
   update_dynamic_data
+
+  if [ "$GENERATE_NEWS_JSON" = "yes" ]; then
+    build_news_json
+  fi
+
+  update_archive
+  publish_archive_assets
+
   load_dynamic_values
   prepare_moonbase_values
   prepare_community_values
+  prepare_archive_values
 
   for md in "$SRC"/*.md; do
     [ -f "$md" ] || continue
@@ -699,12 +782,6 @@ main() {
   done
 
   cleanup_temp_files
-
-  if [ "$GENERATE_NEWS_JSON" = "yes" ]; then
-    build_news_json
-  fi
-
-  update_archive
 }
 
 main "$@"
