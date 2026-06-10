@@ -1,0 +1,77 @@
+#!/bin/sh
+# Archive Moonbase commit journal JSON incrementally.
+# Input defaults to docs/data/moonbase-news.json.
+
+set -eu
+
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+. "$SCRIPT_DIR/archive-lib.sh"
+
+input=${1:-"$DATA_DIR/moonbase-news.json"}
+[ -f "$input" ] || archive_die "missing input: $input"
+
+tmpdir=$(mktemp -d)
+trap 'rm -rf "$tmpdir"' EXIT HUP INT TERM
+
+objects="$tmpdir/objects"
+archive_json_objects "$input" > "$objects"
+
+if [ ! -s "$objects" ]; then
+  echo "archive-commits: no commit entries in $input"
+  exit 0
+fi
+
+# Archive by the date carried by each commit entry, not by build date.
+cut_dates="$tmpdir/dates"
+sed -n 's/.*"date"[[:space:]]*:[[:space:]]*"\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\).*/\1/p' "$objects" | sort -u > "$cut_dates"
+
+while IFS= read -r day; do
+  [ -n "$day" ] || continue
+  year=$(archive_year "$day")
+  month=$(archive_month "$day")
+  outdir="$ARCHIVE_ROOT/commits/$year/$month"
+  outfile="$outdir/$day.json"
+  archive_mkdir "$outdir"
+
+  existing="$tmpdir/existing-$day"
+  incoming="$tmpdir/incoming-$day"
+  merged="$tmpdir/merged-$day"
+  seen="$tmpdir/seen-$day"
+
+  : > "$existing"
+  if archive_cat "$outfile" >/dev/null 2>&1; then
+    archive_cat "$outfile" | archive_json_objects_from_cat > "$existing"
+  fi
+
+  grep '"date"[[:space:]]*:[[:space:]]*"'"$day"'"' "$objects" > "$incoming" || true
+
+  cat "$existing" > "$merged"
+  sed -n 's/.*"commit"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$existing" | sort -u > "$seen"
+
+  added=0
+  while IFS= read -r obj; do
+    commit=$(printf '%s\n' "$obj" | archive_json_field commit | head -1)
+    [ -n "$commit" ] || continue
+    if ! grep -qxF "$commit" "$seen"; then
+      printf '%s\n' "$obj" >> "$merged"
+      printf '%s\n' "$commit" >> "$seen"
+      added=$((added + 1))
+    fi
+  done < "$incoming"
+
+  sort -u "$seen" > "$seen.tmp" && mv "$seen.tmp" "$seen"
+
+  if [ "$added" -gt 0 ]; then
+    # If the day was already closed/compressed but new information appears,
+    # reopen it as a plain active file and replace the old compressed copy.
+    [ -f "$outfile.xz" ] && rm -f "$outfile.xz"
+    archive_emit_json_array < "$merged" > "$outfile"
+    echo "archive-commits: $day added $added new commit(s) -> $outfile"
+  else
+    # Do not recreate a plain file when only a compressed archive exists.
+    if [ ! -f "$outfile" ] && [ ! -f "$outfile.xz" ]; then
+      archive_emit_json_array < "$merged" > "$outfile"
+    fi
+    echo "archive-commits: $day no new commits"
+  fi
+done < "$cut_dates"
