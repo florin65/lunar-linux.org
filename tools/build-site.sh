@@ -645,6 +645,28 @@ update_dynamic_data() {
   "$TOOLS/build-community-news.sh"
 }
 
+update_archive() {
+  if [ "${UPDATE_ARCHIVE:-yes}" != "yes" ]; then
+    return 0
+  fi
+
+  if [ ! -x "$TOOLS/archive.sh" ]; then
+    printf 'archive: skipped, missing %s\n' "$(rel_from_project "$TOOLS/archive.sh")" >&2
+    return 0
+  fi
+
+  printf 'updating archive...\n'
+  ARCHIVE_ROOT="$PROJECT_ROOT/archive" \
+  DATA_DIR="$DATA" \
+  NEWS_DIR="$NEWS_SRC" \
+    "$TOOLS/archive.sh" commits "$MOONBASE_NEWS"
+
+  ARCHIVE_ROOT="$PROJECT_ROOT/archive" \
+  DATA_DIR="$DATA" \
+  NEWS_DIR="$NEWS_SRC" \
+    "$TOOLS/archive.sh" news "$NEWS_SRC"
+}
+
 main() {
   if [ ! -d "$SRC" ]; then
     printf 'missing source directory: %s\n' "$SRC" >&2
@@ -681,6 +703,8 @@ main() {
   if [ "$GENERATE_NEWS_JSON" = "yes" ]; then
     build_news_json
   fi
+
+  update_archive
 }
 
 main "$@"

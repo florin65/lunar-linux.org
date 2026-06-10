@@ -151,6 +151,28 @@ Git Repositories
 
 > Less complexity. More satisfaction.
 
+                build-site.sh
+                    │
+               (balansier)
+                    │
+    ┌───────────────┼──────────────┐
+    │               │              │
+    ▼               ▼              ▼
+moonbase       news.json       docs.md
+commits            │               │
+    │              │               │
+    ▼              ▼               ▼
+archive-      archive-         generator
+commits       news                │
+    │              │              │
+    └──────┬───────┴───────┬──────┘
+           ▼               ▼
+        archive/         docs/
+           │               │
+           └──────┬────────┘
+                  ▼
+           GitHub Pages
+
 ---
 
 ## Project URLs

@@ -1,19 +1,20 @@
-2026-06-08|f5cec0971d|httpd: Version bumped to 2.4.68
-2026-06-08|7fe168176e|grpc: Version bumped to 1.81.1
-2026-06-08|94d63fffd3|audacious: Version bumped to 4.6.1 (#6894)
-2026-06-08|5b408fd095|gpm: add a patch to fix the compile with gnu-c32
-2026-06-08|9357f66f19|frei0r-plugins: Version bumped to 3.2.0
-2026-06-08|be06b48db5|audacious-plugins: version bumped to 4.6.1
-2026-06-08|87d3a9ffd5|upx: Version bumped to 5.2.0
-2026-06-08|a4f1d54bdf|postgis: Bump to 3.6.3.
-2026-06-08|01bb2d2f71|nlopt: Bump to 2.11.0.
-2026-06-08|beae6c4bd5|wxPython: Bump to 4.2.5.
-2026-06-08|b3b5e2c36c|python-beautifulsoup4: Bump to 4.15.0.
-2026-06-08|93f9eed8e0|tornado: Bump to 6.5.6.
-2026-06-08|db57c3901a|rpds-py: Bump to 2026.5.1.
-2026-06-08|fb50c3cdfa|snowballstemmer: Bump to 3.1.1.
-2026-06-08|0cb3ed64e2|simplejson: Bump to 4.1.1.
-2026-06-08|fb0f0a0021|neovim: Bump to 0.12.2 from their git nightly.
-2026-06-08|cc34b2714f|texstudio: Bump to 4.9.5.
-2026-06-08|5ac4049c96|Image-ExifTool: Bump to 13.59.
-2026-06-08|371c46355c|kitty: Version bumped to 0.47.2
+2026-06-09|eaf41eefdc|gpm: add the patch file.
+2026-06-09|e5d4ac8644|podofo: Version bumped to 1.1.1
+2026-06-09|8208fb9bf1|firefox-bin: version bumped to 151.0.4
+2026-06-09|0cd438ae39|SDL2_compat: Bump to 2.32.70. SDL3 does not conflict with anything.
+2026-06-09|4a9d3990b3|linux-lts: Version bumped to 6.18.35
+2026-06-09|4d7b0840bf|allegro: Bump to 5.2.11.3.
+2026-06-09|63431a976d|dumb: Adding -DCMAKE_POLICY_VERSION_MINIMUM=3.5 switch.
+2026-06-09|ad85a14acc|physfs: Bump to 3.2.0.
+2026-06-09|5639f50001|firefox: Version bumped to 151.0.4
+2026-06-09|f70e983448|msgpack-c: Version bumped to 7.0.1
+2026-06-09|e7519e6328|ibackup: Moving to crater.
+2026-06-09|a7ea4ccfd0|frei0r-plugins: Version bumped to 3.2.1
+2026-06-09|b2775b6fbc|rsync: Version bumped to 3.4.4
+2026-06-09|739bb7257a|just: version bumped to 1.52.0
+2026-06-09|996c35f06c|squid: Version bumped to 7.6
+2026-06-09|432195ac93|entr: Version bumped to 5.8
+2026-06-09|d72526ca37|nut: Version bumped to 2.8.5
+2026-06-08|faa3bd3292|netcdf-fortran: Bump to 4.6.3.
+2026-06-08|055047e611|matio: Bump to 1.5.30.
+2026-06-09|741c6dfa55|leiningen: version bumped to 2.13.0
