@@ -1,20 +1,12 @@
-2026-06-09|eaf41eefdc|gpm: add the patch file.
-2026-06-09|e5d4ac8644|podofo: Version bumped to 1.1.1
-2026-06-09|8208fb9bf1|firefox-bin: version bumped to 151.0.4
-2026-06-09|0cd438ae39|SDL2_compat: Bump to 2.32.70. SDL3 does not conflict with anything.
-2026-06-09|4a9d3990b3|linux-lts: Version bumped to 6.18.35
-2026-06-09|4d7b0840bf|allegro: Bump to 5.2.11.3.
-2026-06-09|63431a976d|dumb: Adding -DCMAKE_POLICY_VERSION_MINIMUM=3.5 switch.
-2026-06-09|ad85a14acc|physfs: Bump to 3.2.0.
-2026-06-09|5639f50001|firefox: Version bumped to 151.0.4
-2026-06-09|f70e983448|msgpack-c: Version bumped to 7.0.1
-2026-06-09|e7519e6328|ibackup: Moving to crater.
-2026-06-09|a7ea4ccfd0|frei0r-plugins: Version bumped to 3.2.1
-2026-06-09|b2775b6fbc|rsync: Version bumped to 3.4.4
-2026-06-09|739bb7257a|just: version bumped to 1.52.0
-2026-06-09|996c35f06c|squid: Version bumped to 7.6
-2026-06-09|432195ac93|entr: Version bumped to 5.8
-2026-06-09|d72526ca37|nut: Version bumped to 2.8.5
-2026-06-08|faa3bd3292|netcdf-fortran: Bump to 4.6.3.
-2026-06-08|055047e611|matio: Bump to 1.5.30.
-2026-06-09|741c6dfa55|leiningen: version bumped to 2.13.0
+2026-06-10|358c91e2d8|python-faker: Version bumped to 40.22.0
+2026-06-10|c9abe420b3|meson-python: Version bumped to 0.20.0
+2026-06-10|904a680b63|wakatime-cli: Version bumped to 2.15.1
+2026-06-10|f9a61beb6f|yt-dlp: Version bumped to 2026.06.09
+2026-06-09|9caec3fc79|snowball: Fix updated.
+2026-06-09|8ee0628a1c|snowball: Bump to 3.1.1 and redo patch.
+2026-06-10|88be3722ce|semver: Version bumped to 7.8.4
+2026-06-10|6a1d0ef4f6|rkcommon: Version bumped to 1.15.2
+2026-06-09|839e5551e1|uft8cpp: Bump to 4.1.1.
+2026-06-10|80afbde9c7|elixir: Version bumped to 1.20.1
+2026-06-10|c371cdeae3|serd: Version bumped to 0.32.10
+2026-06-10|792dca9718|lilv: Version bumped to 0.28.0

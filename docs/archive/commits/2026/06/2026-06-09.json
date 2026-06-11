@@ -16,5 +16,8 @@
   {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"squid","version":"7.6","commit":"996c35f06c","title":"squid updated to 7.6","summary":"version bumped to 7.6"},
   {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"entr","version":"5.8","commit":"432195ac93","title":"entr updated to 5.8","summary":"version bumped to 5.8"},
   {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"nut","version":"2.8.5","commit":"d72526ca37","title":"nut updated to 2.8.5","summary":"version bumped to 2.8.5"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"leiningen","version":"2.13.0","commit":"741c6dfa55","title":"leiningen updated to 2.13.0","summary":"version bumped to 2.13.0"}
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"leiningen","version":"2.13.0","commit":"741c6dfa55","title":"leiningen updated to 2.13.0","summary":"version bumped to 2.13.0"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"","version":"","commit":"9caec3fc79","title":"snowball: Fix updated.","summary":"snowball: Fix updated."},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"snowball","version":"3.1.1 and redo patch.","commit":"8ee0628a1c","title":"snowball updated to 3.1.1 and redo patch.","summary":"bump to 3.1.1 and redo patch."},
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"uft8cpp","version":"4.1.1.","commit":"839e5551e1","title":"uft8cpp updated to 4.1.1.","summary":"bump to 4.1.1."}
 ]

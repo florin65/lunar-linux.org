@@ -1,15 +1,10 @@
 [
-  {"date":"2026-05-31","category":"Moonbase","repository":"core","module":"which","version":"2.25.","commit":"663917a1","title":"which updated to 2.25.","summary":"bump to 2.25."},
-  {"date":"2026-06-07","category":"Moonbase","repository":"core","module":"less","version":"704","commit":"1eacdc5d","title":"less updated to 704","summary":"version bumped to 704"},
   {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"python-faker","version":"40.22.0","commit":"358c91e2d8","title":"python-faker updated to 40.22.0","summary":"version bumped to 40.22.0"},
   {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"meson-python","version":"0.20.0","commit":"c9abe420b3","title":"meson-python updated to 0.20.0","summary":"version bumped to 0.20.0"},
   {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"wakatime-cli","version":"2.15.1","commit":"904a680b63","title":"wakatime-cli updated to 2.15.1","summary":"version bumped to 2.15.1"},
   {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"yt-dlp","version":"2026.06.09","commit":"f9a61beb6f","title":"yt-dlp updated to 2026.06.09","summary":"version bumped to 2026.06.09"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"","version":"","commit":"9caec3fc79","title":"snowball: Fix updated.","summary":"snowball: Fix updated."},
-  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"snowball","version":"3.1.1 and redo patch.","commit":"8ee0628a1c","title":"snowball updated to 3.1.1 and redo patch.","summary":"bump to 3.1.1 and redo patch."},
   {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"semver","version":"7.8.4","commit":"88be3722ce","title":"semver updated to 7.8.4","summary":"version bumped to 7.8.4"},
   {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"rkcommon","version":"1.15.2","commit":"6a1d0ef4f6","title":"rkcommon updated to 1.15.2","summary":"version bumped to 1.15.2"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"uft8cpp","version":"4.1.1.","commit":"839e5551e1","title":"uft8cpp updated to 4.1.1.","summary":"bump to 4.1.1."},
   {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"elixir","version":"1.20.1","commit":"80afbde9c7","title":"elixir updated to 1.20.1","summary":"version bumped to 1.20.1"},
   {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"serd","version":"0.32.10","commit":"c371cdeae3","title":"serd updated to 0.32.10","summary":"version bumped to 0.32.10"},
   {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"lilv","version":"0.28.0","commit":"792dca9718","title":"lilv updated to 0.28.0","summary":"version bumped to 0.28.0"}
