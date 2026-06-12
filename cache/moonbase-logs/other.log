@@ -1,12 +1,13 @@
-2026-06-10|358c91e2d8|python-faker: Version bumped to 40.22.0
-2026-06-10|c9abe420b3|meson-python: Version bumped to 0.20.0
-2026-06-10|904a680b63|wakatime-cli: Version bumped to 2.15.1
-2026-06-10|f9a61beb6f|yt-dlp: Version bumped to 2026.06.09
-2026-06-09|9caec3fc79|snowball: Fix updated.
-2026-06-09|8ee0628a1c|snowball: Bump to 3.1.1 and redo patch.
-2026-06-10|88be3722ce|semver: Version bumped to 7.8.4
-2026-06-10|6a1d0ef4f6|rkcommon: Version bumped to 1.15.2
-2026-06-09|839e5551e1|uft8cpp: Bump to 4.1.1.
-2026-06-10|80afbde9c7|elixir: Version bumped to 1.20.1
-2026-06-10|c371cdeae3|serd: Version bumped to 0.32.10
-2026-06-10|792dca9718|lilv: Version bumped to 0.28.0
+2026-06-11|3111eebba3|Audacity: Bump to 3.7.8.
+2026-06-11|342c07e1fa|openjph: Version bumped to 0.28.1
+2026-06-11|d49928530b|seamonky: Moving to crater. The most current version, 2.53.23
+2026-06-11|5352a5589b|brave-bin: Version bumped to 1.91.171
+2026-06-11|dca3969537|libiodbc: Fixing web site url.
+2026-06-11|9a3b656d37|tlp: version bumped to 1.10.1
+2026-06-11|c087de57c8|small tweak.
+2026-06-11|7e9128adaa|llvm: add a missing "\""
+2026-06-10|77826af305|pstoedit: Requires texlive for manual, manditory. All that for a stupid manual.
+2026-06-10|6dc99efab0|pstoedit: Bump to 4.3.
+2026-06-10|28304b4618|plotutils: Adjusting source url.
+2026-06-11|8d053e66d1|wireshark: Version bumped to 4.7.1
+2026-06-10|d613e0e711|CGAL: Version bumped to 6.1.2

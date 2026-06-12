@@ -117,7 +117,6 @@ Development ◄──── Website ────► Community
 ## Long-Term Vision
 
 The website should reflect the real-time heartbeat of the Lunar Linux project.
-
 Repositories already contain the project's history:
 
 * commits

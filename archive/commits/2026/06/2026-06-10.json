@@ -7,5 +7,9 @@
   {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"rkcommon","version":"1.15.2","commit":"6a1d0ef4f6","title":"rkcommon updated to 1.15.2","summary":"version bumped to 1.15.2"},
   {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"elixir","version":"1.20.1","commit":"80afbde9c7","title":"elixir updated to 1.20.1","summary":"version bumped to 1.20.1"},
   {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"serd","version":"0.32.10","commit":"c371cdeae3","title":"serd updated to 0.32.10","summary":"version bumped to 0.32.10"},
-  {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"lilv","version":"0.28.0","commit":"792dca9718","title":"lilv updated to 0.28.0","summary":"version bumped to 0.28.0"}
+  {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"lilv","version":"0.28.0","commit":"792dca9718","title":"lilv updated to 0.28.0","summary":"version bumped to 0.28.0"},
+  {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"","version":"","commit":"77826af305","title":"pstoedit: Requires texlive for manual, manditory. All that for a stupid manual.","summary":"pstoedit: Requires texlive for manual, manditory. All that for a stupid manual."},
+  {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"pstoedit","version":"4.3.","commit":"6dc99efab0","title":"pstoedit updated to 4.3.","summary":"bump to 4.3."},
+  {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"","version":"","commit":"28304b4618","title":"plotutils: Adjusting source url.","summary":"plotutils: Adjusting source url."},
+  {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"CGAL","version":"6.1.2","commit":"d613e0e711","title":"CGAL updated to 6.1.2","summary":"version bumped to 6.1.2"}
 ]

@@ -7,9 +7,5 @@
   {"date":"2026-06-11","category":"Moonbase","repository":"other","module":"tlp","version":"1.10.1","commit":"9a3b656d37","title":"tlp updated to 1.10.1","summary":"version bumped to 1.10.1"},
   {"date":"2026-06-11","category":"Moonbase","repository":"other","module":"","version":"","commit":"c087de57c8","title":"small tweak.","summary":"small tweak."},
   {"date":"2026-06-11","category":"Moonbase","repository":"other","module":"","version":"","commit":"7e9128adaa","title":"llvm: add a missing \"\\\"\"","summary":"llvm: add a missing \"\\\"\""},
-  {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"","version":"","commit":"77826af305","title":"pstoedit: Requires texlive for manual, manditory. All that for a stupid manual.","summary":"pstoedit: Requires texlive for manual, manditory. All that for a stupid manual."},
-  {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"pstoedit","version":"4.3.","commit":"6dc99efab0","title":"pstoedit updated to 4.3.","summary":"bump to 4.3."},
-  {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"","version":"","commit":"28304b4618","title":"plotutils: Adjusting source url.","summary":"plotutils: Adjusting source url."},
-  {"date":"2026-06-11","category":"Moonbase","repository":"other","module":"wireshark","version":"4.7.1","commit":"8d053e66d1","title":"wireshark updated to 4.7.1","summary":"version bumped to 4.7.1"},
-  {"date":"2026-06-10","category":"Moonbase","repository":"other","module":"CGAL","version":"6.1.2","commit":"d613e0e711","title":"CGAL updated to 6.1.2","summary":"version bumped to 6.1.2"}
+  {"date":"2026-06-11","category":"Moonbase","repository":"other","module":"wireshark","version":"4.7.1","commit":"8d053e66d1","title":"wireshark updated to 4.7.1","summary":"version bumped to 4.7.1"}
 ]

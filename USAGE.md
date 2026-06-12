@@ -1,7 +1,6 @@
 # Lunar Linux Website Usage
 
 This document describes how to configure, build, preview and maintain the Lunar Linux website.
-
 The website intentionally follows the same principles as Lunar Linux itself:
 
 - plain text content
@@ -76,7 +75,6 @@ Run:
 ```
 
 This updates dynamic data and regenerates the static site in `docs/`.
-
 The build currently performs:
 
 ```text
@@ -123,7 +121,6 @@ src/markdown/
 ```
 
 Edit these files when changing text shown on the site.
-
 The templates contain layout only. Editorial text should live in Markdown sources.
 
 ---
@@ -137,7 +134,6 @@ src/news/
 ```
 
 Each news entry is a plain text Markdown file.
-
 Recommended filename format:
 
 ```text
@@ -160,7 +156,6 @@ Category: Project
 Title: Website 2.0 released
 
 The news body starts after the first empty line.
-
 Additional paragraphs may follow.
 ```
 
@@ -191,7 +186,6 @@ Date: 2026-06-06 19:30
 ### Validation
 
 Invalid news files are rejected during the build.
-
 A file is rejected if:
 
 - `Date:` is missing
@@ -212,7 +206,6 @@ docs/news/<entry>.html
 ```
 
 The main News page receives a compact table of community/project news entries.
-
 Each entry also gets its own static HTML page.
 
 ---
@@ -220,7 +213,6 @@ Each entry also gets its own static HTML page.
 ## Moonbase commits journal
 
 The Moonbase commits journal is generated from local Moonbase Git repositories.
-
 The list of repositories is configured with:
 
 ```sh
@@ -268,7 +260,5 @@ Output      -> docs/
 ```
 
 Keep text in content files.
-
 Keep structure in templates.
-
 Keep logic in scripts.
