@@ -1,13 +1,5 @@
-2026-06-11|3111eebba3|Audacity: Bump to 3.7.8.
-2026-06-11|342c07e1fa|openjph: Version bumped to 0.28.1
-2026-06-11|d49928530b|seamonky: Moving to crater. The most current version, 2.53.23
-2026-06-11|5352a5589b|brave-bin: Version bumped to 1.91.171
-2026-06-11|dca3969537|libiodbc: Fixing web site url.
-2026-06-11|9a3b656d37|tlp: version bumped to 1.10.1
-2026-06-11|c087de57c8|small tweak.
-2026-06-11|7e9128adaa|llvm: add a missing "\""
-2026-06-10|77826af305|pstoedit: Requires texlive for manual, manditory. All that for a stupid manual.
-2026-06-10|6dc99efab0|pstoedit: Bump to 4.3.
-2026-06-10|28304b4618|plotutils: Adjusting source url.
-2026-06-11|8d053e66d1|wireshark: Version bumped to 4.7.1
-2026-06-10|d613e0e711|CGAL: Version bumped to 6.1.2
+2026-06-13|e67dedda52|fluidsynth: version b umped to 2.5.5
+2026-06-13|564ede3bb3|wine: version bumped to 11.11``
+2026-06-13|0a345e8cc9|runc: version bumped to 1.4.3
+2026-06-13|3f856ca631|poppler: version bumped to 26.06.0
+2026-06-13|84eb4498d9|jenkins: version bumped to 2.568
