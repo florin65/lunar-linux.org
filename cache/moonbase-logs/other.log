@@ -1,5 +1,14 @@
-2026-06-13|e67dedda52|fluidsynth: version b umped to 2.5.5
-2026-06-13|564ede3bb3|wine: version bumped to 11.11``
-2026-06-13|0a345e8cc9|runc: version bumped to 1.4.3
-2026-06-13|3f856ca631|poppler: version bumped to 26.06.0
-2026-06-13|84eb4498d9|jenkins: version bumped to 2.568
+2026-06-14|2ea06204eb|nss: version bumped to 3.125
+2026-06-14|9dfe79c89e|catch2: Version bumped to 3.15.1
+2026-06-14|28f460ffca|wakatime-cli: Version bumped to 2.16.1
+2026-06-14|531c264998|libical: Version bumped to 4.0.3
+2026-06-14|1dba455263|zfs: Version bumped to 2.4.3
+2026-06-14|963f6c8b86|podman: version bumped to 5.8.3
+2026-06-14|90368b8b5a|passt: version bumped to 2026_06_11.a9c61ff
+2026-06-14|88efd6af0b|gst-python: version bumped to 1.28.4
+2026-06-14|b20ec40097|gst-libav: version bumped to 1.28.4
+2026-06-14|812881dea4|gst-plugins-ugly: version bumped to 1.28.4
+2026-06-14|68c159022b|gat-plugins-bad: version bumped to 1.28.4
+2026-06-14|2bd2ee020b|gst-plugins-good: version bumped to 1.28.4
+2026-06-14|5cf23de68a|gst-plugibs-base: version bumped to 1.28.4
+2026-06-14|48a9b5aa30|gstreamer: version bumped to 1.28.4

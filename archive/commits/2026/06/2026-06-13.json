@@ -1,0 +1,8 @@
+[
+  {"date":"2026-06-13","category":"Moonbase","repository":"other","module":"","version":"","commit":"e67dedda52","title":"fluidsynth: version b umped to 2.5.5","summary":"fluidsynth: version b umped to 2.5.5"},
+  {"date":"2026-06-13","category":"Moonbase","repository":"other","module":"wine","version":"11.11``","commit":"564ede3bb3","title":"wine updated to 11.11``","summary":"version bumped to 11.11``"},
+  {"date":"2026-06-13","category":"Moonbase","repository":"other","module":"runc","version":"1.4.3","commit":"0a345e8cc9","title":"runc updated to 1.4.3","summary":"version bumped to 1.4.3"},
+  {"date":"2026-06-13","category":"Moonbase","repository":"other","module":"poppler","version":"26.06.0","commit":"3f856ca631","title":"poppler updated to 26.06.0","summary":"version bumped to 26.06.0"},
+  {"date":"2026-06-13","category":"Moonbase","repository":"other","module":"jenkins","version":"2.568","commit":"84eb4498d9","title":"jenkins updated to 2.568","summary":"version bumped to 2.568"},
+  {"date":"2026-06-13","category":"Moonbase","repository":"xorg","module":"xfsinfo","version":"1.0.8","commit":"3be524d","title":"xfsinfo updated to 1.0.8","summary":"version bumped to 1.0.8"}
+]
