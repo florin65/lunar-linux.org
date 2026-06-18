@@ -1,0 +1,7 @@
+[
+  {"date":"2026-06-15","category":"Moonbase","repository":"other","module":"lighttpd","version":"1.4.83","commit":"a3f173646c","title":"lighttpd updated to 1.4.83","summary":"version bumped to 1.4.83"},
+  {"date":"2026-06-15","category":"Moonbase","repository":"other","module":"kitty","version":"0.47.4","commit":"17ae5ea820","title":"kitty updated to 0.47.4","summary":"version bumped to 0.47.4"},
+  {"date":"2026-06-15","category":"Moonbase","repository":"other","module":"exfatprogs","version":"1.4.2","commit":"2461a1edb9","title":"exfatprogs updated to 1.4.2","summary":"version bumped to 1.4.2"},
+  {"date":"2026-06-15","category":"Moonbase","repository":"other","module":"mutt","version":"2.3.3","commit":"356e5dd186","title":"mutt updated to 2.3.3","summary":"version bumped to 2.3.3"},
+  {"date":"2026-06-15","category":"Moonbase","repository":"other","module":"firefox-bin","version":"152.0","commit":"7d4b4176c4","title":"firefox-bin updated to 152.0","summary":"version bumped to 152.0"}
+]

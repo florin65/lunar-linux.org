@@ -17,7 +17,7 @@ It is the recommended starting point for new installations because it reflects t
 
 [Download ISO]({{ latest_iso_url }})
 [IRC](https://web.libera.chat/#lunar)
-[Installation Guide](http://wiki.lunar-linux.org/Lunar_Linux:Installation)
+[Installation Guide](docs-installation-guide.html)
 
 ## Quick notes
 

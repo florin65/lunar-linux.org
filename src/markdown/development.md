@@ -28,9 +28,6 @@ Understand and improve the system while using Lunar Linux.
 - Report issues — clear bug reports are valuable
 - Send fixes — documentation and module updates
 
-[Community](community.html)
-[IRC](https://web.libera.chat/#lunar)
-[GitHub](https://github.com/lunar-linux)
 
 ## Ways to contribute
 
@@ -72,20 +69,17 @@ Moonbase and project repositories are public and used for development, collabora
 
 Jenkins automatically validates changes, tests updates and helps prepare future Daily Builds.
 
-## Start small
 
-### Use Lunar Linux
+## Development documentation
 
-Install it, explore it and understand how it behaves on real hardware.
+### Moonbase
 
-### Join the Community
+Understand the organization and role of Moonbase.
 
-Talk with users and developers before sending larger changes.
+[Explore Moonbase](pages/docs-moonbase.html)
 
-### Send Improvements
+### Writing Modules
 
-Small fixes, tested module updates and clear reports are valuable contributions.
+Learn how Lunar modules are structured and maintained.
 
-## Small project. Real contributions.
-
-Every improvement starts with someone deciding to help.
+[Read Writing Modules](pages/docs-writing-modules.html)

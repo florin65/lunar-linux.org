@@ -24,8 +24,39 @@ Lunar Linux is both a powerful Linux distribution and a practical school for Lin
 
 Learn here in Lunar Linux and apply that knowledge across Linux distributions.
 
-[Wiki](http://wiki.lunar-linux.org/)
-[Installation Guide](http://wiki.lunar-linux.org/Lunar_Linux:Installation)
+[Installation Guide](pages/docs-installation-guide.html)
+[About Lunar](pages/docs-about-lunar-linux.html)
+[Package Management](pages/docs-package-management.html)
+[History](pages/history.html)
+
+
+## Documentation library
+
+### Getting Started
+
+Install Lunar Linux and understand the first steps.
+
+[Installation Guide](pages/docs-installation-guide.html)
+
+### Using Lunar
+
+Learn the daily workflow and package management model.
+
+[About Lunar](pages/docs-about-lunar-linux.html)
+[Package Management](pages/docs-package-management.html)
+
+### Development
+
+Understand Moonbase and learn how to write modules.
+
+[Moonbase](pages/docs-moonbase.html)
+[Writing Modules](pages/docs-writing-modules.html)
+
+### History
+
+Read the origins and long journey of Lunar Linux.
+
+[The Origins of Lunar Linux](pages/history.html)
 
 ## Getting started
 

@@ -1,17 +1,190 @@
 :root {
+  /* ==================================================
+     GLOBAL TUNING PANEL
+     --------------------------------------------------
+     Change the values below first when tuning the site.
+     They are the main visual "knobs" for the theme.
+     ================================================== */
+
+
+  /* --------------------------------------------------
+     1. GLOBAL FONT SCALE
+     --------------------------------------------------
+     Main knob for text size across the whole site.
+
+       16px = larger / old default
+       15px = recommended balanced size
+       14px = compact
+     -------------------------------------------------- */
+
+  --base-font-size: 15px;
+
+  --font-body: 0.95rem;
+  --font-small: 0.86rem;
+  --font-smaller: 0.78rem;
+  --font-nav: 0.92rem;
+
+  --font-card: 0.94rem;
+  --font-table: 0.90rem;
+  --font-code: 0.86rem;
+
+  --h1-min: 1.70rem;
+  --h1-max: 2.35rem;
+
+  --h2-min: 1.45rem;
+  --h2-max: 2.05rem;
+
+  --h3-size: 1.12rem;
+
+
+  /* --------------------------------------------------
+     2. PAGE WIDTH AND SPACING
+     --------------------------------------------------
+     Main layout knobs.
+     -------------------------------------------------- */
+
+  --content-width: 1280px;
+  --container-side-gap: 56px;
+  --container-side-gap-small: 28px;
+
+  --section-padding: 24px;
+  --hero-padding-top: 24px;
+  --hero-padding-bottom: 18px;
+
+  --card-padding: 20px;
+  --card-radius: 12px;
+  --card-gap: 14px;
+
+
+  /* --------------------------------------------------
+     3. MAIN BACKGROUND COLORS
+     --------------------------------------------------
+     Controls the global blue/black background.
+
+     To make the page lighter, first raise --bg-bottom.
+     To make the top darker/lighter, tune --bg-top.
+     -------------------------------------------------- */
+
   --bg: #030712;
-  --panel: #111827;
-  --panel-soft: rgba(31, 41, 55, 0.74);
+
+  --bg-top: #061126;
+  --bg-middle: #10264d;
+  --bg-bottom: #1d3f73;
+
+  --bg-radial-accent: rgba(96, 165, 250, 0.14);
+  --bg-radial-page: rgba(96, 165, 250, 0.13);
+
+  --bg-muted-section: rgba(3, 7, 18, 0.34);
+  --bg-quickfacts: rgba(3, 7, 18, 0.40);
+
+
+  /* --------------------------------------------------
+     4. TEXT COLORS
+     -------------------------------------------------- */
 
   --text: #f3f4f6;
   --muted: #d1d5db;
 
+
+  /* --------------------------------------------------
+     5. ACCENT COLORS
+     --------------------------------------------------
+     Main Lunar blue accents: links, headings, buttons,
+     TOC pills and highlighted metadata.
+     -------------------------------------------------- */
+
   --accent: #60a5fa;
   --accent-strong: #93c5fd;
 
+  --accent-soft-bg: rgba(96, 165, 250, 0.10);
+  --accent-soft-border: rgba(96, 165, 250, 0.18);
+
+
+  /* --------------------------------------------------
+     6. PANELS, CARDS AND BORDERS
+     -------------------------------------------------- */
+
+  --panel: #111827;
+  --panel-soft: rgba(31, 41, 55, 0.74);
+
+  --card-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+  --journal-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+
   --line: rgba(99, 102, 241, 0.30);
   --line-soft: rgba(148, 163, 184, 0.16);
+
+
+  /* --------------------------------------------------
+     7. HEADER / BRAND
+     -------------------------------------------------- */
+
+  --header-bg: rgba(3, 7, 18, 0.96);
+  --header-min-height: 88px;
+  --header-gap: 34px;
+
+  --brand-logo-height: 86px;
+  --brand-logo-height-small: 76px;
+
+
+  /* --------------------------------------------------
+     8. BUTTONS
+     -------------------------------------------------- */
+
+  --button-min-height: 40px;
+  --button-padding-x: 20px;
+  --button-font-size: 0.90rem;
+
+
+  /* --------------------------------------------------
+     9. LOCAL DOCUMENTATION TOC
+     --------------------------------------------------
+     --toc-columns:
+       1 = vertical list
+       2 = compact two-column layout
+     -------------------------------------------------- */
+
+  --toc-columns: 3;
+  --toc-gap-row: 0.55rem;
+  --toc-gap-column: 1.1rem;
+  --toc-margin-bottom: 0.35rem;
+
+  --toc-pill-padding-y: 0.32rem;
+  --toc-pill-padding-x: 0.82rem;
+  --toc-pill-radius: 999px;
+  --toc-pill-min-height: 1.75rem;
+
+  --toc-pill-bg: rgba(96, 165, 250, 0.10);
+  --toc-pill-border: rgba(96, 165, 250, 0.18);
+  --toc-pill-hover-bg: var(--accent);
+  --toc-pill-hover-text: #020617;
+
+
+  /* --------------------------------------------------
+     10. TABLES / JOURNALS
+     -------------------------------------------------- */
+
+  --table-font-size: 0.88rem;
+  --table-header-font-size: 0.74rem;
+  --table-cell-padding-y: 8px;
+  --table-cell-padding-x: 12px;
+
+
+  /* --------------------------------------------------
+     11. MONOSPACE / CODE
+     -------------------------------------------------- */
+
+  --mono-font:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
 }
+
+html {
+  font-size: var(--base-font-size);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -19,8 +192,13 @@
 body {
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgba(96, 165, 250, 0.14), transparent 30%),
-    linear-gradient(135deg, #030712 0%, #111827 50%, #172554 100%);
+    radial-gradient(circle at top left, var(--bg-radial-accent), transparent 30%),
+    linear-gradient(
+      180deg,
+      var(--bg-top) 0%,
+      var(--bg-middle) 55%,
+      var(--bg-bottom) 100%
+    );
   color: var(--text);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.36;
@@ -40,20 +218,20 @@ p, li, span, div, td, th {
 
 
 .container {
-  width: min(1280px, calc(100% - 56px));
+  width: min(var(--content-width), calc(100% - var(--container-side-gap)));
   margin: 0 auto;
 }
 
 /* Header */
 
 .site-header {
-  background: rgba(3, 7, 18, 0.96);
+  background: var(--header-bg);
   border-bottom: 1px solid var(--line);
   box-shadow: 0 12px 32px rgba(49, 46, 129, 0.18);
 }
 
 .header-inner {
-  min-height: 88px;
+  min-height: var(--header-min-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -72,7 +250,7 @@ p, li, span, div, td, th {
 
 .brand img {
   display: block;
-  height: 86px;
+  height: var(--brand-logo-height);
   width: auto;
 }
 
@@ -89,7 +267,7 @@ p, li, span, div, td, th {
   display: flex;
   align-items: center;
   gap: 32px;
-  font-size: 0.98rem;
+  font-size: var(--font-body);
   font-weight: 500;
 }
 
@@ -119,7 +297,7 @@ p, li, span, div, td, th {
 .meta-line {
   margin: 0 0 10px;
   color: var(--accent);
-  font-size: 0.78rem;
+  font-size: var(--font-smaller);
   font-weight: 800;
   letter-spacing: 0.04em;
   white-space: nowrap;
@@ -128,7 +306,7 @@ p, li, span, div, td, th {
 h1 {
   margin: 0 0 14px;
   color: var(--text);
-  font-size: clamp(1.85rem, 2.7vw, 2.5rem);
+  font-size: clamp(var(--h1-min), 2.7vw, var(--h1-max));
   line-height: 1;
   font-weight: 800;
   letter-spacing: -0.025em;
@@ -140,7 +318,7 @@ h1 {
   margin: 0 0 14px;
   padding-left: 1.2rem;
   color: var(--muted);
-  font-size: 1rem;
+  font-size: var(--font-body);
 }
 
 .offer-list li {
@@ -152,13 +330,13 @@ h1 {
   margin: 0;
   max-width: 760px;
   color: var(--text);
-  font-size: 1.02rem;
+  font-size: var(--font-body);
   font-weight: 600;
 }
 
 .hero-actions {
   display: flex;
-  gap: 14px;
+  gap: var(--card-gap);
   margin-top: 18px;
 }
 
@@ -196,15 +374,15 @@ h1 {
 
 .side-panels {
   display: grid;
-  gap: 14px;
+  gap: var(--card-gap);
 }
 
 .info-box {
   background: var(--panel-soft);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: var(--card-radius);
   padding: 18px;
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--card-shadow);
 }
 
 .info-box h2 {
@@ -226,7 +404,7 @@ h1 {
   gap: 10px;
   padding: 8px 0;
   color: var(--text);
-  font-size: 0.88rem;
+  font-size: var(--font-small);
   border-top: 1px solid var(--line-soft);
 }
 
@@ -238,7 +416,7 @@ h1 {
 .update-list span {
   color: var(--accent);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.78rem;
+  font-size: var(--font-smaller);
 }
 
 .compact {
@@ -248,10 +426,10 @@ h1 {
 .update-list li {
   display: flex;
   justify-content: space-between;
-  gap: 14px;
+  gap: var(--card-gap);
   padding: 6px 0;
   color: var(--text);
-  font-size: 0.88rem;
+  font-size: var(--font-small);
   border-top: 1px solid var(--line-soft);
 }
 
@@ -269,7 +447,7 @@ h1 {
 
 .facts {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(var(--toc-columns), minmax(0, max-content));
 }
 
 .facts div {
@@ -279,7 +457,7 @@ h1 {
   justify-content: center;
   color: var(--accent);
   border-left: 1px solid var(--line-soft);
-  font-size: 0.82rem;
+  font-size: var(--font-small);
   text-align: center;
   padding: 0 8px;
 }
@@ -320,7 +498,7 @@ h1 {
   }
 
   .brand img {
-    height: 76px;
+    height: var(--brand-logo-height-small);
   }
 
   .brand-slogan {
@@ -339,7 +517,7 @@ h1 {
   }
 
   .facts {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(var(--toc-columns), minmax(0, max-content));
   }
 
   .facts div:nth-child(3) {
@@ -349,7 +527,7 @@ h1 {
 
 @media (max-width: 620px) {
   .container {
-    width: min(100% - 28px, 1280px);
+    width: min(100% - var(--container-side-gap-small), var(--content-width));
   }
 
   .site-nav {
@@ -409,14 +587,14 @@ h1 {
 
 .page-hero h1 {
   margin: 0 0 12px;
-  font-size: clamp(1.7rem, 2.6vw, 2.6rem);
+  font-size: clamp(var(--h1-min), 2.6vw, var(--h1-max));
 }
 
 .page-hero p:last-child {
   max-width: 820px;
   margin: 0;
   color: var(--muted);
-  font-size: 1rem;
+  font-size: var(--font-body);
 }
 
 .community-hero-grid {
@@ -441,7 +619,7 @@ h1 {
 .content-grid {
   display: grid;
   grid-template-columns: 1.15fr 1fr 1fr;
-  gap: 14px;
+  gap: var(--card-gap);
 }
 
 .content-card,
@@ -449,9 +627,9 @@ h1 {
 .quote-box {
   background: var(--panel-soft);
   border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  box-shadow: var(--card-shadow);
 }
 
 .content-card.wide {
@@ -471,7 +649,7 @@ h1 {
 .split-content p,
 .closing-banner p {
   color: var(--muted);
-  font-size: 0.98rem;
+  font-size: var(--font-body);
 }
 
 .content-card p:last-child,
@@ -488,13 +666,13 @@ h1 {
 
 .section-title {
   margin: 0 0 16px;
-  font-size: clamp(1.6rem, 2.7vw, 2.3rem);
+  font-size: clamp(var(--h2-min), 2.7vw, var(--h2-max));
 }
 
 .feature-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(var(--toc-columns), minmax(0, max-content));
+  gap: var(--card-gap);
 }
 
 .feature-card-wide {
@@ -511,7 +689,7 @@ h1 {
 .split-content h2 {
   margin-top: 0;
   color: var(--text);
-  font-size: clamp(1.6rem, 2.7vw, 2.3rem);
+  font-size: clamp(var(--h2-min), 2.7vw, var(--h2-max));
 }
 
 .quote-box p {
@@ -539,7 +717,7 @@ h1 {
 .closing-banner p {
   max-width: 760px;
   margin: 0 auto;
-  font-size: 0.98rem;
+  font-size: var(--font-body);
 }
 
 /* Content page responsive */
@@ -598,7 +776,7 @@ h1 {
 }
 
 .download-main.download-stacked .simple-list {
-  font-size: 1.02rem;
+  font-size: var(--font-body);
 }
 
 .download-main.download-stacked .hero-actions {
@@ -650,7 +828,7 @@ h1 {
                Consolas,
                monospace;
 
-  font-size: 0.82rem;
+  font-size: var(--font-small);
   line-height: 1.45;
 
   white-space: pre-wrap;
@@ -678,9 +856,9 @@ h1 {
 .download-card {
   background: var(--panel-soft);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: var(--card-radius);
   padding: 22px;
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--card-shadow);
 }
 
 .download-card h2 {
@@ -691,7 +869,7 @@ h1 {
 
 .download-card p {
   color: var(--muted);
-  font-size: 0.98rem;
+  font-size: var(--font-body);
 }
 
 .primary-download h2 {
@@ -702,7 +880,7 @@ h1 {
   margin: 0;
   padding-left: 1.2rem;
   color: var(--muted);
-  font-size: 0.98rem;
+  font-size: var(--font-body);
 }
 
 .simple-list li {
@@ -775,7 +953,7 @@ h1 {
 .docs-hero-main h1 {
   margin: 0 0 12px;
   color: var(--text);
-  font-size: clamp(1.7rem, 2.6vw, 2.6rem);
+  font-size: clamp(var(--h1-min), 2.6vw, var(--h1-max));
   line-height: 1;
   font-weight: 800;
   letter-spacing: -0.025em;
@@ -784,7 +962,7 @@ h1 {
 .docs-hero-main .hero-description {
   margin: 0;
   color: var(--muted);
-  font-size: 1rem;
+  font-size: var(--font-body);
 }
 
 .docs-hero-quote {
@@ -794,7 +972,7 @@ h1 {
 .docs-philosophy-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: var(--card-gap);
   margin-top: 18px;
 }
 
@@ -827,9 +1005,9 @@ h1 {
 .community-contact-card {
   background: var(--panel-soft);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: var(--card-radius);
   padding: 22px;
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--card-shadow);
 }
 
 .community-contact-card h2 {
@@ -855,7 +1033,7 @@ h1 {
 .community-right-column {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: var(--card-gap);
 
     position: relative;
     top: -58px;
@@ -881,7 +1059,7 @@ h1 {
 .development-right-column {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: var(--card-gap);
   position: relative;
   top: -63px;
 }
@@ -920,7 +1098,7 @@ h1 {
 .generated-page p {
   max-width: 980px;
   color: var(--muted);
-  font-size: 1.02rem;
+  font-size: var(--font-body);
 }
 
 .generated-page a {
@@ -956,15 +1134,15 @@ h1 {
 
 .news-list {
   display: grid;
-  gap: 14px;
+  gap: var(--card-gap);
 }
 
 .news-item {
   background: var(--panel-soft);
   border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  box-shadow: var(--card-shadow);
 }
 
 .news-item time {
@@ -972,7 +1150,7 @@ h1 {
   margin-bottom: 8px;
   color: var(--accent);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.82rem;
+  font-size: var(--font-small);
   font-weight: 800;
 }
 
@@ -1012,7 +1190,7 @@ h1 {
       rgba(31, 41, 55, 0.88),
       rgba(17, 24, 39, 0.84));
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: var(--card-radius);
   box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
   overflow-x: auto;
 }
@@ -1051,7 +1229,7 @@ h1 {
 
 .moonbase-table th {
   color: var(--accent);
-  font-size: 0.78rem;
+  font-size: var(--font-smaller);
   font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1080,7 +1258,7 @@ h1 {
     Menlo,
     Consolas,
     monospace;
-  font-size: 0.82rem;
+  font-size: var(--font-small);
 }
 
 .moonbase-table .commit-id a,
@@ -1163,7 +1341,7 @@ h1 {
       rgba(31, 41, 55, 0.88),
       rgba(17, 24, 39, 0.84));
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: var(--card-radius);
   box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
   overflow-x: auto;
 }
@@ -1194,7 +1372,7 @@ h1 {
 
 .community-news-table th {
   color: var(--accent);
-  font-size: 0.78rem;
+  font-size: var(--font-smaller);
   font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1345,7 +1523,7 @@ h1 {
 
 .archive-explore-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--toc-columns), minmax(0, max-content));
   gap: 18px;
   margin-top: 22px;
 }
@@ -1381,4 +1559,262 @@ h1 {
 
 .archive-section-actions {
   margin-top: 18px;
+}
+
+
+/* -------------------------------------------------- */
+/* Documentation local table of contents              */
+/* -------------------------------------------------- */
+
+.local-toc {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.75rem 0 var(--toc-margin-bottom);
+  display: grid;
+  grid-template-columns: repeat(var(--toc-columns), minmax(0, max-content));
+  gap: var(--toc-gap-row) var(--toc-gap-column);
+  align-items: start;
+}
+
+.local-toc li {
+  margin: 0;
+}
+
+.local-toc a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toc-pill-min-height);
+  padding: var(--toc-pill-padding-y) var(--toc-pill-padding-x);
+  border: 1px solid var(--toc-pill-border);
+  border-radius: var(--toc-pill-radius);
+  background: var(--toc-pill-bg);
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.local-toc a:hover,
+.local-toc a:focus {
+  background: var(--toc-pill-hover-bg);
+  color: var(--toc-pill-hover-text);
+  border-color: var(--toc-pill-hover-bg);
+}
+
+.docs-page h2,
+.docs-page h3 {
+  scroll-margin-top: 7rem;
+}
+
+@media (max-width: 760px) {
+  .local-toc {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* Tighten space after documentation TOC */
+.generated-page .local-toc {
+  margin-bottom: var(--toc-margin-bottom);
+}
+
+.generated-page .local-toc + p,
+.generated-page .local-toc + h2 {
+  margin-top: 0.65rem;
+}
+
+
+/* Tight documentation TOC vertical rhythm */
+.content-section:has(.local-toc) {
+  padding-bottom: 6px;
+}
+
+.content-section:has(.local-toc) + .content-section {
+  padding-top: 8px;
+}
+
+.local-toc {
+  margin-bottom: var(--toc-margin-bottom);
+}
+
+
+/* -------------------------------------------------- */
+/* Documentation tables and link lists                */
+/* -------------------------------------------------- */
+
+.docs-table-wrap {
+  max-width: 760px;
+  margin: 1rem 0 1.2rem;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--card-radius);
+  background: rgba(17, 24, 39, 0.58);
+  box-shadow: var(--card-shadow);
+}
+
+.docs-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-small);
+  line-height: 1.35;
+}
+
+.docs-comparison-table th,
+.docs-comparison-table td {
+  padding: 0.65rem 0.85rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.docs-comparison-table th {
+  color: var(--accent);
+  font-weight: 900;
+  background: rgba(3, 7, 18, 0.42);
+}
+
+.docs-comparison-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.docs-link-section {
+  text-align: left;
+}
+
+.docs-link-list {
+  list-style: disc;
+  padding-left: 1.2rem;
+}
+
+.docs-link-list a,
+.generated-page .docs-link-list a {
+  color: var(--accent-strong);
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 1.4px;
+  text-underline-offset: 4px;
+}
+
+.docs-link-list a:hover,
+.generated-page .docs-link-list a:hover {
+  color: var(--accent);
+}
+
+
+/* docs-package-management: align See Also like Getting Started */
+.see-also-left-title,
+.see-also-left-title + ul,
+.see-also-left-title + .simple-list,
+#see-also,
+#see-also + ul {
+  text-align: left !important;
+  margin-left: 0 !important;
+}
+
+
+/* docs-package-management: highlight Getting Started and See Also navigation links */
+#getting-started + p + ul a,
+#see-also + ul a,
+.docs-package-management-links a,
+.docs-link-list a,
+.see-also-left-title + ul a {
+  color: var(--accent-strong) !important;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+}
+
+#getting-started + p + ul a:hover,
+#see-also + ul a:hover,
+.docs-package-management-links a:hover,
+.docs-link-list a:hover,
+.see-also-left-title + ul a:hover {
+  color: var(--accent) !important;
+  text-decoration-thickness: 2px;
+}
+
+
+
+/* -------------------------------------------------- */
+/* Final page-by-page inspection fixes                */
+/* -------------------------------------------------- */
+
+.structure-diagram-card {
+  max-width: 640px;
+}
+
+.structure-diagram {
+  margin: 0.6rem 0 0;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  background: rgba(3, 7, 18, 0.46);
+  border: 1px solid var(--line-soft);
+  overflow-x: auto;
+}
+
+.structure-diagram code {
+  font-family: var(--mono-font);
+  font-size: var(--font-small);
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.generated-page .simple-list a,
+.docs-link-list a {
+  color: var(--accent-strong);
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 1.4px;
+  text-underline-offset: 4px;
+}
+
+.generated-page .simple-list a:hover,
+.docs-link-list a:hover {
+  color: var(--accent);
+  text-decoration-thickness: 2px;
+}
+
+.history-page .container {
+  max-width: min(var(--content-width), calc(100% - var(--container-side-gap)));
+}
+
+.history-page .split-content {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.history-page .split-content > aside,
+.history-page .split-content > .side-card {
+  display: none;
+}
+
+.inline-emphasis {
+  color: var(--accent-strong);
+  font-size: 1.08em;
+}
+
+.history-principle {
+  display: inline-block;
+  margin: 0.7rem 0 1rem;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: var(--card-radius);
+  background: rgba(17, 24, 39, 0.58);
+  color: var(--text);
+}
+
+.development-page .split-content {
+  align-items: start;
+}
+
+.development-page .split-content aside,
+.development-page .split-content .side-card,
+.development-page .split-content .info-card {
+  align-self: start;
+}
+
+.development-page .split-content aside > *:first-child,
+.development-page .split-content .side-card:first-child {
+  margin-top: 0;
 }

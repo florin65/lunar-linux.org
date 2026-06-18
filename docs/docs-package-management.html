@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Package Management | Lunar Linux Documentation</title>
+  <meta name="description" content="Lunar Linux documentation: Package Management.">
+
+  <link rel="icon" href="assets/logo/favicon.ico">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="index.html">
+        <img src="assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="news.html">News</a>
+      <a href="archive.html">Archive</a>
+      <a href="download.html">Download</a>
+      <a href="docs.html">Docs</a>
+      <a href="community.html">Community</a>
+      <a href="development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main">
+  <section class="page-hero">
+    <div class="container">
+      <h1>Package Management</h1>
+      <p class="hero-description">Managing packages with Lunar's source-based package management system</p>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="on-this-page">On This Page</h2>
+        <ul class="simple-list local-toc">
+          <li><a href="#what-makes-lunar-different">What Makes Lunar Different</a></li>
+          <li><a href="#package-management-tools">Package Management Tools</a></li>
+          <li><a href="#core-components">Core Components</a></li>
+          <li><a href="#comparison-to-other-systems">Comparison to Other Systems</a></li>
+          <li><a href="#getting-started">Getting Started</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="what-makes-lunar-different">What Makes Lunar Different</h2>
+        <p>Lunar Linux's package management system is distinctive because all applications are compiled directly from source code, rather than installed from pre-compiled binaries. This approach offers several advantages:</p>
+        <ul class="simple-list">
+          <li><strong>Optimization:</strong> Software is compiled specifically for your hardware</li>
+          <li><strong>Customization:</strong> Choose exactly which features to include or exclude</li>
+          <li><strong>Transparency:</strong> See exactly what's being installed</li>
+          <li><strong>Flexibility:</strong> Easy to modify or patch packages</li>
+          <li><strong>Currency:</strong> Access to latest upstream sources</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+  <section class="content-section muted-section">
+    <div class="container">
+      <h2 id="package-management-tools" class="section-title">Package Management Tools</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>lunar (Stable)</h3>
+          <p>The stable, production-ready package management system. This is what most users should run.</p>
+          <p><em>lin package-name \# Install a package</em></p>
+          <p><em>lunar update \# Update all installed packages</em></p>
+          <p><em>lunar renew package-name \# Rebuild a package</em></p>
+        </article>
+        <article class="feature-card">
+          <h3>theedge (Development)</h3>
+          <p>The development branch containing experimental features and improvements. Use this only if you want to help test new functionality or need bleeding-edge features.</p>
+          <p><em>lin theedge \# Switch to development branch</em></p>
+          <p><strong>Important:</strong> <em>lunar</em> and <em>theedge</em> are mutually exclusive. Installing one removes the other.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="content-section muted-section">
+    <div class="container">
+      <h2 id="core-components" class="section-title">Core Components</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>lin - Package Installation Tool</h3>
+          <p>The primary command for installing packages. See lin Basics for detailed usage.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Moonbase - Package Repository</h3>
+          <p>The moonbase is Lunar's package repository, containing module definitions for thousands of software packages. See Moonbase Overview for more information.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Modules</h3>
+          <p>In Lunar, a "module" is a package definition containing:</p>
+          <ul class="simple-list">
+            <li>Source download locations</li>
+            <li>Build instructions</li>
+            <li>Dependency information</li>
+            <li>Configuration options</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="comparison-to-other-systems">Comparison to Other Systems</h2>
+        <p>If you're familiar with other package managers, this comparison gives a rough orientation:</p>
+        <ul class="simple-list">
+          <li><strong>Debian / Ubuntu</strong> — <code>apt</code> / <code>dpkg</code> — binary packages</li>
+          <li><strong>Red Hat / Fedora</strong> — <code>yum</code> / <code>rpm</code> / <code>dnf</code> — binary packages</li>
+          <li><strong>Gentoo</strong> — <code>emerge</code> / <code>portage</code> — source-based packages</li>
+          <li><strong>Arch Linux</strong> — <code>pacman</code> — binary packages</li>
+          <li><strong>Lunar Linux</strong> — <code>lin</code> / <code>lunar</code> — source-based modules</li>
+        </ul>
+        <p>Lunar is most similar to Gentoo's Portage in being source-based, but it follows a smaller, simpler and more direct philosophy.</p>
+      </article>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="getting-started">Getting Started</h2>
+        <p>For new users, start with these guides:</p>
+        <ul class="simple-list">
+          <li><a href="docs-installation-guide.html">Installation Guide</a></li>
+          <li><a href="docs-about-lunar-linux.html">About Lunar Linux</a></li>
+          <li><a href="docs-moonbase.html">Moonbase</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container closing-banner">
+      <h2 id="see-also">See Also</h2>
+      <ul class="simple-list">
+        <li><a href="docs-moonbase.html">Moonbase</a></li>
+        <li><a href="docs-writing-modules.html">Writing Modules</a></li>
+        <li><a href="docs-installation-guide.html">Installation Guide</a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

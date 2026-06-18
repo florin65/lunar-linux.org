@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2026-06-14|2ea06204eb|nss: version bumped to 3.125
 2026-06-14|9dfe79c89e|catch2: Version bumped to 3.15.1
 2026-06-14|28f460ffca|wakatime-cli: Version bumped to 2.16.1
@@ -12,3 +13,15 @@
 2026-06-14|2bd2ee020b|gst-plugins-good: version bumped to 1.28.4
 2026-06-14|5cf23de68a|gst-plugibs-base: version bumped to 1.28.4
 2026-06-14|48a9b5aa30|gstreamer: version bumped to 1.28.4
+=======
+2026-06-17|8c9be22cf2|gh: Version bumped to 2.95.0
+2026-06-17|019252e1e5|libnvme: version bumped to 1.16.2
+2026-06-17|9401a5699b|pulseaudio: improvments
+2026-06-17|fad56ff68c|libsndfile: small tweaks
+2026-06-17|5bc2cba89c|libsndfile: improvments
+2026-06-17|b933179801|opus: improvments
+2026-06-17|a5889c68e7|pulseaudio: some improvments
+2026-06-17|ef93738b06|dillo: small tweaks
+2026-06-17|d3ba9f7f42|libfakekey: Changing source url.
+2026-06-17|1ff89c3ae4|neomutt: version bumped to 20260616
+>>>>>>> 9020382 (Version 2.8 - Some documntation added)

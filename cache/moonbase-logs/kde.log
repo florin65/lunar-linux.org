@@ -1,0 +1,5 @@
+2026-06-17|244206af6|spectacle: Adjusting DEPENDS.
+2026-06-17|be90d5f5e|plasma: Bump to 6.7.0.
+2026-06-17|cb00a6f11|oxygen-icons: Moving to frameworks.
+2026-06-17|40b71ffd6|amarok: Bump to 3.3.3.
+2026-06-17|522a0f79d|okular: Removing chmlib depends.

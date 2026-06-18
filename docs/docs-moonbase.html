@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moonbase | Lunar Linux Documentation</title>
+  <meta name="description" content="Lunar Linux documentation: Moonbase.">
+
+  <link rel="icon" href="assets/logo/favicon.ico">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="index.html">
+        <img src="assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="news.html">News</a>
+      <a href="archive.html">Archive</a>
+      <a href="download.html">Download</a>
+      <a href="docs.html">Docs</a>
+      <a href="community.html">Community</a>
+      <a href="development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main">
+  <section class="page-hero">
+    <div class="container">
+      <h1>Moonbase</h1>
+      <p class="hero-description">Understanding Moonbase, the heart of Lunar Linux</p>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="on-this-page">On This Page</h2>
+        <ul class="simple-list local-toc">
+          <li><a href="#sections">Sections</a></li>
+          <li><a href="#modules">Modules</a></li>
+          <li><a href="#summary">Summary</a></li>
+          <li><a href="#viewing-and-browsing">Viewing and Browsing</a></li>
+          <li><a href="#updating-the-moonbase">Updating the Moonbase</a></li>
+          <li><a href="#related-topics">Related Topics</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+  <section class="content-section muted-section">
+    <div class="container">
+      <h2 id="sections" class="section-title">Sections</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>Special Sections</h3>
+          <p>There are two sections of special significance:</p>
+          <p>#### <a href="#zbeta">zbeta</a></p>
+          <p>Contains modules that are:</p>
+          <ul class="simple-list">
+            <li>Downloaded directly from live source code repositories (\<em>-cvs or \</em>-svn modules)</li>
+            <li>Unable to be tested extensively by the Lunar team due to hardware availability or other constraints</li>
+          </ul>
+          <p>These modules cannot be guaranteed to work at all times on all hardware.</p>
+          <p>#### <a href="#zlocal">zlocal</a></p>
+          <p>Where users can:</p>
+          <ul class="simple-list">
+            <li>Develop their own modules</li>
+            <li>Copy and edit existing moonbase modules without risk of them being overwritten next time the moonbase is updated</li>
+          </ul>
+          <p>This is your personal workspace for module development and customization.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="content-section muted-section">
+    <div class="container">
+      <h2 id="modules" class="section-title">Modules</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>Example</h3>
+          <p>If we had a module named FooGame that was located in the "games" section of the moonbase, we would find a directory called FooGame at:</p>
+          <p><em>/var/lib/lunar/moonbase/games/FooGame</em></p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="content-section muted-section">
+    <div class="container">
+      <h2 id="summary" class="section-title">Summary</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>Structure Diagram</h3>
+          <p>``<code>text Moonbase ├── section │   └── module │       └── files └── section └── module └── files </code>``</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="content-section muted-section">
+    <div class="container">
+      <h2 id="viewing-and-browsing" class="section-title">Viewing and Browsing</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>Command Line</h3>
+          <p><em>\# List all sections</em></p>
+          <p><em>ls /var/lib/lunar/moonbase/</em></p>
+          <p><em>\# List modules in a specific section</em></p>
+          <p><em>ls /var/lib/lunar/moonbase/games/</em></p>
+          <p><em>\# View all modules in a section</em></p>
+          <p><em>lvu section games</em></p>
+          <p><em>\# Search for a module</em></p>
+          <p><em>lvu search keyword</em></p>
+        </article>
+        <article class="feature-card">
+          <h3>Web Interface</h3>
+          <p>Browse the moonbase online at <a href="http://www.lunar-linux.org/">lunar-linux.org</a> to see available modules and their details.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="updating-the-moonbase">Updating the Moonbase</h2>
+        <p>The moonbase should be updated regularly to get the latest module definitions:</p>
+        <p><em>\# Update moonbase to latest version</em></p>
+        <p><em>lunar update</em></p>
+        <p><em>\# Just update moonbase without installing updates</em></p>
+        <p><em>lunar renew</em></p>
+        <p>This downloads the latest module definitions from the Lunar Linux servers, ensuring you have access to the newest versions of software packages.</p>
+      </article>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="related-topics">Related Topics</h2>
+        <ul class="simple-list">
+          <li><a href="docs-writing-modules.html">Module Basics</a> - Learn how modules are structured</li>
+          <li><a href="docs-package-management.html">Lin Basics</a> - Using the package installer</li>
+          <li><a href="docs-writing-modules.html">Module Submission</a> - Contributing your own modules</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+  <section class="content-section muted-section">
+    <div class="container">
+      <h2 id="related-articles" class="section-title">Related Articles</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>Module Submission</h3>
+          <p>How to submit new or updated modules to the official Lunar Linux moonbase</p>
+          <p>development</p>
+        </article>
+        <article class="feature-card">
+          <h3>Module Basics</h3>
+          <p>Understanding the structure and scripts that make up a Lunar Linux module</p>
+          <p>development</p>
+        </article>
+        <article class="feature-card">
+          <h3>Module Function Reference</h3>
+          <p>Reference guide for functions available in Lunar module scripts</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Installation Guide | Lunar Linux Documentation</title>
+  <meta name="description" content="Lunar Linux documentation: Installation Guide.">
+
+  <link rel="icon" href="assets/logo/favicon.ico">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="index.html">
+        <img src="assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="news.html">News</a>
+      <a href="archive.html">Archive</a>
+      <a href="download.html">Download</a>
+      <a href="docs.html">Docs</a>
+      <a href="community.html">Community</a>
+      <a href="development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main">
+  <section class="page-hero">
+    <div class="container">
+      <h1>Installation Guide</h1>
+      <p class="hero-description">Step-by-step guide to installing Lunar Linux</p>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="on-this-page">On This Page</h2>
+        <ul class="simple-list local-toc">
+          <li><a href="#before-you-begin">Before You Begin</a></li>
+          <li><a href="#installation-steps">Installation Steps</a></li>
+          <li><a href="#post-installation">Post-Installation</a></li>
+          <li><a href="#troubleshooting">Troubleshooting</a></li>
+          <li><a href="#next-steps">Next Steps</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="before-you-begin">Before You Begin</h2>
+        <p>Ensure you have:</p>
+        <ul class="simple-list">
+          <li>Met the system requirements</li>
+          <li>Backed up any important data</li>
+          <li>Created a bootable Lunar Linux USB drive</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+  <section class="content-section muted-section">
+    <div class="container">
+      <h2 id="installation-steps" class="section-title">Installation Steps</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>1. Boot from Installation Media</h3>
+          <p>1.  Insert the Lunar Linux installation media 2.  Restart your computer 3.  Enter BIOS/UEFI settings (usually F2, F12, or Del key) 4.  Set boot priority to USB/CD drive 5.  Save and exit</p>
+        </article>
+        <article class="feature-card">
+          <h3>2. Start the Installer</h3>
+          <p>Once booted, you'll see the Lunar Linux welcome screen.</p>
+          <p>Start the installation process:</p>
+          <p><em>lunar-install</em></p>
+        </article>
+        <article class="feature-card">
+          <h3>3. Partition Your Disk</h3>
+          <p>The installer will guide you through disk partitioning.</p>
+          <p><strong>Recommended partition scheme:</strong></p>
+          <p><em>/dev/sda1 512M EFI System Partition (if UEFI)</em></p>
+          <p><em>/dev/sda2 4G Swap</em></p>
+          <p><em>/dev/sda3 Rest Root filesystem (/)</em></p>
+        </article>
+        <article class="feature-card">
+          <h3>4. Select Installation Profile</h3>
+          <p>Choose your installation profile:</p>
+          <ul class="simple-list">
+            <li><strong>Minimal</strong> - Basic system only</li>
+            <li><strong>Desktop</strong> - Includes X11 and desktop environment</li>
+            <li><strong>Server</strong> - Optimized for server use</li>
+          </ul>
+        </article>
+        <article class="feature-card">
+          <h3>5. Configure Network</h3>
+          <p>Configure your network connection for package downloads during installation.</p>
+        </article>
+        <article class="feature-card">
+          <h3>6. Install Base System</h3>
+          <p>The installer will:</p>
+          <ul class="simple-list">
+            <li>Format partitions</li>
+            <li>Install base packages</li>
+            <li>Configure bootloader</li>
+          </ul>
+          <p>This may take 30-60 minutes depending on your system and internet speed.</p>
+        </article>
+        <article class="feature-card">
+          <h3>7. Set Root Password</h3>
+          <p>When prompted, set a secure root password.</p>
+        </article>
+        <article class="feature-card">
+          <h3>8. Create User Account</h3>
+          <p>Create your primary user account:</p>
+          <p><em>useradd -m -G wheel username</em></p>
+          <p><em>passwd username</em></p>
+        </article>
+        <article class="feature-card">
+          <h3>9. Reboot</h3>
+          <p>Once installation completes:</p>
+          <p><em>reboot</em></p>
+          <p>Remove the installation media when prompted.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="post-installation">Post-Installation</h2>
+        <p>After rebooting into your new system:</p>
+        <p>1.  Log in with your user account 2.  Update the system: <em>lin update</em> 3.  Install additional software as needed</p>
+      </article>
+    </div>
+  </section>
+  <section class="content-section muted-section">
+    <div class="container">
+      <h2 id="troubleshooting" class="section-title">Troubleshooting</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>Boot Issues</h3>
+          <p>If system won't boot:</p>
+          <ul class="simple-list">
+            <li>Verify BIOS/UEFI boot order</li>
+            <li>Check bootloader configuration</li>
+            <li>Ensure partitions were formatted correctly</li>
+          </ul>
+        </article>
+        <article class="feature-card">
+          <h3>Network Issues</h3>
+          <p>If network isn't working:</p>
+          <ul class="simple-list">
+            <li>Check network cable connection</li>
+            <li>Verify network configuration</li>
+            <li>Test with: <em>ping -c 3 lunar-linux.org</em></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="next-steps">Next Steps</h2>
+        <ul class="simple-list">
+          <li>Learn about package management</li>
+          <li>Explore system administration</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+  <section class="content-section muted-section">
+    <div class="container">
+      <h2 id="related-articles" class="section-title">Related Articles</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>Frequently Asked Questions</h3>
+          <p>Common questions and answers about Lunar Linux, installation, optimization, and package management</p>
+          <p>installation</p>
+        </article>
+        <article class="feature-card">
+          <h3>Advanced Installation Methods</h3>
+          <p>Alternative and advanced installation techniques for Lunar Linux</p>
+          <p>installation</p>
+        </article>
+        <article class="feature-card">
+          <h3>Kernel Command Line Parameters</h3>
+          <p>Configuring device node handling via bootloader kernel parameters</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

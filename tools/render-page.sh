@@ -29,6 +29,22 @@ function attr(s) {
   return s
 }
 
+function slug_id(s,    t) {
+  t = s
+  while (match(t, /\[[^]]+\]\([^)]+\)/)) {
+    t = substr(t, 1, RSTART - 1) substr(t, RSTART + 1, index(substr(t, RSTART), "]") - 2) substr(t, RSTART + RLENGTH)
+  }
+  gsub(/`/, "", t)
+  gsub(/\*/, "", t)
+  t = tolower(t)
+  gsub(/[^a-z0-9]+/, "-", t)
+  gsub(/^-+/, "", t)
+  gsub(/-+$/, "", t)
+  if (t == "") t = "section"
+  return t
+}
+
+
 function inline(s,    out, pre, label, url, rest, p1, p2, code) {
   s = esc(s)
   out = ""
@@ -186,14 +202,17 @@ function render_blocks(a, b, indent, skip_quote, skip_links,    i, items, c, j) 
     if (kind[i] == "h1")
       print indent "<h1>" inline(val[i]) "</h1>"
     else if (kind[i] == "h2")
-      print indent "<h2>" inline(val[i]) "</h2>"
+      print indent "<h2 id=\"" slug_id(val[i]) "\">" inline(val[i]) "</h2>"
     else if (kind[i] == "h3")
-      print indent "<h3>" inline(val[i]) "</h3>"
+      print indent "<h3 id=\"" slug_id(val[i]) "\">" inline(val[i]) "</h3>"
     else if (kind[i] == "p")
       print indent "<p>" inline(val[i]) "</p>"
     else if (kind[i] == "ul") {
       c = split_items(val[i], items)
-      print indent "<ul class=\"simple-list\">"
+      if (i > 1 && kind[i - 1] == "h2" && val[i - 1] == "On This Page")
+        print indent "<ul class=\"simple-list local-toc\">"
+      else
+        print indent "<ul class=\"simple-list\">"
       for (j = 1; j <= c; j++)
         print indent "  <li>" inline(items[j]) "</li>"
       print indent "</ul>"
@@ -262,7 +281,7 @@ function render_feature_grid(title, a, b, muted,    i, nxt, seccls) {
 
   print "  <section class=\"" seccls "\">"
   print "    <div class=\"container\">"
-  print "      <h2 class=\"section-title\">" inline(title) "</h2>"
+  print "      <h2 id=\"" slug_id(title) "\" class=\"section-title\">" inline(title) "</h2>"
   print "      <div class=\"feature-grid\">"
 
   for (i = a; i <= b; i++) {
@@ -299,7 +318,7 @@ function render_split_section(title, a, b, cls,    quote, i, items, c, j) {
   print "  <section class=\"" cls "\">"
   print "    <div class=\"container split-content\">"
   print "      <article>"
-  print "        <h2>" inline(title) "</h2>"
+  print "        <h2 id=\"" slug_id(title) "\">" inline(title) "</h2>"
   render_blocks(a, b, "        ", 1, 1)
   print "      </article>"
 
@@ -321,7 +340,7 @@ function render_closing_banner(title, a, b, muted,    seccls) {
 
   print "  <section class=\"" seccls "\">"
   print "    <div class=\"container closing-banner\">"
-  print "      <h2>" inline(title) "</h2>"
+  print "      <h2 id=\"" slug_id(title) "\">" inline(title) "</h2>"
   render_blocks(a, b, "      ", 0, 1)
   print "    </div>"
   print "  </section>"
@@ -712,7 +731,7 @@ function render_development(    built, start, compact, links, tail, e, first_h3,
 function render_archive_explore(title, a, b,    i, nxt, links, firstcard) {
   print "  <section class=\"content-section muted-section archive-explore-section\">"
   print "    <div class=\"container\">"
-  print "      <h2 class=\"section-title\">" inline(title) "</h2>"
+  print "      <h2 id=\"" slug_id(title) "\" class=\"section-title\">" inline(title) "</h2>"
 
   firstcard = 0
   for (i = a; i <= b; i++) {
