@@ -19,19 +19,5 @@
   {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"leiningen","version":"2.13.0","commit":"741c6dfa55","title":"leiningen updated to 2.13.0","summary":"version bumped to 2.13.0"},
   {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"","version":"","commit":"9caec3fc79","title":"snowball: Fix updated.","summary":"snowball: Fix updated."},
   {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"snowball","version":"3.1.1 and redo patch.","commit":"8ee0628a1c","title":"snowball updated to 3.1.1 and redo patch.","summary":"bump to 3.1.1 and redo patch."},
-  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"uft8cpp","version":"4.1.1.","commit":"839e5551e1","title":"uft8cpp updated to 4.1.1.","summary":"bump to 4.1.1."},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"coreutils","version":"9.11","commit":"f0f59242","title":"coreutils updated to 9.11","summary":"version bumped to 9.11"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"ed","version":"1.22.5","commit":"ca54010e","title":"ed updated to 1.22.5","summary":"version bumped to 1.22.5"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"expat","version":"2.8.1","commit":"9298f643","title":"expat updated to 2.8.1","summary":"version bumped to 2.8.1"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"iptables","version":"1.8.13","commit":"c5bc0cb6","title":"iptables updated to 1.8.13","summary":"version bumped to 1.8.13"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"kbd","version":"2.10.0","commit":"3133d4fa","title":"kbd updated to 2.10.0","summary":"version bumped to 2.10.0"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"libedit","version":"20260512-3.1","commit":"bd95c4a6","title":"libedit updated to 20260512-3.1","summary":"version bumped to 20260512-3.1"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"libmd","version":"1.2.0","commit":"4ac71ad1","title":"libmd updated to 1.2.0","summary":"version bumped to 1.2.0"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"lvm2","version":"2.03.41","commit":"d28ae685","title":"lvm2 updated to 2.03.41","summary":"version bumped to 2.03.41"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"m4","version":"1.4.21","commit":"44ca62fb","title":"m4 updated to 1.4.21","summary":"version bumped to 1.4.21"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"userspace-rcu","version":"0.15.6","commit":"da9513b6","title":"userspace-rcu updated to 0.15.6","summary":"version bumped to 0.15.6"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"util-linux","version":"2.42.1","commit":"ddf2ebd2","title":"util-linux updated to 2.42.1","summary":"version bumped to 2.42.1"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"vim","version":"9.2.0600","commit":"8b4d0181","title":"vim updated to 9.2.0600","summary":"version bumped to 9.2.0600"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"xfsprogs","version":"7.0.1","commit":"d59f34b2","title":"xfsprogs updated to 7.0.1","summary":"version bumped to 7.0.1"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"linux","version":"7.0.12","commit":"977be392","title":"linux updated to 7.0.12","summary":"version bumped to 7.0.12"}
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"uft8cpp","version":"4.1.1.","commit":"839e5551e1","title":"uft8cpp updated to 4.1.1.","summary":"bump to 4.1.1."}
 ]
