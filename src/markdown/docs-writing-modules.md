@@ -88,7 +88,7 @@ Every module is defined as the group of files and directories including a DETAIL
 
 * VERSION=1.0*
 
-* SOURCE=\$MODULE-\$VERSION.tar.bz2*
+* SOURCE=$MODULE-$VERSION.tar.bz2*
 
 * SOURCE_URL=http://my.site.org/files/*
 
@@ -127,21 +127,21 @@ The DETAILS file is the heart of every module. It contains essential information
 ### Required Fields
 *MODULE=mymodule \# The name of the module*
 
-*VERSION=1.0 \# The version number*
+*VERSION=1.0 # The version number*
 
-*SOURCE=\$MODULE-\$VERSION.tar.bz2 \# Source filename*
+*SOURCE=$MODULE-$VERSION.tar.bz2 # Source filename*
 
-*SOURCE_URL=http://... \# Source archive URL*
+*SOURCE_URL=http://... # Source archive URL*
 
-*SOURCE_VFY=sha256:<sha256 checksum> \# SHA256 checksum for verification*
+*SOURCE_VFY=sha256:<sha256 checksum> # SHA256 checksum for verification*
 
-*WEB_SITE=http://... \# Project website URL URL*
+*WEB_SITE=http://... # Project website URL URL*
 
-*ENTERED=20050808 \# Date module was created*
+*ENTERED=20050808 # Date module was created*
 
-*UPDATED=20050808 \# Date module was last updated*
+*UPDATED=20050808 # Date module was last updated*
 
-*SHORT="short description" \# One-line description*
+*SHORT="short description" # One-line description*
 
 ### Long Description
 After the required fields, include a longer description:
@@ -260,15 +260,15 @@ Only call *prepare_install* immediately before installing files:
 ### Use Shell Variables
 Take advantage of predefined variables:
 
-*\$MODULE \# Module name*
+*$MODULE # Module name*
 
-*\$VERSION \# Module version*
+*$VERSION # Module version*
 
-*\$SOURCE_DIRECTORY \# Where source was unpacked*
+*$SOURCE_DIRECTORY # Where source was unpacked*
 
-*\$BUILD_DIRECTORY \# Usually /usr/src*
+*$BUILD_DIRECTORY # Usually /usr/src*
 
-*\$OPTS \# Options from CONFIGURE*
+*$OPTS # Options from CONFIGURE*
 
 ### Follow Conventions
 - Use lowercase for module names
@@ -289,9 +289,9 @@ If you're modifying an existing module, document why:
 ### Multiple Sources
 If your module needs multiple source files:
 
-*SOURCE=\$MODULE-\$VERSION.tar.gz*
+*SOURCE=$MODULE-$VERSION.tar.gz*
 
-*SOURCE2=\$MODULE-docs-\$VERSION.tar.gz*
+*SOURCE2=$MODULE-docs-$VERSION.tar.gz*
 
 *SOURCE_URL=http://example.com/*
 
@@ -305,9 +305,9 @@ Then in your PRE_BUILD:
 
 *unpack \$SOURCE &&*
 
-*cd \$SOURCE_DIRECTORY &&*
+*cd $SOURCE_DIRECTORY &&*
 
-*unpack \$SOURCE2*
+*unpack $SOURCE2*
 
 ### Patches
 If you need to apply patches, use PRE_BUILD:
@@ -316,7 +316,7 @@ If you need to apply patches, use PRE_BUILD:
 
 *default_pre_build &&*
 
-*patch_it \$SOURCE_CACHE/\$SOURCE2 1*
+*patch_it $SOURCE_CACHE/$SOURCE2 1*
 
 Where *\$SOURCE2* is the patch file listed in DETAILS.
 

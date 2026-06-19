@@ -13,5 +13,12 @@
   {"date":"2026-06-17","category":"Moonbase","repository":"other","module":"","version":"","commit":"d3ba9f7f42","title":"libfakekey: Changing source url.","summary":"libfakekey: Changing source url."},
   {"date":"2026-06-17","category":"Moonbase","repository":"other","module":"neomutt","version":"20260616","commit":"1ff89c3ae4","title":"neomutt updated to 20260616","summary":"version bumped to 20260616"},
   {"date":"2026-06-17","category":"Moonbase","repository":"kde","module":"","version":"","commit":"244206af6","title":"spectacle: Adjusting DEPENDS.","summary":"spectacle: Adjusting DEPENDS."},
-  {"date":"2026-06-17","category":"Moonbase","repository":"other","module":"gh","version":"2.95.0","commit":"8c9be22cf2","title":"gh updated to 2.95.0","summary":"version bumped to 2.95.0"}
+  {"date":"2026-06-17","category":"Moonbase","repository":"other","module":"gh","version":"2.95.0","commit":"8c9be22cf2","title":"gh updated to 2.95.0","summary":"version bumped to 2.95.0"},
+  {"date":"2026-06-17","category":"Moonbase","repository":"other","module":"","version":"","commit":"d92d6dfb48","title":"conky: add libXdamage as required dep","summary":"conky: add libXdamage as required dep"},
+  {"date":"2026-06-17","category":"Moonbase","repository":"other","module":"","version":"","commit":"a3b8fcc78e","title":"conky: remove patches","summary":"conky: remove patches"},
+  {"date":"2026-06-17","category":"Moonbase","repository":"other","module":"conky","version":"1.24.1","commit":"ead4758616","title":"conky updated to 1.24.1","summary":"version bumped to 1.24.1"},
+  {"date":"2026-06-17","category":"Moonbase","repository":"other","module":"blosc2","version":"3.1.4","commit":"209e8cd8a7","title":"blosc2 updated to 3.1.4","summary":"version bumped to 3.1.4"},
+  {"date":"2026-06-17","category":"Moonbase","repository":"other","module":"openjph","version":"0.29.0","commit":"c2f3ce4073","title":"openjph updated to 0.29.0","summary":"version bumped to 0.29.0"},
+  {"date":"2026-06-17","category":"Moonbase","repository":"other","module":"skim","version":"4.8.0","commit":"3264633c7f","title":"skim updated to 4.8.0","summary":"version bumped to 4.8.0"},
+  {"date":"2026-06-17","category":"Moonbase","repository":"other","module":"wakatime-cli","version":"2.19.0","commit":"7bd8cddaa1","title":"wakatime-cli updated to 2.19.0","summary":"version bumped to 2.19.0"}
 ]

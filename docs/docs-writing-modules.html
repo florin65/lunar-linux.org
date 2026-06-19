@@ -111,7 +111,7 @@
           <p>Every module is defined as the group of files and directories including a DETAILS file in a directory. So we need a DETAILS file:</p>
           <p><em> MODULE=mymodule</em></p>
           <p><em> VERSION=1.0</em></p>
-          <p><em> SOURCE=\$MODULE-\$VERSION.tar.bz2</em></p>
+          <p><em> SOURCE=$MODULE-$VERSION.tar.bz2</em></p>
           <p><em> SOURCE_URL=http://my.site.org/files/</em></p>
           <p><em> SOURCE_VFY=sha256:&lt;sha256 checksum&gt;</em></p>
           <p><em> WEB_SITE=http://my.site.org/</em></p>
@@ -145,14 +145,14 @@
         <article class="feature-card">
           <h3>Required Fields</h3>
           <p><em>MODULE=mymodule \# The name of the module</em></p>
-          <p><em>VERSION=1.0 \# The version number</em></p>
-          <p><em>SOURCE=\$MODULE-\$VERSION.tar.bz2 \# Source filename</em></p>
-          <p><em>SOURCE_URL=http://... \# Source archive URL</em></p>
-          <p><em>SOURCE_VFY=sha256:&lt;sha256 checksum&gt; \# SHA256 checksum for verification</em></p>
-          <p><em>WEB_SITE=http://... \# Project website URL URL</em></p>
-          <p><em>ENTERED=20050808 \# Date module was created</em></p>
-          <p><em>UPDATED=20050808 \# Date module was last updated</em></p>
-          <p><em>SHORT="short description" \# One-line description</em></p>
+          <p><em>VERSION=1.0 # The version number</em></p>
+          <p><em>SOURCE=$MODULE-$VERSION.tar.bz2 # Source filename</em></p>
+          <p><em>SOURCE_URL=http://... # Source archive URL</em></p>
+          <p><em>SOURCE_VFY=sha256:&lt;sha256 checksum&gt; # SHA256 checksum for verification</em></p>
+          <p><em>WEB_SITE=http://... # Project website URL URL</em></p>
+          <p><em>ENTERED=20050808 # Date module was created</em></p>
+          <p><em>UPDATED=20050808 # Date module was last updated</em></p>
+          <p><em>SHORT="short description" # One-line description</em></p>
         </article>
         <article class="feature-card">
           <h3>Long Description</h3>
@@ -254,11 +254,11 @@
         <article class="feature-card">
           <h3>Use Shell Variables</h3>
           <p>Take advantage of predefined variables:</p>
-          <p><em>\$MODULE \# Module name</em></p>
-          <p><em>\$VERSION \# Module version</em></p>
-          <p><em>\$SOURCE_DIRECTORY \# Where source was unpacked</em></p>
-          <p><em>\$BUILD_DIRECTORY \# Usually /usr/src</em></p>
-          <p><em>\$OPTS \# Options from CONFIGURE</em></p>
+          <p><em>$MODULE # Module name</em></p>
+          <p><em>$VERSION # Module version</em></p>
+          <p><em>$SOURCE_DIRECTORY # Where source was unpacked</em></p>
+          <p><em>$BUILD_DIRECTORY # Usually /usr/src</em></p>
+          <p><em>$OPTS # Options from CONFIGURE</em></p>
         </article>
         <article class="feature-card">
           <h3>Follow Conventions</h3>
@@ -286,23 +286,23 @@
         <article class="feature-card">
           <h3>Multiple Sources</h3>
           <p>If your module needs multiple source files:</p>
-          <p><em>SOURCE=\$MODULE-\$VERSION.tar.gz</em></p>
-          <p><em>SOURCE2=\$MODULE-docs-\$VERSION.tar.gz</em></p>
+          <p><em>SOURCE=$MODULE-$VERSION.tar.gz</em></p>
+          <p><em>SOURCE2=$MODULE-docs-$VERSION.tar.gz</em></p>
           <p><em>SOURCE_URL=http://example.com/</em></p>
           <p><em>SOURCE2_URL=http://docs.example.com/</em></p>
           <p><em>SOURCE_VFY=sha256:&lt;sha256 checksum&gt;</em></p>
           <p><em>SOURCE2_VFY=sha256:&lt;sha256 checksum&gt;</em></p>
           <p>Then in your PRE_BUILD:</p>
           <p><em>unpack \$SOURCE &amp;&amp;</em></p>
-          <p><em>cd \$SOURCE_DIRECTORY &amp;&amp;</em></p>
-          <p><em>unpack \$SOURCE2</em></p>
+          <p><em>cd $SOURCE_DIRECTORY &amp;&amp;</em></p>
+          <p><em>unpack $SOURCE2</em></p>
         </article>
         <article class="feature-card">
           <h3>Patches</h3>
           <p>If you need to apply patches, use PRE_BUILD:</p>
           <p><em>\# PRE_BUILD</em></p>
           <p><em>default_pre_build &amp;&amp;</em></p>
-          <p><em>patch_it \$SOURCE_CACHE/\$SOURCE2 1</em></p>
+          <p><em>patch_it $SOURCE_CACHE/$SOURCE2 1</em></p>
           <p>Where <em>\$SOURCE2</em> is the patch file listed in DETAILS.</p>
         </article>
         <article class="feature-card">

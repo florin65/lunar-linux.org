@@ -78,7 +78,6 @@ For new users, start with these guides:
 
 - [Installation Guide](docs-installation-guide.html)
 - [About Lunar Linux](docs-about-lunar-linux.html)
-- [Moonbase](docs-moonbase.html)
 
 ## See Also
 

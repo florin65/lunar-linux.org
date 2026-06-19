@@ -1,10 +1,11 @@
-2026-06-17|8c9be22cf2|gh: Version bumped to 2.95.0
-2026-06-17|019252e1e5|libnvme: version bumped to 1.16.2
-2026-06-17|9401a5699b|pulseaudio: improvments
-2026-06-17|fad56ff68c|libsndfile: small tweaks
-2026-06-17|5bc2cba89c|libsndfile: improvments
-2026-06-17|b933179801|opus: improvments
-2026-06-17|a5889c68e7|pulseaudio: some improvments
-2026-06-17|ef93738b06|dillo: small tweaks
-2026-06-17|d3ba9f7f42|libfakekey: Changing source url.
-2026-06-17|1ff89c3ae4|neomutt: version bumped to 20260616
+2026-06-18|08c4ec8bb3|vaporsynth: Bump to R77.
+2026-06-18|aa1a8f08b9|python-babel: Adjust sha for core.
+2026-06-18|81c7c5e147|firefox-bin: version bumped to 152.0.1
+2026-06-18|bd6196f8b9|firefox: Bump to 152.0.1.
+2026-06-17|d92d6dfb48|conky: add libXdamage as required dep
+2026-06-17|a3b8fcc78e|conky: remove patches
+2026-06-17|ead4758616|conky: version bumped to 1.24.1
+2026-06-17|209e8cd8a7|blosc2: Version bumped to 3.1.4
+2026-06-17|c2f3ce4073|openjph: Version bumped to 0.29.0
+2026-06-17|3264633c7f|skim: Version bumped to 4.8.0
+2026-06-17|7bd8cddaa1|wakatime-cli: Version bumped to 2.19.0

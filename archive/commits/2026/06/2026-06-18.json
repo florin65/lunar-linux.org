@@ -1,0 +1,6 @@
+[
+  {"date":"2026-06-18","category":"Moonbase","repository":"other","module":"vaporsynth","version":"R77.","commit":"08c4ec8bb3","title":"vaporsynth updated to R77.","summary":"bump to R77."},
+  {"date":"2026-06-18","category":"Moonbase","repository":"other","module":"","version":"","commit":"aa1a8f08b9","title":"python-babel: Adjust sha for core.","summary":"python-babel: Adjust sha for core."},
+  {"date":"2026-06-18","category":"Moonbase","repository":"other","module":"firefox-bin","version":"152.0.1","commit":"81c7c5e147","title":"firefox-bin updated to 152.0.1","summary":"version bumped to 152.0.1"},
+  {"date":"2026-06-18","category":"Moonbase","repository":"other","module":"firefox","version":"152.0.1.","commit":"bd6196f8b9","title":"firefox updated to 152.0.1.","summary":"bump to 152.0.1."}
+]
