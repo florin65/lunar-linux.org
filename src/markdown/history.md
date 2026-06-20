@@ -45,9 +45,7 @@ Its purpose was not rebellion for its own sake.
 
 The goal was to preserve and collaboratively improve the original Sorcerer technology while maintaining an open and community-driven development model.
 
-Shortly afterwards, Lunar Penguin was renamed:
-
-> **Lunar Linux**
+Shortly afterwards, Lunar Penguin was renamed to **Lunar Linux**.
 
 The name Lunar-Penguin remained as an umbrella concept for potential future collaborative projects.
 

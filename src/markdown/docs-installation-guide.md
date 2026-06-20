@@ -27,9 +27,13 @@ Ensure you have:
 ## Installation Steps
 ### 1. Boot from Installation Media
 1.  Insert the Lunar Linux installation media
+
 2.  Restart your computer
+
 3.  Enter BIOS/UEFI settings (usually F2, F12, or Del key)
+
 4.  Set boot priority to USB/CD drive
+
 5.  Save and exit
 
 ### 2. Start the Installer

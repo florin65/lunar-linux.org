@@ -32,16 +32,16 @@ Lunar provides two mutually exclusive package management implementations:
 ### lunar (Stable)
 The stable, production-ready package management system. This is what most users should run.
 
-*lin package-name \# Install a package*
+*lin package-name # Install a package*
 
-*lunar update \# Update all installed packages*
+*lunar update # Update all installed packages*
 
-*lunar renew package-name \# Rebuild a package*
+*lunar renew package-name # Rebuild a package*
 
 ### theedge (Development)
 The development branch containing experimental features and improvements. Use this only if you want to help test new functionality or need bleeding-edge features.
 
-*lin theedge \# Switch to development branch*
+*lin theedge # Switch to development branch*
 
 **Important:** *lunar* and *theedge* are mutually exclusive. Installing one removes the other.
 

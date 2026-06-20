@@ -60,38 +60,29 @@ To summarize:
 - Installable software packages are called **modules**
 - The collection of all modules is called the **moonbase**
 - The moonbase is simply a directory containing logical **sections** (subdirectories)
-- Sections, in turn, contain the **module** directories
+- Sections in turn, contain the **module** directories
 
 ### Structure Diagram
 
-```text
-Moonbase
-├── section
-│   └── module
-│       └── files
-└── section
-    └── module
-        └── files
-```
-
+@@INCLUDE:moonbase-diagram.html@@
 
 ## Viewing and Browsing
 You can explore the moonbase structure using several methods:
 
 ### Command Line
-*\# List all sections*
+*# List all sections*
 
 *ls /var/lib/lunar/moonbase/*
 
-*\# List modules in a specific section*
+*# List modules in a specific section*
 
 *ls /var/lib/lunar/moonbase/games/*
 
-*\# View all modules in a section*
+*# View all modules in a section*
 
 *lvu section games*
 
-*\# Search for a module*
+*# Search for a module*
 
 *lvu search keyword*
 
@@ -101,11 +92,11 @@ Browse the moonbase online at [lunar-linux.org](http://www.lunar-linux.org/) to 
 ## Updating the Moonbase
 The moonbase should be updated regularly to get the latest module definitions:
 
-*\# Update moonbase to latest version*
+*# Update moonbase to latest version*
 
 *lunar update*
 
-*\# Just update moonbase without installing updates*
+*# Just update moonbase without installing updates*
 
 *lunar renew*
 

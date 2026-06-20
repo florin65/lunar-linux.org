@@ -7,15 +7,19 @@
 
 set -eu
 
-if [ "$#" -ne 2 ]; then
-  printf 'usage: %s page-name markdown-file\n' "$0" >&2
+if [ "$#" -ne 3 ]; then
+  printf 'usage: %s page-name markdown-file project-root\n' "$0" >&2
   exit 1
 fi
 
 page_name="$1"
 markdown_file="$2"
+project_root="$3"
 
-awk -v page="$page_name" '
+awk \
+    -v page="$page_name" \
+    -v project_root="$project_root" '
+
 function esc(s) {
   gsub(/&/, "\\&amp;", s)
   gsub(/</, "\\&lt;", s)
@@ -90,7 +94,7 @@ function add(k, v) {
 }
 
 function is_block_start(s) {
-  return s ~ /^(# |## |### |- |> |\[)/
+    return s ~ /^(# |## |### |- |> |\[|```|@@HTML|@@INCLUDE:|<!-- HTML_BLOCK_BEGIN -->)/
 }
 
 function join_lines(arr, count,    i, s) {
@@ -205,6 +209,12 @@ function render_blocks(a, b, indent, skip_quote, skip_links,    i, items, c, j) 
       print indent "<h2 id=\"" slug_id(val[i]) "\">" inline(val[i]) "</h2>"
     else if (kind[i] == "h3")
       print indent "<h3 id=\"" slug_id(val[i]) "\">" inline(val[i]) "</h3>"
+    else if (kind[i] == "h4")
+      print indent "<h4 id=\"" slug_id(val[i]) "\">" inline(val[i]) "</h4>"
+    else if (kind[i] == "h5")
+      print indent "<h5 id=\"" slug_id(val[i]) "\">" inline(val[i]) "</h5>"
+    else if (kind[i] == "h6")
+      print indent "<h6 id=\"" slug_id(val[i]) "\">" inline(val[i]) "</h6>"
     else if (kind[i] == "p")
       print indent "<p>" inline(val[i]) "</p>"
     else if (kind[i] == "ul") {
@@ -227,6 +237,14 @@ function render_blocks(a, b, indent, skip_quote, skip_links,    i, items, c, j) 
     }
     else if (kind[i] == "links") {
       render_actions(val[i], indent)
+    }
+    else if (kind[i] == "code") {
+      printf "%s<pre><code>%s</code></pre>\n",
+         indent,
+         esc(val[i])
+    }
+    else if (kind[i] == "html") {
+        print val[i]
     }
   }
 }
@@ -282,6 +300,19 @@ function render_feature_grid(title, a, b, muted,    i, nxt, seccls) {
   print "  <section class=\"" seccls "\">"
   print "    <div class=\"container\">"
   print "      <h2 id=\"" slug_id(title) "\" class=\"section-title\">" inline(title) "</h2>"
+
+  firstcard = 0
+
+  for (i = a; i <= b; i++) {
+    if (kind[i] == "h3") {
+        firstcard = i
+        break
+    }
+  }
+
+  if (firstcard && firstcard > a)
+    render_blocks(a, firstcard - 1, "      ", 1, 1)
+
   print "      <div class=\"feature-grid\">"
 
   for (i = a; i <= b; i++) {
@@ -418,8 +449,13 @@ function render_index(    title, meta, offer, closing, actions, latest, facts, i
 
   facts = section_index("Quick facts")
   if (facts) {
+
     print "  <section class=\"quickfacts\">"
+    print "    <div class=\"container\">"
+    print "      <h2 id=\"quick-facts\">Quick facts</h2>"
+    print "    </div>"
     print "    <div class=\"container facts\">"
+
     sec_end = section_end(facts)
     for (j = facts + 1; j <= sec_end; j++) {
       if (kind[j] == "ul") {
@@ -429,13 +465,14 @@ function render_index(    title, meta, offer, closing, actions, latest, facts, i
       }
     }
     print "    </div>"
+    print "    </div>"
     print "  </section>"
   }
 
   print "</main>"
 }
 
-function render_download(    title, intro_start, daily, quick, why, before, nexts, links, e) {
+function render_download( title, intro_start, daily, quick, why, before, nexts, links, e) {
   title = first_h1()
 
   print "<main class=\"page-main\">"
@@ -523,21 +560,45 @@ function render_news(    title, desc, community, moonbase, community_desc, moonb
   print "</main>"
 }
 
-function render_about(    why, expect, closing) {
+function render_about(    s, e, why, expect, closing) {
+
   print "<main class=\"page-main\">"
   render_hero(first_h1(), first_p())
 
   render_content_grid(first_section(), 3)
 
   why = section_index("Why choose Lunar Linux?")
-  if (why) render_feature_grid("Why choose Lunar Linux?", why + 1, section_end(why), 1)
+  if (why)
+    render_feature_grid("Why choose Lunar Linux?",
+                        why + 1,
+                        section_end(why),
+                        1)
 
   expect = section_index("What should you expect?")
-  if (expect) render_split_section("What should you expect?", expect + 1, section_end(expect), "content-section")
+  if (expect)
+    render_split_section("What should you expect?",
+                         expect + 1,
+                         section_end(expect),
+                         "content-section")
 
-  closing = last_section()
-  if (closing && val[closing] ~ /^Build it/)
-    render_closing_banner(val[closing], closing + 1, section_end(closing), 1)
+  for (s = first_section(); s; s = next_section_index(s)) {
+
+    if (s == section_at(1)) continue
+    if (s == section_at(2)) continue
+    if (s == section_at(3)) continue
+
+    if (s == why) continue
+    if (s == expect) continue
+
+    e = section_end(s)
+
+    if (s == last_section() && !has_subsections(s + 1, e))
+      render_closing_banner(val[s], s + 1, e, 1)
+    else if (has_subsections(s + 1, e))
+      render_feature_grid(val[s], s + 1, e, 1)
+    else
+      render_split_section(val[s], s + 1, e, "content-section")
+  }
 
   print "</main>"
 }
@@ -894,6 +955,24 @@ END {
       continue
     }
 
+    if (line ~ /^#### /) {
+      add("h4", substr(line, 6))
+      i++
+      continue
+    }
+
+    if (line ~ /^##### /) {
+      add("h5", substr(line, 7))
+      i++
+      continue
+    }
+
+    if (line ~ /^###### /) {
+      add("h6", substr(line, 8))
+      i++
+      continue
+    }
+
     if (line ~ /^- /) {
       c = 0
       while (i <= ln && lines[i] ~ /^- /) {
@@ -914,6 +993,69 @@ END {
       add("quote", join_lines(list, c))
       delete list
       continue
+    }
+
+    if (line ~ /^```/) {
+      code = ""
+      i++
+
+      while (i <= ln && lines[i] !~ /^```/) {
+        code = code lines[i] "\n"
+        i++
+        if (i <= ln && lines[i] == "")
+            i++
+      }
+
+      add("code", code)
+
+      if (i <= ln)
+        i++
+
+      continue
+    }
+
+    if (line == "<!-- HTML_BLOCK_BEGIN -->" || line == "@@HTML") {
+      html = ""
+      i++
+
+    while (i <= ln &&
+      lines[i] != "<!-- HTML_BLOCK_END -->" &&
+      lines[i] != "@@ENDHTML") {
+        html = html lines[i] "\n"
+        i++
+      }
+
+      add("html", html)
+
+      if (i <= ln)
+        i++
+
+      continue
+    }
+
+    if (line ~ /^@@INCLUDE:.*@@$/) {
+        file = line
+        sub(/^@@INCLUDE:/, "", file)
+        sub(/@@$/, "", file)
+
+        html = ""
+
+        path = project_root "/src/includes/" file
+
+        # Defensive check of the path value (the file exists?)
+        if ((getline inc < path) < 0) {
+            html = "<!-- include not found: " file " -->"
+        } else {
+            do {
+                html = html inc "\n"
+            } while ((getline inc < path) > 0)
+        }
+        close(path)
+
+        add("html", html)
+
+        i++
+        continue
     }
 
     if (line ~ /^\[/ && line ~ /\]\(/) {

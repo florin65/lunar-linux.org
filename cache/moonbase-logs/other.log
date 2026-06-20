@@ -1,11 +1,30 @@
-2026-06-18|08c4ec8bb3|vaporsynth: Bump to R77.
-2026-06-18|aa1a8f08b9|python-babel: Adjust sha for core.
-2026-06-18|81c7c5e147|firefox-bin: version bumped to 152.0.1
-2026-06-18|bd6196f8b9|firefox: Bump to 152.0.1.
-2026-06-17|d92d6dfb48|conky: add libXdamage as required dep
-2026-06-17|a3b8fcc78e|conky: remove patches
-2026-06-17|ead4758616|conky: version bumped to 1.24.1
-2026-06-17|209e8cd8a7|blosc2: Version bumped to 3.1.4
-2026-06-17|c2f3ce4073|openjph: Version bumped to 0.29.0
-2026-06-17|3264633c7f|skim: Version bumped to 4.8.0
-2026-06-17|7bd8cddaa1|wakatime-cli: Version bumped to 2.19.0
+2026-06-19|739331d6e6|python-pygobject: Bump to 3.56.3.
+2026-06-19|a9bbaa70b0|gst-python: Bump to 1.29.1.
+2026-06-19|e4080fc817|gst-libav: Bump to 1.29.1.
+2026-06-19|7039f9eff7|gst-plugins-ugly: Bump to 1.29.1.
+2026-06-19|d201817d91|gst-plugings-bad: Bump to 1.29.1.
+2026-06-19|567d066434|gst-plugins-good: Bump to 1.29.1.
+2026-06-19|7939c625b5|gst-plugings-base: Bump to 1.29.1.
+2026-06-19|acaf26b625|gstreamer: Version bumped to 1.29.1
+2026-06-19|7df65f03e4|Vulkan-Headers: Bump to 1.4.354.
+2026-06-19|426d2ec0c5|Vulkan-Loader: Bump to 1.4.354.
+2026-06-19|bb78b78f7e|SDL3_net: added it to the moonbase. Version 3.2.0
+2026-06-19|c58140c039|SDL3_mixer: added it to the moonbase. Version 3.2.4
+2026-06-19|1fdde1e1ee|DL3_image: added it to the moonbase. Version 3.4.4
+2026-06-19|288e7f1b63|SDL3_ttf: added it to the moonbase. Version 3.2.2
+2026-06-19|56fe7cd2d2|conky: Version bumped to 1.24.2
+2026-06-18|ecd74947b5|freerdp: Bump to 3.27.1.
+2026-06-19|abff9b5db8|gsoap: Version bumped to 2.8.143
+2026-06-19|c60cd04c66|ffmpeg: Version bumped to 8.1.2
+2026-06-19|20a80e1611|fmt: Version bumped to 12.2.0
+2026-06-19|bc44a58633|pugixml: Version bumped to 1.16
+2026-06-19|e7ad1b19d9|glow: Version bumped to 2.1.2
+2026-06-19|6d15ee44cc|nginx: version bumped to 1.31.2
+2026-06-19|60488ba598|bind, bind-utils: version bumped to 9.20.24
+2026-06-19|cdad65f21f|libidn: version bumped to 1.44
+2026-06-19|1980eeac6b|just: version bumped to 1.53.0
+2026-06-19|dfe59a2b3a|postfix: version bumped to 3.11.4
+2026-06-19|303d3f9ae0|lighttpd: version bumped to 1.4.84
+2026-06-19|0d343011a2|wireplumber: version bumped to 0.5.15
+2026-06-19|c1fcabad2f|pipewire: version bumped to 1.6.7
+2026-06-18|023c5feb8e|libindi: Bump to 2.2.3.1 and add a switch to BUILD.

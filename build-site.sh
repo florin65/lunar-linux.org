@@ -1,0 +1,1 @@
+./tools/build-site.sh

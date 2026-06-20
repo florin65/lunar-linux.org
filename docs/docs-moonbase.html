@@ -57,18 +57,20 @@
   <section class="content-section muted-section">
     <div class="container">
       <h2 id="sections" class="section-title">Sections</h2>
+      <p>The moonbase's first level of structure and organization is a <strong>section</strong>. A section is a name that serves to classify and organize a group of modules into logical partitions.</p>
+      <p>Each section is simply a subdirectory that resides right below the root of the moonbase or inside another section. Sections can also be nested in other sections.</p>
       <div class="feature-grid">
         <article class="feature-card">
           <h3>Special Sections</h3>
           <p>There are two sections of special significance:</p>
-          <p>#### <a href="#zbeta">zbeta</a></p>
+          <h4 id="zbeta"><a href="#zbeta">zbeta</a></h4>
           <p>Contains modules that are:</p>
           <ul class="simple-list">
             <li>Downloaded directly from live source code repositories (\<em>-cvs or \</em>-svn modules)</li>
             <li>Unable to be tested extensively by the Lunar team due to hardware availability or other constraints</li>
           </ul>
           <p>These modules cannot be guaranteed to work at all times on all hardware.</p>
-          <p>#### <a href="#zlocal">zlocal</a></p>
+          <h4 id="zlocal"><a href="#zlocal">zlocal</a></h4>
           <p>Where users can:</p>
           <ul class="simple-list">
             <li>Develop their own modules</li>
@@ -82,6 +84,8 @@
   <section class="content-section muted-section">
     <div class="container">
       <h2 id="modules" class="section-title">Modules</h2>
+      <p>Modules sit in a section directory. A module consists of a directory with specific files and other directories that are not sections. These subdirectories represent a single module that "belongs" to that section of the moonbase.</p>
+      <p>A module, to be a bit simplistic, is a set of "instructions" to perform a task - namely, instructions to compile and then install what was compiled onto the user's filesystem.</p>
       <div class="feature-grid">
         <article class="feature-card">
           <h3>Example</h3>
@@ -94,10 +98,41 @@
   <section class="content-section muted-section">
     <div class="container">
       <h2 id="summary" class="section-title">Summary</h2>
+      <p>To summarize:</p>
+      <ul class="simple-list">
+        <li>Installable software packages are called <strong>modules</strong></li>
+        <li>The collection of all modules is called the <strong>moonbase</strong></li>
+        <li>The moonbase is simply a directory containing logical <strong>sections</strong> (subdirectories)</li>
+        <li>Sections in turn, contain the <strong>module</strong> directories</li>
+      </ul>
       <div class="feature-grid">
         <article class="feature-card">
           <h3>Structure Diagram</h3>
-          <p>``<code>text Moonbase ├── section │   └── module │       └── files └── section └── module └── files </code>``</p>
+<div class="moonbase-diagram">
+
+<h4>Moonbase Structure</h4>
+
+<pre>
+Moonbase
+│
+├── section
+│   │
+│   └── module
+│       ├── DETAILS
+│       ├── DEPENDS
+│       └── BUILD
+...
+│
+└── zlocal
+    │
+    └── my-module
+        ├── DETAILS
+        ├── BUILD
+        └── BUILD
+</pre>
+
+</div>
+
         </article>
       </div>
     </div>
@@ -105,16 +140,17 @@
   <section class="content-section muted-section">
     <div class="container">
       <h2 id="viewing-and-browsing" class="section-title">Viewing and Browsing</h2>
+      <p>You can explore the moonbase structure using several methods:</p>
       <div class="feature-grid">
         <article class="feature-card">
           <h3>Command Line</h3>
-          <p><em>\# List all sections</em></p>
+          <p><em># List all sections</em></p>
           <p><em>ls /var/lib/lunar/moonbase/</em></p>
-          <p><em>\# List modules in a specific section</em></p>
+          <p><em># List modules in a specific section</em></p>
           <p><em>ls /var/lib/lunar/moonbase/games/</em></p>
-          <p><em>\# View all modules in a section</em></p>
+          <p><em># View all modules in a section</em></p>
           <p><em>lvu section games</em></p>
-          <p><em>\# Search for a module</em></p>
+          <p><em># Search for a module</em></p>
           <p><em>lvu search keyword</em></p>
         </article>
         <article class="feature-card">
@@ -129,9 +165,9 @@
       <article>
         <h2 id="updating-the-moonbase">Updating the Moonbase</h2>
         <p>The moonbase should be updated regularly to get the latest module definitions:</p>
-        <p><em>\# Update moonbase to latest version</em></p>
+        <p><em># Update moonbase to latest version</em></p>
         <p><em>lunar update</em></p>
-        <p><em>\# Just update moonbase without installing updates</em></p>
+        <p><em># Just update moonbase without installing updates</em></p>
         <p><em>lunar renew</em></p>
         <p>This downloads the latest module definitions from the Lunar Linux servers, ensuring you have access to the newest versions of software packages.</p>
       </article>
@@ -152,6 +188,7 @@
   <section class="content-section muted-section">
     <div class="container">
       <h2 id="related-articles" class="section-title">Related Articles</h2>
+      <p>development</p>
       <div class="feature-grid">
         <article class="feature-card">
           <h3>Module Submission</h3>

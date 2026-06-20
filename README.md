@@ -93,10 +93,11 @@ The public release has been completed and published for the community evaluation
 
 ### Activity Tracking
 
-* [ ] Add a Lunar Linux project history page
-* [ ] Add a page to centralize the community related projects (a Lunar Usert Repository)
-* [ ] More automation added to the site 
-* [ ] The great plan can be summarizen in a simple way like this: 
+* [✓] Add a Lunar Linux project history page
+* [✓] More automation added to the site 
+* [✓] The great plan can be summarizen in a simple way like this: 
+
+* [ ] Add a page to centralize the community related projects (a Lunar Users Repository)
 
                  Archive
                      ▲

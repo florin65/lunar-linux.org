@@ -64,13 +64,14 @@
   <section class="content-section muted-section">
     <div class="container">
       <h2 id="before-you-start" class="section-title">Before You Start</h2>
+      <p>Take some time to think about why you want to make a new module. Also, there might be things to consider that would prevent you from writing a module at all. Here are some quick guidelines:</p>
       <div class="feature-grid">
         <article class="feature-card">
           <h3>Check if the Package Already Exists</h3>
           <p>Nothing is worse than doing the same work twice.</p>
-          <p><em>\# Search the moonbase for existing modules</em></p>
+          <p><em># Search the moonbase for existing modules</em></p>
           <p><em>lvu search packagename</em></p>
-          <p><em>\# List all modules</em></p>
+          <p><em># List all modules</em></p>
           <p><em>lvu section all</em></p>
         </article>
         <article class="feature-card">
@@ -87,18 +88,19 @@
   <section class="content-section muted-section">
     <div class="container">
       <h2 id="starting-the-module" class="section-title">Starting the Module</h2>
+      <p>There are two ways to create a new module:</p>
       <div class="feature-grid">
         <article class="feature-card">
           <h3>Quick and Dirty Way</h3>
           <p>The quick way to create a module is by using <em>lvu</em>.</p>
-          <p><em>\# Create a new module</em></p>
+          <p><em># Create a new module</em></p>
           <p><em>lvu new mymodule</em></p>
           <p>This will:</p>
           <p>1.  Prompt you for information using cut and paste 2.  Create the directory in zlocal 3.  Create the DETAILS file</p>
           <p>Now verify the module:</p>
-          <p><em>\# Change to the module directory</em></p>
+          <p><em># Change to the module directory</em></p>
           <p><em>lvu cd mymodule</em></p>
-          <p><em>\# Check the DETAILS file</em></p>
+          <p><em># Check the DETAILS file</em></p>
           <p><em>cat DETAILS</em></p>
           <p>At this point you should verify that the DETAILS file looks correct.</p>
         </article>
@@ -141,15 +143,16 @@
   <section class="content-section muted-section">
     <div class="container">
       <h2 id="creating-the-details-file" class="section-title">Creating the DETAILS File</h2>
+      <p>The DETAILS file is the heart of every module. It contains essential information about the package.</p>
       <div class="feature-grid">
         <article class="feature-card">
           <h3>Required Fields</h3>
-          <p><em>MODULE=mymodule \# The name of the module</em></p>
+          <p><em>MODULE=mymodule # The name of the module</em></p>
           <p><em>VERSION=1.0 # The version number</em></p>
           <p><em>SOURCE=$MODULE-$VERSION.tar.bz2 # Source filename</em></p>
           <p><em>SOURCE_URL=http://... # Source archive URL</em></p>
           <p><em>SOURCE_VFY=sha256:&lt;sha256 checksum&gt; # SHA256 checksum for verification</em></p>
-          <p><em>WEB_SITE=http://... # Project website URL URL</em></p>
+          <p><em>WEB_SITE=http://... # Project website URL</em></p>
           <p><em>ENTERED=20050808 # Date module was created</em></p>
           <p><em>UPDATED=20050808 # Date module was last updated</em></p>
           <p><em>SHORT="short description" # One-line description</em></p>
@@ -171,21 +174,31 @@
       <article>
         <h2 id="adding-dependencies">Adding Dependencies</h2>
         <p>If your module requires other modules, create a DEPENDS file:</p>
-        <p><em>\# /var/lib/lunar/moonbase/zlocal/mymodule/DEPENDS</em></p>
-        <p><em>\# Required dependencies</em></p>
-        <p><em>depends gcc</em></p>
-        <p><em>depends make</em></p>
-        <p><em>\# Optional dependencies</em></p>
-        <p><em>optional_depends "gtk+" \\</em></p>
-        <p><em> "--with-gtk" \\</em></p>
-        <p><em> "--without-gtk" \\</em></p>
-        <p><em> "for GUI support"</em></p>
+        <pre><code># /var/lib/lunar/moonbase/zlocal/mymodule/DEPENDS
+# Required dependencies
+depends gcc
+depends make
+# Optional dependencies
+optional_depends "gtk+" \
+    "--with-gtk" \
+    "--without-gtk" \
+    "for GUI support"
+</code></pre>
       </article>
     </div>
   </section>
   <section class="content-section muted-section">
     <div class="container">
       <h2 id="creating-a-build-script" class="section-title">Creating a BUILD Script</h2>
+      <p>If the default build process doesn't work, create a BUILD script:</p>
+      <pre><code># /var/lib/lunar/moonbase/zlocal/mymodule/BUILD
+./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            $OPTS &amp;&amp;
+make &amp;&amp;
+prepare_install &amp;&amp;
+make install
+</code></pre>
       <div class="feature-grid">
         <article class="feature-card">
           <h3>Important BUILD Notes</h3>
@@ -203,13 +216,13 @@
       <article>
         <h2 id="testing-your-module">Testing Your Module</h2>
         <p>Once you've created your module files:</p>
-        <p><em>\# Test downloading the source</em></p>
+        <p><em># Test downloading the source</em></p>
         <p><em>lget mymodule</em></p>
-        <p><em>\# Try building the module</em></p>
+        <p><em># Try building the module</em></p>
         <p><em>lin mymodule</em></p>
-        <p><em>\# Check what files were installed</em></p>
+        <p><em># Check what files were installed</em></p>
         <p><em>lvu install mymodule</em></p>
-        <p><em>\# Check for broken dependencies</em></p>
+        <p><em># Check for broken dependencies</em></p>
         <p><em>lvu links mymodule</em></p>
       </article>
     </div>
@@ -227,19 +240,19 @@
         <article class="feature-card">
           <h3>Missing Dependencies</h3>
           <p>Make sure to declare all dependencies. Use these commands to help identify them:</p>
-          <p><em>\# Show what libraries a binary needs</em></p>
+          <p><em># Show what libraries a binary needs</em></p>
           <p><em>ldd /usr/bin/mybinary</em></p>
-          <p><em>\# Find what module provides a file</em></p>
+          <p><em># Find what module provides a file</em></p>
           <p><em>lvu where /usr/lib/libsomething.so</em></p>
         </article>
         <article class="feature-card">
           <h3>Improper Use of prepare_install</h3>
           <p>Only call <em>prepare_install</em> immediately before installing files:</p>
-          <p><em>\# WRONG</em></p>
+          <p><em># WRONG</em></p>
           <p><em>prepare_install &amp;&amp;</em></p>
           <p><em>make &amp;&amp;</em></p>
           <p><em>make install</em></p>
-          <p><em>\# CORRECT</em></p>
+          <p><em># CORRECT</em></p>
           <p><em>make &amp;&amp;</em></p>
           <p><em>prepare_install &amp;&amp;</em></p>
           <p><em>make install</em></p>
@@ -272,8 +285,8 @@
         <article class="feature-card">
           <h3>Document Your Changes</h3>
           <p>If you're modifying an existing module, document why:</p>
-          <p><em>\# In the DETAILS file</em></p>
-          <p><em>\# Updated to fix compilation with gcc 11</em></p>
+          <p><em># In the DETAILS file</em></p>
+          <p><em># Fixed the compilation with gcc 11</em></p>
           <p><em>UPDATED=20231102</em></p>
         </article>
       </div>
@@ -293,17 +306,17 @@
           <p><em>SOURCE_VFY=sha256:&lt;sha256 checksum&gt;</em></p>
           <p><em>SOURCE2_VFY=sha256:&lt;sha256 checksum&gt;</em></p>
           <p>Then in your PRE_BUILD:</p>
-          <p><em>unpack \$SOURCE &amp;&amp;</em></p>
+          <p><em>unpack $SOURCE &amp;&amp;</em></p>
           <p><em>cd $SOURCE_DIRECTORY &amp;&amp;</em></p>
           <p><em>unpack $SOURCE2</em></p>
         </article>
         <article class="feature-card">
           <h3>Patches</h3>
           <p>If you need to apply patches, use PRE_BUILD:</p>
-          <p><em>\# PRE_BUILD</em></p>
+          <p><em># PRE_BUILD</em></p>
           <p><em>default_pre_build &amp;&amp;</em></p>
           <p><em>patch_it $SOURCE_CACHE/$SOURCE2 1</em></p>
-          <p>Where <em>\$SOURCE2</em> is the patch file listed in DETAILS.</p>
+          <p>Where <em>$SOURCE2</em> is the patch file listed in DETAILS.</p>
         </article>
         <article class="feature-card">
           <h3>Platform-Specific Builds</h3>
@@ -345,7 +358,7 @@
         <h2 id="getting-help">Getting Help</h2>
         <p>If you need help writing modules:</p>
         <ul class="simple-list">
-          <li>Join \#lunar on irc.freenode.net</li>
+          <li>Join #lunar on irc.freenode.net</li>
           <li>Ask on the lunar mailing list</li>
           <li>Check existing modules for examples</li>
         </ul>
@@ -356,6 +369,7 @@
   <section class="content-section muted-section">
     <div class="container">
       <h2 id="related-articles" class="section-title">Related Articles</h2>
+      <p>development</p>
       <div class="feature-grid">
         <article class="feature-card">
           <h3>Module Basics</h3>

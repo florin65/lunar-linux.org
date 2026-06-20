@@ -670,6 +670,7 @@ h1 {
 }
 
 .feature-grid {
+  margin-top: 1rem;
   display: grid;
   grid-template-columns: repeat(var(--toc-columns), minmax(0, max-content));
   gap: var(--card-gap);
@@ -1127,6 +1128,16 @@ h1 {
   font-weight: 800;
 }
 
+.generated-page pre {
+  margin: 0.75rem 0;
+  padding: 0;
+}
+
+.generated-page pre code {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
 
 /* -------------------------------------------------- */
 /* News page */
@@ -1171,6 +1182,24 @@ h1 {
 
 .compact-card h3 {
   margin-bottom: 8px;
+}
+
+.moonbase-diagram {
+    margin-bottom: 1rem;
+}
+
+.moonbase-diagram pre {
+    padding: 1.2rem;
+    border-radius: 8px;
+    overflow-x: auto;
+
+    font-family:
+        "JetBrains Mono",
+        "Fira Code",
+        monospace;
+
+    line-height: 1.4;
+    font-size: 0.95rem;
 }
 
 
@@ -1736,7 +1765,6 @@ h1 {
 }
 
 
-
 /* -------------------------------------------------- */
 /* Final page-by-page inspection fixes                */
 /* -------------------------------------------------- */
@@ -1817,4 +1845,21 @@ h1 {
 .development-page .split-content aside > *:first-child,
 .development-page .split-content .side-card:first-child {
   margin-top: 0;
+}
+
+
+/* Website 3.0 final polish: visible documentation links */
+.generated-page article li > a,
+.generated-page .info-card li > a,
+.generated-page .simple-list li > a,
+.docs-page article li > a,
+.docs-page .info-card li > a,
+.docs-page .simple-list li > a,
+.info-card li > a,
+.simple-list li > a {
+  color: var(--accent-strong) !important;
+  font-weight: 800;
+  text-decoration-line: underline !important;
+  text-decoration-thickness: 1.4px;
+  text-underline-offset: 4px;
 }

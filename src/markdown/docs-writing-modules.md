@@ -31,11 +31,11 @@ Take some time to think about why you want to make a new module. Also, there mig
 ### Check if the Package Already Exists
 Nothing is worse than doing the same work twice.
 
-*\# Search the moonbase for existing modules*
+*# Search the moonbase for existing modules*
 
 *lvu search packagename*
 
-*\# List all modules*
+*# List all modules*
 
 *lvu section all*
 
@@ -51,7 +51,7 @@ There are two ways to create a new module:
 ### Quick and Dirty Way
 The quick way to create a module is by using *lvu*.
 
-*\# Create a new module*
+*# Create a new module*
 
 *lvu new mymodule*
 
@@ -63,11 +63,11 @@ This will:
 
 Now verify the module:
 
-*\# Change to the module directory*
+*# Change to the module directory*
 
 *lvu cd mymodule*
 
-*\# Check the DETAILS file*
+*# Check the DETAILS file*
 
 *cat DETAILS*
 
@@ -125,7 +125,7 @@ See Module Basics for detailed information about available module scripts and mo
 The DETAILS file is the heart of every module. It contains essential information about the package.
 
 ### Required Fields
-*MODULE=mymodule \# The name of the module*
+*MODULE=mymodule # The name of the module*
 
 *VERSION=1.0 # The version number*
 
@@ -135,7 +135,7 @@ The DETAILS file is the heart of every module. It contains essential information
 
 *SOURCE_VFY=sha256:<sha256 checksum> # SHA256 checksum for verification*
 
-*WEB_SITE=http://... # Project website URL URL*
+*WEB_SITE=http://... # Project website URL*
 
 *ENTERED=20050808 # Date module was created*
 
@@ -159,41 +159,31 @@ After the required fields, include a longer description:
 ## Adding Dependencies
 If your module requires other modules, create a DEPENDS file:
 
-*\# /var/lib/lunar/moonbase/zlocal/mymodule/DEPENDS*
+```text
+# /var/lib/lunar/moonbase/zlocal/mymodule/DEPENDS
 
-*\# Required dependencies*
+# Required dependencies
+depends gcc
+depends make
 
-*depends gcc*
-
-*depends make*
-
-*\# Optional dependencies*
-
-*optional_depends "gtk+" \\*
-
-* "--with-gtk" \\*
-
-* "--without-gtk" \\*
-
-* "for GUI support"*
-
+# Optional dependencies
+optional_depends "gtk+" \
+    "--with-gtk" \
+    "--without-gtk" \
+    "for GUI support"
+```
 ## Creating a BUILD Script
 If the default build process doesn't work, create a BUILD script:
+```text
+# /var/lib/lunar/moonbase/zlocal/mymodule/BUILD
 
-*\# /var/lib/lunar/moonbase/zlocal/mymodule/BUILD*
-
-*./configure --prefix=/usr \\*
-
-* --sysconfdir=/etc \\*
-
-* \$OPTS &&*
-
-*make &&*
-
-*prepare_install &&*
-
-*make install*
-
+./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            $OPTS &&
+make &&
+prepare_install &&
+make install
+```
 ### Important BUILD Notes
 - Use *&&* to chain commands together
 - Call *prepare_install* before *make install*
@@ -202,19 +192,19 @@ If the default build process doesn't work, create a BUILD script:
 ## Testing Your Module
 Once you've created your module files:
 
-*\# Test downloading the source*
+*# Test downloading the source*
 
 *lget mymodule*
 
-*\# Try building the module*
+*# Try building the module*
 
 *lin mymodule*
 
-*\# Check what files were installed*
+*# Check what files were installed*
 
 *lvu install mymodule*
 
-*\# Check for broken dependencies*
+*# Check for broken dependencies*
 
 *lvu links mymodule*
 
@@ -229,18 +219,18 @@ Then copy that into your DETAILS file.
 ### Missing Dependencies
 Make sure to declare all dependencies. Use these commands to help identify them:
 
-*\# Show what libraries a binary needs*
+*# Show what libraries a binary needs*
 
 *ldd /usr/bin/mybinary*
 
-*\# Find what module provides a file*
+*# Find what module provides a file*
 
 *lvu where /usr/lib/libsomething.so*
 
 ### Improper Use of prepare_install
 Only call *prepare_install* immediately before installing files:
 
-*\# WRONG*
+*# WRONG*
 
 *prepare_install &&*
 
@@ -248,7 +238,7 @@ Only call *prepare_install* immediately before installing files:
 
 *make install*
 
-*\# CORRECT*
+*# CORRECT*
 
 *make &&*
 
@@ -279,9 +269,9 @@ Take advantage of predefined variables:
 ### Document Your Changes
 If you're modifying an existing module, document why:
 
-*\# In the DETAILS file*
+*# In the DETAILS file*
 
-*\# Updated to fix compilation with gcc 11*
+*# Fixed the compilation with gcc 11*
 
 *UPDATED=20231102*
 
@@ -303,7 +293,7 @@ If your module needs multiple source files:
 
 Then in your PRE_BUILD:
 
-*unpack \$SOURCE &&*
+*unpack $SOURCE &&*
 
 *cd $SOURCE_DIRECTORY &&*
 
@@ -312,13 +302,13 @@ Then in your PRE_BUILD:
 ### Patches
 If you need to apply patches, use PRE_BUILD:
 
-*\# PRE_BUILD*
+*# PRE_BUILD*
 
 *default_pre_build &&*
 
 *patch_it $SOURCE_CACHE/$SOURCE2 1*
 
-Where *\$SOURCE2* is the patch file listed in DETAILS.
+Where *$SOURCE2* is the patch file listed in DETAILS.
 
 ### Platform-Specific Builds
 For 64-bit specific settings, create:
@@ -347,7 +337,7 @@ See Module Submission for information on contributing your module back to the co
 ## Getting Help
 If you need help writing modules:
 
-- Join \#lunar on irc.freenode.net
+- Join #lunar on irc.freenode.net
 - Ask on the lunar mailing list
 - Check existing modules for examples
 

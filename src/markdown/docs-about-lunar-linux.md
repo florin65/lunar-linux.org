@@ -116,10 +116,6 @@ At Lunar, we believe in:
 
 *"History is irrelevant, only the future matters"*
 
-## Related Articles
-
-general
-
 ### About Lunar Linux
 Learn about Lunar Linux, a source-based Linux distribution that builds optimized software tailored to your system
 

@@ -6,7 +6,9 @@
 
 set -eu
 
-PROJECT_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+SCRIPT=$(readlink -f "$0")
+PROJECT_ROOT=$(dirname "$(dirname "$SCRIPT")")
+
 CONF="$PROJECT_ROOT/site.conf"
 
 if [ ! -f "$CONF" ]; then
@@ -563,7 +565,12 @@ write_page() {
   [ -n "$description" ] || description="Lunar Linux website page."
 
   expand_variables "$md" > "$expanded"
-  sh "$RENDERER" "$name" "$expanded" > "$rendered"
+
+  sh "$RENDERER" \
+    "$name" \
+    "$expanded" \
+    "$PROJECT_ROOT" \
+    > "$rendered"
 
   {
     write_html_head "$title" "$description"
