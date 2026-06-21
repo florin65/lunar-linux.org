@@ -2,9 +2,6 @@
   {"date":"2026-06-20","category":"Moonbase","repository":"gnome3","module":"libmbim","version":"1.34.0, adding optional_depends help2man.","commit":"00a3006c","title":"libmbim updated to 1.34.0, adding optional_depends help2man.","summary":"bump to 1.34.0, adding optional_depends help2man."},
   {"date":"2026-06-20","category":"Moonbase","repository":"kde","module":"libqtxdg","version":"4.4.0.","commit":"a64f6f730","title":"libqtxdg updated to 4.4.0.","summary":"bump to 4.4.0."},
   {"date":"2026-06-20","category":"Moonbase","repository":"kde","module":"libquotient","version":"0.9.6.1.","commit":"2ad25d81e","title":"libquotient updated to 0.9.6.1.","summary":"bump to 0.9.6.1."},
-  {"date":"2026-06-19","category":"Moonbase","repository":"kde","module":"qt-creator","version":"20.0.0.","commit":"502b2f0ab","title":"qt-creator updated to 20.0.0.","summary":"bump to 20.0.0."},
-  {"date":"2026-06-19","category":"Moonbase","repository":"kde","module":"kquickimageeeditor","version":"0.6.2.","commit":"bf47f4e8f","title":"kquickimageeeditor updated to 0.6.2.","summary":"bump to 0.6.2."},
-  {"date":"2026-06-19","category":"Moonbase","repository":"kde","module":"Kvantum","version":"1.1.8.","commit":"95ea703cf","title":"Kvantum updated to 1.1.8.","summary":"bump to 1.1.8."},
   {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"flashrom","version":"1.7.0.","commit":"4fea848bd7","title":"flashrom updated to 1.7.0.","summary":"bump to 1.7.0."},
   {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"libcbor","version":"0.14.0","commit":"97eb5652ad","title":"libcbor updated to 0.14.0","summary":"version bumped to 0.14.0"},
   {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"vmaf","version":"3.2.0","commit":"29e0c350e0","title":"vmaf updated to 3.2.0","summary":"version bumped to 3.2.0"},
@@ -15,11 +12,8 @@
   {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"gradle","version":"9.6.0","commit":"75f96de3fa","title":"gradle updated to 9.6.0","summary":"version bumped to 9.6.0"},
   {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"ansible-core","version":"2.21.1","commit":"7822e0739f","title":"ansible-core updated to 2.21.1","summary":"version bumped to 2.21.1"},
   {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"ansible","version":"14.1.0","commit":"8dd35ff4c2","title":"ansible updated to 14.1.0","summary":"version bumped to 14.1.0"},
-  {"date":"2026-06-19","category":"Moonbase","repository":"other","module":"alsa-lib","version":"1.2.16.1","commit":"7a8e475b60","title":"alsa-lib updated to 1.2.16.1","summary":"version bumped to 1.2.16.1"},
   {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"wakatime-cli","version":"2.20.1","commit":"0324f90acb","title":"wakatime-cli updated to 2.20.1","summary":"version bumped to 2.20.1"},
   {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"wakatime-cli","version":"2.19.1","commit":"1c22b48517","title":"wakatime-cli updated to 2.19.1","summary":"version bumped to 2.19.1"},
   {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"nilfs-utils","version":"2.3.1","commit":"33b969d0f0","title":"nilfs-utils updated to 2.3.1","summary":"version bumped to 2.3.1"},
-  {"date":"2026-06-19","category":"Moonbase","repository":"other","module":"openexr","version":"3.4.13","commit":"5974b0c2d7","title":"openexr updated to 3.4.13","summary":"version bumped to 3.4.13"},
-  {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"linux-lts","version":"6.18.36","commit":"2e8a71c0f1","title":"linux-lts updated to 6.18.36","summary":"version bumped to 6.18.36"},
-  {"date":"2026-06-19","category":"Moonbase","repository":"other","module":"","version":"","commit":"1bb9157fbd","title":"gst-python: Adjusting DEPENDS.","summary":"gst-python: Adjusting DEPENDS."}
+  {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"linux-lts","version":"6.18.36","commit":"2e8a71c0f1","title":"linux-lts updated to 6.18.36","summary":"version bumped to 6.18.36"}
 ]
