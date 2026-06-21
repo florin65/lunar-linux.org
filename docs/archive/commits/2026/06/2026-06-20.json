@@ -15,5 +15,6 @@
   {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"wakatime-cli","version":"2.20.1","commit":"0324f90acb","title":"wakatime-cli updated to 2.20.1","summary":"version bumped to 2.20.1"},
   {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"wakatime-cli","version":"2.19.1","commit":"1c22b48517","title":"wakatime-cli updated to 2.19.1","summary":"version bumped to 2.19.1"},
   {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"nilfs-utils","version":"2.3.1","commit":"33b969d0f0","title":"nilfs-utils updated to 2.3.1","summary":"version bumped to 2.3.1"},
-  {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"linux-lts","version":"6.18.36","commit":"2e8a71c0f1","title":"linux-lts updated to 6.18.36","summary":"version bumped to 6.18.36"}
+  {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"linux-lts","version":"6.18.36","commit":"2e8a71c0f1","title":"linux-lts updated to 6.18.36","summary":"version bumped to 6.18.36"},
+  {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"","version":"","commit":"920fafe229","title":"fwupd: Adjust depends, gobject-introspection.","summary":"fwupd: Adjust depends, gobject-introspection."}
 ]

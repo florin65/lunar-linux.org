@@ -1,17 +1,14 @@
-2026-06-20|4fea848bd7|flashrom: Bump to 1.7.0.
-2026-06-20|97eb5652ad|libcbor: Version bumped to 0.14.0
-2026-06-20|29e0c350e0|vmaf: Version bumped to 3.2.0
-2026-06-20|6e863eca69|thunderbird: linting.
-2026-06-20|b43e723507|thunderbird: Bump to 125.0.
-2026-06-20|2bc44c0673|jq: Version bumped to 1.8.2
-2026-06-20|349fe70209|brave-bin: Bump to 1.91.175.
-2026-06-20|75f96de3fa|gradle: version bumped to 9.6.0
-2026-06-20|7822e0739f|ansible-core: version bumped to 2.21.1
-2026-06-20|8dd35ff4c2|ansible: version bumped to 14.1.0
-2026-06-19|7a8e475b60|alsa-lib: version bumped to 1.2.16.1
-2026-06-20|0324f90acb|wakatime-cli: Version bumped to 2.20.1
-2026-06-20|1c22b48517|wakatime-cli: Version bumped to 2.19.1
-2026-06-20|33b969d0f0|nilfs-utils: Version bumped to 2.3.1
-2026-06-19|5974b0c2d7|openexr: version bumped to 3.4.13
-2026-06-20|2e8a71c0f1|linux-lts: Version bumped to 6.18.36
-2026-06-19|1bb9157fbd|gst-python: Adjusting DEPENDS.
+2026-06-21|92f3bf9572|python-numpy: Version bumped to 2.5.0
+2026-06-21|6069fb4de4|lfs: Removing, replaced with dysk, they did a name change with version 2.6.1.
+2026-06-21|bbc4c7f72e|dysk: Adding, will replace lfs (renamed after 2.6.1).
+2026-06-21|f1bbbd4c2f|num-utils: Rework, update some variables.
+2026-06-21|380b5b70fb|openjph: Version bumped to 0.30.0
+2026-06-21|e31933ca35|yaz: Version bumped to 5.37.3
+2026-06-21|e69ff548e2|cpp-utilities: Version bumped to 5.34.1
+2026-06-21|9e0a8d653c|bgrep: Version bumped to 0.3
+2026-06-21|90d5d6bb6a|node: Version bumped to 26.3.1
+2026-06-21|9022a048dc|fwupd: Adjusting BUILD.
+2026-06-21|1c6780226d|jenkins: version bumped to 2.569
+2026-06-21|2e3933b693|containerd: version bumped to 2.3.2
+2026-06-21|2c644f1c2a|ffmpeg: small tweaks
+2026-06-20|920fafe229|fwupd: Adjust depends, gobject-introspection.

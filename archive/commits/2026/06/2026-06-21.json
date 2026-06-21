@@ -11,6 +11,5 @@
   {"date":"2026-06-21","category":"Moonbase","repository":"other","module":"","version":"","commit":"9022a048dc","title":"fwupd: Adjusting BUILD.","summary":"fwupd: Adjusting BUILD."},
   {"date":"2026-06-21","category":"Moonbase","repository":"other","module":"jenkins","version":"2.569","commit":"1c6780226d","title":"jenkins updated to 2.569","summary":"version bumped to 2.569"},
   {"date":"2026-06-21","category":"Moonbase","repository":"other","module":"containerd","version":"2.3.2","commit":"2e3933b693","title":"containerd updated to 2.3.2","summary":"version bumped to 2.3.2"},
-  {"date":"2026-06-21","category":"Moonbase","repository":"other","module":"","version":"","commit":"2c644f1c2a","title":"ffmpeg: small tweaks","summary":"ffmpeg: small tweaks"},
-  {"date":"2026-06-20","category":"Moonbase","repository":"other","module":"","version":"","commit":"920fafe229","title":"fwupd: Adjust depends, gobject-introspection.","summary":"fwupd: Adjust depends, gobject-introspection."}
+  {"date":"2026-06-21","category":"Moonbase","repository":"other","module":"","version":"","commit":"2c644f1c2a","title":"ffmpeg: small tweaks","summary":"ffmpeg: small tweaks"}
 ]
