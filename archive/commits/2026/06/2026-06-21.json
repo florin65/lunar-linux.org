@@ -11,5 +11,8 @@
   {"date":"2026-06-21","category":"Moonbase","repository":"other","module":"","version":"","commit":"9022a048dc","title":"fwupd: Adjusting BUILD.","summary":"fwupd: Adjusting BUILD."},
   {"date":"2026-06-21","category":"Moonbase","repository":"other","module":"jenkins","version":"2.569","commit":"1c6780226d","title":"jenkins updated to 2.569","summary":"version bumped to 2.569"},
   {"date":"2026-06-21","category":"Moonbase","repository":"other","module":"containerd","version":"2.3.2","commit":"2e3933b693","title":"containerd updated to 2.3.2","summary":"version bumped to 2.3.2"},
-  {"date":"2026-06-21","category":"Moonbase","repository":"other","module":"","version":"","commit":"2c644f1c2a","title":"ffmpeg: small tweaks","summary":"ffmpeg: small tweaks"}
+  {"date":"2026-06-21","category":"Moonbase","repository":"other","module":"","version":"","commit":"2c644f1c2a","title":"ffmpeg: small tweaks","summary":"ffmpeg: small tweaks"},
+  {"date":"2026-06-21","category":"Moonbase","repository":"other","module":"OpenColorIO","version":"2.5.2.","commit":"3afc1944b2","title":"OpenColorIO updated to 2.5.2.","summary":"bump to 2.5.2."},
+  {"date":"2026-06-21","category":"Moonbase","repository":"other","module":"","version":"","commit":"767d30b2cf","title":"minizip-ng:   Bump to 4.2.1.","summary":"minizip-ng:   Bump to 4.2.1."},
+  {"date":"2026-06-21","category":"Moonbase","repository":"other","module":"pystring","version":"1.2.0.","commit":"e314b883ce","title":"pystring updated to 1.2.0.","summary":"bump to 1.2.0."}
 ]
