@@ -1,0 +1,15 @@
+[
+  {"date":"2026-06-22","category":"Moonbase","repository":"other","module":"xmlsec1","version":"1.3.12","commit":"8af6a33727","title":"xmlsec1 updated to 1.3.12","summary":"version bumped to 1.3.12"},
+  {"date":"2026-06-22","category":"Moonbase","repository":"other","module":"catimg","version":"2.8.0.","commit":"ff4e9ea1da","title":"catimg updated to 2.8.0.","summary":"bump to 2.8.0."},
+  {"date":"2026-06-22","category":"Moonbase","repository":"other","module":"darktable","version":"5.6.0 and adjustments.","commit":"fa52783a76","title":"darktable updated to 5.6.0 and adjustments.","summary":"bump to 5.6.0 and adjustments."},
+  {"date":"2026-06-22","category":"Moonbase","repository":"other","module":"","version":"","commit":"69fae24c84","title":"gmic: Fix sha256.","summary":"gmic: Fix sha256."},
+  {"date":"2026-06-22","category":"Moonbase","repository":"other","module":"DBI","version":"1.649","commit":"e2014caeba","title":"DBI updated to 1.649","summary":"version bumped to 1.649"},
+  {"date":"2026-06-22","category":"Moonbase","repository":"other","module":"rtorrent","version":"0.16.15","commit":"63d4ac407b","title":"rtorrent updated to 0.16.15","summary":"version bumped to 0.16.15"},
+  {"date":"2026-06-22","category":"Moonbase","repository":"other","module":"libtorrent","version":"0.16.15","commit":"a895875cd6","title":"libtorrent updated to 0.16.15","summary":"version bumped to 0.16.15"},
+  {"date":"2026-06-22","category":"Moonbase","repository":"other","module":"OpenCSG","version":"1.8.2","commit":"b5d04bacdc","title":"OpenCSG updated to 1.8.2","summary":"version bumped to 1.8.2"},
+  {"date":"2026-06-22","category":"Moonbase","repository":"other","module":"OpenImageIO-oiio","version":"3.1.14.1","commit":"1f7784a35f","title":"OpenImageIO-oiio updated to 3.1.14.1","summary":"version bumped to 3.1.14.1"},
+  {"date":"2026-06-22","category":"Moonbase","repository":"other","module":"embree","version":"4.4.1","commit":"c55f041ef6","title":"embree updated to 4.4.1","summary":"version bumped to 4.4.1"},
+  {"date":"2026-06-22","category":"Moonbase","repository":"other","module":"libuv","version":"1.52.1","commit":"429137811e","title":"libuv updated to 1.52.1","summary":"version bumped to 1.52.1"},
+  {"date":"2026-06-22","category":"Moonbase","repository":"other","module":"mujs","version":"1.3.9","commit":"4465a60f2f","title":"mujs updated to 1.3.9","summary":"version bumped to 1.3.9"},
+  {"date":"2026-06-22","category":"Moonbase","repository":"xorg","module":"xkeyboard-config","version":"2.48","commit":"23e2980","title":"xkeyboard-config updated to 2.48","summary":"version bumped to 2.48"}
+]

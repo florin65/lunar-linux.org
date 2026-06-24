@@ -1,15 +1,8 @@
-2026-06-22|8af6a33727|xmlsec1: Version bumped to 1.3.12
-2026-06-22|ff4e9ea1da|catimg: Bump to 2.8.0.
-2026-06-22|fa52783a76|darktable: Bump to 5.6.0 and adjustments.
-2026-06-22|69fae24c84|gmic: Fix sha256.
-2026-06-22|e2014caeba|DBI: version bumped to 1.649
-2026-06-22|63d4ac407b|rtorrent: Version bumped to 0.16.15
-2026-06-22|a895875cd6|libtorrent: Version bumped to 0.16.15
-2026-06-22|b5d04bacdc|OpenCSG: Version bumped to 1.8.2
-2026-06-22|1f7784a35f|OpenImageIO-oiio: Version bumped to 3.1.14.1
-2026-06-21|3afc1944b2|OpenColorIO: Bump to 2.5.2.
-2026-06-21|767d30b2cf|minizip-ng:   Bump to 4.2.1.
-2026-06-21|e314b883ce|pystring: Bump to 1.2.0.
-2026-06-22|c55f041ef6|embree: Version bumped to 4.4.1
-2026-06-22|429137811e|libuv: Version bumped to 1.52.1
-2026-06-22|4465a60f2f|mujs: Version bumped to 1.3.9
+2026-06-23|3117b4ab08|radare2: Version bumped to 6.1.8
+2026-06-23|7b3172f876|firefox-bin: version bumped to 152.0.2
+2026-06-23|d6000d344f|CUDA-OpenCL-headers: Version bumped to 2026.05.29
+2026-06-23|c2cb0031e0|libarchive: Bump to 3.8.8, moved to cmake.
+2026-06-23|1abec88f76|firefox: Version bumped to 152.0.2
+2026-06-23|66b2a48f92|racket: Bump to 9.2.
+2026-06-23|4a24f422cc|clasp: Version bumped to 3.4.0
+2026-06-23|1a308edd2b|chuck: Version bumped to 1.5.5.8
