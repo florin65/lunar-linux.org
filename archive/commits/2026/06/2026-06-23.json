@@ -8,5 +8,8 @@
   {"date":"2026-06-23","category":"Moonbase","repository":"other","module":"firefox","version":"152.0.2","commit":"1abec88f76","title":"firefox updated to 152.0.2","summary":"version bumped to 152.0.2"},
   {"date":"2026-06-23","category":"Moonbase","repository":"other","module":"racket","version":"9.2.","commit":"66b2a48f92","title":"racket updated to 9.2.","summary":"bump to 9.2."},
   {"date":"2026-06-23","category":"Moonbase","repository":"other","module":"clasp","version":"3.4.0","commit":"4a24f422cc","title":"clasp updated to 3.4.0","summary":"version bumped to 3.4.0"},
-  {"date":"2026-06-23","category":"Moonbase","repository":"other","module":"chuck","version":"1.5.5.8","commit":"1a308edd2b","title":"chuck updated to 1.5.5.8","summary":"version bumped to 1.5.5.8"}
+  {"date":"2026-06-23","category":"Moonbase","repository":"other","module":"chuck","version":"1.5.5.8","commit":"1a308edd2b","title":"chuck updated to 1.5.5.8","summary":"version bumped to 1.5.5.8"},
+  {"date":"2026-06-23","category":"Moonbase","repository":"kde","module":"ktextaddons","version":"2.1.0.","commit":"7c1bb0afa","title":"ktextaddons updated to 2.1.0.","summary":"bump to 2.1.0."},
+  {"date":"2026-06-23","category":"Moonbase","repository":"other","module":"","version":"","commit":"0433f0412c","title":"opencl-icd-loader: Add missing depends.","summary":"opencl-icd-loader: Add missing depends."},
+  {"date":"2026-06-23","category":"Moonbase","repository":"other","module":"opencl-icd-loader","version":"2026.05.29.","commit":"0deff7d3ed","title":"opencl-icd-loader updated to 2026.05.29.","summary":"bump to 2026.05.29."}
 ]

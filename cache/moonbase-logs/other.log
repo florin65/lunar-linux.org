@@ -1,8 +1,9 @@
-2026-06-23|3117b4ab08|radare2: Version bumped to 6.1.8
-2026-06-23|7b3172f876|firefox-bin: version bumped to 152.0.2
-2026-06-23|d6000d344f|CUDA-OpenCL-headers: Version bumped to 2026.05.29
-2026-06-23|c2cb0031e0|libarchive: Bump to 3.8.8, moved to cmake.
-2026-06-23|1abec88f76|firefox: Version bumped to 152.0.2
-2026-06-23|66b2a48f92|racket: Bump to 9.2.
-2026-06-23|4a24f422cc|clasp: Version bumped to 3.4.0
-2026-06-23|1a308edd2b|chuck: Version bumped to 1.5.5.8
+2026-06-24|80de06372b|brackets: Moving to crater.
+2026-06-24|5c759da195|blender: Version bumped to 5.1.2
+2026-06-24|35869dcd40|    dune: version bumped o 3.24.0
+2026-06-24|fb51afe792|elixir: version bumped to 1.20.2
+2026-06-24|d04c58a6f5|libass: Version bumped to 0.17.5
+2026-06-24|9e75a82423|tig: Version bumped to 2.6.1
+2026-06-23|0433f0412c|opencl-icd-loader: Add missing depends.
+2026-06-23|0deff7d3ed|opencl-icd-loader: Bump to 2026.05.29.
+2026-06-24|825befa67b|rapydscript-ng: Version bumped to 0.7.24

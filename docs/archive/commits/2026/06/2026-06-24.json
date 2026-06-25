@@ -1,12 +1,9 @@
 [
-  {"date":"2026-06-23","category":"Moonbase","repository":"kde","module":"ktextaddons","version":"2.1.0.","commit":"7c1bb0afa","title":"ktextaddons updated to 2.1.0.","summary":"bump to 2.1.0."},
   {"date":"2026-06-24","category":"Moonbase","repository":"other","module":"","version":"","commit":"80de06372b","title":"brackets: Moving to crater.","summary":"brackets: Moving to crater."},
   {"date":"2026-06-24","category":"Moonbase","repository":"other","module":"blender","version":"5.1.2","commit":"5c759da195","title":"blender updated to 5.1.2","summary":"version bumped to 5.1.2"},
   {"date":"2026-06-24","category":"Moonbase","repository":"other","module":"","version":"","commit":"35869dcd40","title":"    dune: version bumped o 3.24.0","summary":"    dune: version bumped o 3.24.0"},
   {"date":"2026-06-24","category":"Moonbase","repository":"other","module":"elixir","version":"1.20.2","commit":"fb51afe792","title":"elixir updated to 1.20.2","summary":"version bumped to 1.20.2"},
   {"date":"2026-06-24","category":"Moonbase","repository":"other","module":"libass","version":"0.17.5","commit":"d04c58a6f5","title":"libass updated to 0.17.5","summary":"version bumped to 0.17.5"},
   {"date":"2026-06-24","category":"Moonbase","repository":"other","module":"tig","version":"2.6.1","commit":"9e75a82423","title":"tig updated to 2.6.1","summary":"version bumped to 2.6.1"},
-  {"date":"2026-06-23","category":"Moonbase","repository":"other","module":"","version":"","commit":"0433f0412c","title":"opencl-icd-loader: Add missing depends.","summary":"opencl-icd-loader: Add missing depends."},
-  {"date":"2026-06-23","category":"Moonbase","repository":"other","module":"opencl-icd-loader","version":"2026.05.29.","commit":"0deff7d3ed","title":"opencl-icd-loader updated to 2026.05.29.","summary":"bump to 2026.05.29."},
   {"date":"2026-06-24","category":"Moonbase","repository":"other","module":"rapydscript-ng","version":"0.7.24","commit":"825befa67b","title":"rapydscript-ng updated to 0.7.24","summary":"version bumped to 0.7.24"}
 ]
