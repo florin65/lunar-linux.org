@@ -1,9 +1,1 @@
-2026-06-24|80de06372b|brackets: Moving to crater.
-2026-06-24|5c759da195|blender: Version bumped to 5.1.2
-2026-06-24|35869dcd40|    dune: version bumped o 3.24.0
-2026-06-24|fb51afe792|elixir: version bumped to 1.20.2
-2026-06-24|d04c58a6f5|libass: Version bumped to 0.17.5
-2026-06-24|9e75a82423|tig: Version bumped to 2.6.1
-2026-06-23|0433f0412c|opencl-icd-loader: Add missing depends.
-2026-06-23|0deff7d3ed|opencl-icd-loader: Bump to 2026.05.29.
-2026-06-24|825befa67b|rapydscript-ng: Version bumped to 0.7.24
+2026-06-25|5281b31cbc|node: Version bumped to 26.4.0
