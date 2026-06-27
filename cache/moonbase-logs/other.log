@@ -1,1 +1,5 @@
-2026-06-25|5281b31cbc|node: Version bumped to 26.4.0
+2026-06-26|80559e5ea4|pango: version bumped to 1.58.0
+2026-06-26|142ececd19|poppler: Adjusting BUILD.
+2026-06-26|eb76007ac2|firefox-bin: version bumped to 152.0.3
+2026-06-26|d2e285db6e|firefox: version bumped to 152.0.3
+2026-06-26|0d81f6478e|cython: Version bumped to 3.2.6
