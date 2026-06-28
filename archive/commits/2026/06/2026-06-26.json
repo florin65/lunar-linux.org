@@ -1,0 +1,7 @@
+[
+  {"date":"2026-06-26","category":"Moonbase","repository":"other","module":"pango","version":"1.58.0","commit":"80559e5ea4","title":"pango updated to 1.58.0","summary":"version bumped to 1.58.0"},
+  {"date":"2026-06-26","category":"Moonbase","repository":"other","module":"","version":"","commit":"142ececd19","title":"poppler: Adjusting BUILD.","summary":"poppler: Adjusting BUILD."},
+  {"date":"2026-06-26","category":"Moonbase","repository":"other","module":"firefox-bin","version":"152.0.3","commit":"eb76007ac2","title":"firefox-bin updated to 152.0.3","summary":"version bumped to 152.0.3"},
+  {"date":"2026-06-26","category":"Moonbase","repository":"other","module":"firefox","version":"152.0.3","commit":"d2e285db6e","title":"firefox updated to 152.0.3","summary":"version bumped to 152.0.3"},
+  {"date":"2026-06-26","category":"Moonbase","repository":"other","module":"cython","version":"3.2.6","commit":"0d81f6478e","title":"cython updated to 3.2.6","summary":"version bumped to 3.2.6"}
+]

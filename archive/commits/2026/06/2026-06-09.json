@@ -19,5 +19,10 @@
   {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"leiningen","version":"2.13.0","commit":"741c6dfa55","title":"leiningen updated to 2.13.0","summary":"version bumped to 2.13.0"},
   {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"","version":"","commit":"9caec3fc79","title":"snowball: Fix updated.","summary":"snowball: Fix updated."},
   {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"snowball","version":"3.1.1 and redo patch.","commit":"8ee0628a1c","title":"snowball updated to 3.1.1 and redo patch.","summary":"bump to 3.1.1 and redo patch."},
-  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"uft8cpp","version":"4.1.1.","commit":"839e5551e1","title":"uft8cpp updated to 4.1.1.","summary":"bump to 4.1.1."}
+  {"date":"2026-06-09","category":"Moonbase","repository":"other","module":"uft8cpp","version":"4.1.1.","commit":"839e5551e1","title":"uft8cpp updated to 4.1.1.","summary":"bump to 4.1.1."},
+  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"binutils","version":"2.46.0","commit":"59f76dc7","title":"binutils updated to 2.46.0","summary":"version bumped to 2.46.0"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"ccache","version":"4.13.6","commit":"8b068db3","title":"ccache updated to 4.13.6","summary":"version bumped to 4.13.6"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"btrfs-progs","version":"7.0","commit":"ceb2ded1","title":"btrfs-progs updated to 7.0","summary":"version bumped to 7.0"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"cmake","version":"4.3.3","commit":"bbf4c012","title":"cmake updated to 4.3.3","summary":"version bumped to 4.3.3"},
+  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"groff","version":"1.24.1","commit":"b19bc5bb","title":"groff updated to 1.24.1","summary":"version bumped to 1.24.1"}
 ]

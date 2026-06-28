@@ -1,5 +1,8 @@
-2026-06-26|80559e5ea4|pango: version bumped to 1.58.0
-2026-06-26|142ececd19|poppler: Adjusting BUILD.
-2026-06-26|eb76007ac2|firefox-bin: version bumped to 152.0.3
-2026-06-26|d2e285db6e|firefox: version bumped to 152.0.3
-2026-06-26|0d81f6478e|cython: Version bumped to 3.2.6
+2026-06-27|9852b2fdf1|sqlite: version bumped to 3.53.3
+2026-06-27|5bf27f4d84|podman: version bumped to 6.0.0
+2026-06-27|99269ca27d|mutt: version bumped to 2.4.0
+2026-06-27|c0a425d8f7|tmux: version bumped to 3.7
+2026-06-27|9123e6b552|libpsl: Version bumped to 0.22.0
+2026-06-27|5aa2e21fb3|lynis: version bumped to 3.1.7
+2026-06-27|0b06f91287|libheif: Version bumped to 1.23.1
+2026-06-27|e387c72d7e|patchelf: Version bumped to 0.19.0
