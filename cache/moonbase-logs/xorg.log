@@ -1,0 +1,7 @@
+2026-06-28|89720b3|spirv-llvm-translator: version bumped to 22.1.2
+2026-06-28|2b59868|xgamma: version bumped to 1.0.8
+2026-06-28|e5e02a5|xeyes: version bumped to 1.3.1
+2026-06-28|67979b9|setxkbmap: version bumped to 1.3.5
+2026-06-28|0ab6c0d|iceauth: version bumped to 1.0.11
+2026-06-28|72e7905|beforelight: move it to crater
+2026-06-28|27e27ec|xclock: version bumped to 1.2.0

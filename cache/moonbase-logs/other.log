@@ -1,8 +1,10 @@
-2026-06-27|9852b2fdf1|sqlite: version bumped to 3.53.3
-2026-06-27|5bf27f4d84|podman: version bumped to 6.0.0
-2026-06-27|99269ca27d|mutt: version bumped to 2.4.0
-2026-06-27|c0a425d8f7|tmux: version bumped to 3.7
-2026-06-27|9123e6b552|libpsl: Version bumped to 0.22.0
-2026-06-27|5aa2e21fb3|lynis: version bumped to 3.1.7
-2026-06-27|0b06f91287|libheif: Version bumped to 1.23.1
-2026-06-27|e387c72d7e|patchelf: Version bumped to 0.19.0
+2026-06-28|e8202676e6|pdfjs: version bumped to 6.1.200
+2026-06-28|d6030bc6e7|llvm, clang and ldd: usel clang for build if it's already installed
+2026-06-28|1073a596a0|llvm: vewrsion bumped to 21.1.8
+2026-06-28|2f07a0bf24|compiler-rt, openmp: removed the clang absolute paths from the BUILD files
+2026-06-28|592bce2fe0|llvm, lld, clang, compiler-rt, openmp: version bumped to 22.1.8
+2026-06-28|37d2d5b912|tcl, tk: version bumped to 9.0.4
+2026-06-28|0b0ae8ea68|sqlite: fix a typo
+2026-06-28|bb629208b4|gradle: version bumped to 9.6.1
+2026-06-28|e2304f05b9|lua51, lua52, lua53: move it to crater
+2026-06-28|8ff75b8c0e|linux-lts: Version bumped to 6.18.37
