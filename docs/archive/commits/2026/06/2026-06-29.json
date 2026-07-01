@@ -3,5 +3,7 @@
   {"date":"2026-06-29","category":"Moonbase","repository":"other","module":"skim","version":"4.10.0","commit":"4c7789f2bb","title":"skim updated to 4.10.0","summary":"version bumped to 4.10.0"},
   {"date":"2026-06-29","category":"Moonbase","repository":"other","module":"starship","version":"1.26.0","commit":"34be7f30ab","title":"starship updated to 1.26.0","summary":"version bumped to 1.26.0"},
   {"date":"2026-06-29","category":"Moonbase","repository":"other","module":"tree-sitter","version":"0.26.10","commit":"50366b9449","title":"tree-sitter updated to 0.26.10","summary":"version bumped to 0.26.10"},
-  {"date":"2026-06-29","category":"Moonbase","repository":"other","module":"jenkins","version":"2.570","commit":"87b1a203fd","title":"jenkins updated to 2.570","summary":"version bumped to 2.570"}
+  {"date":"2026-06-29","category":"Moonbase","repository":"other","module":"jenkins","version":"2.570","commit":"87b1a203fd","title":"jenkins updated to 2.570","summary":"version bumped to 2.570"},
+  {"date":"2026-06-29","category":"Moonbase","repository":"other","module":"bfs","version":"4.1.4","commit":"7d9842ea2c","title":"bfs updated to 4.1.4","summary":"version bumped to 4.1.4"},
+  {"date":"2026-06-29","category":"Moonbase","repository":"other","module":"liburing","version":"2.15","commit":"fba7f79990","title":"liburing updated to 2.15","summary":"version bumped to 2.15"}
 ]

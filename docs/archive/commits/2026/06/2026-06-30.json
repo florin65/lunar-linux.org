@@ -13,8 +13,6 @@
   {"date":"2026-06-30","category":"Moonbase","repository":"other","module":"","version":"","commit":"dab98b193c","title":"openttd: fix build","summary":"openttd: fix build"},
   {"date":"2026-06-30","category":"Moonbase","repository":"other","module":"netpbm","version":"10.86.50","commit":"8e1a84e03b","title":"netpbm updated to 10.86.50","summary":"version bumped to 10.86.50"},
   {"date":"2026-06-30","category":"Moonbase","repository":"other","module":"shared-mime-info","version":"2.5.1","commit":"1ef3df3a99","title":"shared-mime-info updated to 2.5.1","summary":"version bumped to 2.5.1"},
-  {"date":"2026-06-29","category":"Moonbase","repository":"other","module":"bfs","version":"4.1.4","commit":"7d9842ea2c","title":"bfs updated to 4.1.4","summary":"version bumped to 4.1.4"},
-  {"date":"2026-06-29","category":"Moonbase","repository":"other","module":"liburing","version":"2.15","commit":"fba7f79990","title":"liburing updated to 2.15","summary":"version bumped to 2.15"},
   {"date":"2026-06-30","category":"Moonbase","repository":"xfce","module":"xarchiver","version":"0.5.4.27","commit":"528dca9","title":"xarchiver updated to 0.5.4.27","summary":"version bumped to 0.5.4.27"},
   {"date":"2026-06-30","category":"Moonbase","repository":"xorg","module":"xfontsel","version":"1.1.2","commit":"b9758e2","title":"xfontsel updated to 1.1.2","summary":"version bumped to 1.1.2"},
   {"date":"2026-06-30","category":"Moonbase","repository":"xorg","module":"xedit","version":"1.2.5","commit":"f51ecde","title":"xedit updated to 1.2.5","summary":"version bumped to 1.2.5"}
