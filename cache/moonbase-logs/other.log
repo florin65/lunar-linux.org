@@ -1,16 +1,1 @@
-2026-06-30|a5eb5ee018|cython: version bumped to 3.2.8
-2026-06-30|dc581321fa|mercurial: version bumped to 7.2.3
-2026-06-30|fb1b57bb9e|tailscale: version bumped to 1.98.8
-2026-06-30|e2658a7529|skopeo: version bumped to 1.23.0
-2026-06-30|8ccea2b026|wine: version bumped to 11.12
-2026-06-30|31334b09e8|unrar: version bumped to 7.2.7
-2026-06-30|68801635f9|firefox-bin: version bumped to 152.0.4
-2026-06-30|6417a89ef3|firefox: version bumped to 152.0.4
-2026-06-30|0bd7471177|just: version bumped to 1.55.1
-2026-06-30|4c2e00500b|transmission: remove patch
-2026-06-30|863a2da98b|transmission: version bumped to 4.1.3
-2026-06-30|dab98b193c|openttd: fix build
-2026-06-30|8e1a84e03b|netpbm: version bumped to 10.86.50
-2026-06-30|1ef3df3a99|shared-mime-info: version bumped to 2.5.1
-2026-06-29|7d9842ea2c|bfs: Version bumped to 4.1.4
-2026-06-29|fba7f79990|liburing: Version bumped to 2.15
+2026-07-01|a9344d2a4e|rustc: version bumped to 1.96.1
