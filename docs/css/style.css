@@ -597,9 +597,6 @@ h1 {
   font-size: var(--font-body);
 }
 
-.community-hero-grid {
-    margin-top: -85px;
-}
 
 .hero-description {
     max-width: none !important;
@@ -620,6 +617,7 @@ h1 {
   display: grid;
   grid-template-columns: 1.15fr 1fr 1fr;
   gap: var(--card-gap);
+  align-items: start;
 }
 
 .content-card,
@@ -674,6 +672,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(var(--toc-columns), minmax(0, max-content));
   gap: var(--card-gap);
+  align-items: start;
 }
 
 .feature-card-wide {
@@ -1000,7 +999,7 @@ h1 {
   display: grid;
   grid-template-columns: 1.25fr 1fr;
   gap: 32px;
-  align-items: center;
+  align-items: start;
 }
 
 .community-contact-card {
@@ -1032,12 +1031,9 @@ h1 {
 }
 
 .community-right-column {
-    display: flex;
-    flex-direction: column;
-    gap: var(--card-gap);
-
-    position: relative;
-    top: -58px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
 }
 
 .compact-quote {
@@ -1862,4 +1858,31 @@ h1 {
   text-decoration-line: underline !important;
   text-decoration-thickness: 1.4px;
   text-underline-offset: 4px;
+}
+
+
+/* -------------------------------------------------- */
+/* Layout cleanup: remove fragile vertical offsets     */
+/* -------------------------------------------------- */
+
+.community-hero-grid {
+  align-items: start;
+  margin-top: 0;
+}
+
+.community-right-column {
+  position: static;
+  top: auto;
+}
+
+.content-grid,
+.feature-grid {
+  align-items: start;
+}
+
+.content-card,
+.feature-card,
+.quote-box,
+.info-box {
+  min-height: 0;
 }
