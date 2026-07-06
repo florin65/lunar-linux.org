@@ -671,8 +671,7 @@ function render_docs(    title, desc, quote, simple, learning, links, tail, e, i
 }
 
 function render_community(    built, contact, quote, links, e, tail, items, c, j) {
-  print "<main class=\"page-main\">"
-  render_hero(first_h1(), first_p())
+  print "<main class=\"page-main community-main\">"
 
   built = section_index("Built by people who use it")
   contact = section_index("Get in touch")
@@ -681,12 +680,17 @@ function render_community(    built, contact, quote, links, e, tail, items, c, j
     quote = first_quote_in_range(built + 1, section_end(built))
     links = first_links_in_range(contact + 1, section_end(contact))
 
-    print "  <section class=\"content-section\">"
+    print "  <section class=\"page-hero community-hero\">"
     print "    <div class=\"container community-hero-grid\">"
-    print "      <article>"
+
+    print "      <article class=\"community-hero-copy\">"
+    print "        <p class=\"meta-line\">Lunar Linux</p>"
+    print "        <h1>" inline(first_h1()) "</h1>"
+    print "        <p class=\"hero-description\">" inline(first_p()) "</p>"
     print "        <h2>" inline(val[built]) "</h2>"
     render_blocks(built + 1, section_end(built), "        ", 1, 1)
     print "      </article>"
+
     print "      <div class=\"community-right-column\">"
 
     if (quote != "") {
@@ -704,9 +708,13 @@ function render_community(    built, contact, quote, links, e, tail, items, c, j
     render_blocks(contact + 1, section_end(contact), "          ", 1, 1)
     if (links != "") render_actions(links, "          ")
     print "        </aside>"
+
     print "      </div>"
     print "    </div>"
     print "  </section>"
+  }
+  else {
+    render_hero(first_h1(), first_p())
   }
 
   for (tail = first_section(); tail; tail = next_section_index(tail)) {
