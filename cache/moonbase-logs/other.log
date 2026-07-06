@@ -1,7 +1,2 @@
-2026-07-02|1cc6988d80|libvirt: version b umped to 12.5.0
-2026-07-02|df8687be28|spaceship-prompt: Version bumped to 4.22.5
-2026-07-02|0bc61cf70b|libseccomp: Version bumped to 2.6.1
-2026-07-02|6725115491|libevent: Version bumped to 2.1.13
-2026-07-02|dbf48df4ea|tmux: Version bumped to 3.7b
-2026-07-02|8faeca40ed|jansson: Version bumped to 2.15.1
-2026-07-02|da84b0b161|libjxl: Version bumped to 0.12.0
+2026-07-05|385eba57bd|enchant: Version bumped to 2.8.18
+2026-07-05|8f6cf3405b|yt-dlp: Version bumped to 2026.07.04
