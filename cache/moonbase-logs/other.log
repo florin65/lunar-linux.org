@@ -1,2 +1,8 @@
-2026-07-05|385eba57bd|enchant: Version bumped to 2.8.18
-2026-07-05|8f6cf3405b|yt-dlp: Version bumped to 2026.07.04
+2026-07-06|45e64ecb33|samba: versdion bumped to 4.24.4
+2026-07-06|975d9a0245|mutt: version bumped to 2.4.1
+2026-07-06|313e916bc8|gnupg: version bumped to 2.5.21
+2026-07-06|9cc991f3bf|clamav: version bumped to 1.5.3
+2026-07-06|09e4ab51e6|kotlin, groovy, leiningen: move it to crater
+2026-07-06|1caf582ca1|linux-lts: version bumped to 6.18.38
+2026-07-06|3e8b0858bc|neovim: version bumped to 0.12.4
+2026-07-06|d93a5445dc|weechat: Version bumped to 4.9.3
