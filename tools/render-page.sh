@@ -110,6 +110,11 @@ function split_items(s, arr) {
   return split(s, arr, SEP)
 }
 
+function is_taxonomy(s,    t) {
+  t = trim(s)
+  return (t == "general" || t == "installation" || t == "development" || t == "documentation")
+}
+
 function first_h1(    i) {
   for (i = 1; i <= n; i++) if (kind[i] == "h1") return val[i]
   return "Page"
@@ -215,8 +220,10 @@ function render_blocks(a, b, indent, skip_quote, skip_links,    i, items, c, j) 
       print indent "<h5 id=\"" slug_id(val[i]) "\">" inline(val[i]) "</h5>"
     else if (kind[i] == "h6")
       print indent "<h6 id=\"" slug_id(val[i]) "\">" inline(val[i]) "</h6>"
-    else if (kind[i] == "p")
+    else if (kind[i] == "p") {
+      if (is_taxonomy(val[i])) continue
       print indent "<p>" inline(val[i]) "</p>"
+    }
     else if (kind[i] == "ul") {
       c = split_items(val[i], items)
       if (i > 1 && kind[i - 1] == "h2" && val[i - 1] == "On This Page")
@@ -226,6 +233,13 @@ function render_blocks(a, b, indent, skip_quote, skip_links,    i, items, c, j) 
       for (j = 1; j <= c; j++)
         print indent "  <li>" inline(items[j]) "</li>"
       print indent "</ul>"
+    }
+    else if (kind[i] == "ol") {
+      c = split_items(val[i], items)
+      print indent "<ol class=\"simple-list ordered-list\">"
+      for (j = 1; j <= c; j++)
+        print indent "  <li>" inline(items[j]) "</li>"
+      print indent "</ol>"
     }
     else if (kind[i] == "quote") {
       c = split_items(val[i], items)
@@ -313,7 +327,10 @@ function render_feature_grid(title, a, b, muted,    i, nxt, seccls) {
   if (firstcard && firstcard > a)
     render_blocks(a, firstcard - 1, "      ", 1, 1)
 
-  print "      <div class=\"feature-grid\">"
+  if (title == "Viewing and Browsing")
+    print "      <div class=\"feature-grid stacked-grid\">"
+  else
+    print "      <div class=\"feature-grid\">"
 
   for (i = a; i <= b; i++) {
     if (kind[i] != "h3") continue
@@ -995,6 +1012,19 @@ END {
         i++
       }
       add("ul", join_lines(list, c))
+      delete list
+      continue
+    }
+
+    if (line ~ /^[0-9]+\. /) {
+      c = 0
+      while (i <= ln && lines[i] ~ /^[0-9]+\. /) {
+        s = lines[i]
+        sub(/^[0-9]+\. +/, "", s)
+        list[++c] = s
+        i++
+      }
+      add("ol", join_lines(list, c))
       delete list
       continue
     }

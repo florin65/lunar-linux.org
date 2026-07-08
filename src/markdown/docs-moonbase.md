@@ -89,6 +89,13 @@ You can explore the moonbase structure using several methods:
 ### Web Interface
 Browse the moonbase online at [lunar-linux.org](http://www.lunar-linux.org/) to see available modules and their details.
 
+### Local Repository
+The same structure is available locally under:
+
+*/var/lib/lunar/moonbase/*
+
+Use this local tree when inspecting modules, reading build scripts or developing changes.
+
 ## Updating the Moonbase
 The moonbase should be updated regularly to get the latest module definitions:
 

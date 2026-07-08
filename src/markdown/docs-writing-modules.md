@@ -119,7 +119,17 @@ This is a basic DETAILS file with all required components. As you can see it's j
 This DETAILS file already can be all you need for writing a module, depending on the way "mymodule" needs to be compiled.
 
 ## Module Format
-See Module Basics for detailed information about available module scripts and module examples.
+A Lunar module is a directory in the moonbase. The directory name is the module name.
+
+The minimal module format is:
+
+- DETAILS - required metadata, source location, checksum and short description
+- BUILD - optional build instructions, used when the default build is not enough
+- DEPENDS - optional dependency list
+- PRE_BUILD - optional preparation steps before BUILD
+- POST_INSTALL - optional actions after installation
+
+Most simple modules need only a DETAILS file. More complex modules add the other files only when they are needed.
 
 ## Creating the DETAILS File
 The DETAILS file is the heart of every module. It contains essential information about the package.

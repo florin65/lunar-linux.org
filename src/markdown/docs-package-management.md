@@ -27,23 +27,15 @@ Lunar Linux's package management system is distinctive because all applications 
 - **Currency:** Access to latest upstream sources
 
 ## Package Management Tools
-Lunar provides two mutually exclusive package management implementations:
+Lunar uses the current **lunar** package management tools.
 
-### lunar (Stable)
-The stable, production-ready package management system. This is what most users should run.
+The stable, production-ready package management system is what users should run.
 
 *lin package-name # Install a package*
 
 *lunar update # Update all installed packages*
 
 *lunar renew package-name # Rebuild a package*
-
-### theedge (Development)
-The development branch containing experimental features and improvements. Use this only if you want to help test new functionality or need bleeding-edge features.
-
-*lin theedge # Switch to development branch*
-
-**Important:** *lunar* and *theedge* are mutually exclusive. Installing one removes the other.
 
 ## Core Components
 ### lin - Package Installation Tool

@@ -2031,3 +2031,243 @@ h1 {
   justify-content: flex-start;
 }
 
+
+/* -------------------------------------------------- */
+/* Website 3.1 final: layout consistency               */
+/* -------------------------------------------------- */
+
+/* Equal height cards across all regular grids */
+.content-grid,
+.feature-grid,
+.archive-explore-grid,
+.docs-philosophy-row {
+  align-items: stretch !important;
+}
+
+.content-grid > *,
+.feature-grid > *,
+.archive-explore-grid > *,
+.docs-philosophy-row > * {
+  height: 100%;
+}
+
+.content-card,
+.feature-card,
+.archive-explore-card,
+.philosophy-card,
+.docs-learning-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Action cards: keep buttons on the bottom line */
+.archive-explore-card {
+  justify-content: flex-start !important;
+}
+
+.archive-explore-card .hero-actions,
+.content-card .hero-actions,
+.feature-card .hero-actions,
+.download-card .hero-actions {
+  margin-top: auto !important;
+  padding-top: 16px;
+}
+
+/* Avoid accidental category/tag paragraphs in related cards from affecting spacing */
+.content-card p,
+.feature-card p,
+.archive-explore-card p,
+.download-card p {
+  margin-top: 0;
+}
+
+.content-card p + p,
+.feature-card p + p,
+.archive-explore-card p + p,
+.download-card p + p {
+  margin-top: 0.45rem;
+}
+
+/* Ordered lists should align cleanly in documentation prose */
+.ordered-list {
+  padding-left: 1.45rem;
+}
+
+.ordered-list li {
+  margin-bottom: 0.35rem;
+}
+
+/* Moonbase: stacked cards avoid large empty side-by-side panels */
+.stacked-grid {
+  grid-template-columns: minmax(0, 760px) !important;
+  align-items: stretch !important;
+}
+
+.stacked-grid .feature-card {
+  width: 100%;
+}
+
+
+
+
+/* -------------------------------------------------- */
+/* Website 3.1 final polish: cards, buttons, spacing   */
+/* -------------------------------------------------- */
+
+/* Force equal-height rows also on older/generated card classes. */
+.card-grid,
+.grid,
+.cards,
+.about-grid,
+.about-cards,
+.docs-card-grid,
+.related-grid,
+.archive-grid,
+.content-grid,
+.feature-grid {
+  align-items: stretch;
+}
+
+.card-grid > *,
+.grid > *,
+.cards > *,
+.about-grid > *,
+.about-cards > *,
+.docs-card-grid > *,
+.related-grid > *,
+.archive-grid > *,
+.content-grid > *,
+.feature-grid > * {
+  height: 100%;
+}
+
+/* Keep card content compact; blank visual lines should be explicit in Markdown, not automatic. */
+.content-card p,
+.feature-card p,
+.info-box p,
+.quote-box p,
+.download-card p,
+.community-contact-card p,
+.archive-explore-card p,
+.philosophy-card p,
+.card p {
+  margin-top: 0;
+  margin-bottom: .55rem;
+}
+
+.content-card p:last-child,
+.feature-card p:last-child,
+.info-box p:last-child,
+.quote-box p:last-child,
+.download-card p:last-child,
+.community-contact-card p:last-child,
+.archive-explore-card p:last-child,
+.philosophy-card p:last-child,
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+/* Action cards: keep buttons at the bottom and avoid split arrows. */
+.action-card,
+.archive-card,
+.archive-explore-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.action-card .btn,
+.action-card .button,
+.action-card a.button,
+.archive-card .btn,
+.archive-card .button,
+.archive-card a.button,
+.archive-explore-card .btn,
+.archive-explore-card .button,
+.archive-explore-card a.button {
+  margin-top: auto;
+  align-self: flex-start;
+  white-space: nowrap;
+  min-width: max-content;
+}
+
+/* In archive cards, allow slightly wider buttons without wrapping the arrow. */
+.archive-card a,
+.archive-explore-card a {
+  white-space: nowrap;
+}
+
+
+
+/* About page 3.1: equal-width cards in the opening grid. */
+.about-main .content-grid .content-card.wide {
+  grid-column: auto;
+}
+
+
+
+/* Archive 3.1: keep action buttons and arrows on one line. */
+.archive-explore-card .hero-actions {
+  margin-top: auto;
+}
+
+.archive-explore-card .button {
+  white-space: nowrap;
+  width: auto;
+  max-width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem;
+  line-height: 1.2;
+  padding-inline: 1.05rem;
+}
+
+@media (min-width: 900px) {
+  .archive-explore-grid {
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+  }
+}
+
+
+
+/* Documentation card examples: keep sequential command/comment lines compact. */
+.feature-card p em,
+.content-card p em,
+.info-box p em {
+  display: inline;
+}
+
+.feature-card p:has(em),
+.content-card p:has(em),
+.info-box p:has(em) {
+  margin-bottom: .35rem;
+}
+
+
+/* -------------------------------------------------- */
+/* Website 3.1 final: About cards are uniform          */
+/* -------------------------------------------------- */
+
+.about-main .content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.about-main .content-grid > .content-card {
+  grid-column: auto !important;
+  height: 100%;
+  min-height: 100%;
+}
+
+.about-main .content-grid > .content-card.wide {
+  grid-column: auto !important;
+}
+
+@media (max-width: 900px) {
+  .about-main .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

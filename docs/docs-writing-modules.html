@@ -96,7 +96,11 @@
           <p><em># Create a new module</em></p>
           <p><em>lvu new mymodule</em></p>
           <p>This will:</p>
-          <p>1.  Prompt you for information using cut and paste 2.  Create the directory in zlocal 3.  Create the DETAILS file</p>
+          <ol class="simple-list ordered-list">
+            <li>Prompt you for information using cut and paste</li>
+            <li>Create the directory in zlocal</li>
+            <li>Create the DETAILS file</li>
+          </ol>
           <p>Now verify the module:</p>
           <p><em># Change to the module directory</em></p>
           <p><em>lvu cd mymodule</em></p>
@@ -136,7 +140,16 @@
     <div class="container split-content">
       <article>
         <h2 id="module-format">Module Format</h2>
-        <p>See Module Basics for detailed information about available module scripts and module examples.</p>
+        <p>A Lunar module is a directory in the moonbase. The directory name is the module name.</p>
+        <p>The minimal module format is:</p>
+        <ul class="simple-list">
+          <li>DETAILS - required metadata, source location, checksum and short description</li>
+          <li>BUILD - optional build instructions, used when the default build is not enough</li>
+          <li>DEPENDS - optional dependency list</li>
+          <li>PRE_BUILD - optional preparation steps before BUILD</li>
+          <li>POST_INSTALL - optional actions after installation</li>
+        </ul>
+        <p>Most simple modules need only a DETAILS file. More complex modules add the other files only when they are needed.</p>
       </article>
     </div>
   </section>
@@ -335,7 +348,13 @@ make install
       <article>
         <h2 id="next-steps">Next Steps</h2>
         <p>Once you have a working module:</p>
-        <p>1.  Test it thoroughly 2.  Check for any warnings during compilation 3.  Verify all files are installed correctly 4.  Test removal with <em>lrm mymodule</em> 5.  Consider submitting it to the moonbase</p>
+        <ol class="simple-list ordered-list">
+          <li>Test it thoroughly</li>
+          <li>Check for any warnings during compilation</li>
+          <li>Verify all files are installed correctly</li>
+          <li>Test removal with <em>lrm mymodule</em></li>
+          <li>Consider submitting it to the moonbase</li>
+        </ol>
         <p>See Module Submission for information on contributing your module back to the community.</p>
       </article>
     </div>
@@ -369,17 +388,14 @@ make install
   <section class="content-section muted-section">
     <div class="container">
       <h2 id="related-articles" class="section-title">Related Articles</h2>
-      <p>development</p>
       <div class="feature-grid">
         <article class="feature-card">
           <h3>Module Basics</h3>
           <p>Understanding the structure and scripts that make up a Lunar Linux module</p>
-          <p>development</p>
         </article>
         <article class="feature-card">
           <h3>Module Function Reference</h3>
           <p>Reference guide for functions available in Lunar module scripts</p>
-          <p>development</p>
         </article>
         <article class="feature-card">
           <h3>Module Submission</h3>

@@ -49,9 +49,7 @@ The installer will guide you through disk partitioning.
 **Recommended partition scheme:**
 
 */dev/sda1 512M EFI System Partition (if UEFI)*
-
 */dev/sda2 4G Swap*
-
 */dev/sda3 Rest Root filesystem (/)*
 
 ### 4. Select Installation Profile
@@ -80,7 +78,6 @@ When prompted, set a secure root password.
 Create your primary user account:
 
 *useradd -m -G wheel username*
-
 *passwd username*
 
 ### 9. Reboot
@@ -93,9 +90,9 @@ Remove the installation media when prompted.
 ## Post-Installation
 After rebooting into your new system:
 
-1.  Log in with your user account
-2.  Update the system: *lin update*
-3.  Install additional software as needed
+1. Log in with your user account
+2. Update the system: *lunar update* (or *lunar renew*)
+3. Install additional software as needed
 
 ## Troubleshooting
 ### Boot Issues
