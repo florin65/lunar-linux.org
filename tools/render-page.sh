@@ -733,8 +733,7 @@ function render_community(    built, contact, quote, links, e, tail, items, c, j
 }
 
 function render_development(    built, start, compact, links, tail, e, first_h3, h3_end) {
-  print "<main class=\"page-main\">"
-  render_hero(first_h1(), first_p())
+  print "<main class=\"page-main development-main\">"
 
   built = section_index("Built by contributors")
   start = section_index("Start here")
@@ -745,15 +744,20 @@ function render_development(    built, start, compact, links, tail, e, first_h3,
       if (kind[e] == "h3") { first_h3 = e; break }
     }
 
-    print "  <section class=\"content-section development-hero\">"
-    print "    <div class=\"container split-content\">"
-    print "      <article>"
+    print "  <section class=\"page-hero development-hero-31\">"
+    print "    <div class=\"container development-hero-grid\">"
+
+    print "      <article class=\"development-hero-copy\">"
+    print "        <p class=\"meta-line\">Lunar Linux</p>"
+    print "        <h1>" inline(first_h1()) "</h1>"
+    print "        <p class=\"hero-description\">" inline(first_p()) "</p>"
     print "        <h2>" inline(val[built]) "</h2>"
     if (first_h3)
       render_blocks(built + 1, first_h3 - 1, "        ", 0, 1)
     else
       render_blocks(built + 1, section_end(built), "        ", 0, 1)
     print "      </article>"
+
     print "      <div class=\"development-right-column\">"
 
     if (first_h3) {
@@ -774,6 +778,9 @@ function render_development(    built, start, compact, links, tail, e, first_h3,
     print "      </div>"
     print "    </div>"
     print "  </section>"
+  }
+  else {
+    render_hero(first_h1(), first_p())
   }
 
   for (tail = first_section(); tail; tail = next_section_index(tail)) {

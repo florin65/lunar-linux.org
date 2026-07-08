@@ -1,8 +1,7 @@
-2026-07-06|45e64ecb33|samba: versdion bumped to 4.24.4
-2026-07-06|975d9a0245|mutt: version bumped to 2.4.1
-2026-07-06|313e916bc8|gnupg: version bumped to 2.5.21
-2026-07-06|9cc991f3bf|clamav: version bumped to 1.5.3
-2026-07-06|09e4ab51e6|kotlin, groovy, leiningen: move it to crater
-2026-07-06|1caf582ca1|linux-lts: version bumped to 6.18.38
-2026-07-06|3e8b0858bc|neovim: version bumped to 0.12.4
-2026-07-06|d93a5445dc|weechat: Version bumped to 4.9.3
+2026-07-07|2e66d5ad40|freerdp: version bumped to 3.28.0
+2026-07-07|bbf92d24f7|firefox-bin: version bumped to 152.0.5
+2026-07-07|f342cd9304|firefox: version bumped to 152.0.5
+2026-07-07|74b36940a5|tlp: Version bumped to 1.10.2
+2026-07-07|83767228f1|c-ares: Version bumped to 1.34.7
+2026-07-07|fc9edd1150|fzf: Version bumped to 0.74.0
+2026-07-07|9761749d41|patchelf: Version bumped to 0.19.1

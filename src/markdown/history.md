@@ -89,15 +89,11 @@ They reconstructed the GPL version of Sorcerer from backups.
 
 Out of respect for Kyle's wishes, they abandoned the Sorcerer name.
 
-After a community vote, the project became:
-
-> **Source Mage GNU/Linux**
+After a community vote, the project became **Source Mage GNU/Linux**.
 
 Source Mage focused heavily on freedom, advanced administration capabilities, and continued evolution of the Sorcery infrastructure.
 
-Its philosophy eventually became:
-
-> "Linux so advanced, it may as well be magic."
+Its philosophy eventually became: **"Linux so advanced, it may as well be magic."**
 
 ---
 
