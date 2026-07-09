@@ -1,7 +1,3 @@
-2026-07-07|2e66d5ad40|freerdp: version bumped to 3.28.0
-2026-07-07|bbf92d24f7|firefox-bin: version bumped to 152.0.5
-2026-07-07|f342cd9304|firefox: version bumped to 152.0.5
-2026-07-07|74b36940a5|tlp: Version bumped to 1.10.2
-2026-07-07|83767228f1|c-ares: Version bumped to 1.34.7
-2026-07-07|fc9edd1150|fzf: Version bumped to 0.74.0
-2026-07-07|9761749d41|patchelf: Version bumped to 0.19.1
+2026-07-08|9bb8ef2608|c-ares: version bumped to 1.34.8
+2026-07-08|a3a154e663|inxi: version bumped to 3.3.41
+2026-07-08|da4be5c53a|go: version bumped to 1.26.5
