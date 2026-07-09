@@ -630,10 +630,6 @@ h1 {
   box-shadow: var(--card-shadow);
 }
 
-.content-card.wide {
-  grid-row: span 2;
-}
-
 .content-card h2,
 .feature-card h3 {
   margin: 0 0 10px;
@@ -673,10 +669,6 @@ h1 {
   grid-template-columns: repeat(var(--toc-columns), minmax(0, max-content));
   gap: var(--card-gap);
   align-items: start;
-}
-
-.feature-card-wide {
-  grid-column: 1 / -1;
 }
 
 .split-content {
@@ -727,10 +719,6 @@ h1 {
   .feature-grid,
   .split-content {
     grid-template-columns: 1fr;
-  }
-
-  .content-card.wide {
-    grid-row: auto;
   }
 }
 
@@ -2198,14 +2186,6 @@ h1 {
 }
 
 
-
-/* About page 3.1: equal-width cards in the opening grid. */
-.about-main .content-grid .content-card.wide {
-  grid-column: auto;
-}
-
-
-
 /* Archive 3.1: keep action buttons and arrows on one line. */
 .archive-explore-card .hero-actions {
   margin-top: auto;
@@ -2259,10 +2239,6 @@ h1 {
   grid-column: auto !important;
   height: 100%;
   min-height: 100%;
-}
-
-.about-main .content-grid > .content-card.wide {
-  grid-column: auto !important;
 }
 
 @media (max-width: 900px) {
