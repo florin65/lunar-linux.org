@@ -1,5 +1,4 @@
 [
-  {"date":"2026-07-08","category":"Moonbase","repository":"kde","module":"plasma","version":"6.7.2.","commit":"4b78730c6","title":"plasma updated to 6.7.2.","summary":"bump to 6.7.2."},
   {"date":"2026-07-09","category":"Moonbase","repository":"other","module":"python-pyasn1","version":"0.6.4","commit":"c733023ce9","title":"python-pyasn1 updated to 0.6.4","summary":"version bumped to 0.6.4"},
   {"date":"2026-07-09","category":"Moonbase","repository":"other","module":"poppler","version":"26.07.0","commit":"1a780593c7","title":"poppler updated to 26.07.0","summary":"version bumped to 26.07.0"},
   {"date":"2026-07-09","category":"Moonbase","repository":"other","module":"libmicrohttpd","version":"1.0.6","commit":"e472d35b9b","title":"libmicrohttpd updated to 1.0.6","summary":"version bumped to 1.0.6"},
