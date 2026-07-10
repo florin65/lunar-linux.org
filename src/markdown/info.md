@@ -1,11 +1,11 @@
 ---
-title: News | Lunar Linux
-description: Lunar Linux project news and updates.
-layout: news-index
-permalink: pages/news.html
+title: Info | Lunar Linux
+description: Lunar Linux project information, news and Moonbase activity.
+layout: info-index
+permalink: pages/info.html
 ---
 
-# News
+# Info
 
 Project activity, community announcements and Moonbase development updates.
 

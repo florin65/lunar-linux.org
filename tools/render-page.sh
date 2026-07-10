@@ -564,6 +564,9 @@ function render_news(    title, desc, community, moonbase, community_desc, moonb
   print "      <h2 class=\"section-title\">Community and project news</h2>"
   print "      <p class=\"hero-description\">" inline(community_desc) "</p>"
   print "{{ community_news_html }}"
+  print "      <div class=\"hero-actions archive-section-actions\">"
+  print "        <a class=\"button secondary\" href=\"news-archive.html\">News Archive →</a>"
+  print "      </div>"
   print "    </div>"
   print "  </section>"
 
@@ -572,6 +575,9 @@ function render_news(    title, desc, community, moonbase, community_desc, moonb
   print "      <h2 class=\"section-title\">Moonbase commits journal</h2>"
   print "      <p class=\"hero-description\">" inline(moonbase_desc) "</p>"
   print "{{ moonbase_commits_html }}"
+  print "      <div class=\"hero-actions archive-section-actions\">"
+  print "        <a class=\"button secondary\" href=\"commits-archive.html\">Commit Archive →</a>"
+  print "      </div>"
   print "    </div>"
   print "  </section>"
   print "</main>"
@@ -815,6 +821,27 @@ function render_development(    built, start, compact, links, tail, e, first_h3,
   print "</main>"
 }
 
+function render_lur(    crater, links) {
+  print "<main class=\"page-main lur-main\">"
+  render_hero(first_h1(), first_p())
+
+  crater = section_index("Crater")
+  if (crater) {
+    links = first_links_in_range(crater + 1, section_end(crater))
+    print "  <section class=\"content-section muted-section\">"
+    print "    <div class=\"container\">"
+    print "      <article class=\"content-card wide\">"
+    print "        <h2>Crater</h2>"
+    render_blocks(crater + 1, section_end(crater), "        ", 0, 1)
+    if (links != "") render_actions(links, "        ")
+    print "      </article>"
+    print "    </div>"
+    print "  </section>"
+  }
+
+  print "</main>"
+}
+
 function render_archive_explore(title, a, b,    i, nxt, links, firstcard) {
   print "  <section class=\"content-section muted-section archive-explore-section\">"
   print "    <div class=\"container\">"
@@ -849,6 +876,36 @@ function render_archive_explore(title, a, b,    i, nxt, links, firstcard) {
   print "      </div>"
   print "    </div>"
   print "  </section>"
+}
+
+function render_news_archive() {
+  print "<main class=\"page-main archive-main\">"
+  render_hero(first_h1(), first_p())
+  print "  <section class=\"content-section archive-section\">"
+  print "    <div class=\"container\">"
+  print "{{ archive_news_html }}"
+  print "      <div class=\"hero-actions archive-section-actions\">"
+  print "        <a class=\"button primary\" href=\"archive/news/\">Browse complete archive →</a>"
+  print "        <a class=\"button secondary\" href=\"info.html\">Return to Info</a>"
+  print "      </div>"
+  print "    </div>"
+  print "  </section>"
+  print "</main>"
+}
+
+function render_commits_archive() {
+  print "<main class=\"page-main archive-main\">"
+  render_hero(first_h1(), first_p())
+  print "  <section class=\"content-section muted-section archive-section\">"
+  print "    <div class=\"container\">"
+  print "{{ archive_commits_html }}"
+  print "      <div class=\"hero-actions archive-section-actions\">"
+  print "        <a class=\"button primary\" href=\"archive/commits/\">Browse complete archive →</a>"
+  print "        <a class=\"button secondary\" href=\"info.html\">Return to Info</a>"
+  print "      </div>"
+  print "    </div>"
+  print "  </section>"
+  print "</main>"
 }
 
 function render_archive(    overview, toc, commits, news, docs, lur) {
@@ -1131,11 +1188,14 @@ END {
 
   if (page == "index") render_index()
   else if (page == "download") render_download()
-  else if (page == "news") render_news()
+  else if (page == "info") render_news()
+  else if (page == "news-archive") render_news_archive()
+  else if (page == "commits-archive") render_commits_archive()
   else if (page == "about") render_about()
   else if (page == "docs") render_docs()
   else if (page == "community") render_community()
   else if (page == "development") render_development()
+  else if (page == "lur") render_lur()
   else if (page == "archive") render_archive()
   else render_generic()
 }

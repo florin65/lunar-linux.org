@@ -748,6 +748,30 @@ publish_archive_assets() {
   printf 'published %s\n' "$(rel_from_project "$dst")"
 }
 
+write_redirect_page() {
+  old_name="$1"
+  new_target="$2"
+  out="$PUBLIC/$old_name.html"
+
+  cat > "$out" <<EOF_REDIRECT
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0; url=$new_target">
+  <link rel="canonical" href="$new_target">
+  <title>Page moved | Lunar Linux</title>
+</head>
+<body>
+  <p>This page has moved to <a href="$new_target">$new_target</a>.</p>
+</body>
+</html>
+EOF_REDIRECT
+
+  printf 'generated redirect %s -> %s\n' "$(rel_from_project "$out")" "$new_target"
+}
+
 main() {
   if [ ! -d "$SRC" ]; then
     printf 'missing source directory: %s\n' "$SRC" >&2
@@ -787,6 +811,9 @@ main() {
     [ -f "$md" ] || continue
     write_page "$md"
   done
+
+  write_redirect_page news info.html
+  write_redirect_page archive info.html
 
   cleanup_temp_files
 }
