@@ -1,6 +1,8 @@
-2026-07-09|c733023ce9|python-pyasn1: version bumped to 0.6.4
-2026-07-09|1a780593c7|poppler: version bumped to 26.07.0
-2026-07-09|e472d35b9b|libmicrohttpd: version bumped to 1.0.6
-2026-07-09|04cec9b2cc|DBI: version bumped to 1.650
-2026-07-09|c1278dd4e6|librevenge: version bumped to 0.0.6
-2026-07-09|b76d8e603a|nudoku: Version bumped to 8.0.1
+2026-07-11|89787e7e7e|dmraid: move to the crater
+2026-07-10|c20bf73ae7|just: version bumped to 1.56.0
+2026-07-10|e4b5a7b32a|mpd: version bumped to 0.24.13
+2026-07-10|0991d4a09b|p11-kit: version bumped to 0.26.4
+2026-07-10|c7089a5a82|podman: version bumped to 6.0.1
+2026-07-10|583d0c1aea|libostree: version bumped to 2026.2
+2026-07-10|b20cccee0c|pipewire: version bumped to 1.6.8
+2026-07-10|2b17beab04|cpp-utilities: Version bumped to 5.34.2

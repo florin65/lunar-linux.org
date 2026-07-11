@@ -9,5 +9,6 @@
   {"date":"2026-07-08","category":"Moonbase","repository":"xorg","module":"xlsfonts","version":"1.0.9","commit":"aaa6175","title":"xlsfonts updated to 1.0.9","summary":"version bumped to 1.0.9"},
   {"date":"2026-07-08","category":"Moonbase","repository":"xorg","module":"xlsatoms","version":"1.1.5","commit":"da8b008","title":"xlsatoms updated to 1.1.5","summary":"version bumped to 1.1.5"},
   {"date":"2026-07-08","category":"Moonbase","repository":"xorg","module":"xkbutils","version":"1.0.7","commit":"303fd6f","title":"xkbutils updated to 1.0.7","summary":"version bumped to 1.0.7"},
-  {"date":"2026-07-08","category":"Moonbase","repository":"kde","module":"plasma","version":"6.7.2.","commit":"4b78730c6","title":"plasma updated to 6.7.2.","summary":"bump to 6.7.2."}
+  {"date":"2026-07-08","category":"Moonbase","repository":"kde","module":"plasma","version":"6.7.2.","commit":"4b78730c6","title":"plasma updated to 6.7.2.","summary":"bump to 6.7.2."},
+  {"date":"2026-07-08","category":"Moonbase","repository":"core","module":"","version":"","commit":"52740098","title":"pciutils: The pci.ids.bz2 file changes too often to keep a sha256 sum","summary":"pciutils: The pci.ids.bz2 file changes too often to keep a sha256 sum"}
 ]

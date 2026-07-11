@@ -4,5 +4,8 @@
   {"date":"2026-07-09","category":"Moonbase","repository":"other","module":"libmicrohttpd","version":"1.0.6","commit":"e472d35b9b","title":"libmicrohttpd updated to 1.0.6","summary":"version bumped to 1.0.6"},
   {"date":"2026-07-09","category":"Moonbase","repository":"other","module":"DBI","version":"1.650","commit":"04cec9b2cc","title":"DBI updated to 1.650","summary":"version bumped to 1.650"},
   {"date":"2026-07-09","category":"Moonbase","repository":"other","module":"librevenge","version":"0.0.6","commit":"c1278dd4e6","title":"librevenge updated to 0.0.6","summary":"version bumped to 0.0.6"},
-  {"date":"2026-07-09","category":"Moonbase","repository":"other","module":"nudoku","version":"8.0.1","commit":"b76d8e603a","title":"nudoku updated to 8.0.1","summary":"version bumped to 8.0.1"}
+  {"date":"2026-07-09","category":"Moonbase","repository":"other","module":"nudoku","version":"8.0.1","commit":"b76d8e603a","title":"nudoku updated to 8.0.1","summary":"version bumped to 8.0.1"},
+  {"date":"2026-07-09","category":"Moonbase","repository":"core","module":"","version":"","commit":"ad785dd2","title":"bash_static: got rid of patches from 5.1","summary":"bash_static: got rid of patches from 5.1"},
+  {"date":"2026-07-09","category":"Moonbase","repository":"core","module":"","version":"","commit":"34b123b5","title":"bash_static: Fixed build for 5.3 and oddly, autoconf 2.73","summary":"bash_static: Fixed build for 5.3 and oddly, autoconf 2.73"},
+  {"date":"2026-07-09","category":"Moonbase","repository":"core","module":"bash_static","version":"5.3.0","commit":"1342dad6","title":"bash_static updated to 5.3.0","summary":"version bumped to 5.3.0"}
 ]
