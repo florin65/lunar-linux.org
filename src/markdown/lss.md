@@ -23,7 +23,7 @@ LSS remains close to Linux and exposes its work through understandable shell scr
 
 The principles behind LSS describe why the system is designed this way and what should be preserved as it evolves.
 
-[The Principles of LSS](pages/docs-lss-principles.html)
+Read [The Principles of LSS](pages/docs-lss-principles.html)
 
 ## User documentation
 
