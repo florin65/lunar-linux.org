@@ -28,6 +28,7 @@ Learn here in Lunar Linux and apply that knowledge across Linux distributions.
 [About Lunar](pages/docs-about-lunar-linux.html)
 [Package Management](pages/docs-package-management.html)
 [History](pages/history.html)
+[LSS](pages/lss.html)
 [Archive](pages/docs-archive.html)
 
 

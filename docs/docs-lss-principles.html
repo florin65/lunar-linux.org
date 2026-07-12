@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Principles of LSS | Lunar Linux</title>
+  <meta name="description" content="The engineering principles behind the Lunar Scripts System.">
+
+  <link rel="icon" href="assets/logo/favicon.ico">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="index.html">
+        <img src="assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="info.html">Info</a>
+      <a href="download.html">Download</a>
+      <a href="docs.html">Docs</a>
+      <a href="lur.html">LUR</a>
+      <a href="community.html">Community</a>
+    <a href="development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main">
+  <section class="page-hero">
+    <div class="container">
+      <h1>The Principles of LSS</h1>
+      <p class="hero-description">The Lunar Scripts System is the collection of tools that builds, installs, updates and maintains a Lunar Linux system.</p>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="introduction">Introduction</h2>
+        <p>The Lunar Scripts System is the collection of tools that builds, installs, updates and maintains a Lunar Linux system.</p>
+        <p>Its design reflects a simple goal: provide powerful system management without hiding Linux behind unnecessary layers.</p>
+        <p>These principles describe what LSS should preserve as it evolves.</p>
+      </article>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="linux-first">Linux First</h2>
+        <p>LSS exists to manage Linux, not to replace or conceal it.</p>
+        <p>Standard Linux concepts, tools, files and administration skills should remain visible and useful.</p>
+        <p>Knowledge gained while using Lunar Linux should transfer naturally to other Linux systems.</p>
+      </article>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="source-preserves-understanding">Source Preserves Understanding</h2>
+        <p>Source code provides more than software.</p>
+        <p>It preserves the ability to inspect, understand, adapt, rebuild and verify the system.</p>
+        <p>LSS therefore treats source-based operation as both a technical model and a means of keeping knowledge accessible.</p>
+      </article>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="keep-software-close-to-upstream">Keep Software Close to Upstream</h2>
+        <p>Lunar Linux should keep software close to upstream and the authors' intentions.</p>
+        <p>Patches and downstream changes should be limited to what is necessary for correct integration, compatibility or security.</p>
+        <p>Fewer unnecessary differences make software easier to understand and maintain.</p>
+      </article>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="simplicity-is-engineering">Simplicity is Engineering</h2>
+        <p>Simplicity is not the absence of capability.</p>
+        <p>It is the result of separating responsibilities, removing unnecessary layers and keeping behavior understandable.</p>
+        <p>A simple system may require careful engineering, but it reduces the long-term cost of administration and maintenance.</p>
+      </article>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="understanding-before-automation">Understanding Before Automation</h2>
+        <p>Automation should follow understanding.</p>
+        <p>Before a process is automated, its inputs, decisions, exceptions and consequences should be understood.</p>
+        <p>Automation must remove repetitive work without removing visibility or control.</p>
+      </article>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="engineering-before-cleverness">Engineering Before Cleverness</h2>
+        <p>Readable and dependable solutions are preferred over clever ones.</p>
+        <p>Code should make its purpose and behavior clear to future maintainers.</p>
+        <p>A solution that is easy to inspect, test and repair is more valuable than one that is merely compact or ingenious.</p>
+      </article>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="knowledge-is-part-of-the-system">Knowledge is Part of the System</h2>
+        <p>Documentation, history, design decisions and engineering experience are part of LSS.</p>
+        <p>Code explains what the system does.</p>
+        <p>Preserved knowledge explains why it does it that way and how it can evolve safely.</p>
+      </article>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="evolve-don-t-reinvent">Evolve, Don't Reinvent</h2>
+        <p>LSS should evolve from its proven foundation.</p>
+        <p>Existing behavior should be understood before it is replaced.</p>
+        <p>New implementations are justified when they provide clear value while preserving compatibility, knowledge and the strengths of the current system.</p>
+      </article>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container split-content">
+      <article>
+        <h2 id="community-is-the-long-term-architecture">Community is the Long-Term Architecture</h2>
+        <p>Software survives through people who understand and maintain it.</p>
+        <p>Readable tools, accessible documentation and preserved history make participation possible.</p>
+        <p>The long-term strength of LSS depends not only on its code, but also on the community knowledge surrounding it.</p>
+      </article>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="container closing-banner">
+      <h2 id="looking-forward">Looking Forward</h2>
+      <p>LSS can adopt new languages, interfaces and implementation techniques without abandoning its principles.</p>
+      <p>Its future should preserve transparency, control, source-based operation and closeness to Linux.</p>
+      <blockquote class="quote-box">
+        <p>Software can always be rewritten. Engineering wisdom cannot.</p>
+      </blockquote>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
