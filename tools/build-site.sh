@@ -25,6 +25,7 @@ MARKDOWN_DIR=${MARKDOWN_DIR:-src/markdown}
 NEWS_DIR=${NEWS_DIR:-src/news}
 TEMPLATES_DIR=${TEMPLATES_DIR:-templates}
 TOOLS_DIR=${TOOLS_DIR:-tools}
+COMPONENTS_DIR=${COMPONENTS_DIR:-components}
 PUBLIC_DIR=${PUBLIC_DIR:-docs}
 DATA_DIR=${DATA_DIR:-docs/data}
 MOONBASE_STATS_JSON=${MOONBASE_STATS_JSON:-docs/data/moonbase-stats.json}
@@ -56,10 +57,12 @@ PUBLIC=$(abs_path "$PUBLIC_DIR")
 DATA=$(abs_path "$DATA_DIR")
 TEMPLATES=$(abs_path "$TEMPLATES_DIR")
 TOOLS=$(abs_path "$TOOLS_DIR")
+COMPONENTS=$(abs_path "$COMPONENTS_DIR")
 HEADER="$TEMPLATES/header.html"
 FOOTER="$TEMPLATES/footer.html"
 PAGE_TEMPLATES="$TEMPLATES/pages"
 RENDERER="$TOOLS/render-page.sh"
+ARCHIVE_LINKS_COMPONENT="$COMPONENTS/archive-links.sh"
 MOONBASE_STATS=$(abs_path "$MOONBASE_STATS_JSON")
 DAILY_ISO=$(abs_path "$DAILY_ISO_JSON")
 NEWS_OUT=$(abs_path "$NEWS_JSON")
@@ -466,6 +469,24 @@ EOF_ARCHIVE_NEWS
   fi
 }
 
+
+prepare_archive_link_values() {
+  archive_news_actions_file=$(mktemp)
+  archive_commits_actions_file=$(mktemp)
+
+  ARCHIVE_LINKS_INDENT='      ' \
+    "$ARCHIVE_LINKS_COMPONENT" \
+      'Browse complete archive →|archive/news/' \
+      'Return to Info|info.html' \
+      > "$archive_news_actions_file"
+
+  ARCHIVE_LINKS_INDENT='      ' \
+    "$ARCHIVE_LINKS_COMPONENT" \
+      'Browse complete archive →|archive/commits/' \
+      'Return to Info|info.html' \
+      > "$archive_commits_actions_file"
+}
+
 cleanup_temp_files() {
   if [ -n "${moonbase_commits_file:-}" ]; then
     rm -f "$moonbase_commits_file"
@@ -481,6 +502,14 @@ cleanup_temp_files() {
 
   if [ -n "${archive_news_file:-}" ]; then
     rm -f "$archive_news_file"
+  fi
+
+  if [ -n "${archive_news_actions_file:-}" ]; then
+    rm -f "$archive_news_actions_file"
+  fi
+
+  if [ -n "${archive_commits_actions_file:-}" ]; then
+    rm -f "$archive_commits_actions_file"
   fi
 }
 
@@ -502,7 +531,9 @@ expand_template_file() {
     -v moonbase_commits_file="$moonbase_commits_file" \
     -v community_news_file="$community_news_file" \
     -v archive_commits_file="$archive_commits_file" \
-    -v archive_news_file="$archive_news_file" '
+    -v archive_news_file="$archive_news_file" \
+    -v archive_news_actions_file="$archive_news_actions_file" \
+    -v archive_commits_actions_file="$archive_commits_actions_file" '
       {
         if ($0 ~ /\{\{[[:space:]]*moonbase_commits_html[[:space:]]*\}\}/) {
           while ((getline line < moonbase_commits_file) > 0) {
@@ -533,6 +564,22 @@ expand_template_file() {
             print line
           }
           close(archive_news_file)
+          next
+        }
+
+        if ($0 ~ /\{\{[[:space:]]*archive_news_actions_html[[:space:]]*\}\}/) {
+          while ((getline line < archive_news_actions_file) > 0) {
+            print line
+          }
+          close(archive_news_actions_file)
+          next
+        }
+
+        if ($0 ~ /\{\{[[:space:]]*archive_commits_actions_html[[:space:]]*\}\}/) {
+          while ((getline line < archive_commits_actions_file) > 0) {
+            print line
+          }
+          close(archive_commits_actions_file)
           next
         }
 
@@ -793,6 +840,11 @@ main() {
     exit 1
   fi
 
+  if [ ! -x "$ARCHIVE_LINKS_COMPONENT" ]; then
+    printf 'missing component: %s\n' "$ARCHIVE_LINKS_COMPONENT" >&2
+    exit 1
+  fi
+
   update_dynamic_data
 
   if [ "$GENERATE_NEWS_JSON" = "yes" ]; then
@@ -806,6 +858,7 @@ main() {
   prepare_moonbase_values
   prepare_community_values
   prepare_archive_values
+  prepare_archive_link_values
 
   for md in "$SRC"/*.md; do
     [ -f "$md" ] || continue
