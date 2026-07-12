@@ -485,6 +485,21 @@ prepare_archive_link_values() {
       'Browse complete archive →|archive/commits/' \
       'Return to Info|info.html' \
       > "$archive_commits_actions_file"
+
+  info_news_archive_actions_file=$(mktemp)
+  info_commits_archive_actions_file=$(mktemp)
+
+  ARCHIVE_LINKS_INDENT='      ' \
+  ARCHIVE_LINKS_FIRST_CLASS=secondary \
+    "$ARCHIVE_LINKS_COMPONENT" \
+      'News Archive →|news-archive.html' \
+      > "$info_news_archive_actions_file"
+
+  ARCHIVE_LINKS_INDENT='      ' \
+  ARCHIVE_LINKS_FIRST_CLASS=secondary \
+    "$ARCHIVE_LINKS_COMPONENT" \
+      'Commit Archive →|commits-archive.html' \
+      > "$info_commits_archive_actions_file"
 }
 
 cleanup_temp_files() {
@@ -511,6 +526,14 @@ cleanup_temp_files() {
   if [ -n "${archive_commits_actions_file:-}" ]; then
     rm -f "$archive_commits_actions_file"
   fi
+
+  if [ -n "${info_news_archive_actions_file:-}" ]; then
+    rm -f "$info_news_archive_actions_file"
+  fi
+
+  if [ -n "${info_commits_archive_actions_file:-}" ]; then
+    rm -f "$info_commits_archive_actions_file"
+  fi
 }
 
 
@@ -533,7 +556,9 @@ expand_template_file() {
     -v archive_commits_file="$archive_commits_file" \
     -v archive_news_file="$archive_news_file" \
     -v archive_news_actions_file="$archive_news_actions_file" \
-    -v archive_commits_actions_file="$archive_commits_actions_file" '
+    -v archive_commits_actions_file="$archive_commits_actions_file" \
+    -v info_news_archive_actions_file="$info_news_archive_actions_file" \
+    -v info_commits_archive_actions_file="$info_commits_archive_actions_file" '
       {
         if ($0 ~ /\{\{[[:space:]]*moonbase_commits_html[[:space:]]*\}\}/) {
           while ((getline line < moonbase_commits_file) > 0) {
@@ -580,6 +605,22 @@ expand_template_file() {
             print line
           }
           close(archive_commits_actions_file)
+          next
+        }
+
+        if ($0 ~ /\{\{[[:space:]]*info_news_archive_actions_html[[:space:]]*\}\}/) {
+          while ((getline line < info_news_archive_actions_file) > 0) {
+            print line
+          }
+          close(info_news_archive_actions_file)
+          next
+        }
+
+        if ($0 ~ /\{\{[[:space:]]*info_commits_archive_actions_html[[:space:]]*\}\}/) {
+          while ((getline line < info_commits_archive_actions_file) > 0) {
+            print line
+          }
+          close(info_commits_archive_actions_file)
           next
         }
 

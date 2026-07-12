@@ -8,6 +8,16 @@
 set -eu
 
 indent=${ARCHIVE_LINKS_INDENT:-}
+first_class=${ARCHIVE_LINKS_FIRST_CLASS:-primary}
+
+case "$first_class" in
+  primary|secondary)
+    ;;
+  *)
+    printf 'archive-links: invalid first class: %s\n' "$first_class" >&2
+    exit 1
+    ;;
+esac
 
 html_text_escape() {
   printf '%s' "$1" | sed \
@@ -51,7 +61,7 @@ for item do
   position=$((position + 1))
 
   if [ "$position" -eq 1 ]; then
-    class='button primary'
+    class="button $first_class"
   else
     class='button secondary'
   fi
