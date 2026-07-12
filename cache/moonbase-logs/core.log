@@ -1,7 +1,0 @@
-2026-07-10|0afdb068|dmraid: remove: it's redundant with lvm AND mdadm, and abandoned for over a decade
-2026-07-09|ad785dd2|bash_static: got rid of patches from 5.1
-2026-07-09|34b123b5|bash_static: Fixed build for 5.3 and oddly, autoconf 2.73
-2026-07-09|1342dad6|bash_static: Version bumped to 5.3.0
-2026-07-08|52740098|pciutils: The pci.ids.bz2 file changes too often to keep a sha256 sum
-2026-06-09|3f89dcbc|pciutils: Version bumped to 3.15.0
-2026-06-09|f95739c7|autoconf: Version bumped to 2.73

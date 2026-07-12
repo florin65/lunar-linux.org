@@ -1,3 +1,6 @@
 [
-  {"date":"2026-07-11","category":"Moonbase","repository":"other","module":"","version":"","commit":"89787e7e7e","title":"dmraid: move to the crater","summary":"dmraid: move to the crater"}
+  {"date":"2026-07-11","category":"Moonbase","repository":"other","module":"","version":"","commit":"89787e7e7e","title":"dmraid: move to the crater","summary":"dmraid: move to the crater"},
+  {"date":"2026-07-11","category":"Moonbase","repository":"other","module":"","version":"","commit":"2e080e8374","title":"clang: if installed rebuild the lldb after install","summary":"clang: if installed rebuild the lldb after install"},
+  {"date":"2026-07-11","category":"Moonbase","repository":"other","module":"","version":"","commit":"497ffd30f0","title":"llvm: mention the lldb module in the list of the LLVM stack modules.","summary":"llvm: mention the lldb module in the list of the LLVM stack modules."},
+  {"date":"2026-07-11","category":"Moonbase","repository":"other","module":"","version":"","commit":"b39d1095da","title":"lldb: the LLVM toolchain available in Lunar Linux addition of the LLVM debugger.","summary":"lldb: the LLVM toolchain available in Lunar Linux addition of the LLVM debugger."}
 ]

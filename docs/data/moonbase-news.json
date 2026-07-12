@@ -1,22 +1,5 @@
 [
-  {"date":"2026-07-10","category":"Moonbase","repository":"core","module":"","version":"","commit":"0afdb068","title":"dmraid: remove: it's redundant with lvm AND mdadm, and abandoned for over a decade","summary":"dmraid: remove: it's redundant with lvm AND mdadm, and abandoned for over a decade"},
-  {"date":"2026-07-09","category":"Moonbase","repository":"core","module":"","version":"","commit":"ad785dd2","title":"bash_static: got rid of patches from 5.1","summary":"bash_static: got rid of patches from 5.1"},
-  {"date":"2026-07-09","category":"Moonbase","repository":"core","module":"","version":"","commit":"34b123b5","title":"bash_static: Fixed build for 5.3 and oddly, autoconf 2.73","summary":"bash_static: Fixed build for 5.3 and oddly, autoconf 2.73"},
-  {"date":"2026-07-09","category":"Moonbase","repository":"core","module":"bash_static","version":"5.3.0","commit":"1342dad6","title":"bash_static updated to 5.3.0","summary":"version bumped to 5.3.0"},
-  {"date":"2026-07-08","category":"Moonbase","repository":"core","module":"","version":"","commit":"52740098","title":"pciutils: The pci.ids.bz2 file changes too often to keep a sha256 sum","summary":"pciutils: The pci.ids.bz2 file changes too often to keep a sha256 sum"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"pciutils","version":"3.15.0","commit":"3f89dcbc","title":"pciutils updated to 3.15.0","summary":"version bumped to 3.15.0"},
-  {"date":"2026-06-09","category":"Moonbase","repository":"core","module":"autoconf","version":"2.73","commit":"f95739c7","title":"autoconf updated to 2.73","summary":"version bumped to 2.73"},
-  {"date":"2026-07-10","category":"Moonbase","repository":"gnome3","module":"webkit2gtk-4.1","version":"2.52.5","commit":"74ac55b9","title":"webkit2gtk-4.1 updated to 2.52.5","summary":"version bumped to 2.52.5"},
-  {"date":"2026-07-11","category":"Moonbase","repository":"other","module":"","version":"","commit":"89787e7e7e","title":"dmraid: move to the crater","summary":"dmraid: move to the crater"},
-  {"date":"2026-07-10","category":"Moonbase","repository":"other","module":"just","version":"1.56.0","commit":"c20bf73ae7","title":"just updated to 1.56.0","summary":"version bumped to 1.56.0"},
-  {"date":"2026-07-10","category":"Moonbase","repository":"other","module":"mpd","version":"0.24.13","commit":"e4b5a7b32a","title":"mpd updated to 0.24.13","summary":"version bumped to 0.24.13"},
-  {"date":"2026-07-10","category":"Moonbase","repository":"other","module":"p11-kit","version":"0.26.4","commit":"0991d4a09b","title":"p11-kit updated to 0.26.4","summary":"version bumped to 0.26.4"},
-  {"date":"2026-07-10","category":"Moonbase","repository":"other","module":"podman","version":"6.0.1","commit":"c7089a5a82","title":"podman updated to 6.0.1","summary":"version bumped to 6.0.1"},
-  {"date":"2026-07-10","category":"Moonbase","repository":"other","module":"libostree","version":"2026.2","commit":"583d0c1aea","title":"libostree updated to 2026.2","summary":"version bumped to 2026.2"},
-  {"date":"2026-07-10","category":"Moonbase","repository":"other","module":"pipewire","version":"1.6.8","commit":"b20cccee0c","title":"pipewire updated to 1.6.8","summary":"version bumped to 1.6.8"},
-  {"date":"2026-07-10","category":"Moonbase","repository":"other","module":"cpp-utilities","version":"5.34.2","commit":"2b17beab04","title":"cpp-utilities updated to 5.34.2","summary":"version bumped to 5.34.2"},
-  {"date":"2026-07-10","category":"Moonbase","repository":"xorg","module":"fontconfig","version":"2.18.2","commit":"b5582fb","title":"fontconfig updated to 2.18.2","summary":"version bumped to 2.18.2"},
-  {"date":"2026-07-10","category":"Moonbase","repository":"xorg","module":"xset","version":"1.2.6","commit":"3898b32","title":"xset updated to 1.2.6","summary":"version bumped to 1.2.6"},
-  {"date":"2026-07-10","category":"Moonbase","repository":"xorg","module":"xrefresh","version":"1.1.1","commit":"cf70577","title":"xrefresh updated to 1.1.1","summary":"version bumped to 1.1.1"},
-  {"date":"2026-07-10","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"f823623","title":"xrdb: vbersion bumped to 1.2.3","summary":"xrdb: vbersion bumped to 1.2.3"}
+  {"date":"2026-07-11","category":"Moonbase","repository":"other","module":"","version":"","commit":"2e080e8374","title":"clang: if installed rebuild the lldb after install","summary":"clang: if installed rebuild the lldb after install"},
+  {"date":"2026-07-11","category":"Moonbase","repository":"other","module":"","version":"","commit":"497ffd30f0","title":"llvm: mention the lldb module in the list of the LLVM stack modules.","summary":"llvm: mention the lldb module in the list of the LLVM stack modules."},
+  {"date":"2026-07-11","category":"Moonbase","repository":"other","module":"","version":"","commit":"b39d1095da","title":"lldb: the LLVM toolchain available in Lunar Linux addition of the LLVM debugger.","summary":"lldb: the LLVM toolchain available in Lunar Linux addition of the LLVM debugger."}
 ]
