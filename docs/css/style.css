@@ -209,6 +209,18 @@ a {
   text-decoration: none;
 }
 
+/* Links inside documentation content */
+
+.split-content article p a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.split-content article p a:hover {
+  color: var(--accent);
+}
+
 /* Global text color enforcement */
 body, .site-nav, .site-nav a,
 h1, h2, h3, h4, h5, h6,
