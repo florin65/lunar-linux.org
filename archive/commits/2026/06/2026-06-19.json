@@ -36,5 +36,6 @@
   {"date":"2026-06-19","category":"Moonbase","repository":"kde","module":"Kvantum","version":"1.1.8.","commit":"95ea703cf","title":"Kvantum updated to 1.1.8.","summary":"bump to 1.1.8."},
   {"date":"2026-06-19","category":"Moonbase","repository":"other","module":"alsa-lib","version":"1.2.16.1","commit":"7a8e475b60","title":"alsa-lib updated to 1.2.16.1","summary":"version bumped to 1.2.16.1"},
   {"date":"2026-06-19","category":"Moonbase","repository":"other","module":"openexr","version":"3.4.13","commit":"5974b0c2d7","title":"openexr updated to 3.4.13","summary":"version bumped to 3.4.13"},
-  {"date":"2026-06-19","category":"Moonbase","repository":"other","module":"","version":"","commit":"1bb9157fbd","title":"gst-python: Adjusting DEPENDS.","summary":"gst-python: Adjusting DEPENDS."}
+  {"date":"2026-06-19","category":"Moonbase","repository":"other","module":"","version":"","commit":"1bb9157fbd","title":"gst-python: Adjusting DEPENDS.","summary":"gst-python: Adjusting DEPENDS."},
+  {"date":"2026-06-19","category":"Moonbase","repository":"core","module":"linux","version":"7.1.1","commit":"b02951f4","title":"linux updated to 7.1.1","summary":"version bumped to 7.1.1"}
 ]

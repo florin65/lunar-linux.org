@@ -1,11 +1,5 @@
-2026-07-12|41cbeb195d|blosc2: Version bumped to 3.2.1
-2026-07-12|57a5a5f88a|wakatime-cli: Version bumped to 2.22.0
-2026-07-12|a80ae63740|libpsl: Version bumped to 0.23.0
-2026-07-12|ab62f3b7f1|tree-sitter: Version bumped to 0.26.11
-2026-07-12|f5d1771213|rustc: version bumped to 1.97.0
-2026-07-12|2830ed87d7|containerd: version bumped to 2.3.3
-2026-07-12|afc9e0a32b|isl: ersion bumped to 0.28
-2026-07-12|68d5ea1979|msmtp: add the optional SASL support
-2026-07-12|274ec53b4c|gsasl: Simple Authentication and Security Layer framework (SASL)
-2026-07-12|c19652563c|msmtp: version bumped to 1.8.33
-2026-07-12|1e6ad6a327|broot: Version bumped to 1.58.0
+2026-07-13|56b6a6bb3d|zsh: version bumped to 5.9.2
+2026-07-13|a8c410c9a7|jenkins: version bumped to 2.572
+2026-07-13|1777c5f6a1|mongo-c-driver: version bumped to 2.3.2
+2026-07-13|c7a68937f9|python-regex: version bumped to 2026.7.10
+2026-07-13|2461412485|git: disable the rust optional depend
