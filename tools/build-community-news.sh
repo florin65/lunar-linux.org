@@ -29,7 +29,7 @@ fi
 
 SITE_ROOT=${SITE_ROOT:-.}
 NEWS_DIR=${NEWS_DIR:-src/news}
-TEMPLATES_DIR=${TEMPLATES_DIR:-templates}
+TOOLS_DIR=${TOOLS_DIR:-tools}
 PUBLIC_DIR=${PUBLIC_DIR:-docs}
 BUILD_DIR=${BUILD_DIR:-cache}
 COMMUNITY_NEWS_HTML=${COMMUNITY_NEWS_HTML:-$BUILD_DIR/community-news.html}
@@ -67,109 +67,16 @@ slugify() {
       -e 's/-$//'
 }
 
-render_body() {
-  awk '
-    function esc(s) {
-      gsub(/&/, "\\&amp;", s)
-      gsub(/</, "\\&lt;", s)
-      gsub(/>/, "\\&gt;", s)
-      return s
-    }
-
-    function inline(s,    out, pre, label, url, rest, p1, p2, code) {
-      s = esc(s)
-      out = ""
-
-      while (match(s, /`[^`]+`/)) {
-        pre = substr(s, 1, RSTART - 1)
-        code = substr(s, RSTART + 1, RLENGTH - 2)
-        out = out pre "<code>" code "</code>"
-        s = substr(s, RSTART + RLENGTH)
-      }
-      s = out s
-      out = ""
-
-      while (match(s, /\[[^]]+\]\([^)]+\)/)) {
-        pre = substr(s, 1, RSTART - 1)
-        p1 = index(substr(s, RSTART), "](")
-        label = substr(s, RSTART + 1, p1 - 2)
-        rest = substr(s, RSTART + p1 + 1)
-        p2 = index(rest, ")")
-        url = substr(rest, 1, p2 - 1)
-        out = out pre "<a href=\"" url "\">" label "</a>"
-        s = substr(rest, p2 + 1)
-      }
-      s = out s
-
-      while (match(s, /\*\*[^*]+\*\*/)) {
-        s = substr(s, 1, RSTART - 1) "<strong>" substr(s, RSTART + 2, RLENGTH - 4) "</strong>" substr(s, RSTART + RLENGTH)
-      }
-
-      while (match(s, /\*[^*]+\*/)) {
-        s = substr(s, 1, RSTART - 1) "<em>" substr(s, RSTART + 1, RLENGTH - 2) "</em>" substr(s, RSTART + RLENGTH)
-      }
-
-      return s
-    }
-
-    function close_list() {
-      if (in_list) {
-        print "          </ul>"
-        in_list = 0
-      }
-    }
-
-    /^[[:space:]]*$/ {
-      close_list()
-      next
-    }
-
-    /^### / {
-      close_list()
-      print "          <h3>" inline(substr($0, 5)) "</h3>"
-      next
-    }
-
-    /^## / {
-      close_list()
-      print "          <h2>" inline(substr($0, 4)) "</h2>"
-      next
-    }
-
-    /^# / {
-      close_list()
-      print "          <h2>" inline(substr($0, 3)) "</h2>"
-      next
-    }
-
-    /^- / {
-      if (!in_list) {
-        print "          <ul class=\"simple-list\">"
-        in_list = 1
-      }
-      print "            <li>" inline(substr($0, 3)) "</li>"
-      next
-    }
-
-    {
-      close_list()
-      print "          <p>" inline($0) "</p>"
-    }
-
-    END {
-      close_list()
-    }
-  ' "$1"
-}
-
 NEWS_SRC=$(abs_path "$NEWS_DIR")
-TEMPLATES=$(abs_path "$TEMPLATES_DIR")
-PUBLIC=$(abs_path "$PUBLIC_DIR")
+TOOLS=$(abs_path "$TOOLS_DIR")
 OUT=$(abs_path "$COMMUNITY_NEWS_HTML")
 NEWS_PAGES=$(abs_path "$NEWS_ARTICLES_DIR")
+NEWS_ARTICLE_RENDERER="$TOOLS/render-news-article.sh"
 
-HEADER="$TEMPLATES/header.html"
-FOOTER="$TEMPLATES/footer.html"
+if [ ! -x "$NEWS_ARTICLE_RENDERER" ]; then
+  printf 'missing news article renderer: %s\n' "$(rel_from_project "$NEWS_ARTICLE_RENDERER")" >&2
+  exit 1
+fi
 
 mkdir -p "$(dirname -- "$OUT")" "$NEWS_PAGES"
 
@@ -232,55 +139,12 @@ for file in "$NEWS_SRC"/*.md; do
       sed 's/[[:space:]][[:space:]]*/ /g'
   )
 
-  {
-    cat <<EOF_PAGE
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>$(html_attr_escape "$title")</title>
-  <meta name="description" content="$(html_attr_escape "$summary")">
-
-  <link rel="icon" href="../assets/logo/favicon.ico">
-  <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-EOF_PAGE
-
-    sed 's#{{root}}#../#g' "$HEADER"
-
-    cat <<EOF_PAGE
-<main class="page-main">
-  <section class="page-hero">
-    <div class="container">
-      <p class="meta-line">$(html_attr_escape "$category") · $(html_attr_escape "$date")</p>
-      <h1>$(html_attr_escape "$title")</h1>
-    </div>
-  </section>
-
-  <section class="content-section">
-    <div class="container content-card wide generated-page news-article-page">
-EOF_PAGE
-
-    render_body "$body"
-
-    cat <<EOF_PAGE
-      <div class="hero-actions">
-        <a class="button secondary" href="../news.html">Back to News</a>
-      </div>
-    </div>
-  </section>
-</main>
-EOF_PAGE
-
-    sed 's#{{root}}#../#g' "$FOOTER"
-
-    cat <<EOF_PAGE
-</body>
-</html>
-EOF_PAGE
-  } > "$out_file"
+  "$NEWS_ARTICLE_RENDERER" \
+    "$file" \
+    "$out_file" \
+    "../" \
+    "../news.html" \
+    "Back to News"
 
   printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
     "$date" \

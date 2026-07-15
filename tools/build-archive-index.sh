@@ -9,10 +9,17 @@ SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 . "$SCRIPT_DIR/archive-lib.sh"
 
 CACHE_DIR=${CACHE_DIR:-$PROJECT_ROOT/cache}
+PUBLIC_DIR=${PUBLIC_DIR:-$PROJECT_ROOT/docs}
+NEWS_ARTICLE_RENDERER=${NEWS_ARTICLE_RENDERER:-$SCRIPT_DIR/render-news-article.sh}
 commits_out=${1:-$CACHE_DIR/archive-commits.html}
 news_out=${2:-$CACHE_DIR/archive-news.html}
 
 archive_mkdir "$CACHE_DIR"
+
+if [ ! -x "$NEWS_ARTICLE_RENDERER" ]; then
+  printf 'missing news article renderer: %s\n' "$NEWS_ARTICLE_RENDERER" >&2
+  exit 1
+fi
 
 html_escape() {
   printf '%s' "$1" | sed \
@@ -124,11 +131,35 @@ build_news_fragment() {
           [ -n "$id" ] || continue
           [ -n "$file" ] || continue
 
-          rel=${base_dir#$PROJECT_ROOT/}/$file
-          if [ ! -f "$PROJECT_ROOT/$rel" ] && [ -f "$PROJECT_ROOT/$rel.xz" ]; then
-            rel="$rel.xz"
+          source_file="$base_dir/$file"
+          if [ ! -f "$source_file" ] && [ -f "$source_file.xz" ]; then
+            source_file="$source_file.xz"
           fi
-          printf '%s\t%s\t%s\t%s\t%s\t%s\n' "$date" "$category" "$title" "$slug" "$id" "$rel" >> "$tmp"
+          [ -f "$source_file" ] || continue
+
+          rel_dir=${base_dir#"$ARCHIVE_ROOT"/}
+          html_file=${file%.md}.html
+          public_dir="$PUBLIC_DIR/archive/$rel_dir"
+          public_file="$public_dir/$html_file"
+          public_rel="archive/$rel_dir/$html_file"
+
+          archive_mkdir "$public_dir"
+          news_source=$(mktemp)
+          archive_cat "$source_file" > "$news_source"
+
+          if "$NEWS_ARTICLE_RENDERER" \
+            "$news_source" \
+            "$public_file" \
+            "../../../../" \
+            "../../../../news-archive.html" \
+            "Back to News Archive"; then
+            printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
+              "$date" "$category" "$title" "$slug" "$id" "$public_rel" >> "$tmp"
+          else
+            printf 'warning: could not render archived news source %s\n' "$source_file" >&2
+          fi
+
+          rm -f "$news_source"
         done
     done
 
