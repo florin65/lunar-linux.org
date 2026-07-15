@@ -62,16 +62,30 @@ archive_compress_file() {
 }
 
 archive_close_day_tree() {
-  root=$1
+  root=${1%/}
   today=$(archive_today)
+  current_year=$(archive_year "$today")
+  current_month=$(archive_month "$today")
+  current_month_dir="$root/$current_year/$current_month"
+
   [ -d "$root" ] || return 0
 
   find "$root" -type f ! -name '*.xz' | while IFS= read -r f; do
     base=$(basename -- "$f")
+    dir=$(dirname -- "$f")
+
     case "$base" in
-      "$today"*) continue ;;
-      *) archive_compress_file "$f" ;;
+      "$today"*)
+        # Keep files for the current day active.
+        continue
+        ;;
+      index.json)
+        # The current monthly index is still being updated.
+        [ "$dir" = "$current_month_dir" ] && continue
+        ;;
     esac
+
+    archive_compress_file "$f"
   done
 }
 
