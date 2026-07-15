@@ -569,21 +569,9 @@ function render_news(    title, desc, community, moonbase, community_desc, moonb
   print "<main class=\"page-main news-main\">"
   render_hero(title, desc, "news-compact-hero")
 
-  render_news_section(
-    "Community and project news",
-    community_desc,
-    "content-section community-news-section",
-    "{{ community_news_html }}",
-    "{{ info_news_archive_actions_html }}"
-  )
+  render_news_section("Community and project news", community_desc, "content-section community-news-section", "{{ community_news_html }}", "{{ info_news_archive_actions_html }}")
 
-  render_news_section(
-    "Moonbase commits journal",
-    moonbase_desc,
-    "content-section muted-section moonbase-section",
-    "{{ moonbase_commits_html }}",
-    "{{ info_commits_archive_actions_html }}"
-  )
+  render_news_section("Moonbase commits journal", moonbase_desc, "content-section muted-section moonbase-section", "{{ moonbase_commits_html }}", "{{ info_commits_archive_actions_html }}")
   print "</main>"
 }
 
