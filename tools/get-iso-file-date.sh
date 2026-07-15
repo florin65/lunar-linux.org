@@ -20,8 +20,10 @@ fi
 . "$CONF"
 
 SITE_ROOT=${SITE_ROOT:-.}
+PUBLIC_DIR=${PUBLIC_DIR:-docs}
+DATA_DIR=${DATA_DIR:-$PUBLIC_DIR/data}
 ISO_BASE_URL=${ISO_BASE_URL:-https://lunar.lart.ca/latest}
-DAILY_ISO_JSON=${DAILY_ISO_JSON:-public/data/daily-iso.json}
+DAILY_ISO_JSON=${DAILY_ISO_JSON:-$DATA_DIR/daily-iso.json}
 
 abs_path() {
   case "$1" in
