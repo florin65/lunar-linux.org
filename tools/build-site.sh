@@ -903,6 +903,15 @@ main() {
 
   for md in "$SRC"/*.md; do
     [ -f "$md" ] || continue
+
+    name=$(basename -- "$md" .md)
+
+    case "$name" in
+      news|archive)
+        continue
+        ;;
+    esac
+
     write_page "$md"
   done
 
