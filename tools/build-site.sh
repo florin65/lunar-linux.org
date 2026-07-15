@@ -170,109 +170,6 @@ expand_variables() {
     ' "$file"
 }
 
-render_markdown_body() {
-  awk '
-    function esc(s) {
-      gsub(/&/, "\\&amp;", s)
-      gsub(/</, "\\&lt;", s)
-      gsub(/>/, "\\&gt;", s)
-      return s
-    }
-
-    function inline(s,    out, pre, label, url, rest, p1, p2, code) {
-      s = esc(s)
-      out = ""
-
-      while (match(s, /`[^`]+`/)) {
-        pre = substr(s, 1, RSTART - 1)
-        code = substr(s, RSTART + 1, RLENGTH - 2)
-        out = out pre "<code>" code "</code>"
-        s = substr(s, RSTART + RLENGTH)
-      }
-      s = out s
-      out = ""
-
-      while (match(s, /\[[^]]+\]\([^)]+\)/)) {
-        pre = substr(s, 1, RSTART - 1)
-        p1 = index(substr(s, RSTART), "](")
-        label = substr(s, RSTART + 1, p1 - 2)
-        rest = substr(s, RSTART + p1 + 1)
-        p2 = index(rest, ")")
-        url = substr(rest, 1, p2 - 1)
-        out = out pre "<a href=\"" url "\">" label "</a>"
-        s = substr(rest, p2 + 1)
-      }
-      s = out s
-
-      while (match(s, /\*\*[^*]+\*\*/)) {
-        s = substr(s, 1, RSTART - 1) "<strong>" substr(s, RSTART + 2, RLENGTH - 4) "</strong>" substr(s, RSTART + RLENGTH)
-      }
-
-      while (match(s, /\*[^*]+\*/)) {
-        s = substr(s, 1, RSTART - 1) "<em>" substr(s, RSTART + 1, RLENGTH - 2) "</em>" substr(s, RSTART + RLENGTH)
-      }
-
-      return s
-    }
-
-    function close_blocks() {
-      if (in_list) {
-        print "      </ul>"
-        in_list = 0
-      }
-      if (in_quote) {
-        print "      </blockquote>"
-        in_quote = 0
-      }
-    }
-
-    BEGIN {
-      in_fm = 0
-      in_list = 0
-      in_quote = 0
-    }
-
-    NR == 1 && $0 == "---" { in_fm = 1; next }
-    in_fm && $0 == "---" { in_fm = 0; next }
-    in_fm { next }
-
-    /^[[:space:]]*$/ { close_blocks(); next }
-
-    /^### / { close_blocks(); line = substr($0, 5); print "      <h3>" inline(line) "</h3>"; next }
-    /^## /  { close_blocks(); line = substr($0, 4); print "      <h2>" inline(line) "</h2>"; next }
-    /^# /   { close_blocks(); line = substr($0, 3); print "      <h1>" inline(line) "</h1>"; next }
-
-    /^- / {
-      if (!in_list) {
-        close_blocks()
-        print "      <ul class=\"simple-list\">"
-        in_list = 1
-      }
-      line = substr($0, 3)
-      print "        <li>" inline(line) "</li>"
-      next
-    }
-
-    /^> / {
-      if (in_list) {
-        print "      </ul>"
-        in_list = 0
-      }
-      if (!in_quote) {
-        print "      <blockquote class=\"quote-box\">"
-        in_quote = 1
-      }
-      line = substr($0, 3)
-      print "        <p>" inline(line) "</p>"
-      next
-    }
-
-    { close_blocks(); print "      <p>" inline($0) "</p>" }
-
-    END { close_blocks() }
-  ' "$1"
-}
-
 write_html_head() {
   title="$1"
   description="$2"
@@ -675,20 +572,6 @@ EOF_PAGE
   rm -f "$expanded" "$rendered"
   printf 'generated %s\n' "$(rel_from_project "$out")"
 }
-
-first_paragraph() {
-  awk '
-    BEGIN { in_fm = 0; body = 0 }
-    NR == 1 && $0 == "---" { in_fm = 1; next }
-    in_fm && $0 == "---" { in_fm = 0; body = 1; next }
-    in_fm { next }
-    body && /^[[:space:]]*$/ { if (p != "") { print p; exit }; next }
-    body && p == "" { p = $0; next }
-    body && p != "" { p = p " " $0 }
-    END { if (p != "") print p }
-  ' "$1"
-}
-
 
 news_meta() {
   key="$1"
