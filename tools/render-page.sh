@@ -278,8 +278,12 @@ function render_actions(s, indent,    items, c, j, label, url, p, cls) {
   print indent "</div>"
 }
 
-function render_hero(title, desc) {
-  print "  <section class=\"page-hero\">"
+function render_hero(title, desc, extra_class,    section_class) {
+  section_class = "page-hero"
+  if (extra_class != "")
+    section_class = section_class " " extra_class
+
+  print "  <section class=\"" section_class "\">"
   print "    <div class=\"container\">"
   print "      <h1>" inline(title) "</h1>"
   print "      <p class=\"hero-description\">" inline(desc) "</p>"
@@ -552,12 +556,7 @@ function render_news(    title, desc, community, moonbase, community_desc, moonb
   if (moonbase_desc == "") moonbase_desc = "Commits journal in the last 24 hours for the Moonbase repositories."
 
   print "<main class=\"page-main news-main\">"
-  print "  <section class=\"page-hero news-compact-hero\">"
-  print "    <div class=\"container\">"
-  print "      <h1>" inline(title) "</h1>"
-  print "      <p class=\"hero-description\">" inline(desc) "</p>"
-  print "    </div>"
-  print "  </section>"
+  render_hero(title, desc, "news-compact-hero")
 
   print "  <section class=\"content-section community-news-section\">"
   print "    <div class=\"container\">"
