@@ -46,15 +46,33 @@ while IFS= read -r day; do
   grep '"date"[[:space:]]*:[[:space:]]*"'"$day"'"' "$objects" > "$incoming" || true
 
   cat "$existing" > "$merged"
-  sed -n 's/.*"commit"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$existing" | sort -u > "$seen"
+  : > "$seen"
+
+  while IFS= read -r obj; do
+    repository=$(printf '%s\n' "$obj" | archive_json_field repository | head -1)
+    commit=$(printf '%s\n' "$obj" | archive_json_field commit | head -1)
+
+    [ -n "$repository" ] || continue
+    [ -n "$commit" ] || continue
+
+    printf '%s\t%s\n' "$repository" "$commit" >> "$seen"
+  done < "$existing"
+
+  sort -u "$seen" > "$seen.tmp" && mv "$seen.tmp" "$seen"
 
   added=0
   while IFS= read -r obj; do
+    repository=$(printf '%s\n' "$obj" | archive_json_field repository | head -1)
     commit=$(printf '%s\n' "$obj" | archive_json_field commit | head -1)
+
+    [ -n "$repository" ] || continue
     [ -n "$commit" ] || continue
-    if ! grep -qxF "$commit" "$seen"; then
+
+    key=$(printf '%s\t%s' "$repository" "$commit")
+
+    if ! grep -qxF "$key" "$seen"; then
       printf '%s\n' "$obj" >> "$merged"
-      printf '%s\n' "$commit" >> "$seen"
+      printf '%s\n' "$key" >> "$seen"
       added=$((added + 1))
     fi
   done < "$incoming"
