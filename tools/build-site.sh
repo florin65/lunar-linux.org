@@ -20,7 +20,6 @@ fi
 . "$CONF"
 
 SITE_ROOT=${SITE_ROOT:-.}
-SRC_DIR=${SRC_DIR:-src}
 MARKDOWN_DIR=${MARKDOWN_DIR:-src/markdown}
 NEWS_DIR=${NEWS_DIR:-src/news}
 TEMPLATES_DIR=${TEMPLATES_DIR:-templates}
