@@ -249,7 +249,47 @@ EOF_MOONBASE
       return s
     }
 
-    function field(line, key,    pat, start, rest, end) {
+    function json_decode(s,    out, i, c) {
+      out = ""
+
+      for (i = 1; i <= length(s); i++) {
+        c = substr(s, i, 1)
+
+        if (c != "\\") {
+          out = out c
+          continue
+        }
+
+        i++
+        if (i > length(s)) {
+          out = out "\\"
+          break
+        }
+
+        c = substr(s, i, 1)
+
+        if (c == "\"") {
+          out = out "\""
+        } else if (c == "\\") {
+          out = out "\\"
+        } else if (c == "/") {
+          out = out "/"
+        } else if (c == "n") {
+          out = out "\n"
+        } else if (c == "r") {
+          out = out "\r"
+        } else if (c == "t") {
+          out = out "\t"
+        } else {
+          # Preserve unsupported escapes such as \uXXXX verbatim.
+          out = out "\\" c
+        }
+      }
+
+      return out
+    }
+
+    function field(line, key,    pat, start, rest, raw, i, c) {
       pat = "\"" key "\":\""
       start = index(line, pat)
       if (!start) {
@@ -257,13 +297,30 @@ EOF_MOONBASE
       }
 
       rest = substr(line, start + length(pat))
-      end = index(rest, "\"")
+      raw = ""
 
-      if (!end) {
-        return rest
+      for (i = 1; i <= length(rest); i++) {
+        c = substr(rest, i, 1)
+
+        if (c == "\\") {
+          raw = raw c
+
+          if (i < length(rest)) {
+            i++
+            raw = raw substr(rest, i, 1)
+          }
+
+          continue
+        }
+
+        if (c == "\"") {
+          return json_decode(raw)
+        }
+
+        raw = raw c
       }
 
-      return substr(rest, 1, end - 1)
+      return json_decode(raw)
     }
 
     BEGIN {
