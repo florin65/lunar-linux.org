@@ -18,8 +18,11 @@ fi
 . "$CONF"
 
 SITE_ROOT=${SITE_ROOT:-.}
-MOONBASE_LOG_DIR=${MOONBASE_LOG_DIR:-cache/moonbase-logs}
-MOONBASE_NEWS_JSON=${MOONBASE_NEWS_JSON:-cache/moonbase-news.json}
+BUILD_DIR=${BUILD_DIR:-cache}
+PUBLIC_DIR=${PUBLIC_DIR:-docs}
+DATA_DIR=${DATA_DIR:-$PUBLIC_DIR/data}
+MOONBASE_LOG_DIR=${MOONBASE_LOG_DIR:-$BUILD_DIR/moonbase-logs}
+MOONBASE_NEWS_JSON=${MOONBASE_NEWS_JSON:-$DATA_DIR/moonbase-news.json}
 
 abs_path() {
   case "$1" in
