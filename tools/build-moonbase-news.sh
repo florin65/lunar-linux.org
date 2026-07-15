@@ -49,11 +49,12 @@ LOG_DIR=$(abs_path "$MOONBASE_LOG_DIR")
 OUT=$(abs_path "$MOONBASE_NEWS_JSON")
 OUT_DIR=$(dirname -- "$OUT")
 TMP="$OUT.tmp"
+ROWS=$(mktemp)
+SORTED_ROWS=$(mktemp)
+trap 'rm -f "$ROWS" "$SORTED_ROWS"' EXIT
 
 mkdir -p "$OUT_DIR"
-
-printf '[\n' > "$TMP"
-first=1
+: > "$ROWS"
 
 if [ -d "$LOG_DIR" ]; then
   find "$LOG_DIR" -type f -name '*.log' | sort | while IFS= read -r log; do
@@ -63,42 +64,55 @@ if [ -d "$LOG_DIR" ]; then
       [ -n "$date" ] || continue
       [ -n "$subject" ] || continue
 
-      module=""
-      version=""
-      title="$subject"
-      summary="$subject"
-
-      case "$subject" in
-        *": version bumped to "*|*": Version bumped to "*)
-          module=${subject%%:*}
-          version=$(printf '%s\n' "$subject" | sed -n 's/^[^:]*: [Vv]ersion bumped to[[:space:]]*\(.*\)$/\1/p')
-          title="$module updated to $version"
-          summary="version bumped to $version"
-          ;;
-        *": Bump to "*|*": bump to "*)
-          module=${subject%%:*}
-          version=$(printf '%s\n' "$subject" | sed -n 's/^[^:]*: [Bb]ump to[[:space:]]*\(.*\)$/\1/p')
-          title="$module updated to $version"
-          summary="bump to $version"
-          ;;
-      esac
-
-      if [ "$first" -eq 0 ]; then
-        printf ',\n' >> "$TMP"
-      fi
-      first=0
-
-      printf '  {"date":"%s","category":"Moonbase","repository":"%s","module":"%s","version":"%s","commit":"%s","title":"%s","summary":"%s"}' \
-        "$(json_escape "$date")" \
-        "$(json_escape "$repo")" \
-        "$(json_escape "$module")" \
-        "$(json_escape "$version")" \
-        "$(json_escape "$commit")" \
-        "$(json_escape "$title")" \
-        "$(json_escape "$summary")" >> "$TMP"
+      printf '%s|%s|%s|%s\n' \
+        "$date" "$repo" "$commit" "$subject" >> "$ROWS"
     done < "$log"
   done
 fi
+
+LC_ALL=C sort -t '|' -k1,1r -k2,2 -k3,3 "$ROWS" > "$SORTED_ROWS"
+
+printf '[\n' > "$TMP"
+first=1
+
+while IFS='|' read -r date repo commit subject || [ -n "$date$repo$commit$subject" ]; do
+  [ -n "$date" ] || continue
+  [ -n "$subject" ] || continue
+
+  module=""
+  version=""
+  title="$subject"
+  summary="$subject"
+
+  case "$subject" in
+    *": version bumped to "*|*": Version bumped to "*)
+      module=${subject%%:*}
+      version=$(printf '%s\n' "$subject" | sed -n 's/^[^:]*: [Vv]ersion bumped to[[:space:]]*\(.*\)$/\1/p')
+      title="$module updated to $version"
+      summary="version bumped to $version"
+      ;;
+    *": Bump to "*|*": bump to "*)
+      module=${subject%%:*}
+      version=$(printf '%s\n' "$subject" | sed -n 's/^[^:]*: [Bb]ump to[[:space:]]*\(.*\)$/\1/p')
+      title="$module updated to $version"
+      summary="bump to $version"
+      ;;
+  esac
+
+  if [ "$first" -eq 0 ]; then
+    printf ',\n' >> "$TMP"
+  fi
+  first=0
+
+  printf '  {"date":"%s","category":"Moonbase","repository":"%s","module":"%s","version":"%s","commit":"%s","title":"%s","summary":"%s"}' \
+    "$(json_escape "$date")" \
+    "$(json_escape "$repo")" \
+    "$(json_escape "$module")" \
+    "$(json_escape "$version")" \
+    "$(json_escape "$commit")" \
+    "$(json_escape "$title")" \
+    "$(json_escape "$summary")" >> "$TMP"
+done < "$SORTED_ROWS"
 
 printf '\n]\n' >> "$TMP"
 mv "$TMP" "$OUT"
