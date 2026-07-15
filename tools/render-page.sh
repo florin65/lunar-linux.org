@@ -291,6 +291,17 @@ function render_hero(title, desc, extra_class,    section_class) {
   print "  </section>"
 }
 
+function render_news_section(title, desc, section_class, content_html, actions_html) {
+  print "  <section class=\"" section_class "\">"
+  print "    <div class=\"container\">"
+  print "      <h2 class=\"section-title\">" inline(title) "</h2>"
+  print "      <p class=\"hero-description\">" inline(desc) "</p>"
+  print content_html
+  print actions_html
+  print "    </div>"
+  print "  </section>"
+}
+
 function render_content_grid(first_pos, max_cards,    pos, idx, end, count, wide) {
   print "  <section class=\"content-section\">"
   print "    <div class=\"container content-grid\">"
@@ -558,23 +569,21 @@ function render_news(    title, desc, community, moonbase, community_desc, moonb
   print "<main class=\"page-main news-main\">"
   render_hero(title, desc, "news-compact-hero")
 
-  print "  <section class=\"content-section community-news-section\">"
-  print "    <div class=\"container\">"
-  print "      <h2 class=\"section-title\">Community and project news</h2>"
-  print "      <p class=\"hero-description\">" inline(community_desc) "</p>"
-  print "{{ community_news_html }}"
-  print "{{ info_news_archive_actions_html }}"
-  print "    </div>"
-  print "  </section>"
+  render_news_section(
+    "Community and project news",
+    community_desc,
+    "content-section community-news-section",
+    "{{ community_news_html }}",
+    "{{ info_news_archive_actions_html }}"
+  )
 
-  print "  <section class=\"content-section muted-section moonbase-section\">"
-  print "    <div class=\"container\">"
-  print "      <h2 class=\"section-title\">Moonbase commits journal</h2>"
-  print "      <p class=\"hero-description\">" inline(moonbase_desc) "</p>"
-  print "{{ moonbase_commits_html }}"
-  print "{{ info_commits_archive_actions_html }}"
-  print "    </div>"
-  print "  </section>"
+  render_news_section(
+    "Moonbase commits journal",
+    moonbase_desc,
+    "content-section muted-section moonbase-section",
+    "{{ moonbase_commits_html }}",
+    "{{ info_commits_archive_actions_html }}"
+  )
   print "</main>"
 }
 
