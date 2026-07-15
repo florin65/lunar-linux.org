@@ -1,5 +1,10 @@
-2026-07-13|56b6a6bb3d|zsh: version bumped to 5.9.2
-2026-07-13|a8c410c9a7|jenkins: version bumped to 2.572
-2026-07-13|1777c5f6a1|mongo-c-driver: version bumped to 2.3.2
-2026-07-13|c7a68937f9|python-regex: version bumped to 2026.7.10
-2026-07-13|2461412485|git: disable the rust optional depend
+2026-07-14|0eee576074|ansible: version bumped to 14.2.0
+2026-07-14|c0c8c1ec37|yasm: fix build failure about a boolean typedef
+2026-07-14|8ad3e100d6|qalculate-gtk: version bumped to 5.12.0
+2026-07-14|faa79e4808|libqalculate: version bumped to 5.12.0
+2026-07-14|c8764d8a39|firefox: version bumped to 152.0.6
+2026-07-14|12dfbec2ca|ansible-core: version bumped to 2.21.2
+2026-07-14|c9ca69a2eb|jenkins: version bumped to 2.573
+2026-07-14|1af07a1ef7|postfix: Version bumped to 3.11.5
+2026-07-14|e75cc528c7|firefox-bin: version bumped to 152.0.6
+2026-07-14|86d5cd2f04|stress-ng: Version bumped to 0.21.04
