@@ -56,8 +56,14 @@ archive_write_atomic() {
 
 archive_compress_file() {
   f=$1
+  compressed="$f.xz"
+
   [ -f "$f" ] || return 0
-  [ ! -f "$f.xz" ] || return 0
+
+  if [ -f "$compressed" ]; then
+    rm -f "$compressed"
+  fi
+
   xz -T0 -9e "$f"
 }
 
