@@ -64,18 +64,19 @@ if [ -d "$LOG_DIR" ]; then
       [ -n "$date" ] || continue
       [ -n "$subject" ] || continue
 
-      printf '%s|%s|%s|%s\n' \
+      printf '%s\t%s\t%s\t%s\n' \
         "$date" "$repo" "$commit" "$subject" >> "$ROWS"
     done < "$log"
   done
 fi
 
-LC_ALL=C sort -t '|' -k1,1r -k2,2 -k3,3 "$ROWS" > "$SORTED_ROWS"
+TAB=$(printf '\t')
+LC_ALL=C sort -t "$TAB" -k1,1r -k2,2 -k3,3 "$ROWS" > "$SORTED_ROWS"
 
 printf '[\n' > "$TMP"
 first=1
 
-while IFS='|' read -r date repo commit subject || [ -n "$date$repo$commit$subject" ]; do
+while IFS='	' read -r date repo commit subject || [ -n "$date$repo$commit$subject" ]; do
   [ -n "$date" ] || continue
   [ -n "$subject" ] || continue
 
