@@ -21,8 +21,10 @@ fi
 . "$CONF"
 
 SITE_ROOT=${SITE_ROOT:-.}
+PUBLIC_DIR=${PUBLIC_DIR:-docs}
+DATA_DIR=${DATA_DIR:-$PUBLIC_DIR/data}
 MOONBASE_DIR=${MOONBASE_DIR:-../moonbase}
-MOONBASE_STATS_JSON=${MOONBASE_STATS_JSON:-public/data/moonbase-stats.json}
+MOONBASE_STATS_JSON=${MOONBASE_STATS_JSON:-$DATA_DIR/moonbase-stats.json}
 
 abs_path() {
   case "$1" in
