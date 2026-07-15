@@ -36,6 +36,7 @@ MOONBASE_NEWS_JSON=${MOONBASE_NEWS_JSON:-docs/data/moonbase-news.json}
 COMMUNITY_NEWS_HTML=${COMMUNITY_NEWS_HTML:-cache/community-news.html}
 GENERATE_NEWS_JSON=${GENERATE_NEWS_JSON:-yes}
 UPDATE_DYNAMIC_DATA=${UPDATE_DYNAMIC_DATA:-yes}
+UPDATE_ARCHIVE=${UPDATE_ARCHIVE:-yes}
 
 abs_path() {
   case "$1" in
@@ -686,7 +687,7 @@ update_dynamic_data() {
 }
 
 update_archive() {
-  if [ "${UPDATE_ARCHIVE:-yes}" != "yes" ]; then
+  if [ "$UPDATE_ARCHIVE" != "yes" ]; then
     return 0
   fi
 
