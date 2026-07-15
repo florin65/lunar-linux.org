@@ -28,6 +28,7 @@ COMPONENTS_DIR=${COMPONENTS_DIR:-components}
 PUBLIC_DIR=${PUBLIC_DIR:-docs}
 DATA_DIR=${DATA_DIR:-docs/data}
 BUILD_DIR=${BUILD_DIR:-cache}
+ARCHIVE_DIR=${ARCHIVE_DIR:-archive}
 MOONBASE_STATS_JSON=${MOONBASE_STATS_JSON:-docs/data/moonbase-stats.json}
 DAILY_ISO_JSON=${DAILY_ISO_JSON:-docs/data/daily-iso.json}
 NEWS_JSON=${NEWS_JSON:-docs/data/news.json}
@@ -55,6 +56,7 @@ NEWS_SRC=$(abs_path "$NEWS_DIR")
 PUBLIC=$(abs_path "$PUBLIC_DIR")
 DATA=$(abs_path "$DATA_DIR")
 BUILD=$(abs_path "$BUILD_DIR")
+ARCHIVE=$(abs_path "$ARCHIVE_DIR")
 TEMPLATES=$(abs_path "$TEMPLATES_DIR")
 TOOLS=$(abs_path "$TOOLS_DIR")
 COMPONENTS=$(abs_path "$COMPONENTS_DIR")
@@ -339,7 +341,7 @@ prepare_archive_values() {
   archive_news_file=$(mktemp)
 
   if [ -x "$TOOLS/build-archive-index.sh" ]; then
-    ARCHIVE_ROOT="$PROJECT_ROOT/archive" \
+    ARCHIVE_ROOT="$ARCHIVE" \
     CACHE_DIR="$BUILD" \
       "$TOOLS/build-archive-index.sh" "$ARCHIVE_COMMITS" "$ARCHIVE_NEWS"
   fi
@@ -694,19 +696,19 @@ update_archive() {
   fi
 
   printf 'updating archive...\n'
-  ARCHIVE_ROOT="$PROJECT_ROOT/archive" \
+  ARCHIVE_ROOT="$ARCHIVE" \
   DATA_DIR="$DATA" \
   NEWS_DIR="$NEWS_SRC" \
     "$TOOLS/archive.sh" commits "$MOONBASE_NEWS"
 
-  ARCHIVE_ROOT="$PROJECT_ROOT/archive" \
+  ARCHIVE_ROOT="$ARCHIVE" \
   DATA_DIR="$DATA" \
   NEWS_DIR="$NEWS_SRC" \
     "$TOOLS/archive.sh" news "$NEWS_SRC"
 }
 
 publish_archive_assets() {
-  src="$PROJECT_ROOT/archive"
+  src="$ARCHIVE"
   dst="$PUBLIC/archive"
 
   [ -d "$src" ] || return 0
