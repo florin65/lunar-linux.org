@@ -16,6 +16,8 @@ if [ ! -f "$CONF" ]; then
   exit 1
 fi
 
+# Configuration precedence:
+# exported environment > site.conf defaults > built-in defaults below
 # shellcheck disable=SC1090
 . "$CONF"
 
