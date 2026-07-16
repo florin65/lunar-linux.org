@@ -1,10 +1,3 @@
-2026-07-14|0eee576074|ansible: version bumped to 14.2.0
-2026-07-14|c0c8c1ec37|yasm: fix build failure about a boolean typedef
-2026-07-14|8ad3e100d6|qalculate-gtk: version bumped to 5.12.0
-2026-07-14|faa79e4808|libqalculate: version bumped to 5.12.0
-2026-07-14|c8764d8a39|firefox: version bumped to 152.0.6
-2026-07-14|12dfbec2ca|ansible-core: version bumped to 2.21.2
-2026-07-14|c9ca69a2eb|jenkins: version bumped to 2.573
-2026-07-14|1af07a1ef7|postfix: Version bumped to 3.11.5
-2026-07-14|e75cc528c7|firefox-bin: version bumped to 152.0.6
-2026-07-14|86d5cd2f04|stress-ng: Version bumped to 0.21.04
+2026-07-15|b47262f6a0|xsimd: Version bumped to 14.3.0
+2026-07-15|0b929c4dd0|atuin: Version bumped to 18.17.1
+2026-07-15|2ce238638c|minimagick: Version bumped to 5.3.2
