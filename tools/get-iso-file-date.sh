@@ -87,18 +87,32 @@ curl -fsSL "$URL" -o "$HTML"
 
 ISO_URL=$(
   awk '
-    match($0, /href="[^"]*lunar-[^"]*\.iso"/) {
-      value = substr($0, RSTART + 6, RLENGTH - 7)
-      print value
-      exit
+    {
+      line = $0
+
+      while (match(line, /href="[^"]*lunar-[^"]*\.iso"/)) {
+        value = substr(line, RSTART + 6, RLENGTH - 7)
+        links[value] = 1
+        line = substr(line, RSTART + RLENGTH)
+      }
+    }
+    END {
+      for (value in links) {
+        selected = value
+        count++
+      }
+
+      if (count != 1)
+        exit 1
+
+      print selected
     }
   ' "$HTML"
-)
-
-if [ -z "$ISO_URL" ]; then
-  printf 'could not find lunar ISO link at %s\n' "$URL" >&2
+) || {
+  printf 'expected exactly one distinct lunar ISO link at %s\n' \
+    "$URL" >&2
   exit 1
-fi
+}
 
 case "$ISO_URL" in
   http://*|https://*) FULL_ISO_URL="$ISO_URL" ;;
