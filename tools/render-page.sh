@@ -1169,6 +1169,14 @@ END {
 
         html = ""
 
+        if (file == "" ||
+            file ~ /^\// ||
+            file ~ /(^|\/)\.\.(\/|$)/ ||
+            file ~ /\\/) {
+            print "invalid include path: " file > "/dev/stderr"
+            exit 2
+        }
+
         path = project_root "/src/includes/" file
 
         # Defensive check of the path value (the file exists?)
