@@ -144,6 +144,9 @@ while IFS= read -r day; do
       archive_die "could not read archived commit file: $outfile"
     fi
 
+    validate_commit_input_layout "$existing_raw" ||
+      archive_die "invalid archived commit array layout: $outfile"
+
     if ! archive_json_objects_from_cat < "$existing_raw" > "$existing"; then
       archive_die "could not parse archived commit file: $outfile"
     fi
