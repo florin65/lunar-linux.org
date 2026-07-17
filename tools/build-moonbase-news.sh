@@ -39,10 +39,33 @@ rel_from_project() {
 }
 
 json_escape() {
-  printf '%s' "$1" | sed \
-    -e 's/\\/\\\\/g' \
-    -e 's/"/\\"/g' \
-    -e ':a;N;$!ba;s/\n/\\n/g'
+  printf '%s' "$1" | awk '
+    BEGIN {
+      ORS = ""
+    }
+
+    {
+      if (NR > 1) {
+        printf "\\n"
+      }
+
+      for (i = 1; i <= length($0); i++) {
+        c = substr($0, i, 1)
+
+        if (c == "\\") {
+          printf "\\\\"
+        } else if (c == "\"") {
+          printf "\\\""
+        } else if (c == "\t") {
+          printf "\\t"
+        } else if (c == "\r") {
+          printf "\\r"
+        } else {
+          printf "%s", c
+        }
+      }
+    }
+  '
 }
 
 valid_log_date() {
