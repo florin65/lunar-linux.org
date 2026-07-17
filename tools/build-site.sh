@@ -832,9 +832,38 @@ news_has_body() {
 }
 
 valid_news_date() {
-  printf '%s
-' "$1" |
-    grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}([[:space:]][0-9]{2}:[0-9]{2})?$'
+  value="$1"
+  date_part=
+  time_part=
+  normalized=
+
+  case "$value" in
+    [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9])
+      date_part="$value"
+      ;;
+    [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]' '[0-9][0-9]:[0-9][0-9])
+      date_part=${value% *}
+      time_part=${value#* }
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+
+  if [ -n "$time_part" ]; then
+    normalized=$(
+      date -d "$date_part $time_part:00" '+%F %H:%M' 2>/dev/null
+    ) || return 1
+
+    [ "$normalized" = "$value" ]
+    return
+  fi
+
+  normalized=$(
+    date -d "$date_part 00:00:00" '+%F' 2>/dev/null
+  ) || return 1
+
+  [ "$normalized" = "$date_part" ]
 }
 
 build_news_json() (
