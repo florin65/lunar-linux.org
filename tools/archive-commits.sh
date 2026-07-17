@@ -11,7 +11,14 @@ input=${1:-"$DATA_DIR/moonbase-news.json"}
 [ -f "$input" ] || archive_die "missing input: $input"
 
 tmpdir=$(mktemp -d)
-trap 'rm -rf "$tmpdir"' EXIT HUP INT TERM
+output_tmp=
+
+cleanup() {
+  rm -rf "$tmpdir"
+  rm -f "$output_tmp"
+}
+
+trap cleanup EXIT HUP INT TERM
 
 objects="$tmpdir/objects"
 archive_json_objects "$input" > "$objects"
@@ -34,13 +41,22 @@ while IFS= read -r day; do
   archive_mkdir "$outdir"
 
   existing="$tmpdir/existing-$day"
+  existing_raw="$tmpdir/existing-raw-$day"
   incoming="$tmpdir/incoming-$day"
   merged="$tmpdir/merged-$day"
   seen="$tmpdir/seen-$day"
 
   : > "$existing"
-  if archive_cat "$outfile" >/dev/null 2>&1; then
-    archive_cat "$outfile" | archive_json_objects_from_cat > "$existing"
+  : > "$existing_raw"
+
+  if [ -f "$outfile" ] || [ -f "$outfile.xz" ]; then
+    if ! archive_cat "$outfile" > "$existing_raw"; then
+      archive_die "could not read archived commit file: $outfile"
+    fi
+
+    if ! archive_json_objects_from_cat < "$existing_raw" > "$existing"; then
+      archive_die "could not parse archived commit file: $outfile"
+    fi
   fi
 
   grep '"date"[[:space:]]*:[[:space:]]*"'"$day"'"' "$objects" > "$incoming" || true
@@ -80,16 +96,28 @@ while IFS= read -r day; do
   sort -u "$seen" > "$seen.tmp" && mv "$seen.tmp" "$seen"
 
   if [ "$added" -gt 0 ]; then
-    # If the day was already closed/compressed but new information appears,
-    # reopen it as a plain active file and replace the old compressed copy.
+    output_tmp=$(mktemp "$outdir/.commit-archive.XXXXXX")
+    if ! archive_emit_json_array < "$merged" > "$output_tmp"; then
+      archive_die "could not build archived commit file: $outfile"
+    fi
+
+    mv "$output_tmp" "$outfile"
+    output_tmp=
     [ -f "$outfile.xz" ] && rm -f "$outfile.xz"
-    archive_emit_json_array < "$merged" > "$outfile"
+
     echo "archive-commits: $day added $added new commit(s) -> $outfile"
   else
     # Do not recreate a plain file when only a compressed archive exists.
     if [ ! -f "$outfile" ] && [ ! -f "$outfile.xz" ]; then
-      archive_emit_json_array < "$merged" > "$outfile"
+      output_tmp=$(mktemp "$outdir/.commit-archive.XXXXXX")
+      if ! archive_emit_json_array < "$merged" > "$output_tmp"; then
+        archive_die "could not build archived commit file: $outfile"
+      fi
+
+      mv "$output_tmp" "$outfile"
+      output_tmp=
     fi
+
     echo "archive-commits: $day no new commits"
   fi
 done < "$cut_dates"
