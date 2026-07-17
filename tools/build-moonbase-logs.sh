@@ -94,7 +94,7 @@ for repo in $MOONBASE_REPOS; do
       --no-merges \
       --since="$SINCE_DATE 00:00:00" \
       --until="$UNTIL_DATE 00:00:00" \
-      --pretty=format:'%ad|%h|%s' \
+      --pretty=format:'%ad|%H|%s' \
       --date=short > "$tmp"
 
     if [ -s "$tmp" ]; then
