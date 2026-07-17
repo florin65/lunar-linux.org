@@ -110,6 +110,16 @@ render_body() {
       return s
     }
 
+    function safe_url(url) {
+      if (url ~ /^#/) return 1
+      if (url ~ /^\// && url !~ /^\/\//) return 1
+      if (url ~ /^\.\.?\//) return 1
+      if (url ~ /^https?:\/\//) return 1
+      if (url ~ /^mailto:/) return 1
+      if (url !~ /:/ && url !~ /^\/\//) return 1
+      return 0
+    }
+
     function style(s) {
       while (match(s, /\*\*[^*]+\*\*/)) {
         s = substr(s, 1, RSTART - 1) "<strong>" substr(s, RSTART + 2, RLENGTH - 4) "</strong>" substr(s, RSTART + RLENGTH)
@@ -160,6 +170,10 @@ render_body() {
         rest = substr(s, RSTART + p1 + 1)
         p2 = index(rest, ")")
         url = substr(rest, 1, p2 - 1)
+        if (!safe_url(url)) {
+          printf "unsafe link URL in news body: %s\n", url > "/dev/stderr"
+          exit 2
+        }
         link_count++
         link_value[link_count] = "<a href=\"" attr(url) "\">" style(label) "</a>"
         token = marker "L" link_count marker
