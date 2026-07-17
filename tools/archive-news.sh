@@ -95,15 +95,36 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
     }
   ' "$f" > "$metadata"
 
-  date_line=$(sed -n 's/^Date:[[:space:]]*//p' "$metadata" | head -1)
+  date_count=$(grep -c '^Date:[[:space:]]*' "$metadata" || :)
+  category_count=$(grep -c '^Category:[[:space:]]*' "$metadata" || :)
+  title_count=$(grep -c '^Title:[[:space:]]*' "$metadata" || :)
 
-  if valid_news_date "$date_line"; then
-    archive_date=$date_line
-    day=${date_line%% *}
-  else
-    day=$(date -r "$f" +%F)
-    archive_date=$day
-  fi
+  [ "$date_count" -eq 1 ] ||
+    archive_die "news source must contain exactly one Date field in metadata: $f"
+  [ "$category_count" -eq 1 ] ||
+    archive_die "news source must contain exactly one Category field in metadata: $f"
+  [ "$title_count" -eq 1 ] ||
+    archive_die "news source must contain exactly one Title field in metadata: $f"
+
+  date_line=$(sed -n 's/^Date:[[:space:]]*//p' "$metadata")
+  category=$(sed -n 's/^Category:[[:space:]]*//p' "$metadata")
+  title=$(sed -n 's/^Title:[[:space:]]*//p' "$metadata")
+
+  [ -n "$date_line" ] || archive_die "empty Date field in news metadata: $f"
+  [ -n "$category" ] || archive_die "empty Category field in news metadata: $f"
+  [ -n "$title" ] || archive_die "empty Title field in news metadata: $f"
+
+  case "$category$title" in
+    *"	"*)
+      archive_die "tabs are not allowed in news Category or Title metadata: $f"
+      ;;
+  esac
+
+  valid_news_date "$date_line" ||
+    archive_die "invalid Date field in news metadata: $f"
+
+  archive_date=$date_line
+  day=${date_line%% *}
 
   year=$(archive_year "$day")
   month=$(archive_month "$day")
@@ -116,11 +137,6 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
   outfile="$outdir/$day-$short.md"
   index="$outdir/index.json"
   source_is_new=0
-
-  title=$(sed -n 's/^Title:[[:space:]]*//p' "$metadata" | head -1)
-  category=$(sed -n 's/^Category:[[:space:]]*//p' "$metadata" | head -1)
-  [ -n "$title" ] || title="$slug"
-  [ -n "$category" ] || category="News"
 
   existing="$tmpdir/news-existing"
   merged="$tmpdir/news-merged"
