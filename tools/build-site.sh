@@ -77,7 +77,7 @@ ARCHIVE_NEWS_HTML=${ARCHIVE_NEWS_HTML:-$BUILD_DIR/archive-news.html}
 ARCHIVE_COMMITS=$(abs_path "$ARCHIVE_COMMITS_HTML")
 ARCHIVE_NEWS=$(abs_path "$ARCHIVE_NEWS_HTML")
 
-mkdir -p "$PUBLIC" "$DATA"
+mkdir -p "$PUBLIC" "$DATA" "$BUILD"
 
 html_attr_escape() {
   printf '%s' "$1" | sed \
