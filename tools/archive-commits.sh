@@ -122,6 +122,78 @@ done < "$objects"
 sort -u "$cut_dates" > "$cut_dates.tmp"
 mv "$cut_dates.tmp" "$cut_dates"
 
+archive_files="$tmpdir/archive-files"
+archive_keys="$tmpdir/archive-keys"
+: > "$archive_files"
+: > "$archive_keys"
+
+if [ -d "$ARCHIVE_ROOT/commits" ]; then
+  find "$ARCHIVE_ROOT/commits" -type f \
+    \( -name '*.json' -o -name '*.json.xz' \) |
+    sed 's/\.xz$//' |
+    sort -u > "$archive_files"
+fi
+
+while IFS= read -r archived_file; do
+  [ -n "$archived_file" ] || continue
+
+  archived_raw="$tmpdir/global-archive-raw"
+  archived_objects="$tmpdir/global-archive-objects"
+
+  if ! archive_cat "$archived_file" > "$archived_raw"; then
+    archive_die "could not read archived commit file: $archived_file"
+  fi
+
+  validate_commit_input_layout "$archived_raw" ||
+    archive_die "invalid archived commit array layout: $archived_file"
+
+  if ! archive_json_objects_from_cat < "$archived_raw" > "$archived_objects"; then
+    archive_die "could not parse archived commit file: $archived_file"
+  fi
+
+  archived_name=$(basename -- "$archived_file")
+  archived_day=${archived_name%.json}
+
+  valid_commit_date "$archived_day" ||
+    archive_die "invalid archived commit filename: $archived_file"
+
+  while IFS= read -r obj; do
+    object_day=$(printf '%s\n' "$obj" | archive_json_field date | head -1)
+    repository=$(printf '%s\n' "$obj" | archive_json_field repository | head -1)
+    commit=$(printf '%s\n' "$obj" | archive_json_field commit | head -1)
+
+    [ "$object_day" = "$archived_day" ] ||
+      archive_die "archived commit entry has wrong date in $archived_file"
+    [ -n "$repository" ] ||
+      archive_die "archived commit entry has no repository in $archived_file"
+    [ -n "$commit" ] ||
+      archive_die "archived commit entry has no commit in $archived_file"
+
+    case "$repository$commit" in
+      *"	"*)
+        archive_die "tabs are not allowed in archived commit keys: $archived_file"
+        ;;
+    esac
+
+    key=$(printf '%s\t%s' "$repository" "$commit")
+    if awk -F '\t' -v key="$key" '
+      $1 "\t" $2 == key {
+        found = 1
+        exit
+      }
+      END {
+        exit(found ? 0 : 1)
+      }
+    ' "$archive_keys"; then
+      archive_die "duplicate commit identity across archive: $repository $commit"
+    fi
+
+    fingerprint=$(printf '%s\n' "$obj" | archive_sha256_stdin)
+    printf '%s\t%s\t%s\t%s\n' \
+      "$repository" "$commit" "$archived_day" "$fingerprint" >> "$archive_keys"
+  done < "$archived_objects"
+done < "$archive_files"
+
 while IFS= read -r day; do
   [ -n "$day" ] || continue
   year=$(archive_year "$day")
@@ -213,7 +285,24 @@ while IFS= read -r day; do
 
     key=$(printf '%s\t%s' "$repository" "$commit")
 
-    if grep -qxF "$key" "$seen"; then
+    global_record=$(awk -F '\t' -v key="$key" '
+      $1 "\t" $2 == key {
+        print $3 "\t" $4
+        exit
+      }
+    ' "$archive_keys")
+
+    if [ -n "$global_record" ]; then
+      global_day=${global_record%%"	"*}
+      global_fingerprint=${global_record#*"	"}
+      incoming_fingerprint=$(printf '%s\n' "$obj" | archive_sha256_stdin)
+
+      [ "$global_day" = "$day" ] ||
+        archive_die "commit identity moved between archive days: $repository $commit"
+
+      [ "$incoming_fingerprint" = "$global_fingerprint" ] ||
+        archive_die "commit entry differs from archived record: $repository $commit"
+    elif grep -qxF "$key" "$seen"; then
       incoming_fingerprint=$(printf '%s\n' "$obj" | archive_sha256_stdin)
       archived_fingerprint=$(awk -F '\t' -v key="$key" '
         $1 "\t" $2 == key {
