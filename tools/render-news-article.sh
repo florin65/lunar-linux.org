@@ -33,6 +33,25 @@ valid_root_prefix() {
   [ -z "$prefix" ]
 }
 
+safe_href() {
+  href=$1
+
+  case "$href" in
+    \#*|/*|./*|../*|http://*|https://*|mailto:*)
+      case "$href" in
+        //*) return 1 ;;
+      esac
+      return 0
+      ;;
+    *:*)
+      return 1
+      ;;
+    *)
+      return 0
+      ;;
+  esac
+}
+
 [ -n "$SOURCE" ] || {
   printf 'usage: %s SOURCE OUTPUT ROOT_PREFIX BACK_HREF [BACK_LABEL]\n' "$0" >&2
   exit 1
@@ -50,6 +69,11 @@ valid_root_prefix() {
 
 if ! valid_root_prefix "$ROOT_PREFIX"; then
   printf 'invalid ROOT_PREFIX: %s\n' "$ROOT_PREFIX" >&2
+  exit 1
+fi
+
+if ! safe_href "$BACK_HREF"; then
+  printf 'unsafe BACK_HREF: %s\n' "$BACK_HREF" >&2
   exit 1
 fi
 
