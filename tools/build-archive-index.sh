@@ -15,11 +15,30 @@ commits_out=${1:-$CACHE_DIR/archive-commits.html}
 news_out=${2:-$CACHE_DIR/archive-news.html}
 
 archive_mkdir "$CACHE_DIR"
+archive_mkdir "$(dirname -- "$commits_out")"
+archive_mkdir "$(dirname -- "$news_out")"
 
 if [ ! -x "$NEWS_ARTICLE_RENDERER" ]; then
   printf 'missing news article renderer: %s\n' "$NEWS_ARTICLE_RENDERER" >&2
   exit 1
 fi
+
+commits_data_tmp=
+commits_fragment_tmp=
+news_data_tmp=
+news_fragment_tmp=
+news_source_tmp=
+
+cleanup() {
+  rm -f \
+    "$commits_data_tmp" \
+    "$commits_fragment_tmp" \
+    "$news_data_tmp" \
+    "$news_fragment_tmp" \
+    "$news_source_tmp"
+}
+
+trap cleanup EXIT HUP INT TERM
 
 html_escape() {
   printf '%s' "$1" | sed \
@@ -36,7 +55,9 @@ tab=$(printf '\t')
 # ---------------------------------------------------------
 
 build_commits_fragment() {
-  tmp=$(mktemp)
+  commits_output_dir=$(dirname -- "$commits_out")
+  commits_data_tmp=$(mktemp "$commits_output_dir/.archive-commits-data.XXXXXX")
+  commits_fragment_tmp=$(mktemp "$commits_output_dir/.archive-commits.XXXXXX")
 
   find "$ARCHIVE_ROOT/commits" -type f \( -name '*.json' -o -name '*.json.xz' \) 2>/dev/null | sort |
     while IFS= read -r f; do
@@ -54,7 +75,7 @@ build_commits_fragment() {
           [ -n "$summary" ] || summary=$title
           [ -n "$module" ] || module=$title
 
-          printf '%s\t%s\t%s\t%s\t%s\n' "$date" "$commit" "$repo" "$module" "$summary" >> "$tmp"
+          printf '%s\t%s\t%s\t%s\t%s\n' "$date" "$commit" "$repo" "$module" "$summary" >> "$commits_data_tmp"
         done
     done
 
@@ -77,8 +98,8 @@ build_commits_fragment() {
     echo '          </thead>'
     echo '          <tbody>'
 
-    if [ -s "$tmp" ]; then
-      sort -r "$tmp" | while IFS="$tab" read -r date commit repo module summary; do
+    if [ -s "$commits_data_tmp" ]; then
+      sort -r "$commits_data_tmp" | while IFS="$tab" read -r date commit repo module summary; do
         repo_e=$(html_escape "$repo")
         module_e=$(html_escape "$module")
         summary_e=$(html_escape "$summary")
@@ -103,9 +124,12 @@ build_commits_fragment() {
     echo '          </tbody>'
     echo '        </table>'
     echo '      </div>'
-  } > "$commits_out"
+  } > "$commits_fragment_tmp"
 
-  rm -f "$tmp"
+  mv "$commits_fragment_tmp" "$commits_out"
+  commits_fragment_tmp=
+  rm -f "$commits_data_tmp"
+  commits_data_tmp=
 }
 
 # ---------------------------------------------------------
@@ -113,7 +137,9 @@ build_commits_fragment() {
 # ---------------------------------------------------------
 
 build_news_fragment() {
-  tmp=$(mktemp)
+  news_output_dir=$(dirname -- "$news_out")
+  news_data_tmp=$(mktemp "$news_output_dir/.archive-news-data.XXXXXX")
+  news_fragment_tmp=$(mktemp "$news_output_dir/.archive-news.XXXXXX")
 
   find "$ARCHIVE_ROOT/news" -type f \( -name 'index.json' -o -name 'index.json.xz' \) 2>/dev/null | sort |
     while IFS= read -r f; do
@@ -144,22 +170,23 @@ build_news_fragment() {
           public_rel="archive/$rel_dir/$html_file"
 
           archive_mkdir "$public_dir"
-          news_source=$(mktemp)
-          archive_cat "$source_file" > "$news_source"
+          news_source_tmp=$(mktemp)
+          archive_cat "$source_file" > "$news_source_tmp"
 
           if "$NEWS_ARTICLE_RENDERER" \
-            "$news_source" \
+            "$news_source_tmp" \
             "$public_file" \
             "../../../../" \
             "../../../../news-archive.html" \
             "Back to News Archive"; then
             printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
-              "$date" "$category" "$title" "$slug" "$id" "$public_rel" >> "$tmp"
+              "$date" "$category" "$title" "$slug" "$id" "$public_rel" >> "$news_data_tmp"
           else
             printf 'warning: could not render archived news source %s\n' "$source_file" >&2
           fi
 
-          rm -f "$news_source"
+          rm -f "$news_source_tmp"
+          news_source_tmp=
         done
     done
 
@@ -178,8 +205,8 @@ build_news_fragment() {
     echo '          </thead>'
     echo '          <tbody>'
 
-    if [ -s "$tmp" ]; then
-      sort -r "$tmp" | while IFS="$tab" read -r date category title slug id rel; do
+    if [ -s "$news_data_tmp" ]; then
+      sort -r "$news_data_tmp" | while IFS="$tab" read -r date category title slug id rel; do
         date_e=$(html_escape "$date")
         category_e=$(html_escape "$category")
         title_e=$(html_escape "$title")
@@ -208,9 +235,12 @@ build_news_fragment() {
     echo '          </tbody>'
     echo '        </table>'
     echo '      </div>'
-  } > "$news_out"
+  } > "$news_fragment_tmp"
 
-  rm -f "$tmp"
+  mv "$news_fragment_tmp" "$news_out"
+  news_fragment_tmp=
+  rm -f "$news_data_tmp"
+  news_data_tmp=
 }
 
 build_commits_fragment
