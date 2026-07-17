@@ -531,7 +531,6 @@ function render_index(    title, meta, offer, closing, actions, latest, facts, i
       }
     }
     print "    </div>"
-    print "    </div>"
     print "  </section>"
   }
 
