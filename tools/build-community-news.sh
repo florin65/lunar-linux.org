@@ -33,6 +33,7 @@ TOOLS_DIR=${TOOLS_DIR:-tools}
 PUBLIC_DIR=${PUBLIC_DIR:-docs}
 BUILD_DIR=${BUILD_DIR:-cache}
 COMMUNITY_NEWS_HTML=${COMMUNITY_NEWS_HTML:-$BUILD_DIR/community-news.html}
+COMMUNITY_NEWS_MANIFEST=${COMMUNITY_NEWS_MANIFEST:-$BUILD_DIR/community-news-pages.list}
 NEWS_ARTICLES_DIR=${NEWS_ARTICLES_DIR:-$PUBLIC_DIR/news}
 
 abs_path() {
@@ -70,6 +71,7 @@ slugify() {
 NEWS_SRC=$(abs_path "$NEWS_DIR")
 TOOLS=$(abs_path "$TOOLS_DIR")
 OUT=$(abs_path "$COMMUNITY_NEWS_HTML")
+MANIFEST=$(abs_path "$COMMUNITY_NEWS_MANIFEST")
 NEWS_PAGES=$(abs_path "$NEWS_ARTICLES_DIR")
 NEWS_ARTICLE_RENDERER="$TOOLS/render-news-article.sh"
 
@@ -78,12 +80,37 @@ if [ ! -x "$NEWS_ARTICLE_RENDERER" ]; then
   exit 1
 fi
 
-mkdir -p "$(dirname -- "$OUT")" "$NEWS_PAGES"
+mkdir -p "$(dirname -- "$OUT")" "$(dirname -- "$MANIFEST")" "$NEWS_PAGES"
 
 rows=$(mktemp)
-trap 'rm -f "$rows"' EXIT
+new_manifest=$(mktemp)
+trap 'rm -f "$rows" "$new_manifest"' EXIT HUP INT TERM
 
 : > "$rows"
+: > "$new_manifest"
+
+publish_news_manifest() {
+  manifest_tmp="$MANIFEST.tmp.$$"
+
+  if [ -f "$MANIFEST" ]; then
+    while IFS= read -r generated; do
+      [ -n "$generated" ] || continue
+
+      if ! printf '%s\n' "$generated" | grep -Eq '^[a-z0-9][a-z0-9-]*\.html$'; then
+        printf 'warning: ignoring unsafe community news manifest entry: %s\n' "$generated" >&2
+        continue
+      fi
+
+      if ! grep -qxF "$generated" "$new_manifest"; then
+        rm -f "$NEWS_PAGES/$generated"
+        printf 'removed stale %s\n' "$(rel_from_project "$NEWS_PAGES/$generated")"
+      fi
+    done < "$MANIFEST"
+  fi
+
+  sort -u "$new_manifest" > "$manifest_tmp"
+  mv "$manifest_tmp" "$MANIFEST"
+}
 
 if [ ! -d "$NEWS_SRC" ]; then
   cat > "$OUT" <<EOF_EMPTY
@@ -91,7 +118,9 @@ if [ ! -d "$NEWS_SRC" ]; then
         <p>No community or project news entries were found.</p>
       </div>
 EOF_EMPTY
+  publish_news_manifest
   printf 'generated %s\n' "$(rel_from_project "$OUT")"
+  printf 'generated %s\n' "$(rel_from_project "$MANIFEST")"
   exit 0
 fi
 
@@ -154,6 +183,8 @@ for file in "$NEWS_SRC"/*.md; do
     "$summary" \
     "$href" >> "$rows"
 
+  printf '%s\n' "$slug.html" >> "$new_manifest"
+
   rm -f "$body"
   printf 'generated %s\n' "$(rel_from_project "$out_file")"
 done
@@ -207,4 +238,6 @@ tmp=$(mktemp)
 } > "$tmp"
 
 mv "$tmp" "$OUT"
+publish_news_manifest
 printf 'generated %s\n' "$(rel_from_project "$OUT")"
+printf 'generated %s\n' "$(rel_from_project "$MANIFEST")"
