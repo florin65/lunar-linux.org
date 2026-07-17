@@ -45,6 +45,12 @@ json_escape() {
     -e ':a;N;$!ba;s/\n/\\n/g'
 }
 
+valid_log_date() {
+  value=$1
+
+  date -d "$value" '+%F' 2>/dev/null | grep -qxF "$value"
+}
+
 LOG_DIR=$(abs_path "$MOONBASE_LOG_DIR")
 OUT=$(abs_path "$MOONBASE_NEWS_JSON")
 OUT_DIR=$(dirname -- "$OUT")
@@ -66,9 +72,65 @@ if [ -d "$LOG_DIR" ]; then
   find "$LOG_DIR" -type f -name '*.log' | sort | while IFS= read -r log; do
     repo=$(basename -- "$log" .log)
 
+    [ -n "$repo" ] ||
+      {
+        printf 'empty repository name for log: %s\n' "$log" >&2
+        exit 1
+      }
+
+    case "$repo" in
+      *"	"*)
+        printf 'tab in repository name for log: %s\n' "$log" >&2
+        exit 1
+        ;;
+    esac
+
+    line_number=0
     while IFS='|' read -r date commit subject || [ -n "$date$commit$subject" ]; do
-      [ -n "$date" ] || continue
-      [ -n "$subject" ] || continue
+      line_number=$((line_number + 1))
+
+      [ -n "$date" ] ||
+        {
+          printf 'missing date in %s:%s\n' "$log" "$line_number" >&2
+          exit 1
+        }
+
+      valid_log_date "$date" ||
+        {
+          printf 'invalid date in %s:%s: %s\n' \
+            "$log" "$line_number" "$date" >&2
+          exit 1
+        }
+
+      [ -n "$commit" ] ||
+        {
+          printf 'missing commit in %s:%s\n' "$log" "$line_number" >&2
+          exit 1
+        }
+
+      case "$commit" in
+        *[!0-9a-f]*)
+          printf 'invalid commit hash in %s:%s: %s\n' \
+            "$log" "$line_number" "$commit" >&2
+          exit 1
+          ;;
+      esac
+
+      [ -n "$subject" ] ||
+        {
+          printf 'missing subject in %s:%s\n' "$log" "$line_number" >&2
+          exit 1
+        }
+
+      case "$date$commit" in
+        *"	"*)
+          printf 'tab in commit log key at %s:%s\n' \
+            "$log" "$line_number" >&2
+          exit 1
+          ;;
+      esac
+
+      subject=$(printf '%s' "$subject" | tr '\t\r' '  ')
 
       printf '%s\t%s\t%s\t%s\n' \
         "$date" "$repo" "$commit" "$subject" >> "$ROWS"
