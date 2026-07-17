@@ -808,11 +808,19 @@ valid_news_date() {
     grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}([[:space:]][0-9]{2}:[0-9]{2})?$'
 }
 
-build_news_json() {
-  tmp="$NEWS_OUT.tmp"
+build_news_json() (
   out_dir=$(dirname -- "$NEWS_OUT")
+  tmp=
+
+  cleanup_news_json() {
+    rm -f "$tmp"
+  }
+
+  trap cleanup_news_json EXIT HUP INT TERM
 
   mkdir -p "$out_dir"
+  tmp=$(mktemp "$out_dir/.news-json.XXXXXX")
+
   printf '[
 ' > "$tmp"
   first=1
@@ -849,22 +857,25 @@ build_news_json() {
       fi
       first=0
 
-      printf '  {"date":"%s","category":"%s","title":"%s","slug":"%s","summary":"%s"}' \
-        "$(json_escape "$date")" \
-        "$(json_escape "$category")" \
-        "$(json_escape "$title")" \
-        "$(json_escape "$slug")" \
-        "$(json_escape "$summary")" >> "$tmp"
+      printf '  {"date":"%s","category":"%s","title":"%s","slug":"%s","summary":"%s"}'         "$(json_escape "$date")"         "$(json_escape "$category")"         "$(json_escape "$title")"         "$(json_escape "$slug")"         "$(json_escape "$summary")" >> "$tmp"
     done
   fi
 
   printf '
 ]
 ' >> "$tmp"
-  mv "$tmp" "$NEWS_OUT"
+
+  if ! mv "$tmp" "$NEWS_OUT"; then
+    printf 'could not publish generated news JSON: %s
+' "$NEWS_OUT" >&2
+    exit 1
+  fi
+
+  tmp=
+
   printf 'generated %s
 ' "$(rel_from_project "$NEWS_OUT")"
-}
+)
 
 update_dynamic_data() {
   if [ "$UPDATE_DYNAMIC_DATA" != "yes" ]; then
