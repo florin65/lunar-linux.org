@@ -49,42 +49,76 @@ function slug_id(s,    t) {
 }
 
 
-function inline(s,    out, pre, label, url, rest, p1, p2, code) {
-  s = esc(s)
+function inline(s,    out, pos, len, kind_name, pre, token, label, url, rest, p1, p2, content, p) {
   out = ""
 
-  while (match(s, /`[^`]+`/)) {
-    pre = substr(s, 1, RSTART - 1)
-    code = substr(s, RSTART + 1, RLENGTH - 2)
-    out = out pre "<code>" code "</code>"
-    s = substr(s, RSTART + RLENGTH)
+  while (s != "") {
+    pos = 0
+    len = 0
+    kind_name = ""
+
+    if (match(s, /`[^`]+`/)) {
+      pos = RSTART
+      len = RLENGTH
+      kind_name = "code"
+    }
+
+    if (match(s, /\[[^]]+\]\([^)]+\)/)) {
+      if (pos == 0 || RSTART < pos) {
+        pos = RSTART
+        len = RLENGTH
+        kind_name = "link"
+      }
+    }
+
+    if (match(s, /\*\*[^*]+\*\*/)) {
+      if (pos == 0 || RSTART < pos) {
+        pos = RSTART
+        len = RLENGTH
+        kind_name = "strong"
+      }
+    }
+
+    if (match(s, /\*[^*]+\*/)) {
+      if (pos == 0 || RSTART < pos) {
+        pos = RSTART
+        len = RLENGTH
+        kind_name = "em"
+      }
+    }
+
+    if (pos == 0) {
+      out = out esc(s)
+      break
+    }
+
+    pre = substr(s, 1, pos - 1)
+    out = out esc(pre)
+    token = substr(s, pos, len)
+
+    if (kind_name == "code") {
+      content = substr(token, 2, length(token) - 2)
+      out = out "<code>" esc(content) "</code>"
+    } else if (kind_name == "link") {
+      p1 = index(token, "](")
+      label = substr(token, 2, p1 - 2)
+      rest = substr(token, p1 + 2)
+      p2 = length(rest) - 1
+      url = substr(rest, 1, p2)
+
+      out = out "<a href="" attr(url) "">" inline(label) "</a>"
+    } else if (kind_name == "strong") {
+      content = substr(token, 3, length(token) - 4)
+      out = out "<strong>" inline(content) "</strong>"
+    } else if (kind_name == "em") {
+      content = substr(token, 2, length(token) - 2)
+      out = out "<em>" inline(content) "</em>"
+    }
+
+    s = substr(s, pos + len)
   }
 
-  s = out s
-  out = ""
-
-  while (match(s, /\[[^]]+\]\([^)]+\)/)) {
-    pre = substr(s, 1, RSTART - 1)
-    p1 = index(substr(s, RSTART), "](")
-    label = substr(s, RSTART + 1, p1 - 2)
-    rest = substr(s, RSTART + p1 + 1)
-    p2 = index(rest, ")")
-    url = substr(rest, 1, p2 - 1)
-    out = out pre "<a href=\"" attr(url) "\">" inline(label) "</a>"
-    s = substr(rest, p2 + 1)
-  }
-
-  s = out s
-
-  while (match(s, /\*\*[^*]+\*\*/)) {
-    s = substr(s, 1, RSTART - 1) "<strong>" substr(s, RSTART + 2, RLENGTH - 4) "</strong>" substr(s, RSTART + RLENGTH)
-  }
-
-  while (match(s, /\*[^*]+\*/)) {
-    s = substr(s, 1, RSTART - 1) "<em>" substr(s, RSTART + 1, RLENGTH - 2) "</em>" substr(s, RSTART + RLENGTH)
-  }
-
-  return s
+  return out
 }
 
 function add(k, v) {
