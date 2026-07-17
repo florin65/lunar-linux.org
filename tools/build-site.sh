@@ -1018,18 +1018,78 @@ update_archive() {
     "$TOOLS/archive.sh" news "$NEWS_SRC"
 }
 
-publish_archive_assets() {
+publish_archive_assets() (
   src="$ARCHIVE"
   dst="$PUBLIC/archive"
+  archive_tar=
+  stage=
+  backup=
 
   [ -d "$src" ] || return 0
 
-  rm -rf "$dst"
-  mkdir -p "$dst"
+  cleanup_archive_publish() {
+    rm -f "$archive_tar"
+    rm -rf "$stage"
 
-  (cd "$src" && tar cf - .) | (cd "$dst" && tar xf -)
-  printf 'published %s\n' "$(rel_from_project "$dst")"
-}
+    if [ -n "$backup" ] && [ -d "$backup" ]; then
+      if [ ! -e "$dst" ]; then
+        mv "$backup" "$dst" 2>/dev/null || true
+      else
+        rm -rf "$backup"
+      fi
+    fi
+  }
+
+  trap cleanup_archive_publish EXIT HUP INT TERM
+
+  archive_tar=$(mktemp "$BUILD/.archive-assets.XXXXXX")
+  stage=$(mktemp -d "$PUBLIC/.archive-stage.XXXXXX")
+
+  if ! (cd "$src" && tar cf "$archive_tar" .); then
+    printf 'could not package archive assets: %s
+' "$src" >&2
+    exit 1
+  fi
+
+  if ! (cd "$stage" && tar xf "$archive_tar"); then
+    printf 'could not stage archive assets: %s
+' "$src" >&2
+    exit 1
+  fi
+
+  if [ -e "$dst" ]; then
+    backup=$(mktemp -d "$PUBLIC/.archive-backup.XXXXXX")
+    rmdir "$backup"
+
+    if ! mv "$dst" "$backup"; then
+      printf 'could not preserve published archive assets: %s
+' "$dst" >&2
+      exit 1
+    fi
+  fi
+
+  if ! mv "$stage" "$dst"; then
+    printf 'could not publish archive assets: %s
+' "$dst" >&2
+
+    if [ -n "$backup" ] && [ -d "$backup" ] && [ ! -e "$dst" ]; then
+      mv "$backup" "$dst" 2>/dev/null || true
+      backup=
+    fi
+
+    exit 1
+  fi
+
+  stage=
+
+  if [ -n "$backup" ]; then
+    rm -rf "$backup"
+    backup=
+  fi
+
+  printf 'published %s
+' "$(rel_from_project "$dst")"
+)
 
 write_redirect_page() (
   old_name="$1"
