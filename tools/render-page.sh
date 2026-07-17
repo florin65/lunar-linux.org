@@ -1123,8 +1123,6 @@ END {
       while (i <= ln && lines[i] !~ /^```/) {
         code = code lines[i] "\n"
         i++
-        if (i <= ln && lines[i] == "")
-            i++
       }
 
       add("code", code)
