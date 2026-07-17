@@ -316,6 +316,15 @@ if ! valid_news_date "$date"; then
   exit 1
 fi
 
+case "$date" in
+  *" "*)
+    date_datetime=${date%% *}T${date#* }:00
+    ;;
+  *)
+    date_datetime=$date
+    ;;
+esac
+
 if ! grep -q '[^[:space:]]' "$body"; then
   printf 'invalid news source %s: empty body\n' "$SOURCE" >&2
   exit 1
@@ -349,7 +358,7 @@ EOF_PAGE
 <main class="page-main">
   <section class="page-hero">
     <div class="container">
-      <p class="meta-line">$(html_attr_escape "$category") · $(html_attr_escape "$date")</p>
+      <p class="meta-line">$(html_attr_escape "$category") · <time datetime="$(html_attr_escape "$date_datetime")">$(html_attr_escape "$date")</time></p>
       <h1>$(html_attr_escape "$title")</h1>
     </div>
   </section>
