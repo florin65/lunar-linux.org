@@ -347,24 +347,122 @@ EOF_MOONBASE
     return 0
   fi
 
-  moonbase_commits_count=$(
-    grep -c '"category":"Moonbase"' "$MOONBASE_NEWS" 2>/dev/null || true
-  )
+  moonbase_stats=$(
+    awk '
+      function json_decode(s,    out, i, c) {
+        out = ""
 
-  moonbase_repositories_changed=$(
-    sed -n 's/.*"repository":"\([^"]*\)".*/\1/p' "$MOONBASE_NEWS" |
-      awk 'NF && !seen[$0]++ { count++ } END { print count + 0 }'
-  )
+        for (i = 1; i <= length(s); i++) {
+          c = substr(s, i, 1)
 
-  moonbase_modules_changed=$(
-    sed -n 's/.*"module":"\([^"]*\)".*/\1/p' "$MOONBASE_NEWS" |
-      awk 'NF && !seen[$0]++ { count++ } END { print count + 0 }'
-  )
+          if (c != "\\") {
+            out = out c
+            continue
+          }
 
-  moonbase_version_bumps=$(
-    sed -n 's/.*"summary":"\([^"]*\)".*/\1/p' "$MOONBASE_NEWS" |
-      awk 'BEGIN { IGNORECASE = 1 } /version bumped to|bump to/ { count++ } END { print count + 0 }'
-  )
+          i++
+          if (i > length(s)) {
+            out = out "\\"
+            break
+          }
+
+          c = substr(s, i, 1)
+
+          if (c == "\"") {
+            out = out "\""
+          } else if (c == "\\") {
+            out = out "\\"
+          } else if (c == "/") {
+            out = out "/"
+          } else if (c == "n") {
+            out = out "\n"
+          } else if (c == "r") {
+            out = out "\r"
+          } else if (c == "t") {
+            out = out "\t"
+          } else {
+            out = out "\\" c
+          }
+        }
+
+        return out
+      }
+
+      function field(line, key,    pat, start, rest, raw, i, c) {
+        pat = "\"" key "\":\""
+        start = index(line, pat)
+
+        if (!start)
+          return ""
+
+        rest = substr(line, start + length(pat))
+        raw = ""
+
+        for (i = 1; i <= length(rest); i++) {
+          c = substr(rest, i, 1)
+
+          if (c == "\\") {
+            raw = raw c
+
+            if (i < length(rest)) {
+              i++
+              raw = raw substr(rest, i, 1)
+            }
+
+            continue
+          }
+
+          if (c == "\"")
+            return json_decode(raw)
+
+          raw = raw c
+        }
+
+        return json_decode(raw)
+      }
+
+      {
+        category = field($0, "category")
+
+        if (category != "Moonbase")
+          next
+
+        commits++
+
+        repository = field($0, "repository")
+        module = field($0, "module")
+        summary = tolower(field($0, "summary"))
+
+        if (repository != "" && !repositories[repository]++)
+          repository_count++
+
+        if (module != "" && !modules[module]++)
+          module_count++
+
+        if (summary ~ /version bumped to|bump to/)
+          version_bumps++
+      }
+
+      END {
+        print commits + 0, repository_count + 0, module_count + 0, version_bumps + 0
+      }
+    ' "$MOONBASE_NEWS"
+  ) || {
+    printf 'could not calculate Moonbase statistics: %s\n' "$MOONBASE_NEWS" >&2
+    return 1
+  }
+
+  set -- $moonbase_stats
+
+  if [ "$#" -ne 4 ]; then
+    printf 'invalid Moonbase statistics output: %s\n' "$moonbase_stats" >&2
+    return 1
+  fi
+
+  moonbase_commits_count=$1
+  moonbase_repositories_changed=$2
+  moonbase_modules_changed=$3
+  moonbase_version_bumps=$4
 
   moonbase_other_commits=$((moonbase_commits_count - moonbase_version_bumps))
   [ "$moonbase_other_commits" -ge 0 ] || moonbase_other_commits=0
