@@ -110,18 +110,48 @@ render_body() {
       return s
     }
 
-    function inline(s,    out, pre, label, url, rest, p1, p2, code) {
+    function style(s) {
+      while (match(s, /\*\*[^*]+\*\*/)) {
+        s = substr(s, 1, RSTART - 1) "<strong>" substr(s, RSTART + 2, RLENGTH - 4) "</strong>" substr(s, RSTART + RLENGTH)
+      }
+
+      while (match(s, /\*[^*]+\*/)) {
+        s = substr(s, 1, RSTART - 1) "<em>" substr(s, RSTART + 1, RLENGTH - 2) "</em>" substr(s, RSTART + RLENGTH)
+      }
+
+      return s
+    }
+
+    function replace_token(s, token, value,    p) {
+      p = index(s, token)
+      while (p) {
+        s = substr(s, 1, p - 1) value substr(s, p + length(token))
+        p = index(s, token)
+      }
+      return s
+    }
+
+    function inline(s,    i, marker, token, pre, label, url, rest, p1, p2, code) {
+      for (i = 1; i <= code_count; i++) {
+        delete code_value[i]
+      }
+      for (i = 1; i <= link_count; i++) {
+        delete link_value[i]
+      }
+      code_count = 0
+      link_count = 0
+      marker = sprintf("%c", 29)
+
       s = esc(s)
-      out = ""
 
       while (match(s, /`[^`]+`/)) {
         pre = substr(s, 1, RSTART - 1)
         code = substr(s, RSTART + 1, RLENGTH - 2)
-        out = out pre "<code>" code "</code>"
-        s = substr(s, RSTART + RLENGTH)
+        code_count++
+        code_value[code_count] = "<code>" code "</code>"
+        token = marker "C" code_count marker
+        s = pre token substr(s, RSTART + RLENGTH)
       }
-      s = out s
-      out = ""
 
       while (match(s, /\[[^]]+\]\([^)]+\)/)) {
         pre = substr(s, 1, RSTART - 1)
@@ -130,17 +160,21 @@ render_body() {
         rest = substr(s, RSTART + p1 + 1)
         p2 = index(rest, ")")
         url = substr(rest, 1, p2 - 1)
-        out = out pre "<a href=\"" attr(url) "\">" label "</a>"
-        s = substr(rest, p2 + 1)
-      }
-      s = out s
-
-      while (match(s, /\*\*[^*]+\*\*/)) {
-        s = substr(s, 1, RSTART - 1) "<strong>" substr(s, RSTART + 2, RLENGTH - 4) "</strong>" substr(s, RSTART + RLENGTH)
+        link_count++
+        link_value[link_count] = "<a href=\"" attr(url) "\">" style(label) "</a>"
+        token = marker "L" link_count marker
+        s = pre token substr(rest, p2 + 1)
       }
 
-      while (match(s, /\*[^*]+\*/)) {
-        s = substr(s, 1, RSTART - 1) "<em>" substr(s, RSTART + 1, RLENGTH - 2) "</em>" substr(s, RSTART + RLENGTH)
+      s = style(s)
+
+      for (i = 1; i <= link_count; i++) {
+        token = marker "L" i marker
+        s = replace_token(s, token, link_value[i])
+      }
+      for (i = 1; i <= code_count; i++) {
+        token = marker "C" i marker
+        s = replace_token(s, token, code_value[i])
       }
 
       return s
