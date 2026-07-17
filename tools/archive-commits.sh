@@ -80,7 +80,15 @@ while IFS= read -r day; do
     fi
   fi
 
-  grep '"date"[[:space:]]*:[[:space:]]*"'"$day"'"' "$objects" > "$incoming" || true
+  : > "$incoming"
+
+  while IFS= read -r obj; do
+    object_day=$(printf '%s\n' "$obj" | archive_json_field date | head -1)
+
+    if [ "$object_day" = "$day" ]; then
+      printf '%s\n' "$obj" >> "$incoming"
+    fi
+  done < "$objects"
 
   cat "$existing" > "$merged"
   : > "$seen"
