@@ -84,7 +84,18 @@ count=0
 skipped=0
 
 find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
-  date_line=$(sed -n 's/^Date:[[:space:]]*//p' "$f" | head -1)
+  metadata="$tmpdir/news-metadata"
+  awk '
+    /^[[:space:]]*$/ {
+      exit
+    }
+
+    {
+      print
+    }
+  ' "$f" > "$metadata"
+
+  date_line=$(sed -n 's/^Date:[[:space:]]*//p' "$metadata" | head -1)
 
   if valid_news_date "$date_line"; then
     archive_date=$date_line
@@ -106,8 +117,8 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
   index="$outdir/index.json"
   source_is_new=0
 
-  title=$(sed -n 's/^Title:[[:space:]]*//p' "$f" | head -1)
-  category=$(sed -n 's/^Category:[[:space:]]*//p' "$f" | head -1)
+  title=$(sed -n 's/^Title:[[:space:]]*//p' "$metadata" | head -1)
+  category=$(sed -n 's/^Category:[[:space:]]*//p' "$metadata" | head -1)
   [ -n "$title" ] || title="$slug"
   [ -n "$category" ] || category="News"
 
