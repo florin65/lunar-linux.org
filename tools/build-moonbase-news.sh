@@ -141,6 +141,22 @@ fi
 TAB=$(printf '\t')
 LC_ALL=C sort -t "$TAB" -k1,1r -k2,2 -k3,3 "$ROWS" > "$SORTED_ROWS"
 
+DUPLICATE_KEYS=$(mktemp)
+trap 'rm -f "$ROWS" "$SORTED_ROWS" "$DUPLICATE_KEYS" "$OUT_TMP"' EXIT HUP INT TERM
+
+cut -f2,3 "$SORTED_ROWS" |
+  LC_ALL=C sort |
+  uniq -d > "$DUPLICATE_KEYS"
+
+if [ -s "$DUPLICATE_KEYS" ]; then
+  while IFS='	' read -r repo commit; do
+    printf 'duplicate Moonbase commit entry: %s %s\n' \
+      "$repo" "$commit" >&2
+  done < "$DUPLICATE_KEYS"
+
+  exit 1
+fi
+
 printf '[\n' > "$OUT_TMP"
 first=1
 
