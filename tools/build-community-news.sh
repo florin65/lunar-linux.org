@@ -120,7 +120,9 @@ mkdir -p "$(dirname -- "$OUT")" "$(dirname -- "$MANIFEST")" "$NEWS_PAGES"
 rows=$(mktemp)
 new_manifest=$(mktemp)
 slug_registry=$(mktemp -d)
-trap 'rm -f "$rows" "$new_manifest"; rm -rf "$slug_registry"' EXIT HUP INT TERM
+staged_pages=$(mktemp -d)
+tmp=
+trap 'rm -f "$rows" "$new_manifest" ${tmp:+"$tmp"}; rm -rf "$slug_registry" "$staged_pages"' EXIT HUP INT TERM
 
 : > "$rows"
 : > "$new_manifest"
@@ -228,8 +230,9 @@ for file in "$NEWS_SRC"/*.md; do
   fi
   printf '%s\n' "$file" > "$slug_owner"
 
-  out_file="$NEWS_PAGES/$slug.html"
-  href="news/$slug.html"
+  page_name="$slug.html"
+  out_file="$staged_pages/$page_name"
+  href="news/$page_name"
   date_short=$(printf '%s\n' "$date" | awk '{ print $1 }')
   case "$date" in
     *" "*) date_html="${date%% *}T${date#* }" ;;
@@ -257,10 +260,10 @@ for file in "$NEWS_SRC"/*.md; do
     "$summary" \
     "$href" >> "$rows"
 
-  printf '%s\n' "$slug.html" >> "$new_manifest"
+  printf '%s\n' "$page_name" >> "$new_manifest"
 
   rm -f "$body"
-  printf 'generated %s\n' "$(rel_from_project "$out_file")"
+  printf 'staged %s\n' "$(rel_from_project "$NEWS_PAGES/$page_name")"
 done
 
 tmp=$(mktemp)
@@ -311,7 +314,14 @@ tmp=$(mktemp)
   printf '      </div>\n'
 } > "$tmp"
 
+while IFS= read -r generated; do
+  [ -n "$generated" ] || continue
+  mv "$staged_pages/$generated" "$NEWS_PAGES/$generated"
+  printf 'generated %s\n' "$(rel_from_project "$NEWS_PAGES/$generated")"
+done < "$new_manifest"
+
 mv "$tmp" "$OUT"
+tmp=
 publish_news_manifest
 printf 'generated %s\n' "$(rel_from_project "$OUT")"
 printf 'generated %s\n' "$(rel_from_project "$MANIFEST")"
