@@ -68,6 +68,41 @@ slugify() {
       -e 's/-$//'
 }
 
+valid_news_date() {
+  value=$1
+  day=${value%% *}
+
+  case "$value" in
+    "$day")
+      hour=
+      minute=
+      ;;
+    "$day "*)
+      time_part=${value#"$day "}
+      hour=${time_part%:*}
+      minute=${time_part#*:}
+      ;;
+  esac
+
+  if ! date -d "$day" '+%F' 2>/dev/null | grep -qxF "$day"; then
+    return 1
+  fi
+
+  if [ -n "$hour" ]; then
+    case "$hour" in
+      0[0-9]|1[0-9]|2[0-3]) ;;
+      *) return 1 ;;
+    esac
+
+    case "$minute" in
+      [0-5][0-9]) ;;
+      *) return 1 ;;
+    esac
+  fi
+
+  return 0
+}
+
 NEWS_SRC=$(abs_path "$NEWS_DIR")
 TOOLS=$(abs_path "$TOOLS_DIR")
 OUT=$(abs_path "$COMMUNITY_NEWS_HTML")
@@ -147,6 +182,13 @@ for file in "$NEWS_SRC"/*.md; do
 
   if ! printf '%s\n' "$date" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}([[:space:]][0-9]{2}:[0-9]{2})?$'; then
     printf 'warning: rejecting invalid news file %s: invalid Date format\n' "$(rel_from_project "$file")" >&2
+    rm -f "$body"
+    continue
+  fi
+
+  if ! valid_news_date "$date"; then
+    printf 'warning: rejecting invalid news file %s: impossible Date value: %s\n' \
+      "$(rel_from_project "$file")" "$date" >&2
     rm -f "$body"
     continue
   fi
