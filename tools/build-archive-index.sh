@@ -227,17 +227,6 @@ build_news_fragment() {
         done
     done
 
-  find "$news_pages_stage" -type f | sort |
-    while IFS= read -r staged_file; do
-      staged_rel=${staged_file#"$news_pages_stage"/}
-      public_file="$PUBLIC_DIR/archive/$staged_rel"
-      archive_mkdir "$(dirname -- "$public_file")"
-      mv "$staged_file" "$public_file"
-    done
-
-  rm -rf "$news_pages_stage"
-  news_pages_stage=
-
   {
     echo '      <div class="community-news-journal archive-journal">'
     echo '        <table class="community-news-table archive-news-table">'
@@ -284,6 +273,17 @@ build_news_fragment() {
     echo '        </table>'
     echo '      </div>'
   } > "$news_fragment_tmp"
+
+  find "$news_pages_stage" -type f | sort |
+    while IFS= read -r staged_file; do
+      staged_rel=${staged_file#"$news_pages_stage"/}
+      public_file="$PUBLIC_DIR/archive/$staged_rel"
+      archive_mkdir "$(dirname -- "$public_file")"
+      mv "$staged_file" "$public_file"
+    done
+
+  rm -rf "$news_pages_stage"
+  news_pages_stage=
 
   mv "$news_fragment_tmp" "$news_out"
   news_fragment_tmp=
