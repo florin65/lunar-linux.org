@@ -1031,12 +1031,21 @@ publish_archive_assets() {
   printf 'published %s\n' "$(rel_from_project "$dst")"
 }
 
-write_redirect_page() {
+write_redirect_page() (
   old_name="$1"
   new_target="$2"
   out="$PUBLIC/$old_name.html"
+  redirect_tmp=
 
-  cat > "$out" <<EOF_REDIRECT
+  cleanup_redirect_file() {
+    rm -f "$redirect_tmp"
+  }
+
+  trap cleanup_redirect_file EXIT HUP INT TERM
+
+  redirect_tmp=$(mktemp "$PUBLIC/.redirect-output.XXXXXX")
+
+  cat > "$redirect_tmp" <<EOF_REDIRECT
 <!doctype html>
 <html lang="en">
 <head>
@@ -1052,8 +1061,17 @@ write_redirect_page() {
 </html>
 EOF_REDIRECT
 
-  printf 'generated redirect %s -> %s\n' "$(rel_from_project "$out")" "$new_target"
-}
+  if ! mv "$redirect_tmp" "$out"; then
+    printf 'could not publish redirect page: %s
+' "$out" >&2
+    exit 1
+  fi
+
+  redirect_tmp=
+
+  printf 'generated redirect %s -> %s
+' "$(rel_from_project "$out")" "$new_target"
+)
 
 main() {
   if [ ! -d "$SRC" ]; then
