@@ -1292,8 +1292,9 @@ main() {
 
   write_redirect_page news info.html
   write_redirect_page archive info.html
-
-  cleanup_temp_files
 }
+
+trap cleanup_temp_files EXIT
+trap 'exit 1' HUP INT TERM
 
 main "$@"
