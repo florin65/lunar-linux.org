@@ -106,7 +106,7 @@ function inline(s,    out, pos, len, kind_name, pre, token, label, url, rest, p1
       p2 = length(rest) - 1
       url = substr(rest, 1, p2)
 
-      out = out "<a href="" attr(url) "">" inline(label) "</a>"
+      out = out "<a href=\\"" attr(url) "\\">" inline(label) "</a>"
     } else if (kind_name == "strong") {
       content = substr(token, 3, length(token) - 4)
       out = out "<strong>" inline(content) "</strong>"
