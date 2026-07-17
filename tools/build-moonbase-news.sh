@@ -178,7 +178,11 @@ if [ -d "$LOG_DIR" ]; then
 fi
 
 TAB=$(printf '\t')
-LC_ALL=C sort -t "$TAB" -k1,1r -k2,2 -k3,3 "$ROWS" > "$SORTED_ROWS"
+if ! LC_ALL=C sort -t "$TAB" -k1,1r -k2,2 -k3,3 \
+  "$ROWS" > "$SORTED_ROWS"; then
+  printf 'could not sort Moonbase news rows\n' >&2
+  exit 1
+fi
 
 DUPLICATE_KEYS=$(mktemp)
 DUPLICATE_KEYS_SORTED=$(mktemp)
