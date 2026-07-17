@@ -72,8 +72,13 @@ OUT_TMP=$(mktemp "$OUT_DIR/.daily-iso.XXXXXX")
 curl -fsSL "$URL" -o "$HTML"
 
 ISO_URL=$(
-  sed -n 's/.*href="\([^"]*lunar-[^"]*\.iso\)".*/\1/p' "$HTML" |
-  head -n 1
+  awk '
+    match($0, /href="[^"]*lunar-[^"]*\.iso"/) {
+      value = substr($0, RSTART + 6, RLENGTH - 7)
+      print value
+      exit
+    }
+  ' "$HTML"
 )
 
 if [ -z "$ISO_URL" ]; then
@@ -95,8 +100,12 @@ SHA256=$(
 
 ISO_DATE=$(
   printf '%s\n' "$ISO_FILE" |
-  sed -n 's/.*\([0-9][0-9][0-9][0-9][-]\?[0-9][0-9][-]\?[0-9][0-9]\).*/\1/p' |
-  head -n 1
+  awk '
+    match($0, /[0-9][0-9][0-9][0-9]-?[0-9][0-9]-?[0-9][0-9]/) {
+      print substr($0, RSTART, RLENGTH)
+      exit
+    }
+  '
 )
 
 case "$ISO_DATE" in
