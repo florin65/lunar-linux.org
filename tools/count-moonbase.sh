@@ -33,10 +33,24 @@ abs_path() {
   esac
 }
 
+rel_from_project() {
+  case "$1" in
+    "$PROJECT_ROOT"/*) printf '%s\n' "${1#$PROJECT_ROOT/}" ;;
+    *) printf '%s\n' "$1" ;;
+  esac
+}
+
 MOONBASE_PATH=$(abs_path "$MOONBASE_DIR")
 OUT=$(abs_path "$MOONBASE_STATS_JSON")
 OUT_DIR=$(dirname -- "$OUT")
-TMP="$OUT.tmp"
+MODULE_LIST=
+OUT_TMP=
+
+cleanup() {
+  rm -f "$MODULE_LIST" "$OUT_TMP"
+}
+
+trap cleanup EXIT HUP INT TERM
 
 if [ ! -d "$MOONBASE_PATH" ]; then
   printf 'missing Moonbase directory: %s\n' "$MOONBASE_PATH" >&2
@@ -45,18 +59,40 @@ fi
 
 mkdir -p "$OUT_DIR"
 
-COUNT=$(
-  find "$MOONBASE_PATH" \
-    -path '*/zlocal' -prune -o \
-    -path '*/zlocal/*' -prune -o \
-    -type f -name DETAILS -print | wc -l | tr -d '[:space:]'
-)
+MODULE_LIST=$(mktemp)
 
-cat > "$TMP" <<EOF_JSON
+if ! find "$MOONBASE_PATH" \
+  -path '*/zlocal' -prune -o \
+  -path '*/zlocal/*' -prune -o \
+  -type f -name DETAILS -print > "$MODULE_LIST"; then
+  printf 'could not enumerate Moonbase modules: %s\n' \
+    "$MOONBASE_PATH" >&2
+  exit 1
+fi
+
+COUNT=$(wc -l < "$MODULE_LIST")
+COUNT=$(printf '%s' "$COUNT" | tr -d '[:space:]')
+
+case "$COUNT" in
+  ''|*[!0-9]*)
+    printf 'invalid Moonbase module count: %s\n' "$COUNT" >&2
+    exit 1
+    ;;
+esac
+
+OUT_TMP=$(mktemp "$OUT_DIR/.moonbase-stats.XXXXXX")
+
+cat > "$OUT_TMP" <<EOF_JSON
 {
   "modules": $COUNT
 }
 EOF_JSON
 
-mv "$TMP" "$OUT"
-printf 'generated %s\n' "${OUT#$PROJECT_ROOT/}"
+if ! mv "$OUT_TMP" "$OUT"; then
+  printf 'could not publish Moonbase statistics: %s\n' "$OUT" >&2
+  exit 1
+fi
+
+OUT_TMP=
+
+printf 'generated %s\n' "$(rel_from_project "$OUT")"
