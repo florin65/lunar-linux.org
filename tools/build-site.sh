@@ -869,9 +869,10 @@ valid_news_date() {
 build_news_json() (
   out_dir=$(dirname -- "$NEWS_OUT")
   tmp=
+  news_list=
 
   cleanup_news_json() {
-    rm -f "$tmp"
+    rm -f "$tmp" "$news_list"
   }
 
   trap cleanup_news_json EXIT HUP INT TERM
@@ -884,7 +885,21 @@ build_news_json() (
   first=1
 
   if [ -d "$NEWS_SRC" ]; then
-    find "$NEWS_SRC" -type f -name '*.md' | sort -r | while IFS= read -r md; do
+    news_list=$(mktemp "$out_dir/.news-list.XXXXXX")
+
+    if ! find "$NEWS_SRC" -type f -name '*.md' > "$news_list"; then
+      printf 'could not enumerate news sources: %s
+' "$NEWS_SRC" >&2
+      exit 1
+    fi
+
+    if ! sort -r "$news_list" -o "$news_list"; then
+      printf 'could not sort news sources: %s
+' "$NEWS_SRC" >&2
+      exit 1
+    fi
+
+    while IFS= read -r md; do
       date=$(news_meta Date "$md")
       title=$(news_meta Title "$md")
       category=$(news_meta Category "$md")
@@ -916,7 +931,7 @@ build_news_json() (
       first=0
 
       printf '  {"date":"%s","category":"%s","title":"%s","slug":"%s","summary":"%s"}'         "$(json_escape "$date")"         "$(json_escape "$category")"         "$(json_escape "$title")"         "$(json_escape "$slug")"         "$(json_escape "$summary")" >> "$tmp"
-    done
+    done < "$news_list"
   fi
 
   printf '
