@@ -95,8 +95,25 @@ esac
 ISO_FILE=$(basename -- "$ISO_URL")
 
 SHA256=$(
-  grep -Eo '[a-fA-F0-9]{64}' "$HTML" | head -n 1 || true
-)
+  awk '
+    {
+      line = $0
+      while (match(line, /[[:xdigit:]]{64}/)) {
+        value = substr(line, RSTART, RLENGTH)
+        print tolower(value)
+        found++
+        line = substr(line, RSTART + RLENGTH)
+      }
+    }
+    END {
+      if (found != 1)
+        exit 1
+    }
+  ' "$HTML"
+) || {
+  printf 'expected exactly one SHA256 value at %s\n' "$URL" >&2
+  exit 1
+}
 
 ISO_DATE=$(
   printf '%s\n' "$ISO_FILE" |
