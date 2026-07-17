@@ -1,3 +1,11 @@
-2026-07-15|b47262f6a0|xsimd: Version bumped to 14.3.0
-2026-07-15|0b929c4dd0|atuin: Version bumped to 18.17.1
-2026-07-15|2ce238638c|minimagick: Version bumped to 5.3.2
+2026-07-16|ef8ddcf1b4|wakatime-cli: Version bumped to 2.22.2
+2026-07-16|9eb093d9d7|blosc2: Version bumped to 3.2.3
+2026-07-16|303a994c1c|netdata: Version bumped to 2.10.4
+2026-07-16|84494542d0|ripgrep: Version bumped to 15.2.0
+2026-07-16|39d6a87ba1|freerdp: version bumped to 3.29.0
+2026-07-16|e33725ad64|dav1d: version bumped to 1.5.4
+2026-07-16|d1813b4af3|wireshark: version bumped to 4.7.2
+2026-07-16|6b332c2572|nginx: version bumped to 1.31.3
+2026-07-16|cb5952523c|open-iscsi: version bumped to 2.1.12
+2026-07-16|ea1bab3a31|runc: version bumped to 1.5.1
+2026-07-16|da6459cd1a|libpathrs: C-friendly API to make path resolution safer on Linux
