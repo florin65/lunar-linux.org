@@ -144,7 +144,13 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
 
   if ! grep -qxF "$hash" "$seen"; then
     if [ -f "$outfile" ] || [ -f "$outfile.xz" ]; then
-      archived_hash=$(archive_cat "$outfile" | sha256sum | awk '{ print $1 }')
+      archived_source="$tmpdir/news-archived-source"
+
+      if ! archive_cat "$outfile" > "$archived_source"; then
+        archive_die "could not read archived news source: $outfile"
+      fi
+
+      archived_hash=$(archive_sha256_file "$archived_source")
       if [ "$archived_hash" != "$hash" ]; then
         archive_die "archived news source hash mismatch: $outfile"
       fi
