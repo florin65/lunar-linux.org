@@ -101,8 +101,104 @@ json_get_string() {
 
   [ -f "$file" ] || return 0
 
-  sed -n 's/^[[:space:]]*"'"$key"'"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$file" |
-    head -n 1
+  awk -v key="$key" '
+    function decode_json_string(raw,    out, i, c) {
+      out = ""
+
+      for (i = 1; i <= length(raw); i++) {
+        c = substr(raw, i, 1)
+
+        if (c != "\\") {
+          out = out c
+          continue
+        }
+
+        i++
+        if (i > length(raw))
+          return ""
+
+        c = substr(raw, i, 1)
+
+        if (c == "\"") {
+          out = out "\""
+        } else if (c == "\\") {
+          out = out "\\"
+        } else if (c == "/") {
+          out = out "/"
+        } else if (c == "n") {
+          out = out "\n"
+        } else if (c == "r") {
+          out = out "\r"
+        } else if (c == "t") {
+          out = out "\t"
+        } else {
+          return ""
+        }
+      }
+
+      return out
+    }
+
+    {
+      line = $0
+      pattern = "^[[:space:]]*\"" key "\"[[:space:]]*:[[:space:]]*\""
+
+      if (line !~ pattern)
+        next
+
+      sub(pattern, "", line)
+
+      raw = ""
+      escaped = 0
+      closed = 0
+
+      for (i = 1; i <= length(line); i++) {
+        c = substr(line, i, 1)
+
+        if (escaped) {
+          raw = raw "\\" c
+          escaped = 0
+          continue
+        }
+
+        if (c == "\\") {
+          escaped = 1
+          continue
+        }
+
+        if (c == "\"") {
+          closed = 1
+          rest = substr(line, i + 1)
+
+          if (rest !~ /^[[:space:]]*,?[[:space:]]*$/)
+            exit 2
+
+          break
+        }
+
+        raw = raw c
+      }
+
+      if (!closed || escaped)
+        exit 2
+
+      value = decode_json_string(raw)
+
+      if (raw != "" && value == "")
+        exit 2
+
+      found++
+      result = value
+    }
+
+    END {
+      if (found > 1)
+        exit 2
+
+      if (found == 1)
+        print result
+    }
+  ' "$file"
 }
 
 json_get_number() {
@@ -111,8 +207,33 @@ json_get_number() {
 
   [ -f "$file" ] || return 0
 
-  sed -n 's/^[[:space:]]*"'"$key"'"[[:space:]]*:[[:space:]]*\([0-9][0-9]*\).*/\1/p' "$file" |
-    head -n 1
+  awk -v key="$key" '
+    {
+      line = $0
+      pattern = "^[[:space:]]*\"" key "\"[[:space:]]*:[[:space:]]*"
+
+      if (line !~ pattern)
+        next
+
+      sub(pattern, "", line)
+
+      if (line !~ /^[0-9]+[[:space:]]*,?[[:space:]]*$/)
+        exit 2
+
+      sub(/[[:space:]]*,?[[:space:]]*$/, "", line)
+
+      found++
+      result = line
+    }
+
+    END {
+      if (found > 1)
+        exit 2
+
+      if (found == 1)
+        print result
+    }
+  ' "$file"
 }
 
 get_meta() {
