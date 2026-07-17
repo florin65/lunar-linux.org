@@ -30,8 +30,52 @@ archive_sha256_stdin() {
   sha256sum | awk '{ print $1 }'
 }
 
+validate_commit_input_layout() {
+  awk '
+    /^[[:space:]]*$/ {
+      next
+    }
+
+    {
+      line = $0
+      sub(/^[[:space:]]*/, "", line)
+      sub(/[[:space:]]*$/, "", line)
+
+      count++
+      lines[count] = line
+    }
+
+    END {
+      if (count < 2 || lines[1] != "[" || lines[count] != "]") {
+        exit 1
+      }
+
+      for (i = 2; i < count; i++) {
+        line = lines[i]
+
+        if (line !~ /^\{.*\},?$/) {
+          exit 1
+        }
+
+        if (i < count - 1 && line !~ /,$/) {
+          exit 1
+        }
+
+        if (i == count - 1 && line ~ /,$/) {
+          exit 1
+        }
+      }
+    }
+  ' "$1"
+}
+
+validate_commit_input_layout "$input" ||
+  archive_die "invalid commit input JSON array layout: $input"
+
 objects="$tmpdir/objects"
-archive_json_objects "$input" > "$objects"
+if ! archive_json_objects "$input" > "$objects"; then
+  archive_die "could not parse commit input: $input"
+fi
 
 if [ ! -s "$objects" ]; then
   echo "archive-commits: no commit entries in $input"
