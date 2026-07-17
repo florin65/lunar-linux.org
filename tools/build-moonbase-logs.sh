@@ -149,6 +149,28 @@ if [ -n "$BACKUP_LOG_DIR" ]; then
   BACKUP_LOG_DIR=
 fi
 
-find "$LOG_DIR" -type f -name '*.log' | sort | while IFS= read -r log; do
+PUBLISHED_LOGS=$(mktemp)
+PUBLISHED_LOGS_SORTED=$(mktemp)
+
+cleanup_published_logs() {
+  rm -f "$PUBLISHED_LOGS" "$PUBLISHED_LOGS_SORTED"
+}
+
+trap 'cleanup; cleanup_published_logs' EXIT HUP INT TERM
+
+if ! find "$LOG_DIR" -type f -name '*.log' > "$PUBLISHED_LOGS"; then
+  printf 'could not enumerate published Moonbase logs: %s\n' \
+    "$LOG_DIR" >&2
+  exit 1
+fi
+
+if ! LC_ALL=C sort "$PUBLISHED_LOGS" > "$PUBLISHED_LOGS_SORTED"; then
+  printf 'could not sort published Moonbase logs: %s\n' \
+    "$LOG_DIR" >&2
+  exit 1
+fi
+
+while IFS= read -r log; do
+  [ -n "$log" ] || continue
   printf 'generated %s\n' "$(rel_from_project "$log")"
-done
+done < "$PUBLISHED_LOGS_SORTED"
