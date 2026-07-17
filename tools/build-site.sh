@@ -740,7 +740,9 @@ write_page() (
   page_tmp=
 
   cleanup_page_files() {
-    rm -f "$expanded" "$rendered" "$page_tmp"
+    [ -n "$expanded" ] && rm -f "$expanded"
+    [ -n "$rendered" ] && rm -f "$rendered"
+    [ -n "$page_tmp" ] && rm -f "$page_tmp"
   }
 
   trap cleanup_page_files EXIT HUP INT TERM
@@ -888,7 +890,9 @@ build_news_json() (
   slug_list=
 
   cleanup_news_json() {
-    rm -f "$tmp" "$news_list" "$slug_list"
+    [ -n "$tmp" ] && rm -f "$tmp"
+    [ -n "$news_list" ] && rm -f "$news_list"
+    [ -n "$slug_list" ] && rm -f "$slug_list"
   }
 
   trap cleanup_news_json EXIT HUP INT TERM
@@ -1028,8 +1032,8 @@ publish_archive_assets() (
   [ -d "$src" ] || return 0
 
   cleanup_archive_publish() {
-    rm -f "$archive_tar"
-    rm -rf "$stage"
+    [ -n "$archive_tar" ] && rm -f "$archive_tar"
+    [ -n "$stage" ] && rm -rf "$stage"
 
     if [ -n "$backup" ] && [ -d "$backup" ]; then
       if [ ! -e "$dst" ]; then
@@ -1098,7 +1102,7 @@ write_redirect_page() (
   redirect_tmp=
 
   cleanup_redirect_file() {
-    rm -f "$redirect_tmp"
+    [ -n "$redirect_tmp" ] && rm -f "$redirect_tmp"
   }
 
   trap cleanup_redirect_file EXIT HUP INT TERM
