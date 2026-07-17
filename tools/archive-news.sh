@@ -11,7 +11,14 @@ src_dir=${1:-"$NEWS_DIR"}
 [ -d "$src_dir" ] || archive_die "missing news source directory: $src_dir"
 
 tmpdir=$(mktemp -d)
-trap 'rm -rf "$tmpdir"' EXIT HUP INT TERM
+index_tmp=
+
+cleanup() {
+  rm -rf "$tmpdir"
+  rm -f "$index_tmp"
+}
+
+trap cleanup EXIT HUP INT TERM
 
 count=0
 skipped=0
@@ -67,7 +74,13 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
       "$hash" "$date_line" "$esc_cat" "$esc_title" "$slug" "$(basename -- "$outfile")" >> "$merged"
   fi
 
-  archive_emit_json_array < "$merged" > "$index"
+  index_tmp=$(mktemp "$outdir/.index.json.XXXXXX")
+  if archive_emit_json_array < "$merged" > "$index_tmp"; then
+    mv "$index_tmp" "$index"
+    index_tmp=
+  else
+    archive_die "could not build archived news index: $index"
+  fi
 done
 
 echo "archive-news: archived Markdown news entries from $src_dir"
