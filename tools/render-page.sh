@@ -128,7 +128,7 @@ function add(k, v) {
 }
 
 function is_block_start(s) {
-    return s ~ /^(# |## |### |- |> |\[|```|@@HTML|@@INCLUDE:|<!-- HTML_BLOCK_BEGIN -->)/
+    return s ~ /^(# |## |### |#### |##### |###### |- |[0-9]+\. |> |\[|```|@@HTML|@@INCLUDE:|<!-- HTML_BLOCK_BEGIN -->)/
 }
 
 function join_lines(arr, count,    i, s) {
