@@ -12,10 +12,11 @@ src_dir=${1:-"$NEWS_DIR"}
 
 tmpdir=$(mktemp -d)
 index_tmp=
+source_tmp=
 
 cleanup() {
   rm -rf "$tmpdir"
-  rm -f "$index_tmp"
+  rm -f "$index_tmp" "$source_tmp"
 }
 
 trap cleanup EXIT HUP INT TERM
@@ -99,11 +100,16 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
   sed -n 's/.*"id"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$existing" | sort -u > "$seen"
 
   if ! grep -qxF "$hash" "$seen"; then
+    source_is_new=0
+
     if [ -f "$outfile" ] || [ -f "$outfile.xz" ]; then
       skipped=$((skipped + 1))
     else
-      cp "$f" "$outfile"
-      count=$((count + 1))
+      source_tmp=$(mktemp "$outdir/.news-source.XXXXXX")
+      if ! cat "$f" > "$source_tmp"; then
+        archive_die "could not stage archived news source: $f"
+      fi
+      source_is_new=1
     fi
 
     archive_file=$(basename -- "$outfile")
@@ -121,12 +127,18 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
   fi
 
   index_tmp=$(mktemp "$outdir/.index.json.XXXXXX")
-  if archive_emit_json_array < "$merged" > "$index_tmp"; then
-    mv "$index_tmp" "$index"
-    index_tmp=
-  else
+  if ! archive_emit_json_array < "$merged" > "$index_tmp"; then
     archive_die "could not build archived news index: $index"
   fi
+
+  if [ "${source_is_new:-0}" -eq 1 ]; then
+    mv "$source_tmp" "$outfile"
+    source_tmp=
+    count=$((count + 1))
+  fi
+
+  mv "$index_tmp" "$index"
+  index_tmp=
 done
 
 echo "archive-news: archived Markdown news entries from $src_dir"
