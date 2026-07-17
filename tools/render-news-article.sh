@@ -62,6 +62,39 @@ html_attr_escape() {
     -e 's/>/\&gt;/g'
 }
 
+valid_news_date() {
+  value=$1
+  day=${value%% *}
+  hour=
+  minute=
+
+  case "$value" in
+    "$day "*)
+      time_part=${value#"$day "}
+      hour=${time_part%:*}
+      minute=${time_part#*:}
+      ;;
+  esac
+
+  if ! date -d "$day" '+%F' 2>/dev/null | grep -qxF "$day"; then
+    return 1
+  fi
+
+  if [ -n "$hour" ]; then
+    case "$hour" in
+      0[0-9]|1[0-9]|2[0-3]) ;;
+      *) return 1 ;;
+    esac
+
+    case "$minute" in
+      [0-5][0-9]) ;;
+      *) return 1 ;;
+    esac
+  fi
+
+  return 0
+}
+
 render_body() {
   awk '
     function esc(s) {
@@ -196,8 +229,18 @@ if [ -z "$date" ] || [ -z "$category" ] || [ -z "$title" ]; then
   exit 1
 fi
 
-if ! printf '%s\n' "$date" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}([[:space:]][0-9]{2}:[0-9]{2})?$'; then
+if printf '%s\n%s\n' "$category" "$title" | grep -q '	'; then
+  printf 'invalid news source %s: tab character in Category or Title\n' "$SOURCE" >&2
+  exit 1
+fi
+
+if ! printf '%s\n' "$date" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}( [0-9]{2}:[0-9]{2})?$'; then
   printf 'invalid news source %s: invalid Date format\n' "$SOURCE" >&2
+  exit 1
+fi
+
+if ! valid_news_date "$date"; then
+  printf 'invalid news source %s: impossible Date value: %s\n' "$SOURCE" "$date" >&2
   exit 1
 fi
 
@@ -208,6 +251,7 @@ fi
 
 summary=$(
   awk 'NF { print; exit }' "$body" |
+    tr '\t' ' ' |
     sed 's/[[:space:]][[:space:]]*/ /g'
 )
 
