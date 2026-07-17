@@ -153,15 +153,19 @@ build_news_fragment() {
           slug=$(printf '%s\n' "$obj" | archive_json_field slug | head -1)
           file=$(printf '%s\n' "$obj" | archive_json_field file | head -1)
 
-          [ -n "$date" ] || continue
-          [ -n "$id" ] || continue
-          [ -n "$file" ] || continue
+          if [ -z "$date" ] || [ -z "$id" ] || [ -z "$file" ]; then
+            printf 'invalid archived news entry in %s: missing date, id or file\n' "$f" >&2
+            exit 1
+          fi
 
           source_file="$base_dir/$file"
           if [ ! -f "$source_file" ] && [ -f "$source_file.xz" ]; then
             source_file="$source_file.xz"
           fi
-          [ -f "$source_file" ] || continue
+          if [ ! -f "$source_file" ]; then
+            printf 'missing archived news source referenced by %s: %s\n' "$f" "$file" >&2
+            exit 1
+          fi
 
           rel_dir=${base_dir#"$ARCHIVE_ROOT"/}
           html_file=${file%.md}.html
@@ -182,7 +186,8 @@ build_news_fragment() {
             printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
               "$date" "$category" "$title" "$slug" "$id" "$public_rel" >> "$news_data_tmp"
           else
-            printf 'warning: could not render archived news source %s\n' "$source_file" >&2
+            printf 'could not render archived news source %s\n' "$source_file" >&2
+            exit 1
           fi
 
           rm -f "$news_source_tmp"
