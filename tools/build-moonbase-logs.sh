@@ -67,8 +67,9 @@ for repo in $MOONBASE_REPOS; do
   repo_dir="$MOONBASE/$repo"
 
   if [ ! -d "$repo_dir/.git" ]; then
-    printf 'skipping %s: not a git repository\n' "$repo" >&2
-    continue
+    printf 'missing configured Moonbase repository: %s\n' \
+      "$repo_dir" >&2
+    exit 1
   fi
 
   (
