@@ -40,9 +40,23 @@ rel_from_project() {
 }
 
 json_escape() {
-  printf '%s' "$1" | sed \
-    -e 's/\\/\\\\/g' \
-    -e 's/"/\\"/g'
+  printf '%s' "$1" | awk '
+    BEGIN {
+      first = 1
+    }
+    {
+      if (!first)
+        printf "\\n"
+      first = 0
+
+      gsub(/\\/, "\\\\")
+      gsub(/"/, "\\\"")
+      gsub(/\t/, "\\t")
+      gsub(/\r/, "\\r")
+
+      printf "%s", $0
+    }
+  '
 }
 
 ensure_trailing_slash() {
