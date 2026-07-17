@@ -870,9 +870,10 @@ build_news_json() (
   out_dir=$(dirname -- "$NEWS_OUT")
   tmp=
   news_list=
+  slug_list=
 
   cleanup_news_json() {
-    rm -f "$tmp" "$news_list"
+    rm -f "$tmp" "$news_list" "$slug_list"
   }
 
   trap cleanup_news_json EXIT HUP INT TERM
@@ -886,6 +887,7 @@ build_news_json() (
 
   if [ -d "$NEWS_SRC" ]; then
     news_list=$(mktemp "$out_dir/.news-list.XXXXXX")
+    slug_list=$(mktemp "$out_dir/.news-slugs.XXXXXX")
 
     if ! find "$NEWS_SRC" -type f -name '*.md' > "$news_list"; then
       printf 'could not enumerate news sources: %s
@@ -905,6 +907,22 @@ build_news_json() (
       category=$(news_meta Category "$md")
       summary=$(news_summary "$md")
       slug=$(basename -- "$md" .md)
+
+      if grep -Fqx -- "$slug" "$slug_list"; then
+        printf 'duplicate generated news slug %s in %s
+'           "$slug" "$(rel_from_project "$md")" >&2
+        exit 1
+      else
+        grep_status=$?
+        if [ "$grep_status" -ne 1 ]; then
+          printf 'could not check generated news slug: %s
+' "$slug" >&2
+          exit 1
+        fi
+      fi
+
+      printf '%s
+' "$slug" >> "$slug_list"
 
       if [ -z "$date" ] || [ -z "$title" ] || [ -z "$category" ]; then
         printf 'warning: rejecting invalid news file %s: missing Date, Category or Title
