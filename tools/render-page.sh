@@ -1179,14 +1179,17 @@ END {
 
         path = project_root "/src/includes/" file
 
-        # Defensive check of the path value (the file exists?)
+        # Missing includes are build errors, not publishable placeholders.
         if ((getline inc < path) < 0) {
-            html = "<!-- include not found: " file " -->"
-        } else {
-            do {
-                html = html inc "\n"
-            } while ((getline inc < path) > 0)
+            print "include not found: " file > "/dev/stderr"
+            close(path)
+            exit 2
         }
+
+        do {
+            html = html inc "\n"
+        } while ((getline inc < path) > 0)
+
         close(path)
 
         add("html", html)
