@@ -47,7 +47,17 @@ BACKUP_LOG_DIR=
 
 cleanup() {
   [ -n "$STAGED_LOG_DIR" ] && rm -rf "$STAGED_LOG_DIR"
-  [ -n "$BACKUP_LOG_DIR" ] && rm -rf "$BACKUP_LOG_DIR"
+
+  if [ -n "$BACKUP_LOG_DIR" ] && [ -e "$BACKUP_LOG_DIR" ]; then
+    if [ ! -e "$LOG_DIR" ]; then
+      if ! mv "$BACKUP_LOG_DIR" "$LOG_DIR"; then
+        printf 'could not restore Moonbase log backup: %s\n' \
+          "$BACKUP_LOG_DIR" >&2
+      fi
+    else
+      rm -rf "$BACKUP_LOG_DIR"
+    fi
+  fi
 }
 
 trap cleanup EXIT HUP INT TERM
