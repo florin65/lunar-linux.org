@@ -73,6 +73,7 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
   slug=$(basename -- "$f" .md)
   outfile="$outdir/$day-$short.md"
   index="$outdir/index.json"
+  source_is_new=0
 
   title=$(sed -n 's/^Title:[[:space:]]*//p' "$f" | head -1)
   category=$(sed -n 's/^Category:[[:space:]]*//p' "$f" | head -1)
@@ -100,8 +101,6 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
   sed -n 's/.*"id"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$existing" | sort -u > "$seen"
 
   if ! grep -qxF "$hash" "$seen"; then
-    source_is_new=0
-
     if [ -f "$outfile" ] || [ -f "$outfile.xz" ]; then
       skipped=$((skipped + 1))
     else
