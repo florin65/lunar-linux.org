@@ -355,7 +355,33 @@ if ! grep -q '[^[:space:]]' "$body"; then
 fi
 
 summary=$(
-  awk 'NF { print; exit }' "$body" |
+  awk '
+    NF {
+      line = $0
+      sub(/^#{1,3}[[:space:]]+/, "", line)
+      sub(/^-+[[:space:]]+/, "", line)
+
+      while (match(line, /`[^`]+`/)) {
+        line = substr(line, 1, RSTART - 1) \
+          substr(line, RSTART + 1, RLENGTH - 2) \
+          substr(line, RSTART + RLENGTH)
+      }
+
+      while (match(line, /\[[^]]+\]\([^)]+\)/)) {
+        token = substr(line, RSTART, RLENGTH)
+        split_at = index(token, "](")
+        label = substr(token, 2, split_at - 2)
+        line = substr(line, 1, RSTART - 1) \
+          label \
+          substr(line, RSTART + RLENGTH)
+      }
+
+      gsub(/\*\*/, "", line)
+      gsub(/\*/, "", line)
+      print line
+      exit
+    }
+  ' "$body" |
     tr '\t' ' ' |
     sed 's/[[:space:]][[:space:]]*/ /g'
 )
