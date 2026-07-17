@@ -27,8 +27,13 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
   date_line=$(sed -n 's/^Date:[[:space:]]*//p' "$f" | head -1)
   day=$(printf '%s\n' "$date_line" | awk '{ print $1 }')
   case "$day" in
-    [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]) ;;
-    *) day=$(date -r "$f" +%F) ;;
+    [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9])
+      archive_date=$date_line
+      ;;
+    *)
+      day=$(date -r "$f" +%F)
+      archive_date=$day
+      ;;
   esac
 
   year=$(archive_year "$day")
@@ -79,7 +84,7 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
     esc_title=$(printf '%s' "$title" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g')
     esc_cat=$(printf '%s' "$category" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g')
     printf '{"id":"%s","date":"%s","category":"%s","title":"%s","slug":"%s","file":"%s"}\n' \
-      "$hash" "$date_line" "$esc_cat" "$esc_title" "$slug" "$(basename -- "$outfile")" >> "$merged"
+      "$hash" "$archive_date" "$esc_cat" "$esc_title" "$slug" "$(basename -- "$outfile")" >> "$merged"
   else
     skipped=$((skipped + 1))
   fi
