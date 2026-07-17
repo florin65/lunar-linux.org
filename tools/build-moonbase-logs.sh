@@ -78,8 +78,8 @@ for repo in $MOONBASE_REPOS; do
     branch=$(git symbolic-ref --short HEAD 2>/dev/null || printf 'unknown')
 
     if [ "$branch" != "master" ]; then
-      printf 'skipping %s/%s\n' "$repo" "$branch" >&2
-      exit 0
+      printf 'unexpected branch for %s: %s\n' "$repo" "$branch" >&2
+      exit 1
     fi
 
     if [ "$UPDATE_MOONBASE_REPOS" = "yes" ]; then
