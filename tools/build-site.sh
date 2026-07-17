@@ -843,7 +843,8 @@ write_page() (
     [ -n "$page_tmp" ] && rm -f "$page_tmp"
   }
 
-  trap cleanup_page_files EXIT HUP INT TERM
+  trap cleanup_page_files EXIT
+  trap 'exit 1' HUP INT TERM
 
   expanded=$(mktemp "$BUILD/.page-expanded.XXXXXX")
   rendered=$(mktemp "$BUILD/.page-rendered.XXXXXX")
@@ -993,7 +994,8 @@ build_news_json() (
     [ -n "$slug_list" ] && rm -f "$slug_list"
   }
 
-  trap cleanup_news_json EXIT HUP INT TERM
+  trap cleanup_news_json EXIT
+  trap 'exit 1' HUP INT TERM
 
   mkdir -p "$out_dir"
   tmp=$(mktemp "$out_dir/.news-json.XXXXXX")
@@ -1142,7 +1144,8 @@ publish_archive_assets() (
     fi
   }
 
-  trap cleanup_archive_publish EXIT HUP INT TERM
+  trap cleanup_archive_publish EXIT
+  trap 'exit 1' HUP INT TERM
 
   archive_tar=$(mktemp "$BUILD/.archive-assets.XXXXXX")
   stage=$(mktemp -d "$PUBLIC/.archive-stage.XXXXXX")
@@ -1203,7 +1206,8 @@ write_redirect_page() (
     [ -n "$redirect_tmp" ] && rm -f "$redirect_tmp"
   }
 
-  trap cleanup_redirect_file EXIT HUP INT TERM
+  trap cleanup_redirect_file EXIT
+  trap 'exit 1' HUP INT TERM
 
   redirect_tmp=$(mktemp "$PUBLIC/.redirect-output.XXXXXX")
 
