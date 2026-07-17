@@ -158,6 +158,19 @@ build_news_fragment() {
             exit 1
           fi
 
+          case "$file" in
+            */*|.*|*..*|*.md.md|*[!A-Za-z0-9._-]*)
+              printf 'invalid archived news file in %s: %s\n' "$f" "$file" >&2
+              exit 1
+              ;;
+            *.md)
+              ;;
+            *)
+              printf 'invalid archived news file in %s: expected a safe .md basename, got %s\n' "$f" "$file" >&2
+              exit 1
+              ;;
+          esac
+
           source_file="$base_dir/$file"
           if [ ! -f "$source_file" ] && [ -f "$source_file.xz" ]; then
             source_file="$source_file.xz"
