@@ -129,11 +129,11 @@ EOF_ISO_FILE
 case "$ISO_DATE" in
   [0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9])
     ISO_DATE=$(
-      printf '%s-%s-%s\n' \
-        "${ISO_DATE%????}" \
-        "${ISO_DATE#????}" \
-        "${ISO_DATE#??????}" |
-      awk -F- '{ print $1 "-" substr($2, 1, 2) "-" $3 }'
+      awk -v value="$ISO_DATE" 'BEGIN {
+        print substr(value, 1, 4) "-" \
+              substr(value, 5, 2) "-" \
+              substr(value, 7, 2)
+      }'
     )
     ;;
   [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9])
@@ -145,8 +145,14 @@ case "$ISO_DATE" in
     ;;
 esac
 
-if ! date -d "$ISO_DATE 00:00:00" '+%F' 2>/dev/null |
-  grep -qx "$ISO_DATE"; then
+NORMALIZED_ISO_DATE=$(
+  date -d "$ISO_DATE 00:00:00" '+%F' 2>/dev/null
+) || {
+  printf 'invalid ISO date in file name: %s\n' "$ISO_DATE" >&2
+  exit 1
+}
+
+if [ "$NORMALIZED_ISO_DATE" != "$ISO_DATE" ]; then
   printf 'invalid ISO date in file name: %s\n' "$ISO_DATE" >&2
   exit 1
 fi
