@@ -303,9 +303,18 @@ FOOTER="$TEMPLATES/footer.html"
   exit 1
 }
 
-date=$(sed -n 's/^Date:[[:space:]]*//p' "$SOURCE" | head -n 1)
-category=$(sed -n 's/^Category:[[:space:]]*//p' "$SOURCE" | head -n 1)
-title=$(sed -n 's/^Title:[[:space:]]*//p' "$SOURCE" | head -n 1)
+date_count=$(grep -c '^Date:' "$SOURCE" || true)
+category_count=$(grep -c '^Category:' "$SOURCE" || true)
+title_count=$(grep -c '^Title:' "$SOURCE" || true)
+
+if [ "$date_count" -ne 1 ] || [ "$category_count" -ne 1 ] || [ "$title_count" -ne 1 ]; then
+  printf 'invalid news source %s: Date, Category and Title must each appear exactly once\n' "$SOURCE" >&2
+  exit 1
+fi
+
+date=$(sed -n 's/^Date:[[:space:]]*//p' "$SOURCE")
+category=$(sed -n 's/^Category:[[:space:]]*//p' "$SOURCE")
+title=$(sed -n 's/^Title:[[:space:]]*//p' "$SOURCE")
 
 output_dir=$(dirname -- "$OUTPUT")
 mkdir -p "$output_dir"
