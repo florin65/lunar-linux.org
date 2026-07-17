@@ -266,7 +266,11 @@ build_news_fragment() {
 
           archive_mkdir "$staged_dir"
           news_source_tmp=$(mktemp)
-          archive_cat "$source_file" > "$news_source_tmp"
+
+          if ! archive_cat "$source_file" > "$news_source_tmp"; then
+            printf 'could not read archived news source: %s\n' "$source_file" >&2
+            exit 1
+          fi
 
           if "$NEWS_ARTICLE_RENDERER" \
             "$news_source_tmp" \
