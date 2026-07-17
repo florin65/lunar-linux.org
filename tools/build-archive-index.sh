@@ -15,6 +15,7 @@ commits_out=${1:-$CACHE_DIR/archive-commits.html}
 news_out=${2:-$CACHE_DIR/archive-news.html}
 
 archive_mkdir "$CACHE_DIR"
+archive_mkdir "$PUBLIC_DIR"
 archive_mkdir "$(dirname -- "$commits_out")"
 archive_mkdir "$(dirname -- "$news_out")"
 
@@ -28,6 +29,7 @@ commits_fragment_tmp=
 news_data_tmp=
 news_fragment_tmp=
 news_source_tmp=
+news_pages_stage=
 
 cleanup() {
   rm -f \
@@ -36,6 +38,10 @@ cleanup() {
     "$news_data_tmp" \
     "$news_fragment_tmp" \
     "$news_source_tmp"
+
+  if [ -n "$news_pages_stage" ]; then
+    rm -rf "$news_pages_stage"
+  fi
 }
 
 trap cleanup EXIT HUP INT TERM
@@ -140,6 +146,7 @@ build_news_fragment() {
   news_output_dir=$(dirname -- "$news_out")
   news_data_tmp=$(mktemp "$news_output_dir/.archive-news-data.XXXXXX")
   news_fragment_tmp=$(mktemp "$news_output_dir/.archive-news.XXXXXX")
+  news_pages_stage=$(mktemp -d "$PUBLIC_DIR/.archive-news-stage.XXXXXX")
 
   find "$ARCHIVE_ROOT/news" -type f \( -name 'index.json' -o -name 'index.json.xz' \) 2>/dev/null | sort |
     while IFS= read -r f; do
@@ -184,6 +191,8 @@ build_news_fragment() {
           html_file=${file%.md}.html
           public_dir="$PUBLIC_DIR/archive/$rel_dir"
           public_file="$public_dir/$html_file"
+          staged_dir="$news_pages_stage/$rel_dir"
+          staged_file="$staged_dir/$html_file"
           public_rel="archive/$rel_dir/$html_file"
           public_dir_rel="archive/$rel_dir"
           root_prefix=$(printf '%s\n' "$public_dir_rel" | awk -F/ '
@@ -196,13 +205,13 @@ build_news_fragment() {
             }
           ')
 
-          archive_mkdir "$public_dir"
+          archive_mkdir "$staged_dir"
           news_source_tmp=$(mktemp)
           archive_cat "$source_file" > "$news_source_tmp"
 
           if "$NEWS_ARTICLE_RENDERER" \
             "$news_source_tmp" \
-            "$public_file" \
+            "$staged_file" \
             "$root_prefix" \
             "${root_prefix}news-archive.html" \
             "Back to News Archive"; then
@@ -217,6 +226,17 @@ build_news_fragment() {
           news_source_tmp=
         done
     done
+
+  find "$news_pages_stage" -type f | sort |
+    while IFS= read -r staged_file; do
+      staged_rel=${staged_file#"$news_pages_stage"/}
+      public_file="$PUBLIC_DIR/archive/$staged_rel"
+      archive_mkdir "$(dirname -- "$public_file")"
+      mv "$staged_file" "$public_file"
+    done
+
+  rm -rf "$news_pages_stage"
+  news_pages_stage=
 
   {
     echo '      <div class="community-news-journal archive-journal">'
