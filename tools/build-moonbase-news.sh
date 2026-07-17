@@ -58,10 +58,11 @@ ROWS=$(mktemp)
 SORTED_ROWS=$(mktemp)
 LOG_FILES=$(mktemp)
 DUPLICATE_KEYS=
+DUPLICATE_KEYS_SORTED=
 OUT_TMP=
 
 cleanup() {
-  rm -f "$ROWS" "$SORTED_ROWS" "$LOG_FILES" "$DUPLICATE_KEYS" "$OUT_TMP"
+  rm -f     "$ROWS"     "$SORTED_ROWS"     "$LOG_FILES"     "$LOG_FILES.unsorted"     "$DUPLICATE_KEYS"     "$DUPLICATE_KEYS_SORTED"     "$OUT_TMP"
 }
 
 trap cleanup EXIT HUP INT TERM
@@ -157,10 +158,22 @@ TAB=$(printf '\t')
 LC_ALL=C sort -t "$TAB" -k1,1r -k2,2 -k3,3 "$ROWS" > "$SORTED_ROWS"
 
 DUPLICATE_KEYS=$(mktemp)
+DUPLICATE_KEYS_SORTED=$(mktemp)
 
-cut -f2,3 "$SORTED_ROWS" |
-  LC_ALL=C sort |
-  uniq -d > "$DUPLICATE_KEYS"
+if ! cut -f2,3 "$SORTED_ROWS" > "$DUPLICATE_KEYS"; then
+  printf 'could not extract Moonbase commit keys\n' >&2
+  exit 1
+fi
+
+if ! LC_ALL=C sort "$DUPLICATE_KEYS" > "$DUPLICATE_KEYS_SORTED"; then
+  printf 'could not sort Moonbase commit keys\n' >&2
+  exit 1
+fi
+
+if ! uniq -d "$DUPLICATE_KEYS_SORTED" > "$DUPLICATE_KEYS"; then
+  printf 'could not detect duplicate Moonbase commit keys\n' >&2
+  exit 1
+fi
 
 if [ -s "$DUPLICATE_KEYS" ]; then
   while IFS='	' read -r repo commit; do
