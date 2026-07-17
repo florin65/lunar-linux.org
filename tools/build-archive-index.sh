@@ -274,6 +274,13 @@ build_news_fragment() {
             "$root_prefix" \
             "${root_prefix}news-archive.html" \
             "Back to News Archive"; then
+            if printf '%s\n%s\n%s\n%s\n%s\n%s\n' \
+              "$date" "$category" "$title" "$slug" "$id" "$public_rel" |
+              grep -q "$tab"; then
+              printf 'invalid archived news entry in %s: tab character in index fields\n' "$f" >&2
+              exit 1
+            fi
+
             printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
               "$date" "$category" "$title" "$slug" "$id" "$public_rel" >> "$news_data_tmp"
           else
