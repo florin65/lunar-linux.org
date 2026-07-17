@@ -78,6 +78,16 @@ cleanup() {
 trap cleanup EXIT HUP INT TERM
 
 URL=$(ensure_trailing_slash "$ISO_BASE_URL")
+
+case "$URL" in
+  http://*|https://*)
+    ;;
+  *)
+    printf 'invalid daily ISO base URL: %s\n' "$URL" >&2
+    exit 1
+    ;;
+esac
+
 mkdir -p "$OUT_DIR"
 
 HTML=$(mktemp)
@@ -115,9 +125,35 @@ ISO_URL=$(
 }
 
 case "$ISO_URL" in
-  http://*|https://*) FULL_ISO_URL="$ISO_URL" ;;
-  /*) FULL_ISO_URL="$(printf '%s' "$URL" | sed 's#^\(https\?://[^/]*\).*#\1#')$ISO_URL" ;;
-  *) FULL_ISO_URL="$URL$ISO_URL" ;;
+  http://*|https://*)
+    FULL_ISO_URL="$ISO_URL"
+    ;;
+  /*)
+    ISO_ORIGIN=$(
+      awk '
+        match($0, /^https?:\/\/[^/]+/) {
+          print substr($0, RSTART, RLENGTH)
+          exit
+        }
+      ' <<EOF_ISO_BASE_URL
+$URL
+EOF_ISO_BASE_URL
+    )
+
+    if [ -z "$ISO_ORIGIN" ]; then
+      printf 'could not derive daily ISO origin from: %s\n' "$URL" >&2
+      exit 1
+    fi
+
+    FULL_ISO_URL="$ISO_ORIGIN$ISO_URL"
+    ;;
+  *://*)
+    printf 'unsupported daily ISO URL scheme: %s\n' "$ISO_URL" >&2
+    exit 1
+    ;;
+  *)
+    FULL_ISO_URL="$URL$ISO_URL"
+    ;;
 esac
 
 ISO_FILE=$(basename -- "$ISO_URL")
