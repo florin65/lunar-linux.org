@@ -94,8 +94,13 @@ mkdir -p "$OUT_DIR"
 OUT_TMP=$(mktemp "$OUT_DIR/.moonbase-news.XXXXXX")
 : > "$ROWS"
 
-if [ -d "$LOG_DIR" ]; then
-  if ! find "$LOG_DIR" -type f -name '*.log' > "$LOG_FILES.unsorted"; then
+[ -d "$LOG_DIR" ] ||
+  {
+    printf 'missing Moonbase log directory: %s\n' "$LOG_DIR" >&2
+    exit 1
+  }
+
+if ! find "$LOG_DIR" -type f -name '*.log' > "$LOG_FILES.unsorted"; then
     printf 'could not enumerate Moonbase log files: %s\n' "$LOG_DIR" >&2
     exit 1
   fi
@@ -174,8 +179,7 @@ if [ -d "$LOG_DIR" ]; then
       printf '%s\t%s\t%s\t%s\n' \
         "$date" "$repo" "$commit" "$subject" >> "$ROWS"
     done < "$log"
-  done < "$LOG_FILES"
-fi
+done < "$LOG_FILES"
 
 TAB=$(printf '\t')
 if ! LC_ALL=C sort -t "$TAB" -k1,1r -k2,2 -k3,3 \
