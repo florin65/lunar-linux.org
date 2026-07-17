@@ -120,7 +120,7 @@ mkdir -p "$(dirname -- "$OUT")" "$(dirname -- "$MANIFEST")" "$NEWS_PAGES"
 rows=$(mktemp)
 new_manifest=$(mktemp)
 slug_registry=$(mktemp -d)
-staged_pages=$(mktemp -d)
+staged_pages=$(mktemp -d "$NEWS_PAGES/.community-news-stage.XXXXXX")
 tmp=
 trap 'rm -f "$rows" "$new_manifest" ${tmp:+"$tmp"}; rm -rf "$slug_registry" "$staged_pages"' EXIT HUP INT TERM
 
