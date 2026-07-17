@@ -116,20 +116,40 @@ SHA256=$(
 }
 
 ISO_DATE=$(
-  printf '%s\n' "$ISO_FILE" |
   awk '
     match($0, /[0-9][0-9][0-9][0-9]-?[0-9][0-9]-?[0-9][0-9]/) {
       print substr($0, RSTART, RLENGTH)
       exit
     }
-  '
+  ' <<EOF_ISO_FILE
+$ISO_FILE
+EOF_ISO_FILE
 )
 
 case "$ISO_DATE" in
-  ????????)
-    ISO_DATE=$(printf '%s' "$ISO_DATE" | sed 's/^\(....\)\(..\)\(..\)$/\1-\2-\3/')
+  [0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9])
+    ISO_DATE=$(
+      printf '%s-%s-%s\n' \
+        "${ISO_DATE%????}" \
+        "${ISO_DATE#????}" \
+        "${ISO_DATE#??????}" |
+      awk -F- '{ print $1 "-" substr($2, 1, 2) "-" $3 }'
+    )
+    ;;
+  [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9])
+    ;;
+  *)
+    printf 'could not extract ISO date from file name: %s\n' \
+      "$ISO_FILE" >&2
+    exit 1
     ;;
 esac
+
+if ! date -d "$ISO_DATE 00:00:00" '+%F' 2>/dev/null |
+  grep -qx "$ISO_DATE"; then
+  printf 'invalid ISO date in file name: %s\n' "$ISO_DATE" >&2
+  exit 1
+fi
 
 GENERATED_AT=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
 
