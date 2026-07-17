@@ -42,13 +42,6 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
   outfile="$outdir/$day-$short.md"
   index="$outdir/index.json"
 
-  if [ -f "$outfile" ] || [ -f "$outfile.xz" ]; then
-    skipped=$((skipped + 1))
-  else
-    cp "$f" "$outfile"
-    count=$((count + 1))
-  fi
-
   title=$(sed -n 's/^Title:[[:space:]]*//p' "$f" | head -1)
   category=$(sed -n 's/^Category:[[:space:]]*//p' "$f" | head -1)
   [ -n "$title" ] || title="$slug"
@@ -57,21 +50,38 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
   existing="$tmpdir/news-existing"
   merged="$tmpdir/news-merged"
   seen="$tmpdir/news-seen"
+  index_raw="$tmpdir/news-index-raw"
   : > "$existing"
+  : > "$index_raw"
 
-  if archive_cat "$index" >/dev/null 2>&1; then
-    archive_cat "$index" | archive_json_objects_from_cat > "$existing"
+  if [ -f "$index" ] || [ -f "$index.xz" ]; then
+    if ! archive_cat "$index" > "$index_raw"; then
+      archive_die "could not read archived news index: $index"
+    fi
+
+    if ! archive_json_objects_from_cat < "$index_raw" > "$existing"; then
+      archive_die "could not parse archived news index: $index"
+    fi
   fi
 
   cp "$existing" "$merged"
   sed -n 's/.*"id"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$existing" | sort -u > "$seen"
 
   if ! grep -qxF "$hash" "$seen"; then
+    if [ -f "$outfile" ] || [ -f "$outfile.xz" ]; then
+      skipped=$((skipped + 1))
+    else
+      cp "$f" "$outfile"
+      count=$((count + 1))
+    fi
+
     # JSON escaping for generated metadata; news titles here are simple but escape anyway.
     esc_title=$(printf '%s' "$title" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g')
     esc_cat=$(printf '%s' "$category" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g')
     printf '{"id":"%s","date":"%s","category":"%s","title":"%s","slug":"%s","file":"%s"}\n' \
       "$hash" "$date_line" "$esc_cat" "$esc_title" "$slug" "$(basename -- "$outfile")" >> "$merged"
+  else
+    skipped=$((skipped + 1))
   fi
 
   index_tmp=$(mktemp "$outdir/.index.json.XXXXXX")
