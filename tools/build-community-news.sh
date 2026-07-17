@@ -224,6 +224,10 @@ for file in "$NEWS_SRC"/*.md; do
   out_file="$NEWS_PAGES/$slug.html"
   href="news/$slug.html"
   date_short=$(printf '%s\n' "$date" | awk '{ print $1 }')
+  case "$date" in
+    *" "*) date_html="${date%% *}T${date#* }" ;;
+    *)     date_html=$date ;;
+  esac
   summary=$(
     awk 'NF { print; exit }' "$body" |
       sed 's/[[:space:]][[:space:]]*/ /g'
@@ -236,8 +240,9 @@ for file in "$NEWS_SRC"/*.md; do
     "../news.html" \
     "Back to News"
 
-  printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
+  printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
     "$date" \
+    "$date_html" \
     "$date_short" \
     "$category" \
     "$title" \
@@ -268,11 +273,11 @@ tmp=$(mktemp)
   printf '          <tbody>\n'
 
   if [ -s "$rows" ]; then
-    sort -r "$rows" | while IFS='	' read -r date date_short category title summary href; do
+    sort -r "$rows" | while IFS='	' read -r date date_html date_short category title summary href; do
       printf '            <tr>\n'
       printf '              <td class="news-meta">\n'
       printf '                <time datetime="%s">%s</time>\n' \
-        "$(html_attr_escape "$date")" \
+        "$(html_attr_escape "$date_html")" \
         "$(html_attr_escape "$date")"
       printf '                <span>%s</span>\n' \
         "$(html_attr_escape "$category")"
