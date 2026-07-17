@@ -26,6 +26,10 @@ valid_commit_date() {
   date -d "$value" '+%F' 2>/dev/null | grep -qxF "$value"
 }
 
+archive_sha256_stdin() {
+  sha256sum | awk '{ print $1 }'
+}
+
 objects="$tmpdir/objects"
 archive_json_objects "$input" > "$objects"
 
@@ -113,6 +117,7 @@ while IFS= read -r day; do
 
   cat "$existing" > "$merged"
   : > "$seen"
+  : > "$seen.fingerprints"
 
   while IFS= read -r obj; do
     existing_day=$(printf '%s\n' "$obj" | archive_json_field date | head -1)
@@ -139,6 +144,8 @@ while IFS= read -r day; do
     fi
 
     printf '%s\n' "$key" >> "$seen"
+    existing_fingerprint=$(printf '%s\n' "$obj" | archive_sha256_stdin)
+    printf '%s\t%s\n' "$key" "$existing_fingerprint" >> "$seen.fingerprints"
   done < "$existing"
 
   added=0
@@ -159,7 +166,20 @@ while IFS= read -r day; do
 
     key=$(printf '%s\t%s' "$repository" "$commit")
 
-    if ! grep -qxF "$key" "$seen"; then
+    if grep -qxF "$key" "$seen"; then
+      incoming_fingerprint=$(printf '%s\n' "$obj" | archive_sha256_stdin)
+      archived_fingerprint=$(awk -F '\t' -v key="$key" '
+        $1 "\t" $2 == key {
+          print $3
+          exit
+        }
+      ' "$seen.fingerprints")
+
+      if [ -z "$archived_fingerprint" ] ||
+         [ "$incoming_fingerprint" != "$archived_fingerprint" ]; then
+        archive_die "commit entry differs from archived record: $repository $commit"
+      fi
+    else
       printf '%s\n' "$obj" >> "$merged"
       printf '%s\n' "$key" >> "$seen"
       added=$((added + 1))
