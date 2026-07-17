@@ -1035,6 +1035,11 @@ in_fm {
 }
 
 END {
+  if (in_fm) {
+    print "unterminated front matter" > "/dev/stderr"
+    exit 2
+  }
+
   i = 1
 
   while (i <= ln) {
