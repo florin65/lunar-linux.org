@@ -32,6 +32,13 @@ abs_path() {
   esac
 }
 
+rel_from_project() {
+  case "$1" in
+    "$PROJECT_ROOT"/*) printf '%s\n' "${1#$PROJECT_ROOT/}" ;;
+    *) printf '%s\n' "$1" ;;
+  esac
+}
+
 json_escape() {
   printf '%s' "$1" | sed \
     -e 's/\\/\\\\/g' \
@@ -47,12 +54,20 @@ ensure_trailing_slash() {
 
 OUT=$(abs_path "$DAILY_ISO_JSON")
 OUT_DIR=$(dirname -- "$OUT")
-TMP="$OUT.tmp"
-HTML=$(mktemp)
-trap 'rm -f "$HTML"' EXIT
+HTML=
+OUT_TMP=
+
+cleanup() {
+  rm -f "$HTML" "$OUT_TMP"
+}
+
+trap cleanup EXIT HUP INT TERM
 
 URL=$(ensure_trailing_slash "$ISO_BASE_URL")
 mkdir -p "$OUT_DIR"
+
+HTML=$(mktemp)
+OUT_TMP=$(mktemp "$OUT_DIR/.daily-iso.XXXXXX")
 
 curl -fsSL "$URL" -o "$HTML"
 
@@ -92,7 +107,7 @@ esac
 
 GENERATED_AT=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
 
-cat > "$TMP" <<EOF_JSON
+cat > "$OUT_TMP" <<EOF_JSON
 {
   "iso_file": "$(json_escape "$ISO_FILE")",
   "iso_url": "$(json_escape "$FULL_ISO_URL")",
@@ -102,5 +117,11 @@ cat > "$TMP" <<EOF_JSON
 }
 EOF_JSON
 
-mv "$TMP" "$OUT"
-printf 'generated %s\n' "${OUT#$PROJECT_ROOT/}"
+if ! mv "$OUT_TMP" "$OUT"; then
+  printf 'could not publish daily ISO metadata: %s\n' "$OUT" >&2
+  exit 1
+fi
+
+OUT_TMP=
+
+printf 'generated %s\n' "$(rel_from_project "$OUT")"
