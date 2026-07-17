@@ -30,6 +30,9 @@ news_data_tmp=
 news_fragment_tmp=
 news_source_tmp=
 news_pages_stage=
+news_index_files_tmp=
+news_index_raw_tmp=
+news_objects_tmp=
 
 cleanup() {
   rm -f \
@@ -37,7 +40,10 @@ cleanup() {
     "$commits_fragment_tmp" \
     "$news_data_tmp" \
     "$news_fragment_tmp" \
-    "$news_source_tmp"
+    "$news_source_tmp" \
+    "$news_index_files_tmp" \
+    "$news_index_raw_tmp" \
+    "$news_objects_tmp"
 
   if [ -n "$news_pages_stage" ]; then
     rm -rf "$news_pages_stage"
@@ -147,12 +153,27 @@ build_news_fragment() {
   news_data_tmp=$(mktemp "$news_output_dir/.archive-news-data.XXXXXX")
   news_fragment_tmp=$(mktemp "$news_output_dir/.archive-news.XXXXXX")
   news_pages_stage=$(mktemp -d "$PUBLIC_DIR/.archive-news-stage.XXXXXX")
+  news_index_files_tmp=$(mktemp)
+  news_index_raw_tmp=$(mktemp)
+  news_objects_tmp=$(mktemp)
 
-  find "$ARCHIVE_ROOT/news" -type f \( -name 'index.json' -o -name 'index.json.xz' \) 2>/dev/null | sort |
-    while IFS= read -r f; do
-      base_dir=$(dirname -- "$f")
-      archive_cat "$f" | archive_json_objects_from_cat |
-        while IFS= read -r obj; do
+  find "$ARCHIVE_ROOT/news" -type f \( -name 'index.json' -o -name 'index.json.xz' \) 2>/dev/null |
+    sort > "$news_index_files_tmp"
+
+  while IFS= read -r f; do
+    base_dir=$(dirname -- "$f")
+
+    if ! archive_cat "$f" > "$news_index_raw_tmp"; then
+      printf 'could not read archived news index: %s\n' "$f" >&2
+      exit 1
+    fi
+
+    if ! archive_json_objects_from_cat < "$news_index_raw_tmp" > "$news_objects_tmp"; then
+      printf 'could not parse archived news index: %s\n' "$f" >&2
+      exit 1
+    fi
+
+    while IFS= read -r obj; do
           id=$(printf '%s\n' "$obj" | archive_json_field id | head -1)
           date=$(printf '%s\n' "$obj" | archive_json_field date | head -1)
           category=$(printf '%s\n' "$obj" | archive_json_field category | head -1)
@@ -222,10 +243,18 @@ build_news_fragment() {
             exit 1
           fi
 
-          rm -f "$news_source_tmp"
-          news_source_tmp=
-        done
-    done
+      rm -f "$news_source_tmp"
+      news_source_tmp=
+    done < "$news_objects_tmp"
+
+    : > "$news_index_raw_tmp"
+    : > "$news_objects_tmp"
+  done < "$news_index_files_tmp"
+
+  rm -f "$news_index_files_tmp" "$news_index_raw_tmp" "$news_objects_tmp"
+  news_index_files_tmp=
+  news_index_raw_tmp=
+  news_objects_tmp=
 
   {
     echo '      <div class="community-news-journal archive-journal">'
