@@ -185,6 +185,16 @@ build_news_fragment() {
           public_dir="$PUBLIC_DIR/archive/$rel_dir"
           public_file="$public_dir/$html_file"
           public_rel="archive/$rel_dir/$html_file"
+          public_dir_rel="archive/$rel_dir"
+          root_prefix=$(printf '%s\n' "$public_dir_rel" | awk -F/ '
+            {
+              for (i = 1; i <= NF; i++) {
+                if ($i != "") {
+                  printf "../"
+                }
+              }
+            }
+          ')
 
           archive_mkdir "$public_dir"
           news_source_tmp=$(mktemp)
@@ -193,8 +203,8 @@ build_news_fragment() {
           if "$NEWS_ARTICLE_RENDERER" \
             "$news_source_tmp" \
             "$public_file" \
-            "../../../../" \
-            "../../../../news-archive.html" \
+            "$root_prefix" \
+            "${root_prefix}news-archive.html" \
             "Back to News Archive"; then
             printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
               "$date" "$category" "$title" "$slug" "$id" "$public_rel" >> "$news_data_tmp"
