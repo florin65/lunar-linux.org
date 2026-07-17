@@ -41,14 +41,24 @@ rel_from_project() {
 
 MOONBASE=$(abs_path "$MOONBASE_DIR")
 LOG_DIR=$(abs_path "$MOONBASE_LOG_DIR")
+LOG_PARENT=$(dirname -- "$LOG_DIR")
+STAGED_LOG_DIR=
+BACKUP_LOG_DIR=
+
+cleanup() {
+  [ -n "$STAGED_LOG_DIR" ] && rm -rf "$STAGED_LOG_DIR"
+  [ -n "$BACKUP_LOG_DIR" ] && rm -rf "$BACKUP_LOG_DIR"
+}
+
+trap cleanup EXIT HUP INT TERM
 
 if [ ! -d "$MOONBASE" ]; then
   printf 'missing moonbase directory: %s\n' "$MOONBASE" >&2
   exit 1
 fi
 
-rm -rf "$LOG_DIR"
-mkdir -p "$LOG_DIR"
+mkdir -p "$LOG_PARENT"
+STAGED_LOG_DIR=$(mktemp -d "$LOG_PARENT/.moonbase-logs.XXXXXX")
 
 SINCE_DATE=$(date -d "$MOONBASE_LOG_DAYS day ago" +%F)
 UNTIL_DATE=$(date +%F)
@@ -77,7 +87,7 @@ for repo in $MOONBASE_REPOS; do
       git pull "https://github.com/lunar-linux/moonbase-$repo"
     fi
 
-    tmp="$LOG_DIR/$repo.log.tmp"
+    tmp="$STAGED_LOG_DIR/$repo.log.tmp"
 
     git log \
       --no-merges \
@@ -87,10 +97,42 @@ for repo in $MOONBASE_REPOS; do
       --date=short > "$tmp"
 
     if [ -s "$tmp" ]; then
-      mv "$tmp" "$LOG_DIR/$repo.log"
-      printf 'generated %s\n' "$(rel_from_project "$LOG_DIR/$repo.log")"
+      mv "$tmp" "$STAGED_LOG_DIR/$repo.log"
     else
       rm -f "$tmp"
     fi
   )
+done
+
+if [ -e "$LOG_DIR" ]; then
+  BACKUP_LOG_DIR=$(mktemp -d "$LOG_PARENT/.moonbase-logs-backup.XXXXXX")
+  rmdir "$BACKUP_LOG_DIR"
+
+  if ! mv "$LOG_DIR" "$BACKUP_LOG_DIR"; then
+    printf 'could not preserve current Moonbase log directory: %s\n' \
+      "$LOG_DIR" >&2
+    exit 1
+  fi
+fi
+
+if ! mv "$STAGED_LOG_DIR" "$LOG_DIR"; then
+  printf 'could not publish Moonbase log directory: %s\n' "$LOG_DIR" >&2
+
+  if [ -n "$BACKUP_LOG_DIR" ] && [ -e "$BACKUP_LOG_DIR" ]; then
+    mv "$BACKUP_LOG_DIR" "$LOG_DIR" || true
+    BACKUP_LOG_DIR=
+  fi
+
+  exit 1
+fi
+
+STAGED_LOG_DIR=
+
+if [ -n "$BACKUP_LOG_DIR" ]; then
+  rm -rf "$BACKUP_LOG_DIR"
+  BACKUP_LOG_DIR=
+fi
+
+find "$LOG_DIR" -type f -name '*.log' | sort | while IFS= read -r log; do
+  printf 'generated %s\n' "$(rel_from_project "$log")"
 done
