@@ -94,24 +94,47 @@ while IFS= read -r day; do
   : > "$seen"
 
   while IFS= read -r obj; do
+    existing_day=$(printf '%s\n' "$obj" | archive_json_field date | head -1)
     repository=$(printf '%s\n' "$obj" | archive_json_field repository | head -1)
     commit=$(printf '%s\n' "$obj" | archive_json_field commit | head -1)
 
-    [ -n "$repository" ] || continue
-    [ -n "$commit" ] || continue
+    [ "$existing_day" = "$day" ] ||
+      archive_die "archived commit entry has wrong date in $outfile"
 
-    printf '%s\t%s\n' "$repository" "$commit" >> "$seen"
+    [ -n "$repository" ] ||
+      archive_die "archived commit entry has no repository in $outfile"
+    [ -n "$commit" ] ||
+      archive_die "archived commit entry has no commit in $outfile"
+
+    case "$repository$commit" in
+      *"	"*)
+        archive_die "tabs are not allowed in archived commit keys: $outfile"
+        ;;
+    esac
+
+    key=$(printf '%s\t%s' "$repository" "$commit")
+    if grep -qxF "$key" "$seen"; then
+      archive_die "duplicate archived commit entry in $outfile: $repository $commit"
+    fi
+
+    printf '%s\n' "$key" >> "$seen"
   done < "$existing"
-
-  sort -u "$seen" > "$seen.tmp" && mv "$seen.tmp" "$seen"
 
   added=0
   while IFS= read -r obj; do
     repository=$(printf '%s\n' "$obj" | archive_json_field repository | head -1)
     commit=$(printf '%s\n' "$obj" | archive_json_field commit | head -1)
 
-    [ -n "$repository" ] || continue
-    [ -n "$commit" ] || continue
+    [ -n "$repository" ] ||
+      archive_die "commit entry has no repository in input: $input"
+    [ -n "$commit" ] ||
+      archive_die "commit entry has no commit in input: $input"
+
+    case "$repository$commit" in
+      *"	"*)
+        archive_die "tabs are not allowed in commit keys: $input"
+        ;;
+    esac
 
     key=$(printf '%s\t%s' "$repository" "$commit")
 
