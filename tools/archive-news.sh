@@ -20,6 +20,32 @@ cleanup() {
 
 trap cleanup EXIT HUP INT TERM
 
+json_escape() {
+  printf '%s' "$1" | awk '
+    BEGIN {
+      ORS = ""
+    }
+
+    {
+      for (i = 1; i <= length($0); i++) {
+        c = substr($0, i, 1)
+
+        if (c == "\\") {
+          printf "\\\\"
+        } else if (c == "\"") {
+          printf "\\\""
+        } else if (c == "\t") {
+          printf "\\t"
+        } else if (c == "\r") {
+          printf "\\r"
+        } else {
+          printf "%s", c
+        }
+      }
+    }
+  '
+}
+
 count=0
 skipped=0
 
@@ -80,11 +106,16 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
       count=$((count + 1))
     fi
 
-    # JSON escaping for generated metadata; news titles here are simple but escape anyway.
-    esc_title=$(printf '%s' "$title" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g')
-    esc_cat=$(printf '%s' "$category" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g')
+    archive_file=$(basename -- "$outfile")
+    esc_hash=$(json_escape "$hash")
+    esc_date=$(json_escape "$archive_date")
+    esc_category=$(json_escape "$category")
+    esc_title=$(json_escape "$title")
+    esc_slug=$(json_escape "$slug")
+    esc_file=$(json_escape "$archive_file")
+
     printf '{"id":"%s","date":"%s","category":"%s","title":"%s","slug":"%s","file":"%s"}\n' \
-      "$hash" "$archive_date" "$esc_cat" "$esc_title" "$slug" "$(basename -- "$outfile")" >> "$merged"
+      "$esc_hash" "$esc_date" "$esc_category" "$esc_title" "$esc_slug" "$esc_file" >> "$merged"
   else
     skipped=$((skipped + 1))
   fi
