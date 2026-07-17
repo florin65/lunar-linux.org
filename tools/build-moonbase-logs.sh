@@ -130,7 +130,12 @@ if ! mv "$STAGED_LOG_DIR" "$LOG_DIR"; then
   printf 'could not publish Moonbase log directory: %s\n' "$LOG_DIR" >&2
 
   if [ -n "$BACKUP_LOG_DIR" ] && [ -e "$BACKUP_LOG_DIR" ]; then
-    mv "$BACKUP_LOG_DIR" "$LOG_DIR" || true
+    if ! mv "$BACKUP_LOG_DIR" "$LOG_DIR"; then
+      printf 'could not restore Moonbase log backup: %s\n' \
+        "$BACKUP_LOG_DIR" >&2
+      exit 1
+    fi
+
     BACKUP_LOG_DIR=
   fi
 
