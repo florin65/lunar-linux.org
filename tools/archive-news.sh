@@ -47,21 +47,52 @@ json_escape() {
   '
 }
 
+valid_news_date() {
+  value=$1
+  day=${value%% *}
+  hour=
+  minute=
+
+  case "$value" in
+    "$day "*)
+      time_part=${value#"$day "}
+      hour=${time_part%:*}
+      minute=${time_part#*:}
+      ;;
+  esac
+
+  if ! date -d "$day" '+%F' 2>/dev/null | grep -qxF "$day"; then
+    return 1
+  fi
+
+  if [ -n "$hour" ]; then
+    case "$hour" in
+      0[0-9]|1[0-9]|2[0-3]) ;;
+      *) return 1 ;;
+    esac
+
+    case "$minute" in
+      [0-5][0-9]) ;;
+      *) return 1 ;;
+    esac
+  fi
+
+  return 0
+}
+
 count=0
 skipped=0
 
 find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
   date_line=$(sed -n 's/^Date:[[:space:]]*//p' "$f" | head -1)
-  day=$(printf '%s\n' "$date_line" | awk '{ print $1 }')
-  case "$day" in
-    [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9])
-      archive_date=$date_line
-      ;;
-    *)
-      day=$(date -r "$f" +%F)
-      archive_date=$day
-      ;;
-  esac
+
+  if valid_news_date "$date_line"; then
+    archive_date=$date_line
+    day=${date_line%% *}
+  else
+    day=$(date -r "$f" +%F)
+    archive_date=$day
+  fi
 
   year=$(archive_year "$day")
   month=$(archive_month "$day")
