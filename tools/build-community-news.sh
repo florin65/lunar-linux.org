@@ -84,7 +84,8 @@ mkdir -p "$(dirname -- "$OUT")" "$(dirname -- "$MANIFEST")" "$NEWS_PAGES"
 
 rows=$(mktemp)
 new_manifest=$(mktemp)
-trap 'rm -f "$rows" "$new_manifest"' EXIT HUP INT TERM
+slug_registry=$(mktemp -d)
+trap 'rm -f "$rows" "$new_manifest"; rm -rf "$slug_registry"' EXIT HUP INT TERM
 
 : > "$rows"
 : > "$new_manifest"
@@ -159,6 +160,24 @@ for file in "$NEWS_SRC"/*.md; do
   slug=$(basename -- "$file" .md)
   slug=$(slugify "$slug")
   [ -n "$slug" ] || slug=$(slugify "$title")
+
+  if [ -z "$slug" ]; then
+    printf 'error: rejecting news file %s: cannot derive a safe slug\n' \
+      "$(rel_from_project "$file")" >&2
+    rm -f "$body"
+    exit 1
+  fi
+
+  slug_owner="$slug_registry/$slug"
+  if [ -f "$slug_owner" ]; then
+    first_file=$(cat "$slug_owner")
+    printf 'error: community news slug collision: %s\n' "$slug" >&2
+    printf '  first source:  %s\n' "$(rel_from_project "$first_file")" >&2
+    printf '  second source: %s\n' "$(rel_from_project "$file")" >&2
+    rm -f "$body"
+    exit 1
+  fi
+  printf '%s\n' "$file" > "$slug_owner"
 
   out_file="$NEWS_PAGES/$slug.html"
   href="news/$slug.html"
