@@ -731,12 +731,23 @@ expand_template_file() {
     ' "$file"
 }
 
-write_page() {
+write_page() (
   md="$1"
   name=$(basename -- "$md" .md)
   out="$PUBLIC/$name.html"
-  expanded=$(mktemp)
-  rendered=$(mktemp)
+  expanded=
+  rendered=
+  page_tmp=
+
+  cleanup_page_files() {
+    rm -f "$expanded" "$rendered" "$page_tmp"
+  }
+
+  trap cleanup_page_files EXIT HUP INT TERM
+
+  expanded=$(mktemp "$BUILD/.page-expanded.XXXXXX")
+  rendered=$(mktemp "$BUILD/.page-rendered.XXXXXX")
+  page_tmp=$(mktemp "$PUBLIC/.page-output.XXXXXX")
 
   title=$(get_meta title "$md")
   description=$(get_meta description "$md")
@@ -746,11 +757,7 @@ write_page() {
 
   expand_variables "$md" > "$expanded"
 
-  sh "$RENDERER" \
-    "$name" \
-    "$expanded" \
-    "$PROJECT_ROOT" \
-    > "$rendered"
+  sh "$RENDERER"     "$name"     "$expanded"     "$PROJECT_ROOT"     > "$rendered"
 
   {
     write_html_head "$title" "$description"
@@ -762,11 +769,19 @@ write_page() {
 </body>
 </html>
 EOF_PAGE
-  } > "$out"
+  } > "$page_tmp"
 
-  rm -f "$expanded" "$rendered"
-  printf 'generated %s\n' "$(rel_from_project "$out")"
-}
+  if ! mv "$page_tmp" "$out"; then
+    printf 'could not publish generated page: %s
+' "$out" >&2
+    exit 1
+  fi
+
+  page_tmp=
+
+  printf 'generated %s
+' "$(rel_from_project "$out")"
+)
 
 news_meta() {
   key="$1"
