@@ -576,7 +576,12 @@ EOF_MOONBASE
       print "          <tbody>"
     }
 
-    /"category":"Moonbase"/ {
+    {
+      category = field($0, "category")
+
+      if (category != "Moonbase")
+        next
+
       repo = field($0, "repository")
       module = field($0, "module")
       commit = field($0, "commit")
