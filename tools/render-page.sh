@@ -1125,6 +1125,11 @@ END {
         i++
       }
 
+      if (i > ln) {
+        print "unterminated fenced code block" > "/dev/stderr"
+        exit 2
+      }
+
       add("code", code)
 
       if (i <= ln)
@@ -1142,6 +1147,11 @@ END {
       lines[i] != "@@ENDHTML") {
         html = html lines[i] "\n"
         i++
+      }
+
+      if (i > ln) {
+        print "unterminated HTML block" > "/dev/stderr"
+        exit 2
       }
 
       add("html", html)
