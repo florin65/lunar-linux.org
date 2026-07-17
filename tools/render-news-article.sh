@@ -303,31 +303,33 @@ FOOTER="$TEMPLATES/footer.html"
   exit 1
 }
 
-date_count=$(grep -c '^Date:' "$SOURCE" || true)
-category_count=$(grep -c '^Category:' "$SOURCE" || true)
-title_count=$(grep -c '^Title:' "$SOURCE" || true)
-
-if [ "$date_count" -ne 1 ] || [ "$category_count" -ne 1 ] || [ "$title_count" -ne 1 ]; then
-  printf 'invalid news source %s: Date, Category and Title must each appear exactly once\n' "$SOURCE" >&2
-  exit 1
-fi
-
-date=$(sed -n 's/^Date:[[:space:]]*//p' "$SOURCE")
-category=$(sed -n 's/^Category:[[:space:]]*//p' "$SOURCE")
-title=$(sed -n 's/^Title:[[:space:]]*//p' "$SOURCE")
-
 output_dir=$(dirname -- "$OUTPUT")
 mkdir -p "$output_dir"
 
+metadata=$(mktemp)
 body=$(mktemp)
 tmp=$(mktemp "$output_dir/.render-news-article.XXXXXX")
-trap 'rm -f "$body" "$tmp"' EXIT HUP INT TERM
+trap 'rm -f "$metadata" "$body" "$tmp"' EXIT HUP INT TERM
 
 awk '
   BEGIN { body = 0 }
-  body { print; next }
+  body { print > body_file; next }
   /^[[:space:]]*$/ { body = 1; next }
-' "$SOURCE" > "$body"
+  { print > metadata_file }
+' metadata_file="$metadata" body_file="$body" "$SOURCE"
+
+date_count=$(grep -c '^Date:' "$metadata" || true)
+category_count=$(grep -c '^Category:' "$metadata" || true)
+title_count=$(grep -c '^Title:' "$metadata" || true)
+
+if [ "$date_count" -ne 1 ] || [ "$category_count" -ne 1 ] || [ "$title_count" -ne 1 ]; then
+  printf 'invalid news source %s: Date, Category and Title must each appear exactly once in the metadata header\n' "$SOURCE" >&2
+  exit 1
+fi
+
+date=$(sed -n 's/^Date:[[:space:]]*//p' "$metadata")
+category=$(sed -n 's/^Category:[[:space:]]*//p' "$metadata")
+title=$(sed -n 's/^Title:[[:space:]]*//p' "$metadata")
 
 if [ -z "$date" ] || [ -z "$category" ] || [ -z "$title" ]; then
   printf 'invalid news source %s: missing Date, Category or Title\n' "$SOURCE" >&2
