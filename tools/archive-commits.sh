@@ -36,10 +36,14 @@ fi
 
 # Archive by the date carried by each commit entry, not by build date.
 cut_dates="$tmpdir/dates"
+input_keys="$tmpdir/input-keys"
 : > "$cut_dates"
+: > "$input_keys"
 
 while IFS= read -r obj; do
   day=$(printf '%s\n' "$obj" | archive_json_field date | head -1)
+  repository=$(printf '%s\n' "$obj" | archive_json_field repository | head -1)
+  commit=$(printf '%s\n' "$obj" | archive_json_field commit | head -1)
 
   [ -n "$day" ] ||
     archive_die "commit entry has no date in input: $input"
@@ -47,6 +51,23 @@ while IFS= read -r obj; do
   valid_commit_date "$day" ||
     archive_die "commit entry has invalid date '$day' in input: $input"
 
+  [ -n "$repository" ] ||
+    archive_die "commit entry has no repository in input: $input"
+  [ -n "$commit" ] ||
+    archive_die "commit entry has no commit in input: $input"
+
+  case "$repository$commit" in
+    *"	"*)
+      archive_die "tabs are not allowed in commit keys: $input"
+      ;;
+  esac
+
+  key=$(printf '%s\t%s' "$repository" "$commit")
+  if grep -qxF "$key" "$input_keys"; then
+    archive_die "duplicate commit entry in input: $repository $commit"
+  fi
+
+  printf '%s\n' "$key" >> "$input_keys"
   printf '%s\n' "$day" >> "$cut_dates"
 done < "$objects"
 
