@@ -180,7 +180,14 @@ for file in "$NEWS_SRC"/*.md; do
     continue
   fi
 
-  if ! printf '%s\n' "$date" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}([[:space:]][0-9]{2}:[0-9]{2})?$'; then
+  if printf '%s\n%s\n' "$category" "$title" | grep -q '	'; then
+    printf 'warning: rejecting invalid news file %s: tab character in Category or Title\n' \
+      "$(rel_from_project "$file")" >&2
+    rm -f "$body"
+    continue
+  fi
+
+  if ! printf '%s\n' "$date" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}( [0-9]{2}:[0-9]{2})?$'; then
     printf 'warning: rejecting invalid news file %s: invalid Date format\n' "$(rel_from_project "$file")" >&2
     rm -f "$body"
     continue
@@ -230,6 +237,7 @@ for file in "$NEWS_SRC"/*.md; do
   esac
   summary=$(
     awk 'NF { print; exit }' "$body" |
+      tr '\t' ' ' |
       sed 's/[[:space:]][[:space:]]*/ /g'
   )
 
