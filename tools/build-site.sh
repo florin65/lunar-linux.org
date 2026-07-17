@@ -89,10 +89,23 @@ html_attr_escape() {
 }
 
 json_escape() {
-  printf '%s' "$1" | sed \
-    -e 's/\\/\\\\/g' \
-    -e 's/"/\\"/g' \
-    -e ':a;N;$!ba;s/\n/\\n/g'
+  printf '%s' "$1" | awk '
+    BEGIN {
+      first = 1
+    }
+    {
+      if (!first)
+        printf "\\n"
+      first = 0
+
+      gsub(/\\/, "\\\\")
+      gsub(/"/, "\\\"")
+      gsub(/\t/, "\\t")
+      gsub(/\r/, "\\r")
+
+      printf "%s", $0
+    }
+  '
 }
 
 json_get_string() {
