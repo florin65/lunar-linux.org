@@ -214,8 +214,11 @@ date=$(sed -n 's/^Date:[[:space:]]*//p' "$SOURCE" | head -n 1)
 category=$(sed -n 's/^Category:[[:space:]]*//p' "$SOURCE" | head -n 1)
 title=$(sed -n 's/^Title:[[:space:]]*//p' "$SOURCE" | head -n 1)
 
+output_dir=$(dirname -- "$OUTPUT")
+mkdir -p "$output_dir"
+
 body=$(mktemp)
-tmp=$(mktemp)
+tmp=$(mktemp "$output_dir/.render-news-article.XXXXXX")
 trap 'rm -f "$body" "$tmp"' EXIT HUP INT TERM
 
 awk '
@@ -254,8 +257,6 @@ summary=$(
     tr '\t' ' ' |
     sed 's/[[:space:]][[:space:]]*/ /g'
 )
-
-mkdir -p "$(dirname -- "$OUTPUT")"
 
 {
   cat <<EOF_PAGE
