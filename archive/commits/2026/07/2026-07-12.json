@@ -10,5 +10,6 @@
   {"date":"2026-07-12","category":"Moonbase","repository":"other","module":"","version":"","commit":"274ec53b4c","title":"gsasl: Simple Authentication and Security Layer framework (SASL)","summary":"gsasl: Simple Authentication and Security Layer framework (SASL)"},
   {"date":"2026-07-12","category":"Moonbase","repository":"other","module":"msmtp","version":"1.8.33","commit":"c19652563c","title":"msmtp updated to 1.8.33","summary":"version bumped to 1.8.33"},
   {"date":"2026-07-12","category":"Moonbase","repository":"other","module":"broot","version":"1.58.0","commit":"1e6ad6a327","title":"broot updated to 1.58.0","summary":"version bumped to 1.58.0"},
-  {"date":"2026-07-12","category":"Moonbase","repository":"xorg","module":"xsetroot","version":"1.1.4","commit":"07355b5","title":"xsetroot updated to 1.1.4","summary":"version bumped to 1.1.4"}
+  {"date":"2026-07-12","category":"Moonbase","repository":"xorg","module":"xsetroot","version":"1.1.4","commit":"07355b5","title":"xsetroot updated to 1.1.4","summary":"version bumped to 1.1.4"},
+  {"date":"2026-07-12","category":"Moonbase","repository":"core","module":"meson","version":"1.11.2","commit":"48a6738c66f74cc16368d109c598f662197e457a","title":"meson updated to 1.11.2","summary":"version bumped to 1.11.2"}
 ]

@@ -1,13 +1,4 @@
 [
-  {"date":"2026-07-16","category":"Moonbase","repository":"other","module":"netdata","version":"2.10.4","commit":"303a994c1c","title":"netdata updated to 2.10.4","summary":"version bumped to 2.10.4"},
-  {"date":"2026-07-16","category":"Moonbase","repository":"other","module":"freerdp","version":"3.29.0","commit":"39d6a87ba1","title":"freerdp updated to 3.29.0","summary":"version bumped to 3.29.0"},
-  {"date":"2026-07-16","category":"Moonbase","repository":"other","module":"nginx","version":"1.31.3","commit":"6b332c2572","title":"nginx updated to 1.31.3","summary":"version bumped to 1.31.3"},
-  {"date":"2026-07-16","category":"Moonbase","repository":"other","module":"ripgrep","version":"15.2.0","commit":"84494542d0","title":"ripgrep updated to 15.2.0","summary":"version bumped to 15.2.0"},
-  {"date":"2026-07-16","category":"Moonbase","repository":"other","module":"blosc2","version":"3.2.3","commit":"9eb093d9d7","title":"blosc2 updated to 3.2.3","summary":"version bumped to 3.2.3"},
-  {"date":"2026-07-16","category":"Moonbase","repository":"other","module":"open-iscsi","version":"2.1.12","commit":"cb5952523c","title":"open-iscsi updated to 2.1.12","summary":"version bumped to 2.1.12"},
-  {"date":"2026-07-16","category":"Moonbase","repository":"other","module":"wireshark","version":"4.7.2","commit":"d1813b4af3","title":"wireshark updated to 4.7.2","summary":"version bumped to 4.7.2"},
-  {"date":"2026-07-16","category":"Moonbase","repository":"other","module":"","version":"","commit":"da6459cd1a","title":"libpathrs: C-friendly API to make path resolution safer on Linux","summary":"libpathrs: C-friendly API to make path resolution safer on Linux"},
-  {"date":"2026-07-16","category":"Moonbase","repository":"other","module":"dav1d","version":"1.5.4","commit":"e33725ad64","title":"dav1d updated to 1.5.4","summary":"version bumped to 1.5.4"},
-  {"date":"2026-07-16","category":"Moonbase","repository":"other","module":"runc","version":"1.5.1","commit":"ea1bab3a31","title":"runc updated to 1.5.1","summary":"version bumped to 1.5.1"},
-  {"date":"2026-07-16","category":"Moonbase","repository":"other","module":"wakatime-cli","version":"2.22.2","commit":"ef8ddcf1b4","title":"wakatime-cli updated to 2.22.2","summary":"version bumped to 2.22.2"}
+  {"date":"2026-07-17","category":"Moonbase","repository":"other","module":"skim","version":"5.1.3","commit":"e8d9921d7c2b3bd29a55a6776e8bb52066dfddbb","title":"skim updated to 5.1.3","summary":"version bumped to 5.1.3"},
+  {"date":"2026-07-12","category":"Moonbase","repository":"core","module":"meson","version":"1.11.2","commit":"48a6738c66f74cc16368d109c598f662197e457a","title":"meson updated to 1.11.2","summary":"version bumped to 1.11.2"}
 ]
