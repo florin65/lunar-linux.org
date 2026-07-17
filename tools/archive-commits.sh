@@ -20,6 +20,12 @@ cleanup() {
 
 trap cleanup EXIT HUP INT TERM
 
+valid_commit_date() {
+  value=$1
+
+  date -d "$value" '+%F' 2>/dev/null | grep -qxF "$value"
+}
+
 objects="$tmpdir/objects"
 archive_json_objects "$input" > "$objects"
 
@@ -30,7 +36,22 @@ fi
 
 # Archive by the date carried by each commit entry, not by build date.
 cut_dates="$tmpdir/dates"
-sed -n 's/.*"date"[[:space:]]*:[[:space:]]*"\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\).*/\1/p' "$objects" | sort -u > "$cut_dates"
+: > "$cut_dates"
+
+while IFS= read -r obj; do
+  day=$(printf '%s\n' "$obj" | archive_json_field date | head -1)
+
+  [ -n "$day" ] ||
+    archive_die "commit entry has no date in input: $input"
+
+  valid_commit_date "$day" ||
+    archive_die "commit entry has invalid date '$day' in input: $input"
+
+  printf '%s\n' "$day" >> "$cut_dates"
+done < "$objects"
+
+sort -u "$cut_dates" > "$cut_dates.tmp"
+mv "$cut_dates.tmp" "$cut_dates"
 
 while IFS= read -r day; do
   [ -n "$day" ] || continue
