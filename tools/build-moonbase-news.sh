@@ -48,12 +48,18 @@ json_escape() {
 LOG_DIR=$(abs_path "$MOONBASE_LOG_DIR")
 OUT=$(abs_path "$MOONBASE_NEWS_JSON")
 OUT_DIR=$(dirname -- "$OUT")
-TMP="$OUT.tmp"
 ROWS=$(mktemp)
 SORTED_ROWS=$(mktemp)
-trap 'rm -f "$ROWS" "$SORTED_ROWS"' EXIT
+OUT_TMP=
+
+cleanup() {
+  rm -f "$ROWS" "$SORTED_ROWS" "$OUT_TMP"
+}
+
+trap cleanup EXIT HUP INT TERM
 
 mkdir -p "$OUT_DIR"
+OUT_TMP=$(mktemp "$OUT_DIR/.moonbase-news.XXXXXX")
 : > "$ROWS"
 
 if [ -d "$LOG_DIR" ]; then
@@ -73,7 +79,7 @@ fi
 TAB=$(printf '\t')
 LC_ALL=C sort -t "$TAB" -k1,1r -k2,2 -k3,3 "$ROWS" > "$SORTED_ROWS"
 
-printf '[\n' > "$TMP"
+printf '[\n' > "$OUT_TMP"
 first=1
 
 while IFS='	' read -r date repo commit subject || [ -n "$date$repo$commit$subject" ]; do
@@ -101,7 +107,7 @@ while IFS='	' read -r date repo commit subject || [ -n "$date$repo$commit$subjec
   esac
 
   if [ "$first" -eq 0 ]; then
-    printf ',\n' >> "$TMP"
+    printf ',\n' >> "$OUT_TMP"
   fi
   first=0
 
@@ -112,10 +118,11 @@ while IFS='	' read -r date repo commit subject || [ -n "$date$repo$commit$subjec
     "$(json_escape "$version")" \
     "$(json_escape "$commit")" \
     "$(json_escape "$title")" \
-    "$(json_escape "$summary")" >> "$TMP"
+    "$(json_escape "$summary")" >> "$OUT_TMP"
 done < "$SORTED_ROWS"
 
-printf '\n]\n' >> "$TMP"
-mv "$TMP" "$OUT"
+printf '\n]\n' >> "$OUT_TMP"
+mv "$OUT_TMP" "$OUT"
+OUT_TMP=
 
 printf 'generated %s\n' "$(rel_from_project "$OUT")"
