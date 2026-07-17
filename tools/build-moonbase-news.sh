@@ -56,10 +56,12 @@ OUT=$(abs_path "$MOONBASE_NEWS_JSON")
 OUT_DIR=$(dirname -- "$OUT")
 ROWS=$(mktemp)
 SORTED_ROWS=$(mktemp)
+LOG_FILES=$(mktemp)
+DUPLICATE_KEYS=
 OUT_TMP=
 
 cleanup() {
-  rm -f "$ROWS" "$SORTED_ROWS" "$OUT_TMP"
+  rm -f "$ROWS" "$SORTED_ROWS" "$LOG_FILES" "$DUPLICATE_KEYS" "$OUT_TMP"
 }
 
 trap cleanup EXIT HUP INT TERM
@@ -69,7 +71,20 @@ OUT_TMP=$(mktemp "$OUT_DIR/.moonbase-news.XXXXXX")
 : > "$ROWS"
 
 if [ -d "$LOG_DIR" ]; then
-  find "$LOG_DIR" -type f -name '*.log' | sort | while IFS= read -r log; do
+  if ! find "$LOG_DIR" -type f -name '*.log' > "$LOG_FILES.unsorted"; then
+    printf 'could not enumerate Moonbase log files: %s\n' "$LOG_DIR" >&2
+    exit 1
+  fi
+
+  if ! LC_ALL=C sort "$LOG_FILES.unsorted" > "$LOG_FILES"; then
+    printf 'could not sort Moonbase log files: %s\n' "$LOG_DIR" >&2
+    exit 1
+  fi
+
+  rm -f "$LOG_FILES.unsorted"
+
+  while IFS= read -r log; do
+    [ -n "$log" ] || continue
     repo=$(basename -- "$log" .log)
 
     [ -n "$repo" ] ||
@@ -135,14 +150,13 @@ if [ -d "$LOG_DIR" ]; then
       printf '%s\t%s\t%s\t%s\n' \
         "$date" "$repo" "$commit" "$subject" >> "$ROWS"
     done < "$log"
-  done
+  done < "$LOG_FILES"
 fi
 
 TAB=$(printf '\t')
 LC_ALL=C sort -t "$TAB" -k1,1r -k2,2 -k3,3 "$ROWS" > "$SORTED_ROWS"
 
 DUPLICATE_KEYS=$(mktemp)
-trap 'rm -f "$ROWS" "$SORTED_ROWS" "$DUPLICATE_KEYS" "$OUT_TMP"' EXIT HUP INT TERM
 
 cut -f2,3 "$SORTED_ROWS" |
   LC_ALL=C sort |
