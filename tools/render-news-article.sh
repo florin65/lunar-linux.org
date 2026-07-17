@@ -71,6 +71,12 @@ render_body() {
       return s
     }
 
+    function attr(s) {
+      gsub(/"/, "\\&quot;", s)
+      gsub(/\047/, "\\&#39;", s)
+      return s
+    }
+
     function inline(s,    out, pre, label, url, rest, p1, p2, code) {
       s = esc(s)
       out = ""
@@ -91,7 +97,7 @@ render_body() {
         rest = substr(s, RSTART + p1 + 1)
         p2 = index(rest, ")")
         url = substr(rest, 1, p2 - 1)
-        out = out pre "<a href=\"" url "\">" label "</a>"
+        out = out pre "<a href=\"" attr(url) "\">" label "</a>"
         s = substr(rest, p2 + 1)
       }
       s = out s
