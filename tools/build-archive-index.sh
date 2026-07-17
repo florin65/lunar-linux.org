@@ -26,6 +26,9 @@ fi
 
 commits_data_tmp=
 commits_fragment_tmp=
+commits_files_tmp=
+commits_raw_tmp=
+commits_objects_tmp=
 news_data_tmp=
 news_fragment_tmp=
 news_source_tmp=
@@ -38,6 +41,9 @@ cleanup() {
   rm -f \
     "$commits_data_tmp" \
     "$commits_fragment_tmp" \
+    "$commits_files_tmp" \
+    "$commits_raw_tmp" \
+    "$commits_objects_tmp" \
     "$news_data_tmp" \
     "$news_fragment_tmp" \
     "$news_source_tmp" \
@@ -70,26 +76,51 @@ build_commits_fragment() {
   commits_output_dir=$(dirname -- "$commits_out")
   commits_data_tmp=$(mktemp "$commits_output_dir/.archive-commits-data.XXXXXX")
   commits_fragment_tmp=$(mktemp "$commits_output_dir/.archive-commits.XXXXXX")
+  commits_files_tmp=$(mktemp)
+  commits_raw_tmp=$(mktemp)
+  commits_objects_tmp=$(mktemp)
 
-  find "$ARCHIVE_ROOT/commits" -type f \( -name '*.json' -o -name '*.json.xz' \) 2>/dev/null | sort |
-    while IFS= read -r f; do
-      archive_cat "$f" | archive_json_objects_from_cat |
-        while IFS= read -r obj; do
-          date=$(printf '%s\n' "$obj" | archive_json_field date | head -1)
-          repo=$(printf '%s\n' "$obj" | archive_json_field repository | head -1)
-          module=$(printf '%s\n' "$obj" | archive_json_field module | head -1)
-          commit=$(printf '%s\n' "$obj" | archive_json_field commit | head -1)
-          summary=$(printf '%s\n' "$obj" | archive_json_field summary | head -1)
-          title=$(printf '%s\n' "$obj" | archive_json_field title | head -1)
+  find "$ARCHIVE_ROOT/commits" -type f \( -name '*.json' -o -name '*.json.xz' \) 2>/dev/null |
+    sort > "$commits_files_tmp"
 
-          [ -n "$date" ] || continue
-          [ -n "$commit" ] || continue
-          [ -n "$summary" ] || summary=$title
-          [ -n "$module" ] || module=$title
+  while IFS= read -r f; do
+    if ! archive_cat "$f" > "$commits_raw_tmp"; then
+      printf 'could not read archived commits file: %s\n' "$f" >&2
+      exit 1
+    fi
 
-          printf '%s\t%s\t%s\t%s\t%s\n' "$date" "$commit" "$repo" "$module" "$summary" >> "$commits_data_tmp"
-        done
-    done
+    if ! archive_json_objects_from_cat < "$commits_raw_tmp" > "$commits_objects_tmp"; then
+      printf 'could not parse archived commits file: %s\n' "$f" >&2
+      exit 1
+    fi
+
+    while IFS= read -r obj; do
+      date=$(printf '%s\n' "$obj" | archive_json_field date | head -1)
+      repo=$(printf '%s\n' "$obj" | archive_json_field repository | head -1)
+      module=$(printf '%s\n' "$obj" | archive_json_field module | head -1)
+      commit=$(printf '%s\n' "$obj" | archive_json_field commit | head -1)
+      summary=$(printf '%s\n' "$obj" | archive_json_field summary | head -1)
+      title=$(printf '%s\n' "$obj" | archive_json_field title | head -1)
+
+      if [ -z "$date" ] || [ -z "$commit" ]; then
+        printf 'invalid archived commit entry in %s: missing date or commit\n' "$f" >&2
+        exit 1
+      fi
+
+      [ -n "$summary" ] || summary=$title
+      [ -n "$module" ] || module=$title
+
+      printf '%s\t%s\t%s\t%s\t%s\n' "$date" "$commit" "$repo" "$module" "$summary" >> "$commits_data_tmp"
+    done < "$commits_objects_tmp"
+
+    : > "$commits_raw_tmp"
+    : > "$commits_objects_tmp"
+  done < "$commits_files_tmp"
+
+  rm -f "$commits_files_tmp" "$commits_raw_tmp" "$commits_objects_tmp"
+  commits_files_tmp=
+  commits_raw_tmp=
+  commits_objects_tmp=
 
   {
     echo '      <div class="moonbase-journal archive-journal">'
