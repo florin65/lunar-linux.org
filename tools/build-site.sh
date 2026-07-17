@@ -772,7 +772,36 @@ news_meta() {
   key="$1"
   file="$2"
 
-  sed -n 's/^'"$key"':[[:space:]]*//p' "$file" | head -n 1
+  awk -v key="$key" '
+    BEGIN {
+      count = 0
+    }
+
+    /^[[:space:]]*$/ {
+      exit
+    }
+
+    {
+      prefix = key ":"
+
+      if (index($0, prefix) != 1)
+        next
+
+      value = substr($0, length(prefix) + 1)
+      sub(/^[[:space:]]*/, "", value)
+
+      count++
+      result = value
+    }
+
+    END {
+      if (count > 1)
+        exit 2
+
+      if (count == 1)
+        print result
+    }
+  ' "$file"
 }
 
 news_summary() {
