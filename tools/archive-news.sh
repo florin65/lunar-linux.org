@@ -125,8 +125,10 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
   existing="$tmpdir/news-existing"
   merged="$tmpdir/news-merged"
   index_raw="$tmpdir/news-index-raw"
+  existing_ids="$tmpdir/news-existing-ids"
   : > "$existing"
   : > "$index_raw"
+  : > "$existing_ids"
 
   if [ -f "$index" ] || [ -f "$index.xz" ]; then
     if ! archive_cat "$index" > "$index_raw"; then
@@ -145,16 +147,48 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
 
   while IFS= read -r obj; do
     existing_id=$(printf '%s\n' "$obj" | archive_json_field id | head -1)
+    existing_date=$(printf '%s\n' "$obj" | archive_json_field date | head -1)
+    existing_file=$(printf '%s\n' "$obj" | archive_json_field file | head -1)
+
+    if [ -z "$existing_id" ] || [ -z "$existing_date" ] || [ -z "$existing_file" ]; then
+      archive_die "invalid archived news entry in index: missing id, date or file"
+    fi
+
+    case "$existing_id" in
+      *[!0-9a-f]*)
+        archive_die "invalid archived news id in index: $existing_id"
+        ;;
+    esac
+
+    if [ "${#existing_id}" -ne 64 ]; then
+      archive_die "invalid archived news id length in index: $existing_id"
+    fi
+
+    if ! valid_news_date "$existing_date"; then
+      archive_die "invalid archived news date in index: $existing_date"
+    fi
+
+    case "$existing_file" in
+      */*|.*|*..*|*.md.md|*[!A-Za-z0-9._-]*)
+        archive_die "invalid archived news file in index: $existing_file"
+        ;;
+      *.md)
+        ;;
+      *)
+        archive_die "invalid archived news file in index: $existing_file"
+        ;;
+    esac
+
+    if grep -qxF "$existing_id" "$existing_ids"; then
+      archive_die "duplicate archived news id in index: $existing_id"
+    fi
+    printf '%s\n' "$existing_id" >> "$existing_ids"
 
     if [ "$existing_id" = "$hash" ]; then
       matched_count=$((matched_count + 1))
-      matched_file=$(printf '%s\n' "$obj" | archive_json_field file | head -1)
+      matched_file=$existing_file
     fi
   done < "$existing"
-
-  if [ "$matched_count" -gt 1 ]; then
-    archive_die "duplicate archived news id in index: $hash"
-  fi
 
   if [ "$matched_count" -eq 0 ]; then
     if [ -f "$outfile" ] || [ -f "$outfile.xz" ]; then
