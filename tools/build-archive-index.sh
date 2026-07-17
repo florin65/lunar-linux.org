@@ -110,6 +110,13 @@ build_commits_fragment() {
       [ -n "$summary" ] || summary=$title
       [ -n "$module" ] || module=$title
 
+      if printf '%s\n%s\n%s\n%s\n' "$date" "$commit" "$repo" "$module" | grep -q "$tab"; then
+        printf 'invalid archived commit entry in %s: tab character in date, commit, repository or module\n' "$f" >&2
+        exit 1
+      fi
+
+      summary=$(printf '%s' "$summary" | tr "$tab" ' ')
+
       printf '%s\t%s\t%s\t%s\t%s\n' "$date" "$commit" "$repo" "$module" "$summary" >> "$commits_data_tmp"
     done < "$commits_objects_tmp"
 
