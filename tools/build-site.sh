@@ -908,22 +908,6 @@ build_news_json() (
       summary=$(news_summary "$md")
       slug=$(basename -- "$md" .md)
 
-      if grep -Fqx -- "$slug" "$slug_list"; then
-        printf 'duplicate generated news slug %s in %s
-'           "$slug" "$(rel_from_project "$md")" >&2
-        exit 1
-      else
-        grep_status=$?
-        if [ "$grep_status" -ne 1 ]; then
-          printf 'could not check generated news slug: %s
-' "$slug" >&2
-          exit 1
-        fi
-      fi
-
-      printf '%s
-' "$slug" >> "$slug_list"
-
       if [ -z "$date" ] || [ -z "$title" ] || [ -z "$category" ]; then
         printf 'warning: rejecting invalid news file %s: missing Date, Category or Title
 ' "$(rel_from_project "$md")" >&2
@@ -941,6 +925,22 @@ build_news_json() (
 ' "$(rel_from_project "$md")" >&2
         continue
       fi
+
+      if grep -Fqx -- "$slug" "$slug_list"; then
+        printf 'duplicate generated news slug %s in %s
+'           "$slug" "$(rel_from_project "$md")" >&2
+        exit 1
+      else
+        grep_status=$?
+        if [ "$grep_status" -ne 1 ]; then
+          printf 'could not check generated news slug: %s
+' "$slug" >&2
+          exit 1
+        fi
+      fi
+
+      printf '%s
+' "$slug" >> "$slug_list"
 
       if [ "$first" -eq 0 ]; then
         printf ',
