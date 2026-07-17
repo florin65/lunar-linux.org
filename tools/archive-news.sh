@@ -124,7 +124,6 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
 
   existing="$tmpdir/news-existing"
   merged="$tmpdir/news-merged"
-  seen="$tmpdir/news-seen"
   index_raw="$tmpdir/news-index-raw"
   : > "$existing"
   : > "$index_raw"
@@ -140,9 +139,24 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
   fi
 
   cp "$existing" "$merged"
-  sed -n 's/.*"id"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$existing" | sort -u > "$seen"
 
-  if ! grep -qxF "$hash" "$seen"; then
+  matched_file=
+  matched_count=0
+
+  while IFS= read -r obj; do
+    existing_id=$(printf '%s\n' "$obj" | archive_json_field id | head -1)
+
+    if [ "$existing_id" = "$hash" ]; then
+      matched_count=$((matched_count + 1))
+      matched_file=$(printf '%s\n' "$obj" | archive_json_field file | head -1)
+    fi
+  done < "$existing"
+
+  if [ "$matched_count" -gt 1 ]; then
+    archive_die "duplicate archived news id in index: $hash"
+  fi
+
+  if [ "$matched_count" -eq 0 ]; then
     if [ -f "$outfile" ] || [ -f "$outfile.xz" ]; then
       archived_source="$tmpdir/news-archived-source"
 
@@ -174,6 +188,34 @@ find "$src_dir" -type f -name '*.md' | sort | while IFS= read -r f; do
     printf '{"id":"%s","date":"%s","category":"%s","title":"%s","slug":"%s","file":"%s"}\n' \
       "$esc_hash" "$esc_date" "$esc_category" "$esc_title" "$esc_slug" "$esc_file" >> "$merged"
   else
+    [ -n "$matched_file" ] || archive_die "archived news entry has no file: $hash"
+
+    case "$matched_file" in
+      */*|.*|*..*|*.md.md|*[!A-Za-z0-9._-]*)
+        archive_die "invalid archived news file in index: $matched_file"
+        ;;
+      *.md)
+        ;;
+      *)
+        archive_die "invalid archived news file in index: $matched_file"
+        ;;
+    esac
+
+    indexed_source="$outdir/$matched_file"
+    if [ ! -f "$indexed_source" ] && [ ! -f "$indexed_source.xz" ]; then
+      archive_die "missing archived news source referenced by index: $indexed_source"
+    fi
+
+    archived_source="$tmpdir/news-archived-source"
+    if ! archive_cat "$indexed_source" > "$archived_source"; then
+      archive_die "could not read archived news source: $indexed_source"
+    fi
+
+    archived_hash=$(archive_sha256_file "$archived_source")
+    if [ "$archived_hash" != "$hash" ]; then
+      archive_die "archived news source hash mismatch: $indexed_source"
+    fi
+
     skipped=$((skipped + 1))
   fi
 
