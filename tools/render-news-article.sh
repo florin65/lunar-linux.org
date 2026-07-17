@@ -17,6 +17,22 @@ ROOT_PREFIX=${3:-}
 BACK_HREF=${4:-}
 BACK_LABEL=${5:-Back to News}
 
+valid_root_prefix() {
+  prefix=$1
+
+  case "$prefix" in
+    ""|"./")
+      return 0
+      ;;
+  esac
+
+  while [ "${prefix#../}" != "$prefix" ]; do
+    prefix=${prefix#../}
+  done
+
+  [ -z "$prefix" ]
+}
+
 [ -n "$SOURCE" ] || {
   printf 'usage: %s SOURCE OUTPUT ROOT_PREFIX BACK_HREF [BACK_LABEL]\n' "$0" >&2
   exit 1
@@ -31,6 +47,11 @@ BACK_LABEL=${5:-Back to News}
   printf 'missing news source: %s\n' "$SOURCE" >&2
   exit 1
 }
+
+if ! valid_root_prefix "$ROOT_PREFIX"; then
+  printf 'invalid ROOT_PREFIX: %s\n' "$ROOT_PREFIX" >&2
+  exit 1
+fi
 
 PROJECT_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 CONF="$PROJECT_ROOT/site.conf"
