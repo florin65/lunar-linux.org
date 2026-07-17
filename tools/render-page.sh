@@ -1208,9 +1208,17 @@ END {
       while (i <= ln && lines[i] ~ /^\[/ && lines[i] ~ /\]\(/) {
         s = lines[i]
         p1 = index(s, "](")
-        label = substr(s, 2, p1 - 2)
         rest = substr(s, p1 + 2)
         p2 = index(rest, ")")
+
+        if (p1 <= 2 ||
+            p2 <= 1 ||
+            substr(rest, p2 + 1) != "") {
+          print "invalid action link: " s > "/dev/stderr"
+          exit 2
+        }
+
+        label = substr(s, 2, p1 - 2)
         url = substr(rest, 1, p2 - 1)
         list[++c] = label LINKSEP url
         i++
