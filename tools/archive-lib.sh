@@ -33,11 +33,10 @@ archive_mkdir() {
 }
 
 archive_cat() {
-  f=$1
-  if [ -f "$f" ]; then
-    cat "$f"
-  elif [ -f "$f.xz" ]; then
-    xzcat "$f.xz"
+  if [ -f "$1" ]; then
+    cat "$1"
+  elif [ -f "$1.xz" ]; then
+    xzcat "$1.xz"
   else
     return 1
   fi
@@ -47,34 +46,34 @@ archive_sha256_file() {
   sha256sum "$1" | awk '{ print $1 }'
 }
 
-archive_write_atomic() {
+archive_write_atomic() (
   target=$1
   tmp="$target.$$"
   cat > "$tmp"
   mv "$tmp" "$target"
-}
+)
 
-archive_compress_file() {
+archive_compress_file() (
   f=$1
   compressed="$f.xz"
 
-  [ -f "$f" ] || return 0
+  [ -f "$f" ] || exit 0
 
   if [ -f "$compressed" ]; then
     rm -f "$compressed"
   fi
 
   xz -T0 -9e "$f"
-}
+)
 
-archive_close_day_tree() {
+archive_close_day_tree() (
   root=${1%/}
   today=$(archive_today)
   current_year=$(archive_year "$today")
   current_month=$(archive_month "$today")
   current_month_dir="$root/$current_year/$current_month"
 
-  [ -d "$root" ] || return 0
+  [ -d "$root" ] || exit 0
 
   find "$root" -type f ! -name '*.xz' | while IFS= read -r f; do
     base=$(basename -- "$f")
@@ -82,22 +81,18 @@ archive_close_day_tree() {
 
     case "$base" in
       "$today"*)
-        # Keep files for the current day active.
         continue
         ;;
       index.json)
-        # The current monthly index is still being updated.
         [ "$dir" = "$current_month_dir" ] && continue
         ;;
     esac
 
     archive_compress_file "$f"
   done
-}
+)
 
 archive_json_objects() {
-  # Print one compact JSON object per line from a generated JSON array where
-  # each object is already stored on one line.
   sed -n '/^[[:space:]]*{/p' "$1" |
     sed 's/^[[:space:]]*//' |
     sed 's/,[[:space:]]*$//'
@@ -110,9 +105,7 @@ archive_json_objects_from_cat() {
 }
 
 archive_json_field() {
-  field=$1
-
-  awk -v key="$field" '
+  awk -v key="$1" '
     function json_decode(s,    out, i, c) {
       out = ""
 
@@ -145,7 +138,6 @@ archive_json_field() {
         } else if (c == "t") {
           out = out "\t"
         } else {
-          # Preserve unsupported escapes such as \uXXXX verbatim.
           out = out "\\" c
         }
       }
@@ -153,7 +145,7 @@ archive_json_field() {
       return out
     }
 
-    function field_value(line, key,    pat, start, rest, raw, i, c) {
+    function field_value(line, key,    pat, rest, raw, i, c) {
       pat = "\"" key "\"[[:space:]]*:[[:space:]]*\""
 
       if (!match(line, pat)) {
@@ -197,8 +189,7 @@ archive_json_field() {
   '
 }
 
-archive_emit_json_array() {
-  # Reads object lines from stdin, writes valid JSON array.
+archive_emit_json_array() (
   first=1
   printf '[\n'
   while IFS= read -r obj; do
@@ -210,4 +201,4 @@ archive_emit_json_array() {
     printf '  %s' "$obj"
   done
   printf '\n]\n'
-}
+)

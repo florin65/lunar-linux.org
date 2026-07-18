@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Working with Moonbase</title>
+  <meta name="description" content="Inspecting, updating, comparing, and maintaining the active Moonbase safely.">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Working with Moonbase</h1>
+      <p class="hero-description">Moonbase is the active collection of module definitions used by LSS.</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <p>It is not the installed system.</p>
+        <pre><code>Moonbase
+→ module intent and build policy
+
+/var/state/lunar/packages
+→ installed package and policy state
+
+/var/log/lunar/install
+→ final ownership
+</code></pre>
+        <h2 id="active-moonbase">Active Moonbase</h2>
+        <p>A common active location is:</p>
+        <pre><code>/var/lib/lunar/moonbase
+</code></pre>
+        <p>Inspect it directly:</p>
+        <pre><code>git -C /var/lib/lunar/moonbase status --short
+git -C /var/lib/lunar/moonbase branch --show-current
+git -C /var/lib/lunar/moonbase rev-parse HEAD
+</code></pre>
+        <p>The active local Moonbase explains what the current system will execute.</p>
+        <p>An upstream repository explains upstream intent, but it may differ from the active copy.</p>
+        <h2 id="locate-a-module">Locate a module</h2>
+        <pre><code>MODULE=name
+SECTION=$(lvu where "$MODULE")
+MODULE_DIR="/var/lib/lunar/moonbase/$SECTION/$MODULE"
+
+printf '%s
+' "$MODULE_DIR"
+</code></pre>
+        <p>Inspect all module files:</p>
+        <pre><code>find "$MODULE_DIR" -maxdepth 2 -type f -print | sort
+</code></pre>
+        <h2 id="record-the-current-revision">Record the current revision</h2>
+        <p>Before a significant update:</p>
+        <pre><code>git -C /var/lib/lunar/moonbase rev-parse HEAD   &gt; /root/moonbase-revision.before
+
+git -C /var/lib/lunar/moonbase branch --show-current   &gt; /root/moonbase-branch.before
+
+git -C /var/lib/lunar/moonbase status --short   &gt; /root/moonbase-status.before
+</code></pre>
+        <p>Preserve local changes:</p>
+        <pre><code>git -C /var/lib/lunar/moonbase diff   &gt; /root/moonbase-local-changes.patch
+</code></pre>
+        <p>Do not update over unknown local modifications.</p>
+        <h2 id="compare-revisions">Compare revisions</h2>
+        <p>Compare one module:</p>
+        <pre><code>git -C /var/lib/lunar/moonbase diff   OLD..NEW -- section/module
+</code></pre>
+        <p>List changed files:</p>
+        <pre><code>git -C /var/lib/lunar/moonbase diff   --name-only OLD..NEW
+</code></pre>
+        <p>Inspect history:</p>
+        <pre><code>git -C /var/lib/lunar/moonbase log --   section/module
+</code></pre>
+        <p>A module may change without changing upstream version.</p>
+        <p>Possible changes include:</p>
+        <ul class="simple-list">
+          <li>patch additions;</li>
+          <li>dependency corrections;</li>
+          <li>compiler selection;</li>
+          <li>installation paths;</li>
+          <li>hooks;</li>
+          <li>optional-feature defaults;</li>
+          <li>source verification.</li>
+        </ul>
+        <h2 id="updating-moonbase-does-not-update-installed-software">Updating Moonbase does not update installed software</h2>
+        <pre><code>Moonbase update
+→ definitions change
+
+installed system
+→ unchanged until install, rebuild, or removal
+</code></pre>
+        <p>After updating Moonbase, review affected modules before rebuilding them.</p>
+        <p>See <a href="../user-guide/updating-safely.html">Updating Lunar Linux Safely</a>.</p>
+        <h2 id="local-changes-and-branches">Local changes and branches</h2>
+        <p>Safe ways to preserve local work include:</p>
+        <ul class="simple-list">
+          <li>commit local changes;</li>
+          <li>use a dedicated branch;</li>
+          <li>export a patch;</li>
+          <li>move private modules into a clearly identified local section;</li>
+          <li>pin a known revision.</li>
+        </ul>
+        <p>Avoid an unmanaged mixture of local edits and upstream updates.</p>
+        <h2 id="local-modules">Local modules</h2>
+        <p>A dedicated local section makes provenance clearer.</p>
+        <p>Conceptually:</p>
+        <pre><code>local/utils
+local/libs
+local/services
+</code></pre>
+        <p>Benefits include:</p>
+        <ul class="simple-list">
+          <li>fewer merge conflicts;</li>
+          <li>easier backup;</li>
+          <li>clearer review;</li>
+          <li>safer upstream updates.</li>
+        </ul>
+        <p>Use the conventions supported by the active Moonbase.</p>
+        <h2 id="search-moonbase">Search Moonbase</h2>
+        <p>Search for dependencies:</p>
+        <pre><code>grep -R -n -F 'dependency-name'   /var/lib/lunar/moonbase
+</code></pre>
+        <p>Find hooks:</p>
+        <pre><code>find /var/lib/lunar/moonbase   -type f   \( -name PRE_BUILD -o -name POST_BUILD      -o -name POST_INSTALL -o -name PRE_REMOVE      -o -name POST_REMOVE \)   -print
+</code></pre>
+        <p>Find patches:</p>
+        <pre><code>find /var/lib/lunar/moonbase   -type f   \( -name '*.patch' -o -name '*.diff' \)   -print
+</code></pre>
+        <p>Find plugin-related modules:</p>
+        <pre><code>grep -R -n -E 'plugin\.d|\.plugin'   /var/lib/lunar/moonbase
+</code></pre>
+        <h2 id="reproducibility-record">Reproducibility record</h2>
+        <p>For an important build, preserve:</p>
+        <pre><code>OUT=/root/lss-build-record
+mkdir -p "$OUT"
+
+git -C /var/lib/lunar/moonbase rev-parse HEAD   &gt; "$OUT/moonbase-revision"
+
+git -C /var/lib/lunar/moonbase status --short   &gt; "$OUT/moonbase-status"
+
+git -C /var/lib/lunar/moonbase diff   &gt; "$OUT/moonbase-diff"
+
+cp -a "$MODULE_DIR" "$OUT/module-definition"
+</code></pre>
+        <p>Also preserve configuration, toolchain information, package state, and dependency state when exact reproduction matters.</p>
+        <h2 id="safe-moonbase-workflow">Safe Moonbase workflow</h2>
+        <pre><code>inspect active revision
+→ preserve local changes
+→ update definitions
+→ review diffs
+→ classify affected modules
+→ rebuild selectively
+→ verify state and runtime
+</code></pre>
+        <p>Continue with <a href="moonbase-module-anatomy.html">Moonbase Module Anatomy</a> and <a href="building-and-testing.html">Building and Testing a Local Module</a>.</p>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

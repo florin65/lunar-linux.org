@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>&quot;Recovery and State Repair&quot;</title>
-  <meta name="description" content="&quot;A conservative method for repairing inconsistent LSS state.&quot;">
+  <title>Recovery and State Repair</title>
+  <meta name="description" content="A conservative method for repairing inconsistent LSS state.">
 
   <link rel="icon" href="../../assets/logo/favicon.ico">
   <link rel="stylesheet" href="../../css/style.css">
@@ -86,7 +86,7 @@ cp -a /var/log/lunar/install/${MODULE}-* "$BASE/" 2&gt;/dev/null || true
 cp -a /var/log/lunar/md5sum/${MODULE}-* "$BASE/" 2&gt;/dev/null || true
 cp -a /var/log/lunar/compile/${MODULE}-* "$BASE/" 2&gt;/dev/null || true
 </code></pre>
-        <p>Also preserve the active module definition and Moonbase revision when possible.</p>
+        <p>Also preserve the active module definition, Moonbase revision, configuration choices, and toolchain environment when possible.</p>
         <h2 id="inconsistency-matrix">Inconsistency matrix</h2>
         <h3 id="package-record-present-payload-missing">Package record present, payload missing</h3>
         <p>Likely causes:</p>
@@ -152,6 +152,36 @@ cp -a /var/log/lunar/compile/${MODULE}-* "$BASE/" 2&gt;/dev/null || true
 → no longer owned by an installed module
 </code></pre>
         <p>Keep, archive, compare, or remove it deliberately.</p>
+        <h2 id="drift-that-affects-recovery">Drift that affects recovery</h2>
+        <p>Recovery must account for more than files and records.</p>
+        <h3 id="policy-drift">Policy drift</h3>
+        <p>Preserve the full state list, including:</p>
+        <pre><code>held
+exiled
+enforced
+</code></pre>
+        <p>Restoring a module as merely <code>installed</code> may change administrator intent.</p>
+        <h3 id="moonbase-drift">Moonbase drift</h3>
+        <p>The current Moonbase definition may differ from the one that produced the damaged installation.</p>
+        <p>Preserve:</p>
+        <pre><code>git -C /var/lib/lunar/moonbase rev-parse HEAD
+git -C /var/lib/lunar/moonbase diff
+</code></pre>
+        <p>A rebuild from a changed recipe may repair the module while changing its behavior.</p>
+        <h3 id="optional-feature-and-provider-drift">Optional-feature and provider drift</h3>
+        <p>A reinstall with different options or provider choices can produce a valid but semantically different package.</p>
+        <p>Inspect saved dependency state and module configuration before recovery.</p>
+        <h3 id="toolchain-drift">Toolchain drift</h3>
+        <p>A new compiler or linker may change ABI, generated code, or build behavior.</p>
+        <p>Record:</p>
+        <pre><code>CC
+CXX
+CFLAGS
+CXXFLAGS
+LDFLAGS
+toolchain versions
+</code></pre>
+        <p>Use a trusted cache when exact reproduction is required and a matching rebuild environment is unavailable.</p>
         <h2 id="preferred-repair-order">Preferred repair order</h2>
         <p>Use the least invasive supported path:</p>
         <pre><code>1. rebuild
@@ -186,6 +216,25 @@ module logs partly removed
 modified configuration remains
 </code></pre>
         <p>Use the surviving manifest, a saved manifest, a trusted cache, or a test reinstall to reconstruct ownership. Avoid broad manual deletion.</p>
+        <h2 id="manual-manifest-reconstruction">Manual manifest reconstruction</h2>
+        <p>Manual reconstruction is a last resort.</p>
+        <p>Use it only when:</p>
+        <ul class="simple-list">
+          <li>rebuild is impossible;</li>
+          <li>no trusted cache exists;</li>
+          <li>no coherent backup exists;</li>
+          <li>ownership must be recovered from strong evidence.</li>
+        </ul>
+        <p>Possible evidence includes:</p>
+        <ul class="simple-list">
+          <li>a saved package cache;</li>
+          <li>an old manifest;</li>
+          <li>another identical system;</li>
+          <li>upstream installation lists;</li>
+          <li>filesystem timestamps;</li>
+          <li>activity history.</li>
+        </ul>
+        <p>A guessed manifest can cause destructive removal.</p>
         <h2 id="manual-state-repair">Manual state repair</h2>
         <p>Manual editing is a last resort.</p>
         <p>Before editing:</p>
@@ -203,6 +252,31 @@ cp -a /var/state/lunar/depends \
           <li>immediate before/after comparison;</li>
           <li>filesystem and runtime verification.</li>
         </ul>
+        <h2 id="recovery-checkpoints">Recovery checkpoints</h2>
+        <p>After each major repair step:</p>
+        <pre><code>cp -a /var/state/lunar/packages \
+  "$BASE/packages.checkpoint-N"
+
+cp -a /var/state/lunar/depends \
+  "$BASE/depends.checkpoint-N"
+</code></pre>
+        <p>Do not perform several major repairs without intermediate checkpoints.</p>
+        <h2 id="system-wide-audit-ideas">System-wide audit ideas</h2>
+        <p>Check installed records without matching manifests:</p>
+        <pre><code>awk -F: '$3 ~ /installed/ {print $1 ":" $4}' \
+  /var/state/lunar/packages |
+while IFS=: read -r module version; do
+  test -f "/var/log/lunar/install/${module}-${version}" ||
+    echo "missing manifest: ${module}-${version}"
+done
+</code></pre>
+        <p>Treat audit output as a lead, not automatic proof. Historical or naming exceptions may exist.</p>
+        <p>Check missing paths in one manifest:</p>
+        <pre><code>while IFS= read -r path; do
+  [ -e "$path" ] || [ -L "$path" ] ||
+    echo "missing: $path"
+done &lt; /var/log/lunar/install/module-version
+</code></pre>
         <h2 id="verification-after-repair">Verification after repair</h2>
         <p>Check package state:</p>
         <pre><code>grep '^module:' /var/state/lunar/packages
@@ -220,7 +294,8 @@ lvu installed module
 ldd /usr/bin/program
 program --version
 </code></pre>
-        <p>A repair is complete only when state, ownership, filesystem, and runtime agree.</p>
+        <p>A repair is complete only when state, ownership, filesystem, policy, configuration, and runtime agree.</p>
+        <p>See <a href="caches-and-rollback.html">Caches and Rollback</a> and <a href="../debugging-guide/advanced-inspection.html">Advanced Inspection</a>.</p>
       </article>
     </div>
   </section>

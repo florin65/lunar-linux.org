@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>&quot;Updating the System Safely&quot;</title>
-  <meta name="description" content="&quot;A staged method for updating modules, libraries, toolchains, and services.&quot;">
+  <title>Updating the System Safely</title>
+  <meta name="description" content="A staged method for updating modules, libraries, toolchains, and services.">
 
   <link rel="icon" href="../../assets/logo/favicon.ico">
   <link rel="stylesheet" href="../../css/style.css">
@@ -55,23 +55,35 @@
         <p>Use staged updates rather than one undifferentiated system change.</p>
         <h2 id="before-updating-moonbase">Before updating Moonbase</h2>
         <pre><code>git -C /var/lib/lunar/moonbase status --short
-git -C /var/lib/lunar/moonbase rev-parse HEAD \
-  &gt; /root/moonbase-revision.before
+git -C /var/lib/lunar/moonbase rev-parse HEAD   &gt; /root/moonbase-revision.before
 
-git -C /var/lib/lunar/moonbase diff \
-  &gt; /root/moonbase-local-changes.patch
+git -C /var/lib/lunar/moonbase diff   &gt; /root/moonbase-local-changes.patch
 </code></pre>
         <p>Preserve package and dependency state:</p>
-        <pre><code>cp -a /var/state/lunar/packages \
-  /root/packages.before-update
+        <pre><code>cp -a /var/state/lunar/packages   /root/packages.before-update
 
-cp -a /var/state/lunar/depends \
-  /root/depends.before-update
+cp -a /var/state/lunar/depends   /root/depends.before-update
 </code></pre>
+        <p>Check available space:</p>
+        <pre><code>df -h
+du -sh /var/cache/lunar
+du -sh /var/log/lunar
+</code></pre>
+        <p>A source build may require space for the archive, build tree, object files, installed payload, logs, cache, and old version during replacement.</p>
+        <h2 id="verify-source-availability">Verify source availability</h2>
+        <p>Before a critical update, confirm that required sources remain available and match their expected verification data.</p>
+        <p>Potential failures include:</p>
+        <ul class="simple-list">
+          <li>removed upstream archive;</li>
+          <li>renamed tag;</li>
+          <li>unavailable mirror;</li>
+          <li>changed checksum;</li>
+          <li>network failure.</li>
+        </ul>
+        <p>Preserve source archives for critical modules when practical.</p>
         <h2 id="review-changed-modules">Review changed modules</h2>
         <p>Compare the old and new Moonbase revisions:</p>
-        <pre><code>git -C /var/lib/lunar/moonbase diff \
-  OLD..NEW -- section/module
+        <pre><code>git -C /var/lib/lunar/moonbase diff   OLD..NEW -- section/module
 </code></pre>
         <p>Look for:</p>
         <ul class="simple-list">
@@ -85,6 +97,7 @@ cp -a /var/state/lunar/depends \
           <li>removal behavior.</li>
         </ul>
         <p>The same upstream version can still have different packaging behavior.</p>
+        <p>For deeper Moonbase maintenance, see <a href="../module-author-guide/working-with-moonbase.html">Working with Moonbase</a>.</p>
         <h2 id="update-order">Update order</h2>
         <pre><code>dependencies
 → shared libraries
@@ -96,6 +109,23 @@ cp -a /var/state/lunar/depends \
         <pre><code>lvu depends library
 lvu leert library
 </code></pre>
+        <h2 id="abi-and-soname-transitions">ABI and SONAME transitions</h2>
+        <p>Warning signs include:</p>
+        <ul class="simple-list">
+          <li>changed SONAME;</li>
+          <li>changed major library version;</li>
+          <li>removed symbols;</li>
+          <li>C++ runtime changes;</li>
+          <li>compiler runtime changes;</li>
+          <li>language runtime transitions.</li>
+        </ul>
+        <p>Inspect a library:</p>
+        <pre><code>readelf -d /usr/lib/libexample.so | grep SONAME
+</code></pre>
+        <p>After updating, check important consumers:</p>
+        <pre><code>ldd /usr/bin/consumer | grep 'not found'
+</code></pre>
+        <p>Rebuild direct consumers first, then higher-level dependents as needed.</p>
         <h2 id="toolchain-updates">Toolchain updates</h2>
         <p>Record:</p>
         <pre><code>gcc --version
@@ -103,11 +133,21 @@ clang --version
 ld --version
 make --version
 
-env | grep -E \
-  '^(CC|CXX|CFLAGS|CXXFLAGS|LDFLAGS|MAKEFLAGS)='
+env | grep -E   '^(CC|CXX|CFLAGS|CXXFLAGS|LDFLAGS|MAKEFLAGS)='
 </code></pre>
         <p>Validate the new toolchain on a small known module before rebuilding core components.</p>
         <p>Compiler-family consistency matters. A module expecting Clang-specific flags should not silently build with GCC, and vice versa.</p>
+        <h2 id="cache-isolation-for-a-fresh-build">Cache isolation for a fresh build</h2>
+        <p>A trusted cache can help recovery, but it can also hide the normal compile path.</p>
+        <p>For a controlled fresh build:</p>
+        <pre><code>preserve old cache
+→ move it outside /var/cache/lunar
+→ rebuild
+→ inspect manifest and runtime
+→ preserve the new cache
+</code></pre>
+        <p>Use this when toolchain, provider, options, patches, or Moonbase recipe changed.</p>
+        <p>See <a href="../administrator-guide/caches-and-rollback.html">Caches and Rollback</a>.</p>
         <h2 id="update-waves">Update waves</h2>
         <p>A practical order:</p>
         <pre><code>wave 1
@@ -126,6 +166,25 @@ wave 5
 → core and toolchain
 </code></pre>
         <p>Capture <code>/var/state/lunar/packages</code> and <code>/var/state/lunar/depends</code> after each major wave.</p>
+        <h2 id="kernel-and-boot-updates">Kernel and boot updates</h2>
+        <p>Before updating a kernel, initramfs, bootloader, or firmware:</p>
+        <ul class="simple-list">
+          <li>retain a known-good kernel;</li>
+          <li>retain a working boot entry;</li>
+          <li>preserve boot configuration;</li>
+          <li>verify available filesystem space;</li>
+          <li>verify recovery media or another boot path;</li>
+          <li>inspect generated initramfs and boot files before rebooting.</li>
+        </ul>
+        <p>Do not remove the previous working kernel immediately.</p>
+        <h2 id="lss-self-update">LSS self-update</h2>
+        <p>Updating <code>lunar</code> or core LSS functions affects every later package operation.</p>
+        <p>Before a major self-update, preserve:</p>
+        <pre><code>cp -a /var/lib/lunar/functions   /root/lunar-functions.before
+
+cp -a /etc/lunar   /root/lunar-config.before
+</code></pre>
+        <p>Use a container, chroot, or other recoverable environment for significant LSS changes.</p>
         <h2 id="service-updates">Service updates</h2>
         <p>After updating a service:</p>
         <pre><code>verify binary
@@ -135,6 +194,20 @@ wave 5
 → test client behavior
 </code></pre>
         <p>Installation success is not service validation.</p>
+        <h2 id="detect-partial-installation">Detect partial installation</h2>
+        <p>After a failure, inspect:</p>
+        <pre><code>grep '^module:' /var/state/lunar/packages
+ls -l /var/log/lunar/install/module-*
+ls -l /var/log/lunar/md5sum/module-*
+command -v program
+</code></pre>
+        <p>Possible states include:</p>
+        <pre><code>old record + old payload
+new record + new payload
+no record + partial payload
+record present + missing manifest
+</code></pre>
+        <p>Do not continue updating other modules until the failed transition is understood.</p>
         <h2 id="failure-response">Failure response</h2>
         <pre><code>stop expansion
 → preserve evidence

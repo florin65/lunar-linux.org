@@ -30,6 +30,7 @@ COMPONENTS_DIR=${COMPONENTS_DIR:-components}
 PUBLIC_DIR=${PUBLIC_DIR:-docs}
 DATA_DIR=${DATA_DIR:-docs/data}
 BUILD_DIR=${BUILD_DIR:-cache}
+BUILD_REPORT=${BUILD_REPORT:-$BUILD_DIR/build-report.txt}
 ARCHIVE_DIR=${ARCHIVE_DIR:-archive}
 MOONBASE_STATS_JSON=${MOONBASE_STATS_JSON:-docs/data/moonbase-stats.json}
 DAILY_ISO_JSON=${DAILY_ISO_JSON:-docs/data/daily-iso.json}
@@ -39,6 +40,7 @@ COMMUNITY_NEWS_HTML=${COMMUNITY_NEWS_HTML:-$BUILD_DIR/community-news.html}
 GENERATE_NEWS_JSON=${GENERATE_NEWS_JSON:-yes}
 UPDATE_DYNAMIC_DATA=${UPDATE_DYNAMIC_DATA:-yes}
 UPDATE_ARCHIVE=${UPDATE_ARCHIVE:-yes}
+STRICT_ARCHIVE=${STRICT_ARCHIVE:-no}
 
 abs_path() {
   case "$1" in
@@ -59,6 +61,7 @@ NEWS_SRC=$(abs_path "$NEWS_DIR")
 PUBLIC=$(abs_path "$PUBLIC_DIR")
 DATA=$(abs_path "$DATA_DIR")
 BUILD=$(abs_path "$BUILD_DIR")
+BUILD_REPORT_FILE=$(abs_path "$BUILD_REPORT")
 ARCHIVE=$(abs_path "$ARCHIVE_DIR")
 TEMPLATES=$(abs_path "$TEMPLATES_DIR")
 TOOLS=$(abs_path "$TOOLS_DIR")
@@ -646,14 +649,16 @@ EOF_COMMUNITY
 }
 
 prepare_archive_values() {
+  if [ -n "${archive_commits_file:-}" ]; then
+    rm -f "$archive_commits_file"
+  fi
+
+  if [ -n "${archive_news_file:-}" ]; then
+    rm -f "$archive_news_file"
+  fi
+
   archive_commits_file=$(mktemp)
   archive_news_file=$(mktemp)
-
-  if [ "$UPDATE_ARCHIVE" = "yes" ] && [ -x "$TOOLS/build-archive-index.sh" ]; then
-    ARCHIVE_ROOT="$ARCHIVE" \
-    CACHE_DIR="$BUILD" \
-      "$TOOLS/build-archive-index.sh" "$ARCHIVE_COMMITS" "$ARCHIVE_NEWS"
-  fi
 
   if [ -f "$ARCHIVE_COMMITS" ]; then
     cat "$ARCHIVE_COMMITS" > "$archive_commits_file"
@@ -1123,6 +1128,31 @@ build_news_json() (
 ' "$(rel_from_project "$NEWS_OUT")"
 )
 
+
+initialize_build_report() {
+  {
+    printf 'Website build report\n'
+    printf 'Date: %s\n' "$(date '+%F %T')"
+    printf 'Status: running\n'
+    printf '\nProblems\n'
+  } > "$BUILD_REPORT_FILE"
+}
+
+finalize_build_report() {
+  report_status=$1
+  report_tmp=$(mktemp "$BUILD/.build-report.XXXXXX")
+
+  awk -v status="$report_status" '
+    NR == 3 {
+      print "Status: " status
+      next
+    }
+    { print }
+  ' "$BUILD_REPORT_FILE" > "$report_tmp"
+
+  mv "$report_tmp" "$BUILD_REPORT_FILE"
+}
+
 update_dynamic_data() {
   if [ "$UPDATE_DYNAMIC_DATA" != "yes" ]; then
     return 0
@@ -1190,6 +1220,17 @@ publish_archive_assets() (
   archive_tar=$(mktemp "$BUILD/.archive-assets.XXXXXX")
   stage=$(mktemp -d "$PUBLIC/.archive-stage.XXXXXX")
 
+  # Start from the last successfully published archive. This preserves
+  # generated HTML for entries whose archived source is currently broken.
+  if [ -d "$dst" ]; then
+    if ! (cd "$dst" && tar cf - .) | (cd "$stage" && tar xf -); then
+      printf 'could not preserve previously published archive: %s\n' "$dst" >&2
+      exit 1
+    fi
+  fi
+
+  # Overlay the current raw archive tree. New and corrected archive assets
+  # replace old copies, while unrelated published HTML remains available.
   if ! (cd "$src" && tar cf "$archive_tar" .); then
     printf 'could not package archive assets: %s
 ' "$src" >&2
@@ -1235,6 +1276,80 @@ publish_archive_assets() (
   printf 'published %s
 ' "$(rel_from_project "$dst")"
 )
+
+process_archive_last() {
+  archive_status=skipped
+
+  if [ "$UPDATE_ARCHIVE" != "yes" ]; then
+    printf 'archive: skipped by configuration\n'
+    return 0
+  fi
+
+  archive_log=$(mktemp "$BUILD/.archive-run.XXXXXX")
+
+  if (
+    update_archive
+    publish_archive_assets
+
+    if [ -x "$TOOLS/build-archive-index.sh" ]; then
+      ARCHIVE_ROOT="$ARCHIVE" \
+      CACHE_DIR="$BUILD" \
+      PUBLIC_DIR="$PUBLIC" \
+      BUILD_REPORT="$BUILD_REPORT_FILE" \
+        "$TOOLS/build-archive-index.sh" "$ARCHIVE_COMMITS" "$ARCHIVE_NEWS"
+    else
+      printf 'archive index: skipped, missing %s\n' \
+        "$(rel_from_project "$TOOLS/build-archive-index.sh")" >&2
+    fi
+  ) >"$archive_log" 2>&1; then
+    cat "$archive_log"
+    archive_status=ok
+  else
+    archive_rc=$?
+    cat "$archive_log" >&2
+    archive_status=warning
+
+    printf '\nWARNING: archive processing failed with status %s.\n' \
+      "$archive_rc" >&2
+    printf 'The active Website pages were generated successfully.\n' >&2
+    printf 'The previous published archive and archive fragments were preserved where possible.\n\n' >&2
+  fi
+
+  rm -f "$archive_log"
+  archive_log=
+
+  return 0
+}
+
+write_archive_pages() {
+  prepare_archive_values
+
+  for archive_md in \
+    "$SRC/news-archive.md" \
+    "$SRC/commits-archive.md"
+  do
+    if [ -f "$archive_md" ]; then
+      write_page "$archive_md"
+    fi
+  done
+}
+
+print_build_summary() {
+  printf '\nBuild summary:\n'
+  printf '  active Website: generated successfully\n'
+
+  case "${archive_status:-skipped}" in
+    ok)
+      printf '  archive: updated successfully\n'
+      ;;
+    warning)
+      printf '  archive: warning; previous valid output retained where possible\n' >&2
+      ;;
+    *)
+      printf '  archive: skipped\n'
+      ;;
+  esac
+}
 
 write_redirect_page() (
   old_name="$1"
@@ -1306,14 +1421,13 @@ main() {
     exit 1
   fi
 
+  initialize_build_report
+
   update_dynamic_data
 
   if [ "$GENERATE_NEWS_JSON" = "yes" ]; then
     build_news_json
   fi
-
-  update_archive
-  publish_archive_assets
 
   load_dynamic_values
   prepare_moonbase_values
@@ -1332,7 +1446,7 @@ main() {
     rel=${md#"$SRC"/}
 
     case "$rel" in
-      news.md|archive.md)
+      news.md|archive.md|news-archive.md|commits-archive.md)
         continue
         ;;
     esac
@@ -1344,6 +1458,32 @@ main() {
 
   write_redirect_page news info.html
   write_redirect_page archive info.html
+
+  # Archive processing is deliberately last. Its failure must not block
+  # generation of the active Website and documentation pages.
+  process_archive_last
+  write_archive_pages
+  print_build_summary
+
+  if [ "${archive_status:-skipped}" = "warning" ]; then
+    finalize_build_report "completed with warnings"
+  else
+    finalize_build_report "completed"
+  fi
+
+  if [ -f "$BUILD_REPORT_FILE" ]; then
+    printf '\n'
+    cat "$BUILD_REPORT_FILE"
+  else
+    printf 'build report missing: %s\n' \
+      "$(rel_from_project "$BUILD_REPORT_FILE")" >&2
+  fi
+
+  if [ "${archive_status:-skipped}" = "warning" ] &&      [ "$STRICT_ARCHIVE" = "yes" ]; then
+    printf 'STRICT_ARCHIVE=yes: failing after the active Website build completed.
+' >&2
+    return 1
+  fi
 }
 
 trap cleanup_temp_files EXIT

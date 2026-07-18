@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>&quot;Moonbase Module Anatomy&quot;</title>
-  <meta name="description" content="&quot;The purpose of common files in a Moonbase module.&quot;">
+  <title>Moonbase Module Anatomy</title>
+  <meta name="description" content="The purpose of common files in a Moonbase module.">
 
   <link rel="icon" href="../../assets/logo/favicon.ico">
   <link rel="stylesheet" href="../../css/style.css">
@@ -36,12 +36,21 @@
   <section class="page-hero documentation-hero">
     <div class="container">
       <h1>Moonbase Module Anatomy</h1>
-      <p class="hero-description">Common files include:</p>
+      <p class="hero-description">A Moonbase module is executable package policy.</p>
     </div>
   </section>
   <section class="content-section documentation-section">
     <div class="container documentation-layout">
       <article class="documentation-article">
+        <p>It describes:</p>
+        <pre><code>source identity
+→ dependency choices
+→ build procedure
+→ installation
+→ integration
+→ removal behavior
+</code></pre>
+        <p>Common files include:</p>
         <pre><code>DETAILS
 BUILD
 DEPENDS
@@ -54,26 +63,212 @@ PRE_REMOVE
 POST_REMOVE
 CONFLICTS
 </code></pre>
+        <p>A module may also include patches, helper scripts, service files, configuration templates, and plugin files.</p>
         <h2 id="details">DETAILS</h2>
-        <p>Defines source identity, version, source URLs, checksums, descriptions, and metadata.</p>
-        <p>Version alone is not complete build identity. Options, providers, compiler, patches, and local Moonbase changes also matter.</p>
+        <p><code>DETAILS</code> defines the identity and source of the module.</p>
+        <p>Typical fields describe:</p>
+        <ul class="simple-list">
+          <li>module name;</li>
+          <li>upstream version;</li>
+          <li>source archive;</li>
+          <li>source URL;</li>
+          <li>source verification;</li>
+          <li>project website;</li>
+          <li>entry and update dates;</li>
+          <li>short and long descriptions.</li>
+        </ul>
+        <p>A simplified example:</p>
+        <pre><code>MODULE=example
+VERSION=1.0
+SOURCE=$MODULE-$VERSION.tar.xz
+SOURCE_URL=https://example.org/releases/
+SOURCE_VFY=sha256:CHECKSUM
+WEB_SITE=https://example.org/
+ENTERED=20260718
+UPDATED=20260718
+SHORT="Example software"
+
+cat &lt;&lt; EOF
+A longer description of the software.
+EOF
+</code></pre>
+        <p>Use the exact conventions accepted by the active Moonbase.</p>
+        <p>Source verification is part of the module contract. A version string and URL are not sufficient without a trusted checksum or signature mechanism.</p>
+        <p>Upstream version is also not complete build identity.</p>
+        <pre><code>same upstream version
+≠ same resulting package
+</code></pre>
+        <p>The result may differ because of:</p>
+        <ul class="simple-list">
+          <li>Moonbase revision;</li>
+          <li>patches;</li>
+          <li>optional dependencies;</li>
+          <li>selected providers;</li>
+          <li>compiler family and version;</li>
+          <li>compiler and linker flags;</li>
+          <li>local configuration;</li>
+          <li>generated files.</li>
+        </ul>
         <h2 id="build">BUILD</h2>
-        <p>Defines the build and installation procedure.</p>
+        <p><code>BUILD</code> defines the build and installation procedure.</p>
+        <p>A conventional example:</p>
+        <pre><code>./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+prepare_install &amp;&amp;
+make install
+</code></pre>
+        <p>A simple Makefile project may use:</p>
+        <pre><code>make &amp;&amp;
+prepare_install &amp;&amp;
+make install PREFIX=/usr
+</code></pre>
+        <p>The shell <code>&amp;&amp;</code> chain matters. Each command runs only if the previous command succeeds.</p>
+        <p>Avoid sequences that continue after a failed configure, build, or installation step.</p>
         <p>Review:</p>
         <ul class="simple-list">
           <li>command ordering;</li>
           <li>configure and build flags;</li>
+          <li>compiler selection;</li>
           <li>destination paths;</li>
           <li>patches and generated files;</li>
           <li>cleanup behavior;</li>
           <li>whether installation begins only after <code>prepare_install</code>.</li>
         </ul>
+        <h2 id="standard-helpers">Standard helpers</h2>
+        <p>Moonbase modules may use helpers such as:</p>
+        <pre><code>default_build
+default_make
+</code></pre>
+        <p>These reduce repeated boilerplate for common build systems.</p>
+        <p>Inspect the implementation in the active LSS version before assuming that a helper matches every upstream project.</p>
+        <p>Modules may also use helpers such as <code>sedit</code> for controlled source or configuration edits.</p>
+        <p>Every non-obvious edit should have a clear compatibility or packaging reason.</p>
         <h2 id="depends">DEPENDS</h2>
-        <p>Defines required and optional relationships. Optional dependencies may also encode build choices.</p>
+        <p><code>DEPENDS</code> defines required and optional relationships.</p>
+        <p>A required dependency describes software needed for the selected module form.</p>
+        <p>An optional dependency usually maps a feature choice to:</p>
+        <ul class="simple-list">
+          <li>dependency state;</li>
+          <li>a positive build flag;</li>
+          <li>a negative build flag;</li>
+          <li>a short explanation.</li>
+        </ul>
+        <p>The declaration should not depend on accidental software already installed on the maintainer's machine.</p>
+        <p>Test in a minimal environment to discover hidden dependencies.</p>
         <h2 id="configure-and-options">CONFIGURE and OPTIONS</h2>
-        <p>These establish module-specific choices and switches passed to the underlying build system.</p>
-        <h2 id="hooks">Hooks</h2>
-        <p>Lifecycle hooks may update services, indexes, generated state, boot metadata, or other system-wide resources. Treat them as executable package policy.</p>
+        <p><code>CONFIGURE</code> and <code>OPTIONS</code> expose module-specific choices.</p>
+        <p>Good options are:</p>
+        <ul class="simple-list">
+          <li>meaningful to the administrator;</li>
+          <li>stable across module revisions;</li>
+          <li>reproducible;</li>
+          <li>connected to explicit build behavior.</li>
+        </ul>
+        <p>Prefer explicit enable and disable flags over uncontrolled upstream auto-detection.</p>
+        <p>Configuration choices become part of the practical package identity and may affect cache suitability.</p>
+        <h2 id="patches-and-auxiliary-files">Patches and auxiliary files</h2>
+        <p>A module may include:</p>
+        <ul class="simple-list">
+          <li>source patches;</li>
+          <li>service definitions;</li>
+          <li>default configuration;</li>
+          <li>desktop files;</li>
+          <li>helper scripts;</li>
+          <li>plugin files.</li>
+        </ul>
+        <p>A patch should record:</p>
+        <pre><code>purpose
+affected version
+source or author
+upstream status
+condition for removal
+</code></pre>
+        <p>A patch file has no effect unless module logic actually applies it.</p>
+        <p>Search:</p>
+        <pre><code>grep -R -n -E 'patch|sedit' "$MODULE_DIR"
+</code></pre>
+        <h2 id="pre-build">PRE_BUILD</h2>
+        <p><code>PRE_BUILD</code> runs before the main build procedure.</p>
+        <p>Typical uses:</p>
+        <ul class="simple-list">
+          <li>applying patches;</li>
+          <li>regenerating build-system files;</li>
+          <li>preparing architecture-specific source;</li>
+          <li>setting compiler-family requirements.</li>
+        </ul>
+        <p>It should modify the build environment, not install unmanaged live-system payload.</p>
+        <h2 id="post-build">POST_BUILD</h2>
+        <p><code>POST_BUILD</code> runs after the main build procedure.</p>
+        <p>It may:</p>
+        <ul class="simple-list">
+          <li>remove unwanted installed files;</li>
+          <li>normalize the installed payload;</li>
+          <li>adjust permissions;</li>
+          <li>perform packaging cleanup.</li>
+        </ul>
+        <p>A file can therefore appear in raw installwatch history and still be absent from the final manifest.</p>
+        <h2 id="post-install">POST_INSTALL</h2>
+        <p><code>POST_INSTALL</code> runs after the main installation transaction.</p>
+        <p>It may update:</p>
+        <ul class="simple-list">
+          <li>caches;</li>
+          <li>indexes;</li>
+          <li>service integration;</li>
+          <li>boot metadata;</li>
+          <li>plugin state.</li>
+        </ul>
+        <p>Because it occurs after normal installation boundaries, review its side effects carefully.</p>
+        <h2 id="pre-remove-and-post-remove">PRE_REMOVE and POST_REMOVE</h2>
+        <p>Removal hooks may stop services, clean generated state, rebuild indexes, or perform other system integration.</p>
+        <p>Inspect them before removing a complex module:</p>
+        <pre><code>for hook in PRE_REMOVE POST_REMOVE; do
+  test -f "$MODULE_DIR/$hook" || continue
+  sed -n '1,240p' "$MODULE_DIR/$hook"
+done
+</code></pre>
+        <h2 id="conflicts">CONFLICTS</h2>
+        <p><code>CONFLICTS</code> describes modules or providers that should not coexist.</p>
+        <p>A conflict can represent:</p>
+        <ul class="simple-list">
+          <li>overlapping implementations;</li>
+          <li>incompatible files;</li>
+          <li>mutually exclusive providers;</li>
+          <li>known operational breakage.</li>
+        </ul>
+        <p>Do not replace a conflict declaration with ad hoc file deletion.</p>
+        <h2 id="modules-that-install-plugins">Modules that install plugins</h2>
+        <p>A module may install LSS plugin files.</p>
+        <p>Search:</p>
+        <pre><code>grep -R -n -E 'plugin\.d|\.plugin' "$MODULE_DIR"
+</code></pre>
+        <p>Such modules require extra care during update and removal because plugin registration order and active processes may matter.</p>
+        <p>See <a href="../plugin-guide/plugins-and-extensibility.html">Plugins and Extensibility</a>.</p>
+        <h2 id="declared-behavior-versus-final-ownership">Declared behavior versus final ownership</h2>
+        <p>Moonbase defines intended behavior.</p>
+        <p>The install manifest records the final paths attributed to the installed module.</p>
+        <pre><code>Moonbase
+→ declared package policy
+
+raw installwatch
+→ filesystem events
+
+install manifest
+→ final ownership
+</code></pre>
+        <p>A path touched during the build may be excluded, protected, removed later, or created outside normal ownership tracking.</p>
+        <p>For the ownership model, see <a href="../debugging-guide/logs-and-manifests.html">Logs and Manifests</a>.</p>
+        <h2 id="review-checklist">Review checklist</h2>
+        <p>Before accepting a module, ask:</p>
+        <pre><code>Is the source verified?
+Are dependencies complete?
+Are optional features explicit?
+Does prepare_install precede live installation?
+Are patches documented?
+Are hooks necessary and bounded?
+Is final ownership clean?
+Does removal behave safely?
+</code></pre>
+        <p>Continue with <a href="working-with-moonbase.html">Working with Moonbase</a> and <a href="lifecycle-and-prepare-install.html">Lifecycle and prepare_install</a>.</p>
       </article>
     </div>
   </section>

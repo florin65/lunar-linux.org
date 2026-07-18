@@ -1,16 +1,19 @@
 #!/bin/sh
-
-# Build small HTML fragments for the Lunar archive page.
+# Build archive HTML fragments and archived news pages.
+# Archive news entries are processed independently: valid entries are updated,
+# while broken entries preserve previously published HTML where possible.
 
 set -eu
 
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-# shellcheck disable=SC1091
 . "$SCRIPT_DIR/archive-lib.sh"
 
 CACHE_DIR=${CACHE_DIR:-$PROJECT_ROOT/cache}
 PUBLIC_DIR=${PUBLIC_DIR:-$PROJECT_ROOT/docs}
+NEWS_DIR=${NEWS_DIR:-$PROJECT_ROOT/src/news}
+BUILD_REPORT=${BUILD_REPORT:-$CACHE_DIR/build-report.txt}
 NEWS_ARTICLE_RENDERER=${NEWS_ARTICLE_RENDERER:-$SCRIPT_DIR/render-news-article.sh}
+
 commits_out=${1:-$CACHE_DIR/archive-commits.html}
 news_out=${2:-$CACHE_DIR/archive-news.html}
 
@@ -18,45 +21,15 @@ archive_mkdir "$CACHE_DIR"
 archive_mkdir "$PUBLIC_DIR"
 archive_mkdir "$(dirname -- "$commits_out")"
 archive_mkdir "$(dirname -- "$news_out")"
+archive_mkdir "$(dirname -- "$BUILD_REPORT")"
 
-if [ ! -x "$NEWS_ARTICLE_RENDERER" ]; then
-  printf 'missing news article renderer: %s\n' "$NEWS_ARTICLE_RENDERER" >&2
-  exit 1
-fi
+[ -x "$NEWS_ARTICLE_RENDERER" ] ||
+  archive_die "missing news article renderer: $NEWS_ARTICLE_RENDERER"
 
-commits_data_tmp=
-commits_fragment_tmp=
-commits_files_tmp=
-commits_raw_tmp=
-commits_objects_tmp=
-news_data_tmp=
-news_fragment_tmp=
-news_source_tmp=
-news_pages_stage=
-news_index_files_tmp=
-news_index_raw_tmp=
-news_objects_tmp=
+tmpdir=$(mktemp -d)
+trap 'rm -rf "$tmpdir"' EXIT HUP INT TERM
 
-cleanup() {
-  rm -f \
-    "$commits_data_tmp" \
-    "$commits_fragment_tmp" \
-    "$commits_files_tmp" \
-    "$commits_raw_tmp" \
-    "$commits_objects_tmp" \
-    "$news_data_tmp" \
-    "$news_fragment_tmp" \
-    "$news_source_tmp" \
-    "$news_index_files_tmp" \
-    "$news_index_raw_tmp" \
-    "$news_objects_tmp"
-
-  if [ -n "$news_pages_stage" ]; then
-    rm -rf "$news_pages_stage"
-  fi
-}
-
-trap cleanup EXIT HUP INT TERM
+tab=$(printf '\t')
 
 html_escape() {
   printf '%s' "$1" | sed \
@@ -66,33 +39,47 @@ html_escape() {
     -e 's/"/\&quot;/g'
 }
 
-tab=$(printf '\t')
+find_current_news_source() (
+  wanted_id=$1
 
-# ---------------------------------------------------------
-# Commits archive fragment
-# ---------------------------------------------------------
+  [ -d "$NEWS_DIR" ] || exit 1
+
+  find "$NEWS_DIR" -type f -name '*.md' | sort |
+  while IFS= read -r candidate; do
+    candidate_id=$(archive_sha256_file "$candidate")
+    if [ "$candidate_id" = "$wanted_id" ]; then
+      printf '%s\n' "$candidate"
+      exit 0
+    fi
+  done
+
+  exit 1
+)
+
+report_problem() {
+  printf '  %s\n' "$1" >> "$BUILD_REPORT"
+  printf 'archive warning: %s\n' "$1" >&2
+}
 
 build_commits_fragment() {
-  commits_output_dir=$(dirname -- "$commits_out")
-  commits_data_tmp=$(mktemp "$commits_output_dir/.archive-commits-data.XXXXXX")
-  commits_fragment_tmp=$(mktemp "$commits_output_dir/.archive-commits.XXXXXX")
-  commits_files_tmp=$(mktemp)
-  commits_raw_tmp=$(mktemp)
-  commits_objects_tmp=$(mktemp)
+  data="$tmpdir/commits.data"
+  fragment="$tmpdir/commits.html"
+  raw="$tmpdir/commits.raw"
+  objects="$tmpdir/commits.objects"
+  files="$tmpdir/commits.files"
+  : > "$data"
 
-  find "$ARCHIVE_ROOT/commits" -type f \( -name '*.json' -o -name '*.json.xz' \) 2>/dev/null |
-    sort > "$commits_files_tmp"
+  find "$ARCHIVE_ROOT/commits" -type f \
+    \( -name '*.json' -o -name '*.json.xz' \) 2>/dev/null |
+    sort > "$files"
 
-  while IFS= read -r f; do
-    if ! archive_cat "$f" > "$commits_raw_tmp"; then
-      printf 'could not read archived commits file: %s\n' "$f" >&2
-      exit 1
+  while IFS= read -r archive_file; do
+    if ! archive_cat "$archive_file" > "$raw"; then
+      report_problem "$archive_file: could not read archived commits file"
+      continue
     fi
 
-    if ! archive_json_objects_from_cat < "$commits_raw_tmp" > "$commits_objects_tmp"; then
-      printf 'could not parse archived commits file: %s\n' "$f" >&2
-      exit 1
-    fi
+    archive_json_objects_from_cat < "$raw" > "$objects"
 
     while IFS= read -r obj; do
       date=$(printf '%s\n' "$obj" | archive_json_field date | head -1)
@@ -103,274 +90,258 @@ build_commits_fragment() {
       title=$(printf '%s\n' "$obj" | archive_json_field title | head -1)
 
       if [ -z "$date" ] || [ -z "$commit" ]; then
-        printf 'invalid archived commit entry in %s: missing date or commit\n' "$f" >&2
-        exit 1
+        report_problem "$archive_file: invalid commit entry; missing date or commit"
+        continue
       fi
 
       [ -n "$summary" ] || summary=$title
       [ -n "$module" ] || module=$title
 
-      if printf '%s\n%s\n%s\n%s\n' "$date" "$commit" "$repo" "$module" | grep -q "$tab"; then
-        printf 'invalid archived commit entry in %s: tab character in date, commit, repository or module\n' "$f" >&2
-        exit 1
+      if printf '%s\n%s\n%s\n%s\n' \
+        "$date" "$commit" "$repo" "$module" | grep -q "$tab"; then
+        report_problem "$archive_file: invalid tab in commit entry"
+        continue
       fi
 
       summary=$(printf '%s' "$summary" | tr "$tab" ' ')
-
-      printf '%s\t%s\t%s\t%s\t%s\n' "$date" "$commit" "$repo" "$module" "$summary" >> "$commits_data_tmp"
-    done < "$commits_objects_tmp"
-
-    : > "$commits_raw_tmp"
-    : > "$commits_objects_tmp"
-  done < "$commits_files_tmp"
-
-  rm -f "$commits_files_tmp" "$commits_raw_tmp" "$commits_objects_tmp"
-  commits_files_tmp=
-  commits_raw_tmp=
-  commits_objects_tmp=
+      printf '%s\t%s\t%s\t%s\t%s\n' \
+        "$date" "$commit" "$repo" "$module" "$summary" >> "$data"
+    done < "$objects"
+  done < "$files"
 
   {
     echo '      <div class="moonbase-journal archive-journal">'
     echo '        <table class="moonbase-table archive-commits-table">'
-    echo '          <colgroup>'
-    echo '            <col class="moonbase-col-commit">'
-    echo '            <col class="moonbase-col-repository">'
-    echo '            <col class="moonbase-col-module">'
-    echo '            <col class="moonbase-col-comment">'
-    echo '          </colgroup>'
-    echo '          <thead>'
-    echo '            <tr>'
-    echo '              <th>Commit</th>'
-    echo '              <th>Repository</th>'
-    echo '              <th>Module</th>'
-    echo '              <th>Comment</th>'
-    echo '            </tr>'
-    echo '          </thead>'
+    echo '          <thead><tr><th>Commit</th><th>Repository</th><th>Module</th><th>Comment</th></tr></thead>'
     echo '          <tbody>'
 
-    if [ -s "$commits_data_tmp" ]; then
-      sort -r "$commits_data_tmp" | while IFS="$tab" read -r date commit repo module summary; do
-        repo_e=$(html_escape "$repo")
-        module_e=$(html_escape "$module")
-        summary_e=$(html_escape "$summary")
-        commit_e=$(html_escape "$commit")
-        date_e=$(html_escape "$date")
+    if [ -s "$data" ]; then
+      sort -r "$data" |
+      while IFS="$tab" read -r date commit repo module summary; do
         url="https://github.com/lunar-linux/moonbase-$repo/commit/$commit"
-        url_e=$(html_escape "$url")
-
-        echo '            <tr>'
-        printf '              <td class="commit-id"><a href="%s" target="_blank" rel="noopener" title="%s">%s</a></td>\n' "$url_e" "$date_e" "$commit_e"
-        printf '              <td class="repository-name">%s</td>\n' "$repo_e"
-        printf '              <td class="module-name">%s</td>\n' "$module_e"
-        printf '              <td class="commit-comment">%s</td>\n' "$summary_e"
-        echo '            </tr>'
+        printf '            <tr><td class="commit-id"><a href="%s" target="_blank" rel="noopener" title="%s">%s</a></td><td class="repository-name">%s</td><td class="module-name">%s</td><td class="commit-comment">%s</td></tr>\n' \
+          "$(html_escape "$url")" "$(html_escape "$date")" \
+          "$(html_escape "$commit")" "$(html_escape "$repo")" \
+          "$(html_escape "$module")" "$(html_escape "$summary")"
       done
     else
-      echo '            <tr>'
-      echo '              <td colspan="4" class="commit-comment">No archived commits were found.</td>'
-      echo '            </tr>'
+      echo '            <tr><td colspan="4" class="commit-comment">No archived commits were found.</td></tr>'
     fi
 
     echo '          </tbody>'
     echo '        </table>'
     echo '      </div>'
-  } > "$commits_fragment_tmp"
+  } > "$fragment"
 
-  mv "$commits_fragment_tmp" "$commits_out"
-  commits_fragment_tmp=
-  rm -f "$commits_data_tmp"
-  commits_data_tmp=
+  mv "$fragment" "$commits_out"
 }
 
-# ---------------------------------------------------------
-# News archive fragment
-# ---------------------------------------------------------
-
 build_news_fragment() {
-  news_output_dir=$(dirname -- "$news_out")
-  news_data_tmp=$(mktemp "$news_output_dir/.archive-news-data.XXXXXX")
-  news_fragment_tmp=$(mktemp "$news_output_dir/.archive-news.XXXXXX")
-  news_pages_stage=$(mktemp -d "$PUBLIC_DIR/.archive-news-stage.XXXXXX")
-  news_index_files_tmp=$(mktemp)
-  news_index_raw_tmp=$(mktemp)
-  news_objects_tmp=$(mktemp)
+  data="$tmpdir/news.data"
+  fragment="$tmpdir/news.html"
+  raw="$tmpdir/news.raw"
+  objects="$tmpdir/news.objects"
+  files="$tmpdir/news.files"
+  source_tmp="$tmpdir/news-source.md"
+  stage="$tmpdir/news-pages"
 
-  find "$ARCHIVE_ROOT/news" -type f \( -name 'index.json' -o -name 'index.json.xz' \) 2>/dev/null |
-    sort > "$news_index_files_tmp"
+  archive_mkdir "$stage"
+  : > "$data"
 
-  while IFS= read -r f; do
-    base_dir=$(dirname -- "$f")
+  generated=0
+  preserved=0
+  skipped=0
+  warnings=0
 
-    if ! archive_cat "$f" > "$news_index_raw_tmp"; then
-      printf 'could not read archived news index: %s\n' "$f" >&2
-      exit 1
+  find "$ARCHIVE_ROOT/news" -type f \
+    \( -name 'index.json' -o -name 'index.json.xz' \) 2>/dev/null |
+    sort > "$files"
+
+  while IFS= read -r index_file; do
+    base_dir=$(dirname -- "$index_file")
+
+    if ! archive_cat "$index_file" > "$raw"; then
+      report_problem "$index_file: could not read news index"
+      warnings=$((warnings + 1))
+      continue
     fi
 
-    if ! archive_json_objects_from_cat < "$news_index_raw_tmp" > "$news_objects_tmp"; then
-      printf 'could not parse archived news index: %s\n' "$f" >&2
-      exit 1
-    fi
+    archive_json_objects_from_cat < "$raw" > "$objects"
 
     while IFS= read -r obj; do
-          id=$(printf '%s\n' "$obj" | archive_json_field id | head -1)
-          date=$(printf '%s\n' "$obj" | archive_json_field date | head -1)
-          category=$(printf '%s\n' "$obj" | archive_json_field category | head -1)
-          title=$(printf '%s\n' "$obj" | archive_json_field title | head -1)
-          slug=$(printf '%s\n' "$obj" | archive_json_field slug | head -1)
-          file=$(printf '%s\n' "$obj" | archive_json_field file | head -1)
+      id=$(printf '%s\n' "$obj" | archive_json_field id | head -1)
+      date=$(printf '%s\n' "$obj" | archive_json_field date | head -1)
+      category=$(printf '%s\n' "$obj" | archive_json_field category | head -1)
+      title=$(printf '%s\n' "$obj" | archive_json_field title | head -1)
+      slug=$(printf '%s\n' "$obj" | archive_json_field slug | head -1)
+      file=$(printf '%s\n' "$obj" | archive_json_field file | head -1)
 
-          if [ -z "$date" ] || [ -z "$id" ] || [ -z "$file" ]; then
-            printf 'invalid archived news entry in %s: missing date, id or file\n' "$f" >&2
-            exit 1
-          fi
+      if [ -z "$date" ] || [ -z "$id" ] || [ -z "$file" ]; then
+        report_problem "$index_file: invalid news entry; missing date, id or file"
+        warnings=$((warnings + 1))
+        skipped=$((skipped + 1))
+        continue
+      fi
 
-          case "$file" in
-            */*|.*|*..*|*.md.md|*[!A-Za-z0-9._-]*)
-              printf 'invalid archived news file in %s: %s\n' "$f" "$file" >&2
-              exit 1
-              ;;
-            *.md)
-              ;;
-            *)
-              printf 'invalid archived news file in %s: expected a safe .md basename, got %s\n' "$f" "$file" >&2
-              exit 1
-              ;;
-          esac
+      case "$file" in
+        */*|.*|*..*|*.md.md|*[!A-Za-z0-9._-]*)
+          report_problem "$index_file: unsafe archived news filename: $file"
+          warnings=$((warnings + 1))
+          skipped=$((skipped + 1))
+          continue
+          ;;
+        *.md) ;;
+        *)
+          report_problem "$index_file: archived news filename is not Markdown: $file"
+          warnings=$((warnings + 1))
+          skipped=$((skipped + 1))
+          continue
+          ;;
+      esac
 
-          source_file="$base_dir/$file"
-          if [ ! -f "$source_file" ] && [ -f "$source_file.xz" ]; then
-            source_file="$source_file.xz"
-          fi
-          if [ ! -f "$source_file" ]; then
-            printf 'missing archived news source referenced by %s: %s\n' "$f" "$file" >&2
-            exit 1
-          fi
+      rel_dir=${base_dir#"$ARCHIVE_ROOT"/}
+      html_file=${file%.md}.html
+      public_dir="$PUBLIC_DIR/archive/$rel_dir"
+      public_file="$public_dir/$html_file"
+      staged_dir="$stage/$rel_dir"
+      staged_file="$staged_dir/$html_file"
+      public_rel="archive/$rel_dir/$html_file"
+      public_dir_rel="archive/$rel_dir"
 
-          rel_dir=${base_dir#"$ARCHIVE_ROOT"/}
-          html_file=${file%.md}.html
-          public_dir="$PUBLIC_DIR/archive/$rel_dir"
-          public_file="$public_dir/$html_file"
-          staged_dir="$news_pages_stage/$rel_dir"
-          staged_file="$staged_dir/$html_file"
-          public_rel="archive/$rel_dir/$html_file"
-          public_dir_rel="archive/$rel_dir"
-          root_prefix=$(printf '%s\n' "$public_dir_rel" | awk -F/ '
-            {
-              for (i = 1; i <= NF; i++) {
-                if ($i != "") {
-                  printf "../"
-                }
-              }
-            }
-          ')
+      source_file="$base_dir/$file"
+      if [ ! -f "$source_file" ] && [ -f "$source_file.xz" ]; then
+        source_file="$source_file.xz"
+      fi
 
-          archive_mkdir "$staged_dir"
-          news_source_tmp=$(mktemp)
+      problem=
+      if [ ! -f "$source_file" ]; then
+        problem="missing archived news source: $file"
+      elif ! archive_cat "$source_file" > "$source_tmp"; then
+        problem="could not read archived news source: $file"
+      else
+        actual_id=$(archive_sha256_file "$source_tmp")
+        if [ "$actual_id" != "$id" ]; then
+          problem="hash mismatch for archived news source: $file"
+        fi
+      fi
 
-          if ! archive_cat "$source_file" > "$news_source_tmp"; then
-            printf 'could not read archived news source: %s\n' "$source_file" >&2
-            exit 1
-          fi
+      if [ -n "$problem" ]; then
+        warnings=$((warnings + 1))
+        report_problem "$index_file: $problem"
 
-          if "$NEWS_ARTICLE_RENDERER" \
-            "$news_source_tmp" \
-            "$staged_file" \
-            "$root_prefix" \
-            "${root_prefix}news-archive.html" \
-            "Back to News Archive"; then
-            if printf '%s\n%s\n%s\n%s\n%s\n%s\n' \
-              "$date" "$category" "$title" "$slug" "$id" "$public_rel" |
-              grep -q "$tab"; then
-              printf 'invalid archived news entry in %s: tab character in index fields\n' "$f" >&2
-              exit 1
+        current_source=
+        if current_source=$(find_current_news_source "$id"); then
+          if [ -n "$current_source" ] && [ -f "$current_source" ]; then
+            if cat "$current_source" > "$source_tmp"; then
+              report_problem "$index_file: using matching current news source: ${current_source#$PROJECT_ROOT/}"
+              problem=
             fi
-
-            printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
-              "$date" "$category" "$title" "$slug" "$id" "$public_rel" >> "$news_data_tmp"
-          else
-            printf 'could not render archived news source %s\n' "$source_file" >&2
-            exit 1
           fi
+        fi
 
-      rm -f "$news_source_tmp"
-      news_source_tmp=
-    done < "$news_objects_tmp"
+        if [ -n "$problem" ]; then
+          if [ -f "$public_file" ]; then
+            preserved=$((preserved + 1))
+            report_problem "$index_file: preserved previous HTML for $file"
+            printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
+              "$date" "$category" "$title" "$slug" "$id" "$public_rel" >> "$data"
+          else
+            skipped=$((skipped + 1))
+            report_problem "$index_file: no matching current source or previous HTML for $file"
+          fi
+          continue
+        fi
+      fi
 
-    : > "$news_index_raw_tmp"
-    : > "$news_objects_tmp"
-  done < "$news_index_files_tmp"
+      root_prefix=$(printf '%s\n' "$public_dir_rel" | awk -F/ '
+        {
+          for (i = 1; i <= NF; i++)
+            if ($i != "") printf "../"
+        }
+      ')
 
-  rm -f "$news_index_files_tmp" "$news_index_raw_tmp" "$news_objects_tmp"
-  news_index_files_tmp=
-  news_index_raw_tmp=
-  news_objects_tmp=
+      archive_mkdir "$staged_dir"
+
+      if "$NEWS_ARTICLE_RENDERER" \
+        "$source_tmp" "$staged_file" "$root_prefix" \
+        "${root_prefix}news-archive.html" "Back to News Archive"
+      then
+        generated=$((generated + 1))
+        printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
+          "$date" "$category" "$title" "$slug" "$id" "$public_rel" >> "$data"
+      else
+        warnings=$((warnings + 1))
+        report_problem "$index_file: renderer failed for $file"
+
+        if [ -f "$public_file" ]; then
+          preserved=$((preserved + 1))
+          printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
+            "$date" "$category" "$title" "$slug" "$id" "$public_rel" >> "$data"
+        else
+          skipped=$((skipped + 1))
+        fi
+      fi
+    done < "$objects"
+  done < "$files"
 
   {
     echo '      <div class="community-news-journal archive-journal">'
     echo '        <table class="community-news-table archive-news-table">'
-    echo '          <colgroup>'
-    echo '            <col class="community-news-col-meta">'
-    echo '            <col class="community-news-col-content">'
-    echo '          </colgroup>'
-    echo '          <thead>'
-    echo '            <tr>'
-    echo '              <th>Date</th>'
-    echo '              <th>News</th>'
-    echo '            </tr>'
-    echo '          </thead>'
+    echo '          <thead><tr><th>Date</th><th>News</th></tr></thead>'
     echo '          <tbody>'
 
-    if [ -s "$news_data_tmp" ]; then
-      sort -r "$news_data_tmp" | while IFS="$tab" read -r date category title slug id rel; do
-        date_e=$(html_escape "$date")
-        category_e=$(html_escape "$category")
-        title_e=$(html_escape "$title")
-        id_e=$(html_escape "$id")
-        rel_e=$(html_escape "$rel")
+    if [ -s "$data" ]; then
+      sort -r "$data" |
+      while IFS="$tab" read -r date category title slug id rel; do
         short_id=$(printf '%s' "$id" | cut -c1-12)
-        short_id_e=$(html_escape "$short_id")
-
         echo '            <tr>'
-        echo '              <td class="news-meta">'
-        printf '                <time datetime="%s">%s</time>\n' "$date_e" "$date_e"
-        printf '                <span>%s</span>\n' "$category_e"
-        echo '              </td>'
-        echo '              <td class="news-content">'
-        printf '                <a class="news-title-link" href="%s">%s</a>\n' "$rel_e" "$title_e"
-        printf '                <p>Archive id: <code>%s</code></p>\n' "$short_id_e"
-        echo '              </td>'
+        printf '              <td class="news-meta"><time datetime="%s">%s</time><span>%s</span></td>\n' \
+          "$(html_escape "$date")" "$(html_escape "$date")" "$(html_escape "$category")"
+        printf '              <td class="news-content"><a class="news-title-link" href="%s">%s</a><p>Archive id: <code>%s</code></p></td>\n' \
+          "$(html_escape "$rel")" "$(html_escape "$title")" "$(html_escape "$short_id")"
         echo '            </tr>'
       done
     else
-      echo '            <tr>'
-      echo '              <td colspan="2" class="news-content">No archived news entries were found.</td>'
-      echo '            </tr>'
+      echo '            <tr><td colspan="2" class="news-content">No valid archived news entries were found.</td></tr>'
     fi
 
     echo '          </tbody>'
     echo '        </table>'
     echo '      </div>'
-  } > "$news_fragment_tmp"
+  } > "$fragment"
 
-  find "$news_pages_stage" -type f | sort |
-    while IFS= read -r staged_file; do
-      staged_rel=${staged_file#"$news_pages_stage"/}
-      public_file="$PUBLIC_DIR/archive/$staged_rel"
-      archive_mkdir "$(dirname -- "$public_file")"
-      mv "$staged_file" "$public_file"
-    done
+  find "$stage" -type f | sort |
+  while IFS= read -r staged_file; do
+    staged_rel=${staged_file#"$stage"/}
+    public_file="$PUBLIC_DIR/archive/$staged_rel"
+    archive_mkdir "$(dirname -- "$public_file")"
+    mv "$staged_file" "$public_file"
+  done
 
-  rm -rf "$news_pages_stage"
-  news_pages_stage=
+  mv "$fragment" "$news_out"
 
-  mv "$news_fragment_tmp" "$news_out"
-  news_fragment_tmp=
-  rm -f "$news_data_tmp"
-  news_data_tmp=
+  {
+    printf '\nArchive\n'
+    printf '  generated: %s\n' "$generated"
+    printf '  preserved: %s\n' "$preserved"
+    printf '  skipped: %s\n' "$skipped"
+    printf '  warnings: %s\n' "$warnings"
+  } >> "$BUILD_REPORT"
+
+  printf 'archive news: generated=%s preserved=%s skipped=%s warnings=%s\n' \
+    "$generated" "$preserved" "$skipped" "$warnings"
+
+  [ "$warnings" -eq 0 ]
 }
 
 build_commits_fragment
-build_news_fragment
+
+if build_news_fragment; then
+  echo "generated ${commits_out#$PROJECT_ROOT/}"
+  echo "generated ${news_out#$PROJECT_ROOT/}"
+  exit 0
+fi
 
 echo "generated ${commits_out#$PROJECT_ROOT/}"
-echo "generated ${news_out#$PROJECT_ROOT/}"
+echo "generated ${news_out#$PROJECT_ROOT/} with warnings"
+exit 2

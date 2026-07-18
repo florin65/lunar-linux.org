@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>&quot;Removal and Configuration Preservation&quot;</title>
-  <meta name="description" content="&quot;Ownership-driven removal, shared directories, and local configuration.&quot;">
+  <title>Removal and Configuration Preservation</title>
+  <meta name="description" content="Ownership-driven removal, shared directories, and local configuration.">
 
   <link rel="icon" href="../../assets/logo/favicon.ico">
   <link rel="stylesheet" href="../../css/style.css">
@@ -73,6 +73,7 @@ cp -a "/var/log/lunar/install/${MODULE}-${VERSION}" \
 cp -a "/var/log/lunar/md5sum/${MODULE}-${VERSION}" \
   "/root/${MODULE}-remove/md5sum-log" 2&gt;/dev/null || true
 </code></pre>
+        <p>Module-specific logs may disappear during removal.</p>
         <h2 id="regular-files-and-symlinks">Regular files and symlinks</h2>
         <p>Owned payload is normally removed.</p>
         <p>Symlink ownership and target ownership are separate. Removing an owned symlink does not imply that its target is owned by the same module.</p>
@@ -102,12 +103,97 @@ locally modified `/etc` file
 → retained
 </code></pre>
         <p>The retained file becomes local orphaned configuration after the package record and manifest are removed.</p>
+        <p>The <code>PRESERVE=off</code> path was not runtime-validated in the current documented evidence. Treat its exact behavior as implementation-derived until tested.</p>
+        <h2 id="normal-removal-versus-upgrade-removal">Normal removal versus upgrade removal</h2>
+        <p>A rebuild may use upgrade-style removal to replace the old package while preparing the new installation.</p>
+        <pre><code>normal lrm
+→ user-requested removal
+
+upgrade removal
+→ replacement phase inside rebuild or update
+</code></pre>
+        <p>Do not assume every detail of normal removal is identical during upgrade replacement.</p>
+        <h2 id="removal-after-a-failed-installation">Removal after a failed installation</h2>
+        <p>A failed install may leave:</p>
+        <ul class="simple-list">
+          <li>partial payload;</li>
+          <li>no package record;</li>
+          <li>stale package record;</li>
+          <li>incomplete manifest;</li>
+          <li>temporary files.</li>
+        </ul>
+        <p>Inspect ownership evidence before running <code>lrm</code>.</p>
+        <p>If the final manifest is incomplete, normal removal may not clean all partial files.</p>
+        <h2 id="package-record-present-manifest-missing">Package record present, manifest missing</h2>
+        <p>Normal removal is unsafe because ownership evidence is incomplete.</p>
+        <p>Preferred path:</p>
+        <pre><code>preserve state
+→ rebuild or reinstall the same configuration
+→ regenerate manifest
+→ verify
+→ remove if still desired
+</code></pre>
+        <h2 id="manifest-present-package-record-missing">Manifest present, package record missing</h2>
+        <p>Possible causes include:</p>
+        <ul class="simple-list">
+          <li>interrupted removal;</li>
+          <li>manual state edit;</li>
+          <li>stale logs.</li>
+        </ul>
+        <p>Inspect the activity log and actual payload before deciding whether the manifest is stale.</p>
         <h2 id="shared-ownership">Shared ownership</h2>
         <p>Before deleting a suspicious remaining path:</p>
         <pre><code>grep -R -F -x '/path' \
   /var/log/lunar/install 2&gt;/dev/null
 </code></pre>
         <p>Multiple matches may indicate intentional sharing, a provider transition, stale state, or a packaging error.</p>
+        <h2 id="files-recreated-after-removal">Files recreated after removal</h2>
+        <p>A path may reappear because:</p>
+        <ul class="simple-list">
+          <li>a service recreates it;</li>
+          <li>another module owns it;</li>
+          <li>a login or boot process generates it;</li>
+          <li>a hook rebuilds it;</li>
+          <li>an index or cache refresh recreates it.</li>
+        </ul>
+        <p>Compare timestamps and inspect service and hook behavior before assuming removal failed.</p>
+        <h2 id="services-and-active-processes">Services and active processes</h2>
+        <p>Before removing a service:</p>
+        <ul class="simple-list">
+          <li>stop it;</li>
+          <li>inspect active processes;</li>
+          <li>inspect listening sockets;</li>
+          <li>preserve configuration;</li>
+          <li>inspect service-manager files;</li>
+          <li>verify dependent services.</li>
+        </ul>
+        <p>Removing files does not terminate an already running process.</p>
+        <h2 id="plugin-bearing-modules">Plugin-bearing modules</h2>
+        <p>A module may install LSS plugin files.</p>
+        <p>Before removal:</p>
+        <ul class="simple-list">
+          <li>identify plugin ownership;</li>
+          <li>wait for active <code>lin</code> operations to finish;</li>
+          <li>inspect fallback behavior;</li>
+          <li>preserve plugin configuration;</li>
+          <li>verify plugin directories afterward.</li>
+        </ul>
+        <p>A running process may already have loaded plugin code even after the file disappears.</p>
+        <p>See <a href="../plugin-guide/plugins-and-extensibility.html">Plugins and Extensibility</a>.</p>
+        <h2 id="critical-modules">Critical modules</h2>
+        <p>Do not casually remove:</p>
+        <pre><code>lunar
+glibc
+gcc
+bash
+coreutils
+filesystem components
+init system
+boot components
+core shared libraries
+</code></pre>
+        <p>Sparse dependency state does not prove operational safety.</p>
+        <p>Use a container, chroot, or recovery environment for experiments involving critical modules.</p>
         <h2 id="after-removal">After removal</h2>
         <p>Verify:</p>
         <pre><code>grep "^${MODULE}:" /var/state/lunar/packages ||
@@ -120,9 +206,11 @@ locally modified `/etc` file
           <li>plugin files;</li>
           <li>preserved configuration;</li>
           <li>shared directories;</li>
-          <li>activity history.</li>
+          <li>activity history;</li>
+          <li>recreated paths.</li>
         </ul>
         <p>Do not treat the presence of a preserved configuration file as proof that the module remains installed.</p>
+        <p>For inconsistent removal state, see <a href="recovery-and-state-repair.html">Recovery and State Repair</a>.</p>
       </article>
     </div>
   </section>

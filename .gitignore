@@ -2,3 +2,6 @@
 *.swp
 *.swo
 .DS_Store
+
+# Local Website build report
+cache/build-report.txt
