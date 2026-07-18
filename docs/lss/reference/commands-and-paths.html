@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;LSS Commands and Paths&quot;</title>
+  <meta name="description" content="&quot;A compact reference for common LSS commands and storage locations.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>LSS Commands and Paths</h1>
+      <p class="hero-description">Install:</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <h2 id="core-commands">Core commands</h2>
+        <pre><code>lin module
+</code></pre>
+        <p>Rebuild:</p>
+        <pre><code>lin -c module
+</code></pre>
+        <p>Remove:</p>
+        <pre><code>lrm module
+</code></pre>
+        <p>Inspect:</p>
+        <pre><code>lvu installed module
+lvu version module
+lvu where module
+lvu depends module
+lvu leert module
+lvu leafs
+</code></pre>
+        <h2 id="command-meanings">Command meanings</h2>
+        <pre><code>lin module
+→ install a module
+
+lin -c module
+→ rebuild through upgrade-style replacement
+
+lrm module
+→ remove through final ownership
+
+lvu installed module
+→ show installed version
+
+lvu version module
+→ show active Moonbase version
+
+lvu where module
+→ show Moonbase section
+
+lvu depends module
+→ show reverse dependents
+
+lvu leert module
+→ show reverse dependency tree
+
+lvu leafs
+→ list modules with no recorded reverse dependents
+</code></pre>
+        <p>A leaf is not automatically unused or safe to remove.</p>
+        <h2 id="moonbase">Moonbase</h2>
+        <p>Active tree:</p>
+        <pre><code>/var/lib/lunar/moonbase
+</code></pre>
+        <p>Locate a module:</p>
+        <pre><code>MODULE=name
+SECTION=$(lvu where "$MODULE")
+MODULE_DIR="/var/lib/lunar/moonbase/$SECTION/$MODULE"
+</code></pre>
+        <p>Common files:</p>
+        <pre><code>DETAILS
+BUILD
+DEPENDS
+CONFIGURE
+OPTIONS
+PRE_BUILD
+POST_BUILD
+POST_INSTALL
+PRE_REMOVE
+POST_REMOVE
+</code></pre>
+        <h2 id="persistent-state">Persistent state</h2>
+        <pre><code>/var/state/lunar/packages
+/var/state/lunar/depends
+</code></pre>
+        <p>Package lookup:</p>
+        <pre><code>grep '^module:' /var/state/lunar/packages
+</code></pre>
+        <p>Dependency lookup:</p>
+        <pre><code>grep -E '^module:|^[^:]+:module:' \
+  /var/state/lunar/depends
+</code></pre>
+        <h2 id="logs-and-ownership">Logs and ownership</h2>
+        <pre><code>/var/log/lunar/install
+→ final ownership
+
+/var/log/lunar/compile
+→ build output
+
+/var/log/lunar/md5sum
+→ installed checksums
+
+/var/log/lunar/activity
+→ operation history
+</code></pre>
+        <p>Read a compile log:</p>
+        <pre><code>xzless /var/log/lunar/compile/module-version.xz
+</code></pre>
+        <h2 id="caches">Caches</h2>
+        <pre><code>/var/cache/lunar
+</code></pre>
+        <p>Inspect:</p>
+        <pre><code>ls -lh /var/cache/lunar/module-*
+tar -tJf archive.tar.xz
+xz -t archive.tar.xz
+</code></pre>
+        <h2 id="global-configuration">Global configuration</h2>
+        <pre><code>/etc/lunar/config
+</code></pre>
+        <p>Common settings:</p>
+        <pre><code>ARCHIVE
+PRESERVE
+REAP
+</code></pre>
+        <p>Inspect:</p>
+        <pre><code>grep -n -E 'ARCHIVE|PRESERVE|REAP' \
+  /etc/lunar/config
+</code></pre>
+        <h2 id="useful-checks">Useful checks</h2>
+        <p>Runtime:</p>
+        <pre><code>command -v program
+ldd /path/to/binary
+</code></pre>
+        <p>Pkg-config:</p>
+        <pre><code>pkg-config --modversion name
+pkg-config --print-requires name
+</code></pre>
+        <p>Ownership:</p>
+        <pre><code>grep -R -F -x '/path' \
+  /var/log/lunar/install 2&gt;/dev/null
+</code></pre>
+        <p>Moonbase revision:</p>
+        <pre><code>git -C /var/lib/lunar/moonbase status --short
+git -C /var/lib/lunar/moonbase rev-parse HEAD
+</code></pre>
+        <p>Configuration checksum:</p>
+        <pre><code>md5sum /etc/module.conf
+</code></pre>
+        <h2 id="essential-paths">Essential paths</h2>
+        <pre><code>/sbin/lin
+/sbin/lrm
+/bin/lvu
+/etc/lunar
+/var/lib/lunar/functions
+/var/lib/lunar/moonbase
+/var/state/lunar/packages
+/var/state/lunar/depends
+/var/log/lunar/activity
+/var/log/lunar/compile
+/var/log/lunar/install
+/var/log/lunar/md5sum
+/var/cache/lunar
+/usr/lib/installwatch.so
+</code></pre>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -357,6 +357,46 @@ function render_content_grid(first_pos, max_cards,    pos, idx, end, count, wide
   print "  </section>"
 }
 
+function render_feature_grid_actions(title, a, b, muted,    i, nxt, links, seccls, firstcard) {
+  seccls = muted ? "content-section muted-section" : "content-section"
+
+  print "  <section class=\"" seccls "\">"
+  print "    <div class=\"container\">"
+  print "      <h2 id=\"" slug_id(title) "\" class=\"section-title\">" inline(title) "</h2>"
+
+  firstcard = 0
+  for (i = a; i <= b; i++) {
+    if (kind[i] == "h3") {
+      firstcard = i
+      break
+    }
+  }
+
+  if (firstcard && firstcard > a)
+    render_blocks(a, firstcard - 1, "      ", 1, 1)
+
+  print "      <div class=\"feature-grid\">"
+
+  for (i = a; i <= b; i++) {
+    if (kind[i] != "h3") continue
+
+    nxt = next_h3_or_end(i, b)
+    links = first_links_in_range(i + 1, nxt)
+
+    print "        <article class=\"feature-card\">"
+    print "          <h3>" inline(val[i]) "</h3>"
+    render_blocks(i + 1, nxt, "          ", 1, 1)
+    if (links != "") render_actions(links, "          ")
+    print "        </article>"
+
+    i = nxt
+  }
+
+  print "      </div>"
+  print "    </div>"
+  print "  </section>"
+}
+
 function render_feature_grid(title, a, b, muted,    i, nxt, seccls) {
   seccls = muted ? "content-section muted-section" : "content-section"
 
@@ -984,6 +1024,60 @@ function render_archive(    overview, toc, commits, news, docs, lur) {
   print "</main>"
 }
 
+function render_documentation(    i, skipped_h1, skipped_intro) {
+  print "<main class=\"page-main documentation-main\">"
+  render_hero(first_h1(), first_p(), "documentation-hero")
+
+  print "  <section class=\"content-section documentation-section\">"
+  print "    <div class=\"container documentation-layout\">"
+  print "      <article class=\"documentation-article\">"
+
+  skipped_h1 = 0
+  skipped_intro = 0
+
+  for (i = 1; i <= n; i++) {
+    if (!skipped_h1 && kind[i] == "h1") {
+      skipped_h1 = 1
+      continue
+    }
+
+    if (!skipped_intro && kind[i] == "p") {
+      skipped_intro = 1
+      continue
+    }
+
+    render_blocks(i, i, "        ", 0, 0)
+  }
+
+  print "      </article>"
+  print "    </div>"
+  print "  </section>"
+  print "</main>"
+}
+
+function render_lss(    about, documentation, principles, architecture) {
+  print "<main class=\"page-main lss-main\">"
+  render_hero(first_h1(), first_p())
+
+  about = section_index("About LSS")
+  if (about)
+    render_split_section("About LSS", about + 1, section_end(about), "content-section")
+
+  documentation = section_index("Documentation")
+  if (documentation)
+    render_feature_grid_actions("Documentation", documentation + 1, section_end(documentation), 1)
+
+  principles = section_index("Principles")
+  if (principles)
+    render_split_section("Principles", principles + 1, section_end(principles), "content-section")
+
+  architecture = section_index("Architecture")
+  if (architecture)
+    render_closing_banner("Architecture", architecture + 1, section_end(architecture), 1)
+
+  print "</main>"
+}
+
 function render_generic(    s, e) {
   print "<main class=\"page-main\">"
   render_hero(first_h1(), first_p())
@@ -1247,7 +1341,9 @@ END {
   else if (page == "community") render_community()
   else if (page == "development") render_development()
   else if (page == "lur") render_lur()
+  else if (page == "lss") render_lss()
   else if (page == "archive") render_archive()
+  else if (page == "documentation") render_documentation()
   else render_generic()
 }
 ' "$markdown_file"

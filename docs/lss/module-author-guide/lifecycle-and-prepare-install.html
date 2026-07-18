@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;Lifecycle and prepare_install&quot;</title>
+  <meta name="description" content="&quot;The installation-tracking boundary and module lifecycle responsibilities.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Lifecycle and prepare_install</h1>
+      <p class="hero-description">A Moonbase module participates in a larger LSS transaction.</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <p>A simplified lifecycle is:</p>
+        <pre><code>preconditions and configuration
+→ dependency resolution
+→ source download
+→ source preparation
+→ build
+→ prepare_install
+→ install into the live filesystem
+→ final manifest and MD5 generation
+→ package-state update
+→ post-install work
+</code></pre>
+        <h2 id="the-prepare-install-boundary">The <code>prepare_install</code> boundary</h2>
+        <p><code>prepare_install</code> establishes the installation-tracking context before package payload is written into the live filesystem.</p>
+        <p>Conceptually it:</p>
+        <pre><code>prepares upgrade-style removal of old ownership
+→ activates installwatch
+→ establishes the tracked installation phase
+</code></pre>
+        <p>The exact implementation belongs to LSS, but the module-author responsibility is simple:</p>
+        <pre><code>build first
+→ call prepare_install
+→ install second
+</code></pre>
+        <p>A module that installs files before this boundary can escape normal final ownership tracking.</p>
+        <h2 id="minimal-build-examples">Minimal BUILD examples</h2>
+        <p>Conventional Autotools-style project:</p>
+        <pre><code>./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+prepare_install &amp;&amp;
+make install
+</code></pre>
+        <p>Simple Makefile project:</p>
+        <pre><code>make &amp;&amp;
+prepare_install &amp;&amp;
+make install PREFIX=/usr
+</code></pre>
+        <p>The installation command and arguments vary by project. The ordering does not.</p>
+        <h2 id="build-tree-versus-live-filesystem">Build tree versus live filesystem</h2>
+        <p>Before <code>prepare_install</code>:</p>
+        <pre><code>source and build-tree activity
+</code></pre>
+        <p>After <code>prepare_install</code>:</p>
+        <pre><code>live-filesystem installation observed by LSS
+</code></pre>
+        <p>Temporary files in the build tree should not become package ownership.</p>
+        <h2 id="final-ownership">Final ownership</h2>
+        <p>Three layers must remain distinct:</p>
+        <pre><code>Moonbase module
+→ intended behavior
+
+raw installwatch activity
+→ filesystem events during execution
+
+install manifest
+→ final paths attributed to the module
+</code></pre>
+        <p>A path may appear in raw activity and disappear before the final manifest is created.</p>
+        <h2 id="hooks">Hooks</h2>
+        <p>Typical hooks include:</p>
+        <pre><code>PRE_BUILD
+POST_BUILD
+POST_INSTALL
+PRE_REMOVE
+POST_REMOVE
+</code></pre>
+        <p>Use hooks only for lifecycle work that genuinely belongs to the package.</p>
+        <p>Good hook behavior:</p>
+        <ul class="simple-list">
+          <li>narrow scope;</li>
+          <li>clear failure handling;</li>
+          <li>predictable paths;</li>
+          <li>no hidden global changes;</li>
+          <li>no avoidable writes outside tracked ownership;</li>
+          <li>useful diagnostic output.</li>
+        </ul>
+        <p>A module hook is appropriate for package-specific behavior. Reusable LSS-wide interception belongs in the plugin system.</p>
+        <h2 id="configuration">Configuration</h2>
+        <p>Files under <code>/etc</code> require deliberate handling.</p>
+        <p>A module author should know:</p>
+        <ul class="simple-list">
+          <li>which default files are installed;</li>
+          <li>whether upstream overwrites them;</li>
+          <li>how LSS MD5 tracking will see them;</li>
+          <li>whether remove hooks touch them;</li>
+          <li>whether local modification should survive removal.</li>
+        </ul>
+        <p>Do not install generated credentials or host-specific secrets as normal package defaults.</p>
+        <h2 id="dependencies">Dependencies</h2>
+        <p>Declare real build and runtime relationships.</p>
+        <p>Do not rely on software that happens to be present on the development host.</p>
+        <p>Optional dependencies should map clearly to features and should use explicit positive and negative build flags where possible.</p>
+        <h2 id="author-acceptance-criteria">Author acceptance criteria</h2>
+        <p>A lifecycle is acceptable when:</p>
+        <pre><code>source verifies
+build succeeds
+prepare_install precedes live installation
+final manifest contains intended ownership
+package state is correct
+dependencies are correct
+runtime works
+rebuild is stable
+removal is clean
+reinstall works
+</code></pre>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

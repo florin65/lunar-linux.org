@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;Validated Case Studies&quot;</title>
+  <meta name="description" content="&quot;Compact examples showing how LSS events, ownership, removal, and configuration preservation behave.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Validated Case Studies</h1>
+      <p class="hero-description">These examples illustrate concrete LSS behavior.</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <h2 id="xxhash-transient-installation-activity"><code>xxhash</code>: transient installation activity</h2>
+        <p>A controlled rebuild captured raw installwatch activity around:</p>
+        <pre><code>/usr/lib/libxxhash.a
+</code></pre>
+        <p>The raw stream included:</p>
+        <pre><code>open
+chmod
+unlink
+</code></pre>
+        <p>The file was therefore created or opened, had permissions applied, and was later removed during the same lifecycle.</p>
+        <p>It did not appear in the final install manifest.</p>
+        <p>This demonstrates:</p>
+        <pre><code>raw event history
+≠ final ownership
+</code></pre>
+        <p>The final manifest before and after the rebuild was identical.</p>
+        <h2 id="xxhash-installed-size"><code>xxhash</code>: installed size</h2>
+        <p>The recorded installed size matched a manual sum of regular files listed in the manifest.</p>
+        <p>Observed rules:</p>
+        <ul class="simple-list">
+          <li>regular files counted;</li>
+          <li>directories excluded;</li>
+          <li>symlinks excluded;</li>
+          <li>Lunar-generated logs listed in the manifest contributed;</li>
+          <li>explicit <code>du -k</code> was required to avoid an interactive <code>du -h</code> alias.</li>
+        </ul>
+        <h2 id="foremost-normal-removal"><code>foremost</code>: normal removal</h2>
+        <p>Before removal, the manifest included:</p>
+        <ul class="simple-list">
+          <li><code>/etc/foremost.conf</code>;</li>
+          <li>the executable;</li>
+          <li>documentation;</li>
+          <li>a manual page;</li>
+          <li>shared directories;</li>
+          <li>Lunar compile, install, and MD5 logs.</li>
+        </ul>
+        <p>Normal removal produced:</p>
+        <pre><code>package record removed
+payload removed
+unchanged `/etc/foremost.conf` removed
+module-specific empty documentation directory removed
+shared `/usr` and `/usr/share` directories retained
+module-specific Lunar logs removed
+</code></pre>
+        <h2 id="foremost-modified-configuration"><code>foremost</code>: modified configuration</h2>
+        <p>After reinstall, <code>/etc/foremost.conf</code> was modified locally.</p>
+        <p>With <code>PRESERVE=on</code>, removal produced:</p>
+        <pre><code>payload removed
+package record removed
+module logs removed
+modified configuration retained
+</code></pre>
+        <p>The retained file was local orphaned configuration rather than ownership of an installed module.</p>
+        <h2 id="operational-lessons">Operational lessons</h2>
+        <pre><code>final manifest
+→ final ownership, not complete event history
+
+PRESERVE=on
+→ preserves modified `/etc` state, not every `/etc` file
+
+shared directories
+→ not removed blindly
+
+module logs
+→ preserve them before removal when they are needed as evidence
+</code></pre>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

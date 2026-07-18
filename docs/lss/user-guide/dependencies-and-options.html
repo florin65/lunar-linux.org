@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;Dependencies and Optional Features&quot;</title>
+  <meta name="description" content="&quot;How LSS records dependencies and how to change optional module features safely.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Dependencies and Optional Features</h1>
+      <p class="hero-description">Moonbase modules can declare required and optional relationships.</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <h2 id="required-dependencies">Required dependencies</h2>
+        <p>A required dependency belongs to the module's accepted build or runtime form.</p>
+        <p>Inspect:</p>
+        <pre><code>MODULE=name
+SECTION=$(lvu where "$MODULE")
+MODULE_DIR="/var/lib/lunar/moonbase/$SECTION/$MODULE"
+
+sed -n '1,240p' "$MODULE_DIR/DEPENDS"
+</code></pre>
+        <p>Before removing a dependency, inspect reverse use:</p>
+        <pre><code>lvu depends dependency
+lvu leert dependency
+
+grep -E '^[^:]+:dependency:' \
+  /var/state/lunar/depends
+</code></pre>
+        <h2 id="optional-dependencies">Optional dependencies</h2>
+        <p>Optional dependencies normally control features.</p>
+        <p>Conceptually:</p>
+        <pre><code>dependency enabled
+→ feature enabled
+→ build flags and stored relationship change
+
+dependency disabled
+→ feature omitted
+→ negative build flag should prevent accidental detection
+</code></pre>
+        <p>The exact prompts and flags are module-specific.</p>
+        <h2 id="current-resolved-state">Current resolved state</h2>
+        <pre><code>grep "^${MODULE}:" /var/state/lunar/depends
+</code></pre>
+        <p>Observed form:</p>
+        <pre><code>module:dependency:status:type:field5:field6
+</code></pre>
+        <p>This is persistent resolved state, not merely a copy of the current <code>DEPENDS</code> file.</p>
+        <p>Moonbase may change while stored state still reflects an earlier configuration.</p>
+        <h2 id="changing-an-optional-feature">Changing an optional feature</h2>
+        <p>A safe sequence:</p>
+        <pre><code>inspect current DEPENDS and stored state
+→ preserve manifest and dependency records
+→ reconfigure or rebuild
+→ inspect new dependency state
+→ compare manifest
+→ test the feature
+</code></pre>
+        <p>Example evidence capture:</p>
+        <pre><code>grep "^${MODULE}:" /var/state/lunar/depends \
+  &gt; "/root/${MODULE}.depends.before"
+
+cp -a "/var/log/lunar/install/${MODULE}-${VERSION}" \
+  "/root/${MODULE}.manifest.before"
+
+lin -c "$MODULE"
+
+grep "^${MODULE}:" /var/state/lunar/depends \
+  &gt; "/root/${MODULE}.depends.after"
+</code></pre>
+        <h2 id="removing-an-optional-dependency">Removing an optional dependency</h2>
+        <p>Do not remove the dependency first.</p>
+        <p>Correct order:</p>
+        <pre><code>disable feature in dependent module
+→ rebuild dependent
+→ verify relationship disappeared
+→ verify runtime
+→ remove former dependency
+</code></pre>
+        <p>Otherwise the current installed binary may still require the library even if the planned next configuration does not.</p>
+        <h2 id="provider-changes">Provider changes</h2>
+        <p>When several implementations can satisfy a role:</p>
+        <pre><code>select provider
+→ rebuild dependent modules
+→ verify stored relationships
+→ verify runtime
+→ remove old provider only after transition
+</code></pre>
+        <p>Policy states such as <code>exiled</code> and <code>enforced</code> may also express provider intent.</p>
+        <h2 id="hidden-auto-detection">Hidden auto-detection</h2>
+        <p>Upstream configure systems may detect installed software automatically.</p>
+        <p>Module definitions should use explicit positive and negative flags where possible. Users should verify that disabling a dependency really removes the feature from the build.</p>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

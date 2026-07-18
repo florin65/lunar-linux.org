@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;Advanced Inspection&quot;</title>
+  <meta name="description" content="&quot;Controlled evidence collection for difficult LSS problems.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Advanced Inspection</h1>
+      <p class="hero-description">Use advanced inspection only when ordinary logs and manifests cannot answer a precise question.</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <p>Good questions include:</p>
+        <pre><code>Why did installed size change?
+Why is a path missing from the final manifest?
+Why do two modules appear to own the same path?
+Why was a configuration file preserved?
+Why did dependency state change?
+Was a cache used?
+Which operation removed this path?
+</code></pre>
+        <h2 id="preserve-before-testing">Preserve before testing</h2>
+        <p>Record:</p>
+        <ul class="simple-list">
+          <li>package and dependency state;</li>
+          <li>install and MD5 logs;</li>
+          <li>compile and activity logs;</li>
+          <li>cache inventory;</li>
+          <li>Moonbase revision and local changes;</li>
+          <li>compiler environment;</li>
+          <li>filesystem metadata;</li>
+          <li>runtime and linkage results.</li>
+        </ul>
+        <p>Use explicit evidence names:</p>
+        <pre><code>packages.before
+packages.after
+depends.before
+depends.after
+install-log.before
+install-log.after
+console.log
+filesystem-state.before
+filesystem-state.after
+</code></pre>
+        <p>Do not overwrite raw evidence.</p>
+        <h2 id="installed-size-semantics">Installed-size semantics</h2>
+        <p>Validated behavior:</p>
+        <ul class="simple-list">
+          <li>installed size is calculated from regular files listed in the final manifest;</li>
+          <li>directories are excluded;</li>
+          <li>symlinks are excluded;</li>
+          <li>Lunar-generated log files listed in the manifest can contribute.</li>
+        </ul>
+        <p>Reproduce:</p>
+        <pre><code>SIZE=0
+
+while IFS= read -r path; do
+  if [ -f "$path" ]; then
+    value=$(du -k -- "$path" | awk '{print $1}')
+    printf '%8s KB  %s\n' "$value" "$path"
+    SIZE=$((SIZE + value))
+  fi
+done &lt; install-log
+
+echo "TOTAL=${SIZE}KB"
+</code></pre>
+        <p>Use <code>du -k</code> explicitly. Interactive aliases such as <code>du -h</code> can make manual calculations misleading.</p>
+        <h2 id="raw-installwatch-activity">Raw installwatch activity</h2>
+        <p>Raw installwatch can record events such as:</p>
+        <pre><code>open
+chmod
+mkdir
+link
+symlink
+rename
+unlink
+</code></pre>
+        <p>It does not define final ownership.</p>
+        <pre><code>raw installwatch event
+→ something happened
+
+final manifest entry
+→ LSS claims final ownership
+</code></pre>
+        <p>A path may be created and removed during installation and therefore not appear in the final manifest.</p>
+        <h2 id="raw-capture-safety">Raw capture safety</h2>
+        <p>Raw installwatch files are normally temporary.</p>
+        <p>Capture requires controlled instrumentation and should be performed only in a container, chroot, test VM, or other recoverable environment.</p>
+        <p>Instrument only the destruction boundary, preserve the raw file, and restore LSS source immediately afterward.</p>
+        <h2 id="detecting-cache-use">Detecting cache use</h2>
+        <p>Clues include:</p>
+        <ul class="simple-list">
+          <li>unusually fast completion;</li>
+          <li>no normal compiler output;</li>
+          <li>no fresh compile log;</li>
+          <li>cache timestamp older than the current install;</li>
+          <li>activity indicating restoration.</li>
+        </ul>
+        <p>Inspect:</p>
+        <pre><code>ls -l /var/cache/lunar/${MODULE}-*
+ls -l /var/log/lunar/compile/${MODULE}-*
+grep "$MODULE" /var/log/lunar/activity
+</code></pre>
+        <p>Move the cache aside for one controlled fresh build when necessary.</p>
+        <h2 id="investigating-etc">Investigating <code>/etc</code></h2>
+        <pre><code>md5sum /etc/example.conf
+grep '/etc/example.conf' saved-md5sum-log
+grep -n 'PRESERVE' /etc/lunar/config
+</code></pre>
+        <p>Interpret checksum, <code>PRESERVE</code>, <code>PROTECTED</code>, <code>EXCLUDED</code>, and remove hooks separately.</p>
+        <h2 id="investigating-dependency-drift">Investigating dependency drift</h2>
+        <pre><code>grep -E "^${MODULE}:|^[^:]+:${MODULE}:" \
+  /var/state/lunar/depends
+
+sed -n '1,240p' "$MODULE_DIR/DEPENDS"
+</code></pre>
+        <p>Also inspect <code>CONFIGURE</code> and <code>OPTIONS</code>.</p>
+        <p>Possible causes:</p>
+        <ul class="simple-list">
+          <li>old stored choice;</li>
+          <li>changed Moonbase definition;</li>
+          <li>interrupted reconfiguration;</li>
+          <li>renamed provider;</li>
+          <li>changed optional-feature default.</li>
+        </ul>
+        <h2 id="single-variable-experiments">Single-variable experiments</h2>
+        <p>Change one factor only:</p>
+        <pre><code>compiler
+dependency choice
+cache availability
+Moonbase revision
+PRESERVE setting
+module patch
+</code></pre>
+        <p>Changing several factors at once destroys attribution.</p>
+        <h2 id="escalation-ladder">Escalation ladder</h2>
+        <pre><code>1. lvu and state files
+2. compile, install, MD5, and activity logs
+3. Moonbase source inspection
+4. before/after snapshots
+5. cache isolation
+6. container reproduction
+7. raw installwatch capture
+8. source-level instrumentation
+</code></pre>
+        <p>Stop when the question is answered.</p>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;Inspecting Modules and System State&quot;</title>
+  <meta name="description" content="&quot;How to inspect installed versions, dependencies, ownership, and physical state.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Inspecting Modules and System State</h1>
+      <p class="hero-description">Use several views together.</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <h2 id="module-identity">Module identity</h2>
+        <pre><code>lvu installed module
+lvu version module
+lvu where module
+</code></pre>
+        <p>These answer:</p>
+        <pre><code>installed
+→ which version is recorded locally?
+
+version
+→ which version is available in active Moonbase?
+
+where
+→ which Moonbase section contains the definition?
+</code></pre>
+        <h2 id="package-state">Package state</h2>
+        <pre><code>grep '^module:' /var/state/lunar/packages
+</code></pre>
+        <p>Observed form:</p>
+        <pre><code>module:YYYYMMDD:state-list:version:size
+</code></pre>
+        <p>Do not read the state field as only installed or absent. It may also preserve policy such as <code>held</code>, <code>exiled</code>, or <code>enforced</code>.</p>
+        <h2 id="dependency-state">Dependency state</h2>
+        <pre><code>grep '^module:' /var/state/lunar/depends
+
+grep -E '^[^:]+:module:' \
+  /var/state/lunar/depends
+</code></pre>
+        <p>The first shows relationships declared for the module. The second shows modules that record it as a dependency.</p>
+        <p>Use:</p>
+        <pre><code>lvu depends module
+lvu leert module
+</code></pre>
+        <p>for a more readable reverse view.</p>
+        <h2 id="ownership">Ownership</h2>
+        <pre><code>cat /var/log/lunar/install/module-version
+</code></pre>
+        <p>The install manifest records final ownership.</p>
+        <p>Check whether a path is owned:</p>
+        <pre><code>grep -R -F -x '/path' \
+  /var/log/lunar/install 2&gt;/dev/null
+</code></pre>
+        <p>Multiple matches require review.</p>
+        <h2 id="checksums">Checksums</h2>
+        <pre><code>cat /var/log/lunar/md5sum/module-version
+</code></pre>
+        <p>For configuration:</p>
+        <pre><code>md5sum /etc/module.conf
+
+grep '/etc/module.conf' \
+  /var/log/lunar/md5sum/module-version
+</code></pre>
+        <h2 id="physical-state">Physical state</h2>
+        <p>Persistent records can drift from the filesystem.</p>
+        <p>Check a binary:</p>
+        <pre><code>command -v program
+file /usr/bin/program
+ldd /usr/bin/program
+</code></pre>
+        <p>Check all paths in one manifest:</p>
+        <pre><code>while IFS= read -r path; do
+  [ -e "$path" ] || [ -L "$path" ] ||
+    echo "missing: $path"
+done &lt; /var/log/lunar/install/module-version
+</code></pre>
+        <h2 id="interpreting-disagreement">Interpreting disagreement</h2>
+        <pre><code>package record present + payload missing
+→ damaged or incomplete installation
+
+manifest present + package record missing
+→ stale or interrupted state
+
+payload present + no manifest
+→ unmanaged or orphaned files
+
+Moonbase newer + installed version older
+→ pending update, not necessarily damage
+</code></pre>
+        <p>Inspect before repairing.</p>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

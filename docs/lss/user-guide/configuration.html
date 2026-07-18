@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;Configuration and Reconfiguration&quot;</title>
+  <meta name="description" content="&quot;How module options, stored choices, and system configuration interact.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Configuration and Reconfiguration</h1>
+      <p class="hero-description">LSS configuration exists at several levels:</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <pre><code>/etc/lunar/config
+→ global LSS behavior
+
+Moonbase CONFIGURE and OPTIONS
+→ module choices
+
+/var/state/lunar/depends
+→ resolved dependency choices
+
+/etc
+→ installed runtime configuration
+</code></pre>
+        <p>Do not collapse these into one concept.</p>
+        <h2 id="inspect-global-settings">Inspect global settings</h2>
+        <pre><code>grep -n -E 'ARCHIVE|PRESERVE|REAP' \
+  /etc/lunar/config
+</code></pre>
+        <p>Common meanings:</p>
+        <pre><code>ARCHIVE
+→ create reusable package archives
+
+PRESERVE
+→ control treatment of locally modified `/etc` files
+
+REAP
+→ control cleanup behavior
+</code></pre>
+        <h2 id="inspect-module-choices">Inspect module choices</h2>
+        <pre><code>MODULE=name
+SECTION=$(lvu where "$MODULE")
+MODULE_DIR="/var/lib/lunar/moonbase/$SECTION/$MODULE"
+
+for file in CONFIGURE OPTIONS DEPENDS BUILD; do
+  test -f "$MODULE_DIR/$file" || continue
+  echo "=== $file ==="
+  sed -n '1,240p' "$MODULE_DIR/$file"
+done
+</code></pre>
+        <h2 id="reconfiguration">Reconfiguration</h2>
+        <p>A choice does not change the installed binary until the module is rebuilt.</p>
+        <p>Safe process:</p>
+        <pre><code>inspect old choices and dependencies
+→ preserve state and manifest
+→ change one option
+→ rebuild
+→ inspect dependency and ownership changes
+→ test the affected feature
+</code></pre>
+        <h2 id="configuration-drift">Configuration drift</h2>
+        <p>A Moonbase update can:</p>
+        <ul class="simple-list">
+          <li>add a new option;</li>
+          <li>remove an old option;</li>
+          <li>change defaults;</li>
+          <li>rename a provider;</li>
+          <li>change auto-detection;</li>
+          <li>turn an optional dependency into a required one.</li>
+        </ul>
+        <p>Stored choices may therefore represent an older module definition.</p>
+        <h2 id="etc-files"><code>/etc</code> files</h2>
+        <p>Before a risky rebuild or removal:</p>
+        <pre><code>cp -a /etc/module.conf \
+  /root/module.conf.before
+</code></pre>
+        <p>Afterward:</p>
+        <pre><code>diff -u \
+  /root/module.conf.before \
+  /etc/module.conf
+</code></pre>
+        <p>Validated behavior with <code>PRESERVE=on</code>:</p>
+        <pre><code>unchanged configuration
+→ removed during normal removal
+
+locally modified configuration
+→ retained
+</code></pre>
+        <p>A service update is complete only after configuration and runtime behavior have been tested.</p>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

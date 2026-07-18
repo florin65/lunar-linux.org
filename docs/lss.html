@@ -32,7 +32,7 @@
     </nav>
   </div>
 </header>
-<main class="page-main">
+<main class="page-main lss-main">
   <section class="page-hero">
     <div class="container">
       <h1>Lunar Scripts System</h1>
@@ -44,61 +44,78 @@
       <article>
         <h2 id="about-lss">About LSS</h2>
         <p>The Lunar Scripts System is the administration and package-management foundation of Lunar Linux.</p>
-        <p>It provides the tools used to manage modules, dependencies, builds, installations, upgrades and the system configuration that supports them.</p>
-        <p>LSS remains close to Linux and exposes its work through understandable shell scripts, files and commands.</p>
+        <p>It manages Moonbase modules, dependencies, source builds, installation ownership, upgrades, configuration handling, package policy and system recovery.</p>
       </article>
+    </div>
+  </section>
+  <section class="content-section muted-section">
+    <div class="container">
+      <h2 id="documentation" class="section-title">Documentation</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>LSS Documentation Overview</h3>
+          <p>Start with the documentation map and choose the guide that matches your task.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="lss/index.html">LSS Documentation</a>
+          </div>
+        </article>
+        <article class="feature-card">
+          <h3>User Guide</h3>
+          <p>Install, rebuild, remove, configure and update modules safely.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="lss/user-guide/index.html">Open the User Guide</a>
+          </div>
+        </article>
+        <article class="feature-card">
+          <h3>Administrator and Recovery Guide</h3>
+          <p>Understand configuration preservation, rollback and conservative state repair.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="lss/administrator-guide/index.html">Open the Administrator Guide</a>
+          </div>
+        </article>
+        <article class="feature-card">
+          <h3>Module Author Guide</h3>
+          <p>Create, validate and maintain Moonbase modules.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="lss/module-author-guide/index.html">Open the Module Author Guide</a>
+          </div>
+        </article>
+        <article class="feature-card">
+          <h3>Debugging and Inspection Guide</h3>
+          <p>Interpret logs, manifests, installwatch activity, ownership and installed size.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="lss/debugging-guide/index.html">Open the Debugging Guide</a>
+          </div>
+        </article>
+        <article class="feature-card">
+          <h3>Plugin and Extension Guide</h3>
+          <p>Understand plugin control flow, ordering, reload behavior and extension safety.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="lss/plugin-guide/index.html">Open the Plugin Guide</a>
+          </div>
+        </article>
+        <article class="feature-card">
+          <h3>Command and State Reference</h3>
+          <p>Find commands, paths, record formats and return semantics.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="lss/reference/index.html">Open the Reference</a>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
   <section class="content-section">
     <div class="container split-content">
       <article>
         <h2 id="principles">Principles</h2>
-        <p>The principles behind LSS describe why the system is designed this way and what should be preserved as it evolves.</p>
-        <p>Read <a href="docs-lss-principles.html">The Principles of LSS</a></p>
+        <p>Read the design principles that guide LSS development and maintenance.</p>
       </article>
     </div>
   </section>
-  <section class="content-section">
-    <div class="container split-content">
-      <article>
-        <h2 id="user-documentation">User documentation</h2>
-        <p>Practical documentation for installing, configuring and using Lunar Linux through LSS.</p>
-        <p>The User Guide is under development.</p>
-      </article>
-    </div>
-  </section>
-  <section class="content-section">
-    <div class="container split-content">
-      <article>
-        <h2 id="architecture">Architecture</h2>
-        <p>Technical documentation describing the structure, responsibilities and interaction of the LSS utilities.</p>
-        <p>The Architecture Guide is under development.</p>
-      </article>
-    </div>
-  </section>
-  <section class="content-section">
-    <div class="container split-content">
-      <article>
-        <h2 id="reference">Reference</h2>
-        <p>Detailed documentation for commands, configuration files, module functions and implementation behavior.</p>
-        <p>The Reference Guide is under development.</p>
-      </article>
-    </div>
-  </section>
-  <section class="content-section">
-    <div class="container split-content">
-      <article>
-        <h2 id="history-and-engineering-knowledge">History and engineering knowledge</h2>
-        <p>The development history, design decisions, lessons and engineering experience accumulated throughout the life of LSS.</p>
-        <p>This material is being reconstructed from source code, repository history and preserved project records.</p>
-      </article>
-    </div>
-  </section>
-  <section class="content-section">
+  <section class="content-section muted-section">
     <div class="container closing-banner">
-      <h2 id="documentation-status">Documentation status</h2>
-      <p>The LSS documentation is being developed progressively from the real implementation.</p>
-      <p>The first published document is <strong>The Principles of LSS</strong>.</p>
+      <h2 id="architecture">Architecture</h2>
+      <p>The LSS Architecture Guide remains a separate future documentation milestone.</p>
     </div>
   </section>
 </main>

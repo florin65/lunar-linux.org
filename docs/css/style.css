@@ -2259,3 +2259,82 @@ h1 {
   }
 }
 
+
+/* LSS documentation */
+
+.documentation-hero {
+  padding-bottom: 2rem;
+}
+
+.documentation-section {
+  padding-top: 2rem;
+}
+
+.documentation-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.documentation-article {
+  width: min(100%, 860px);
+  margin: 0 auto;
+}
+
+.documentation-article a:not(.button) {
+  color: var(--accent-strong);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1.4px;
+  text-underline-offset: 0.18em;
+}
+
+.documentation-article a:not(.button):hover,
+.documentation-article a:not(.button):focus-visible {
+  color: var(--accent);
+  text-decoration-thickness: 2px;
+}
+
+.documentation-article h2 a:not(.button),
+.documentation-article h3 a:not(.button),
+.documentation-article h4 a:not(.button) {
+  font-weight: inherit;
+}
+
+.documentation-article h2 {
+  margin-top: 3rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.documentation-article h3 {
+  margin-top: 2rem;
+}
+
+.documentation-article h4,
+.documentation-article h5,
+.documentation-article h6 {
+  margin-top: 1.5rem;
+}
+
+.documentation-article p,
+.documentation-article li {
+  max-width: 78ch;
+}
+
+.documentation-article pre {
+  margin: 1.25rem 0 1.75rem;
+  overflow-x: auto;
+}
+
+.documentation-article .hero-actions {
+  margin: 1.25rem 0 2rem;
+}
+
+.documentation-article blockquote {
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 700px) {
+  .documentation-article h2 {
+    margin-top: 2.25rem;
+  }
+}

@@ -9,48 +9,64 @@ permalink: pages/lss.html
 
 The tools and scripts that build, install, update and maintain a Lunar Linux system.
 
-> Understand first. Document second. Improve third.
+> Transparent package management built from understandable shell scripts, files and commands.
 
 ## About LSS
 
 The Lunar Scripts System is the administration and package-management foundation of Lunar Linux.
 
-It provides the tools used to manage modules, dependencies, builds, installations, upgrades and the system configuration that supports them.
+It manages Moonbase modules, dependencies, source builds, installation ownership, upgrades, configuration handling, package policy and system recovery.
 
-LSS remains close to Linux and exposes its work through understandable shell scripts, files and commands.
+## Documentation
+
+### LSS Documentation Overview
+
+Start with the documentation map and choose the guide that matches your task.
+
+[LSS Documentation](lss/index.html)
+
+### User Guide
+
+Install, rebuild, remove, configure and update modules safely.
+
+[Open the User Guide](lss/user-guide/index.html)
+
+### Administrator and Recovery Guide
+
+Understand configuration preservation, rollback and conservative state repair.
+
+[Open the Administrator Guide](lss/administrator-guide/index.html)
+
+### Module Author Guide
+
+Create, validate and maintain Moonbase modules.
+
+[Open the Module Author Guide](lss/module-author-guide/index.html)
+
+### Debugging and Inspection Guide
+
+Interpret logs, manifests, installwatch activity, ownership and installed size.
+
+[Open the Debugging Guide](lss/debugging-guide/index.html)
+
+### Plugin and Extension Guide
+
+Understand plugin control flow, ordering, reload behavior and extension safety.
+
+[Open the Plugin Guide](lss/plugin-guide/index.html)
+
+### Command and State Reference
+
+Find commands, paths, record formats and return semantics.
+
+[Open the Reference](lss/reference/index.html)
 
 ## Principles
 
-The principles behind LSS describe why the system is designed this way and what should be preserved as it evolves.
+Read the design principles that guide LSS development and maintenance.
 
-Read [The Principles of LSS](docs-lss-principles.html)
-
-## User documentation
-
-Practical documentation for installing, configuring and using Lunar Linux through LSS.
-
-The User Guide is under development.
+[The Principles of LSS](docs-lss-principles.html)
 
 ## Architecture
 
-Technical documentation describing the structure, responsibilities and interaction of the LSS utilities.
-
-The Architecture Guide is under development.
-
-## Reference
-
-Detailed documentation for commands, configuration files, module functions and implementation behavior.
-
-The Reference Guide is under development.
-
-## History and engineering knowledge
-
-The development history, design decisions, lessons and engineering experience accumulated throughout the life of LSS.
-
-This material is being reconstructed from source code, repository history and preserved project records.
-
-## Documentation status
-
-The LSS documentation is being developed progressively from the real implementation.
-
-The first published document is **The Principles of LSS**.
+The LSS Architecture Guide remains a separate future documentation milestone.

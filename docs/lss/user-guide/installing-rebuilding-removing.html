@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;Installing, Rebuilding, and Removing Modules&quot;</title>
+  <meta name="description" content="&quot;Safe daily module operations with lin, lrm, and lvu.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Installing, Rebuilding, and Removing Modules</h1>
+      <p class="hero-description">The core LSS operations are:</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <pre><code>lin module
+lin -c module
+lrm module
+</code></pre>
+        <p>Use <code>lvu</code> before and after each operation to inspect state.</p>
+        <h2 id="before-installation">Before installation</h2>
+        <p>Locate and inspect the module:</p>
+        <pre><code>MODULE=name
+SECTION=$(lvu where "$MODULE")
+MODULE_DIR="/var/lib/lunar/moonbase/$SECTION/$MODULE"
+
+printf 'section: %s\n' "$SECTION"
+
+sed -n '1,240p' "$MODULE_DIR/DETAILS"
+test -f "$MODULE_DIR/DEPENDS" &amp;&amp;
+  sed -n '1,240p' "$MODULE_DIR/DEPENDS"
+</code></pre>
+        <p>Check:</p>
+        <ul class="simple-list">
+          <li>source and version;</li>
+          <li>required dependencies;</li>
+          <li>optional features;</li>
+          <li>conflicts;</li>
+          <li>unusual hooks;</li>
+          <li>local Moonbase changes.</li>
+        </ul>
+        <h2 id="install">Install</h2>
+        <pre><code>lin "$MODULE"
+</code></pre>
+        <p>Preserve console output for important modules:</p>
+        <pre><code>lin "$MODULE" 2&gt;&amp;1 |
+  tee "/root/${MODULE}-install.log"
+</code></pre>
+        <p>Verify:</p>
+        <pre><code>lvu installed "$MODULE"
+grep "^${MODULE}:" /var/state/lunar/packages
+</code></pre>
+        <p>Inspect ownership:</p>
+        <pre><code>VERSION=$(lvu installed "$MODULE")
+cat "/var/log/lunar/install/${MODULE}-${VERSION}"
+</code></pre>
+        <p>Then test actual functionality.</p>
+        <p>A successful <code>lin</code> result proves that the package transaction completed. It does not prove that every application feature or service works.</p>
+        <h2 id="rebuild">Rebuild</h2>
+        <pre><code>lin -c "$MODULE"
+</code></pre>
+        <p>Use rebuild when:</p>
+        <ul class="simple-list">
+          <li>changing options;</li>
+          <li>changing compiler or flags;</li>
+          <li>rebuilding after a dependency transition;</li>
+          <li>testing a Moonbase modification;</li>
+          <li>refreshing a damaged installation;</li>
+          <li>validating reproducibility.</li>
+        </ul>
+        <p>Before rebuilding, preserve the current package record and manifest:</p>
+        <pre><code>VERSION=$(lvu installed "$MODULE")
+
+grep "^${MODULE}:" /var/state/lunar/packages \
+  &gt; "/root/${MODULE}.package.before"
+
+cp -a "/var/log/lunar/install/${MODULE}-${VERSION}" \
+  "/root/${MODULE}.manifest.before"
+</code></pre>
+        <p>After rebuilding:</p>
+        <pre><code>VERSION_AFTER=$(lvu installed "$MODULE")
+
+grep "^${MODULE}:" /var/state/lunar/packages \
+  &gt; "/root/${MODULE}.package.after"
+
+cp -a "/var/log/lunar/install/${MODULE}-${VERSION_AFTER}" \
+  "/root/${MODULE}.manifest.after"
+
+diff -u \
+  "/root/${MODULE}.manifest.before" \
+  "/root/${MODULE}.manifest.after"
+</code></pre>
+        <p>A changed manifest may be expected after a version or feature change. It should still be understood.</p>
+        <h2 id="before-removal">Before removal</h2>
+        <p>Check reverse dependencies:</p>
+        <pre><code>lvu depends "$MODULE"
+lvu leert "$MODULE"
+
+grep -E "^[^:]+:${MODULE}:" \
+  /var/state/lunar/depends
+</code></pre>
+        <p>Inspect remove hooks:</p>
+        <pre><code>for hook in PRE_REMOVE POST_REMOVE; do
+  test -f "$MODULE_DIR/$hook" || continue
+  echo "=== $hook ==="
+  sed -n '1,240p' "$MODULE_DIR/$hook"
+done
+</code></pre>
+        <p>Preserve install and MD5 logs because removal may delete them:</p>
+        <pre><code>VERSION=$(lvu installed "$MODULE")
+BACKUP="/root/${MODULE}-remove-evidence"
+
+mkdir -p "$BACKUP"
+
+cp -a "/var/log/lunar/install/${MODULE}-${VERSION}" \
+  "$BACKUP/install-log"
+
+cp -a "/var/log/lunar/md5sum/${MODULE}-${VERSION}" \
+  "$BACKUP/md5sum-log" 2&gt;/dev/null || true
+</code></pre>
+        <h2 id="remove">Remove</h2>
+        <pre><code>lrm "$MODULE"
+</code></pre>
+        <p>Verify:</p>
+        <pre><code>grep "^${MODULE}:" /var/state/lunar/packages ||
+  echo "package record removed"
+</code></pre>
+        <p>Use the saved manifest to confirm payload removal.</p>
+        <p>Shared directories such as <code>/usr</code> and <code>/usr/share</code> should not be removed simply because they appeared in a module manifest.</p>
+        <h2 id="configuration-behavior">Configuration behavior</h2>
+        <p>With <code>PRESERVE=on</code>, validated behavior is:</p>
+        <pre><code>unchanged `/etc` file
+→ removed
+
+locally modified `/etc` file
+→ retained
+</code></pre>
+        <p>A retained file after package removal is local orphaned configuration. It is no longer evidence that the package remains installed.</p>
+        <h2 id="safe-daily-pattern">Safe daily pattern</h2>
+        <pre><code>inspect
+→ preserve current state
+→ perform one operation
+→ verify package record
+→ verify manifest
+→ verify runtime
+</code></pre>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

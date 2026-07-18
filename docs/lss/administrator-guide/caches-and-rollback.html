@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;Caches and Rollback&quot;</title>
+  <meta name="description" content="&quot;How LSS caches help recovery and where their limits begin.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Caches and Rollback</h1>
+      <p class="hero-description">LSS caches under:</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <pre><code>/var/cache/lunar
+</code></pre>
+        <p>can accelerate reinstall and rollback.</p>
+        <p>A typical cache name may include:</p>
+        <pre><code>module-version-target-triplet.tar.xz
+</code></pre>
+        <p>Example:</p>
+        <pre><code>xxhash-0.8.3-x86_64-pc-linux-gnu.tar.xz
+</code></pre>
+        <h2 id="what-a-cache-is">What a cache is</h2>
+        <p>A cache is reusable installed payload.</p>
+        <p>It is not:</p>
+        <ul class="simple-list">
+          <li>proof that the module is currently installed;</li>
+          <li>the package-state record;</li>
+          <li>the dependency-state record;</li>
+          <li>the final ownership manifest;</li>
+          <li>a complete description of build configuration;</li>
+          <li>a guarantee that post-install effects will be reproduced.</li>
+        </ul>
+        <pre><code>cache present
+≠ installed
+
+installed
+≠ cache present
+</code></pre>
+        <h2 id="cache-identity-is-incomplete">Cache identity is incomplete</h2>
+        <p>A matching filename may still hide different builds.</p>
+        <pre><code>matching module + version + target triplet
+≠ guaranteed semantic equivalence
+</code></pre>
+        <p>Two caches may differ because of:</p>
+        <ul class="simple-list">
+          <li>optional dependencies;</li>
+          <li>provider selection;</li>
+          <li>compiler family or version;</li>
+          <li>compiler flags;</li>
+          <li>patches;</li>
+          <li>Moonbase revision;</li>
+          <li>local environment;</li>
+          <li>generated configuration.</li>
+        </ul>
+        <p>Preserve provenance for important caches.</p>
+        <h2 id="inspecting-a-cache">Inspecting a cache</h2>
+        <p>List:</p>
+        <pre><code>ls -lh /var/cache/lunar/module-*
+</code></pre>
+        <p>Test compression:</p>
+        <pre><code>xz -t archive.tar.xz
+</code></pre>
+        <p>List contents:</p>
+        <pre><code>tar -tJf archive.tar.xz
+</code></pre>
+        <p>Extract only into a temporary directory for inspection:</p>
+        <pre><code>mkdir -p /tmp/lunar-cache-inspect
+
+tar -xJf archive.tar.xz \
+  -C /tmp/lunar-cache-inspect
+</code></pre>
+        <p>Do not extract directly into <code>/</code>.</p>
+        <h2 id="preserving-a-trusted-cache">Preserving a trusted cache</h2>
+        <pre><code>mkdir -p /root/lunar-cache-backup
+
+cp -a /var/cache/lunar/module-version-* \
+  /root/lunar-cache-backup/
+
+sha256sum /root/lunar-cache-backup/module-version-* \
+  &gt; /root/lunar-cache-backup/SHA256SUMS
+</code></pre>
+        <p>Useful sidecar metadata includes:</p>
+        <pre><code>module
+version
+creation date
+Moonbase revision
+compiler versions
+build flags
+optional dependency choices
+target triplet
+checksum
+</code></pre>
+        <h2 id="before-risky-work">Before risky work</h2>
+        <p>Preserve:</p>
+        <ul class="simple-list">
+          <li>a known-good cache;</li>
+          <li><code>/var/state/lunar/packages</code>;</li>
+          <li><code>/var/state/lunar/depends</code>;</li>
+          <li>install and MD5 logs;</li>
+          <li>active Moonbase revision and local changes;</li>
+          <li>critical configuration;</li>
+          <li>a tested boot or recovery path.</li>
+        </ul>
+        <h2 id="fresh-rebuild-versus-cache-resurrection">Fresh rebuild versus cache resurrection</h2>
+        <p>A cache can hide the normal compile path.</p>
+        <p>When a fresh build is required:</p>
+        <pre><code>preserve old cache
+→ move it outside /var/cache/lunar
+→ rebuild
+→ inspect new manifest and runtime
+→ preserve the new cache
+</code></pre>
+        <p>A fresh build is preferable when:</p>
+        <ul class="simple-list">
+          <li>toolchain changed;</li>
+          <li>Moonbase recipe changed;</li>
+          <li>optional features changed;</li>
+          <li>provider changed;</li>
+          <li>patches changed;</li>
+          <li>reproducibility is under test.</li>
+        </ul>
+        <h2 id="rollback-completeness">Rollback completeness</h2>
+        <p>A useful rollback restores:</p>
+        <pre><code>payload
+final ownership
+MD5 records
+package record
+dependency relationships
+policy state
+configuration
+runtime behavior
+</code></pre>
+        <p>Restoring only binaries is incomplete.</p>
+        <p>Restoring only state databases is also incomplete.</p>
+        <h2 id="recovery-through-lss">Recovery through LSS</h2>
+        <p>Use normal LSS installation or rebuild paths whenever possible.</p>
+        <pre><code>trusted cache
+→ restore through LSS
+→ regenerate state
+→ verify ownership
+→ verify runtime
+</code></pre>
+        <p>Manual unpacking can bypass:</p>
+        <ul class="simple-list">
+          <li>manifest generation;</li>
+          <li>package registration;</li>
+          <li>dependency-state updates;</li>
+          <li>configuration policy;</li>
+          <li>post-install behavior.</li>
+        </ul>
+        <h2 id="snapshot-and-backup-strategy">Snapshot and backup strategy</h2>
+        <p>For experiments:</p>
+        <pre><code>backup or snapshot
+→ perform one controlled transition
+→ preserve evidence
+→ restore if necessary
+</code></pre>
+        <p>For full-system recovery, preserve both files and state:</p>
+        <pre><code>/etc
+/var/state/lunar
+/var/log/lunar
+/var/cache/lunar
+active Moonbase
+important source archives
+</code></pre>
+        <p>A backup that has never been tested is only a hypothesis.</p>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;Held, Exiled, and Enforced Modules&quot;</title>
+  <meta name="description" content="&quot;How LSS preserves administrator policy in package state.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Held, Exiled, and Enforced Modules</h1>
+      <p class="hero-description">The package-state record can preserve administrative policy.</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <pre><code>installed
+→ module is recorded as present
+
+held
+→ retain the current version
+
+exiled
+→ reject module presence
+
+enforced
+→ require module presence
+</code></pre>
+        <p>These states are not interchangeable.</p>
+        <h2 id="held">Held</h2>
+        <p>Use a hold when a known-good version must remain in place.</p>
+        <p>Typical reasons:</p>
+        <ul class="simple-list">
+          <li>regression in a newer version;</li>
+          <li>dependent software not ready;</li>
+          <li>local patch;</li>
+          <li>incomplete toolchain transition;</li>
+          <li>production validation still pending.</li>
+        </ul>
+        <p>Document why the hold exists and what condition will end it.</p>
+        <p>A long-lived hold can create security and compatibility debt.</p>
+        <h2 id="exiled">Exiled</h2>
+        <p>Exile is stronger than simply not installing a module.</p>
+        <pre><code>uninstalled
+→ absent now
+
+exiled
+→ explicitly rejected by policy
+</code></pre>
+        <p>Exiling a dependency can make another module impossible to install or rebuild.</p>
+        <p>Review reverse relationships first.</p>
+        <h2 id="enforced">Enforced</h2>
+        <p>An enforced module is required by system policy even when no other module depends on it.</p>
+        <pre><code>required dependency
+→ required by another module
+
+enforced module
+→ required by administrator policy
+</code></pre>
+        <p>Do not remove an enforced module without deliberately changing the policy.</p>
+        <h2 id="inspect-policy">Inspect policy</h2>
+        <pre><code>awk -F: '$3 ~ /held|exiled|enforced/ {print}' \
+  /var/state/lunar/packages
+</code></pre>
+        <p>For one module:</p>
+        <pre><code>grep '^module:' /var/state/lunar/packages
+lvu depends module
+lvu leert module
+</code></pre>
+        <h2 id="before-large-updates">Before large updates</h2>
+        <p>Review all special states.</p>
+        <p>A held module may block an ABI transition. An exiled module may conflict with a new required dependency. An enforced provider may affect replacement decisions.</p>
+        <p>Preserve complete package records during rollback. Restoring only <code>installed</code> can silently lose administrator intent.</p>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

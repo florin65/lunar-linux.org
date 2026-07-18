@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;Building and Testing a Local Module&quot;</title>
+  <meta name="description" content="&quot;A complete lifecycle test for local Moonbase modules.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Building and Testing a Local Module</h1>
+      <p class="hero-description">Use a container, chroot, virtual machine, or other recoverable environment.</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <p>A first test module should be small:</p>
+        <ul class="simple-list">
+          <li>one source archive;</li>
+          <li>conventional build system;</li>
+          <li>few dependencies;</li>
+          <li>no boot or login integration;</li>
+          <li>small, obvious payload;</li>
+          <li>simple runtime test.</li>
+        </ul>
+        <h2 id="minimal-structure">Minimal structure</h2>
+        <pre><code>hello-lunar/
+├── DETAILS
+└── BUILD
+</code></pre>
+        <p>Add these only when needed:</p>
+        <pre><code>DEPENDS
+CONFIGURE
+OPTIONS
+PRE_BUILD
+POST_BUILD
+POST_INSTALL
+PRE_REMOVE
+POST_REMOVE
+patches
+auxiliary files
+</code></pre>
+        <h2 id="minimal-details-example">Minimal <code>DETAILS</code> example</h2>
+        <pre><code>MODULE=hello-lunar
+VERSION=1.0
+SOURCE=$MODULE-$VERSION.tar.gz
+SOURCE_URL=https://example.org/releases/
+SOURCE_VFY=sha256:...
+WEB_SITE=https://example.org/
+ENTERED=20260718
+UPDATED=20260718
+SHORT="Small example program"
+
+cat &lt;&lt; EOF
+A small example program packaged as a local Moonbase module.
+EOF
+</code></pre>
+        <p>Use the verification syntax accepted by the active Moonbase.</p>
+        <p>Calculate a checksum:</p>
+        <pre><code>sha256sum hello-lunar-1.0.tar.gz
+</code></pre>
+        <h2 id="minimal-build-example">Minimal <code>BUILD</code> example</h2>
+        <pre><code>make &amp;&amp;
+prepare_install &amp;&amp;
+make install PREFIX=/usr
+</code></pre>
+        <p>For a configure-based project:</p>
+        <pre><code>./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+prepare_install &amp;&amp;
+make install
+</code></pre>
+        <h2 id="record-the-baseline">Record the baseline</h2>
+        <pre><code>MODULE=hello-lunar
+BASE=/root/lss-local-module/$MODULE
+
+mkdir -p "$BASE/before" "$BASE/after"
+
+cp -a /var/state/lunar/packages \
+  "$BASE/before/packages"
+
+cp -a /var/state/lunar/depends \
+  "$BASE/before/depends"
+
+env | sort &gt; "$BASE/before/environment"
+</code></pre>
+        <p>Also preserve the active Moonbase revision and the module directory.</p>
+        <h2 id="install-test">Install test</h2>
+        <pre><code>lin "$MODULE" 2&gt;&amp;1 |
+  tee "$BASE/install-console.log"
+</code></pre>
+        <p>Verify:</p>
+        <pre><code>lvu installed "$MODULE"
+grep "^${MODULE}:" /var/state/lunar/packages
+</code></pre>
+        <p>Inspect the manifest:</p>
+        <pre><code>VERSION=$(lvu installed "$MODULE")
+MANIFEST="/var/log/lunar/install/${MODULE}-${VERSION}"
+
+cat "$MANIFEST"
+</code></pre>
+        <p>Check that it contains only intended paths.</p>
+        <h2 id="runtime-test">Runtime test</h2>
+        <p>For a command:</p>
+        <pre><code>command -v hello-lunar
+hello-lunar --version
+hello-lunar
+</code></pre>
+        <p>Check linkage:</p>
+        <pre><code>ldd /usr/bin/hello-lunar
+</code></pre>
+        <p>Declared dependencies should match actual runtime needs.</p>
+        <h2 id="rebuild-test">Rebuild test</h2>
+        <pre><code>cp -a "$MANIFEST" "$BASE/install.before-rebuild"
+
+lin -c "$MODULE" 2&gt;&amp;1 |
+  tee "$BASE/rebuild-console.log"
+
+cp -a "$MANIFEST" "$BASE/install.after-rebuild"
+
+diff -u \
+  "$BASE/install.before-rebuild" \
+  "$BASE/install.after-rebuild"
+</code></pre>
+        <p>A deterministic module should normally produce stable ownership.</p>
+        <h2 id="removal-test">Removal test</h2>
+        <p>Preserve the manifest and MD5 log before removal because module-specific logs may be deleted.</p>
+        <pre><code>cp -a "$MANIFEST" "$BASE/install-log"
+cp -a "/var/log/lunar/md5sum/${MODULE}-${VERSION}" \
+  "$BASE/md5sum-log" 2&gt;/dev/null || true
+
+lrm "$MODULE" 2&gt;&amp;1 |
+  tee "$BASE/remove-console.log"
+</code></pre>
+        <p>Verify:</p>
+        <ul class="simple-list">
+          <li>package record is gone;</li>
+          <li>payload is gone;</li>
+          <li>shared directories remain;</li>
+          <li>module-specific empty directories disappear;</li>
+          <li>configuration behavior is understood.</li>
+        </ul>
+        <h2 id="reinstall-test">Reinstall test</h2>
+        <pre><code>lin "$MODULE" 2&gt;&amp;1 |
+  tee "$BASE/reinstall-console.log"
+</code></pre>
+        <p>Run the runtime test again.</p>
+        <h2 id="optional-dependency-test">Optional dependency test</h2>
+        <p>For one optional feature:</p>
+        <pre><code>enable feature
+→ build
+→ record depends and manifest
+→ disable feature
+→ rebuild
+→ compare depends, manifest, and runtime
+</code></pre>
+        <p>Do not test several option changes at once.</p>
+        <h2 id="failure-path-test">Failure-path test</h2>
+        <p>Test at least one expected failure:</p>
+        <ul class="simple-list">
+          <li>unavailable source;</li>
+          <li>wrong checksum;</li>
+          <li>missing required dependency;</li>
+          <li>intentionally failing patch;</li>
+          <li>invalid compiler selection.</li>
+        </ul>
+        <p>Verify that failure leaves:</p>
+        <ul class="simple-list">
+          <li>no false installed record;</li>
+          <li>no unmanaged live payload;</li>
+          <li>a useful compile log;</li>
+          <li>a recoverable next run.</li>
+        </ul>
+        <h2 id="hidden-dependency-detection">Hidden dependency detection</h2>
+        <p>A minimal environment reveals undeclared assumptions.</p>
+        <p>Look for:</p>
+        <pre><code>command not found
+header missing
+library missing
+pkg-config package missing
+</code></pre>
+        <p>Add real dependencies rather than depending on the developer's full system.</p>
+        <h2 id="final-acceptance">Final acceptance</h2>
+        <p>A local module is ready for wider use when:</p>
+        <pre><code>source verifies
+build succeeds
+manifest is correct
+package state is correct
+dependencies are correct
+runtime works
+rebuild is stable
+removal is clean
+reinstall works
+failure behavior is understandable
+</code></pre>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

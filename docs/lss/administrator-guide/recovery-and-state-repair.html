@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;Recovery and State Repair&quot;</title>
+  <meta name="description" content="&quot;A conservative method for repairing inconsistent LSS state.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Recovery and State Repair</h1>
+      <p class="hero-description">LSS recovery means restoring agreement between several layers:</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <pre><code>Moonbase
+→ intended module behavior
+
+/var/state/lunar/packages
+→ package and policy state
+
+/var/state/lunar/depends
+→ dependency relationships
+
+/var/log/lunar/install
+→ final ownership
+
+/var/log/lunar/md5sum
+→ installed checksums
+
+filesystem
+→ physical payload
+
+runtime
+→ actual functionality
+</code></pre>
+        <p>Repairing only the visible symptom can leave the system inconsistent.</p>
+        <h2 id="preserve-evidence-first">Preserve evidence first</h2>
+        <p>Before changing anything:</p>
+        <pre><code>MODULE=name
+VERSION=$(lvu installed "$MODULE")
+BASE=/root/lss-recovery/$MODULE
+
+mkdir -p "$BASE"
+
+cp -a /var/state/lunar/packages "$BASE/packages.before"
+cp -a /var/state/lunar/depends "$BASE/depends.before"
+
+grep "^${MODULE}:" /var/state/lunar/packages \
+  &gt; "$BASE/package-record.before" || true
+
+grep -E "^${MODULE}:|^[^:]+:${MODULE}:" \
+  /var/state/lunar/depends \
+  &gt; "$BASE/depends-records.before" || true
+
+cp -a /var/log/lunar/install/${MODULE}-* "$BASE/" 2&gt;/dev/null || true
+cp -a /var/log/lunar/md5sum/${MODULE}-* "$BASE/" 2&gt;/dev/null || true
+cp -a /var/log/lunar/compile/${MODULE}-* "$BASE/" 2&gt;/dev/null || true
+</code></pre>
+        <p>Also preserve the active module definition and Moonbase revision when possible.</p>
+        <h2 id="inconsistency-matrix">Inconsistency matrix</h2>
+        <h3 id="package-record-present-payload-missing">Package record present, payload missing</h3>
+        <p>Likely causes:</p>
+        <ul class="simple-list">
+          <li>manual deletion;</li>
+          <li>filesystem damage;</li>
+          <li>interrupted replacement;</li>
+          <li>restored state database without payload.</li>
+        </ul>
+        <p>Preferred repair:</p>
+        <pre><code>preserve evidence
+→ rebuild or reinstall
+→ regenerate payload and logs
+→ verify runtime
+</code></pre>
+        <p>Do not delete the package record merely to make the database resemble the damaged filesystem.</p>
+        <h3 id="package-record-present-manifest-missing">Package record present, manifest missing</h3>
+        <p>The module is recorded as installed, but LSS has lost its primary ownership record.</p>
+        <p>Preferred repair:</p>
+        <pre><code>rebuild or reinstall the same configuration
+→ regenerate install and MD5 logs
+→ compare the resulting payload
+→ verify state
+</code></pre>
+        <p>Avoid normal removal until ownership has been restored.</p>
+        <h3 id="manifest-present-package-record-missing">Manifest present, package record missing</h3>
+        <p>Possible causes:</p>
+        <ul class="simple-list">
+          <li>interrupted removal;</li>
+          <li>manual state edit;</li>
+          <li>stale log;</li>
+          <li>partial recovery.</li>
+        </ul>
+        <p>Inspect:</p>
+        <pre><code>grep "$MODULE" /var/log/lunar/activity
+</code></pre>
+        <p>Then compare the manifest with the actual filesystem. Do not assume either layer is automatically correct.</p>
+        <h3 id="payload-present-without-ownership">Payload present without ownership</h3>
+        <p>Possible causes:</p>
+        <ul class="simple-list">
+          <li>manual installation;</li>
+          <li>preserved configuration;</li>
+          <li>partial failed operation;</li>
+          <li>external installer;</li>
+          <li>files left by a hook or service.</li>
+        </ul>
+        <p>Search existing ownership:</p>
+        <pre><code>grep -R -F -x '/path' /var/log/lunar/install 2&gt;/dev/null
+</code></pre>
+        <p>Do not assign ownership by guesswork.</p>
+        <h3 id="dependency-record-references-a-missing-module">Dependency record references a missing module</h3>
+        <p>Inspect the dependent module's <code>DEPENDS</code>, <code>CONFIGURE</code>, and <code>OPTIONS</code> files.</p>
+        <p>Preferred repair:</p>
+        <pre><code>reconfigure or rebuild the dependent module
+→ regenerate dependency state
+→ verify the relationship
+</code></pre>
+        <p>Deleting one line from <code>/var/state/lunar/depends</code> may hide the problem without restoring the intended configuration.</p>
+        <h3 id="preserved-configuration-remains-after-removal">Preserved configuration remains after removal</h3>
+        <p>This may be correct when a locally modified <code>/etc</code> file survives with <code>PRESERVE=on</code>.</p>
+        <p>Such a file is local orphaned state:</p>
+        <pre><code>present on disk
+→ no longer owned by an installed module
+</code></pre>
+        <p>Keep, archive, compare, or remove it deliberately.</p>
+        <h2 id="preferred-repair-order">Preferred repair order</h2>
+        <p>Use the least invasive supported path:</p>
+        <pre><code>1. rebuild
+2. reinstall
+3. restore through a verified cache
+4. rollback from a coherent backup or snapshot
+5. narrowly scoped manual repair
+</code></pre>
+        <p>A supported rebuild or reinstall can restore payload, ownership, checksums, package state, and dependency state together.</p>
+        <h2 id="interrupted-rebuild">Interrupted rebuild</h2>
+        <p>Possible state:</p>
+        <pre><code>old payload partly removed
+new payload incomplete
+final manifest absent
+old cache still available
+package record stale or missing
+</code></pre>
+        <p>Response:</p>
+        <ol class="simple-list ordered-list">
+          <li>stop further updates;</li>
+          <li>preserve console, compile, activity, and state evidence;</li>
+          <li>determine whether the old or new payload remains;</li>
+          <li>use a trusted cache or known-good module definition;</li>
+          <li>reinstall;</li>
+          <li>verify ownership and runtime before continuing.</li>
+        </ol>
+        <h2 id="interrupted-removal">Interrupted removal</h2>
+        <p>Possible state:</p>
+        <pre><code>package record removed
+some payload remains
+module logs partly removed
+modified configuration remains
+</code></pre>
+        <p>Use the surviving manifest, a saved manifest, a trusted cache, or a test reinstall to reconstruct ownership. Avoid broad manual deletion.</p>
+        <h2 id="manual-state-repair">Manual state repair</h2>
+        <p>Manual editing is a last resort.</p>
+        <p>Before editing:</p>
+        <pre><code>cp -a /var/state/lunar/packages \
+  /root/packages.pre-manual-repair
+
+cp -a /var/state/lunar/depends \
+  /root/depends.pre-manual-repair
+</code></pre>
+        <p>A valid manual repair requires:</p>
+        <ul class="simple-list">
+          <li>a documented source for each reconstructed value;</li>
+          <li>one narrowly scoped change;</li>
+          <li>preservation of <code>held</code>, <code>exiled</code>, and <code>enforced</code> policy;</li>
+          <li>immediate before/after comparison;</li>
+          <li>filesystem and runtime verification.</li>
+        </ul>
+        <h2 id="verification-after-repair">Verification after repair</h2>
+        <p>Check package state:</p>
+        <pre><code>grep '^module:' /var/state/lunar/packages
+lvu installed module
+</code></pre>
+        <p>Check ownership:</p>
+        <pre><code>cat /var/log/lunar/install/module-version
+</code></pre>
+        <p>Check dependency state:</p>
+        <pre><code>grep -E '^module:|^[^:]+:module:' \
+  /var/state/lunar/depends
+</code></pre>
+        <p>Check payload and runtime:</p>
+        <pre><code>command -v program
+ldd /usr/bin/program
+program --version
+</code></pre>
+        <p>A repair is complete only when state, ownership, filesystem, and runtime agree.</p>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

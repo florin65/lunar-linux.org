@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;Removal and Configuration Preservation&quot;</title>
+  <meta name="description" content="&quot;Ownership-driven removal, shared directories, and local configuration.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Removal and Configuration Preservation</h1>
+      <p class="hero-description">LSS removal is driven primarily by the final install manifest.</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <pre><code>manifest path
+→ classify
+→ apply path and configuration policy
+→ remove when permitted
+→ update persistent state
+</code></pre>
+        <h2 id="before-removal">Before removal</h2>
+        <pre><code>MODULE=name
+VERSION=$(lvu installed "$MODULE")
+SECTION=$(lvu where "$MODULE")
+MODULE_DIR="/var/lib/lunar/moonbase/$SECTION/$MODULE"
+</code></pre>
+        <p>Check reverse dependencies:</p>
+        <pre><code>lvu depends "$MODULE"
+lvu leert "$MODULE"
+</code></pre>
+        <p>Inspect remove hooks:</p>
+        <pre><code>for hook in PRE_REMOVE POST_REMOVE; do
+  test -f "$MODULE_DIR/$hook" || continue
+  sed -n '1,240p' "$MODULE_DIR/$hook"
+done
+</code></pre>
+        <p>Save logs:</p>
+        <pre><code>mkdir -p "/root/${MODULE}-remove"
+
+cp -a "/var/log/lunar/install/${MODULE}-${VERSION}" \
+  "/root/${MODULE}-remove/install-log"
+
+cp -a "/var/log/lunar/md5sum/${MODULE}-${VERSION}" \
+  "/root/${MODULE}-remove/md5sum-log" 2&gt;/dev/null || true
+</code></pre>
+        <h2 id="regular-files-and-symlinks">Regular files and symlinks</h2>
+        <p>Owned payload is normally removed.</p>
+        <p>Symlink ownership and target ownership are separate. Removing an owned symlink does not imply that its target is owned by the same module.</p>
+        <h2 id="directories">Directories</h2>
+        <p>Shared directories are not removed blindly.</p>
+        <pre><code>shared non-empty directory
+→ retained
+
+module-specific empty directory
+→ may be removed
+</code></pre>
+        <h2 id="configuration-policy">Configuration policy</h2>
+        <pre><code>PRESERVE
+→ modified `/etc` configuration may survive removal
+
+PROTECTED
+→ ownership may remain recorded, but deletion is blocked
+
+EXCLUDED
+→ path is filtered from final ownership
+</code></pre>
+        <p>Validated behavior with <code>PRESERVE=on</code>:</p>
+        <pre><code>unchanged `/etc` file
+→ removed
+
+locally modified `/etc` file
+→ retained
+</code></pre>
+        <p>The retained file becomes local orphaned configuration after the package record and manifest are removed.</p>
+        <h2 id="shared-ownership">Shared ownership</h2>
+        <p>Before deleting a suspicious remaining path:</p>
+        <pre><code>grep -R -F -x '/path' \
+  /var/log/lunar/install 2&gt;/dev/null
+</code></pre>
+        <p>Multiple matches may indicate intentional sharing, a provider transition, stale state, or a packaging error.</p>
+        <h2 id="after-removal">After removal</h2>
+        <p>Verify:</p>
+        <pre><code>grep "^${MODULE}:" /var/state/lunar/packages ||
+  echo "package record removed"
+</code></pre>
+        <p>Use the saved manifest to inspect the filesystem.</p>
+        <p>Also verify:</p>
+        <ul class="simple-list">
+          <li>dependent services;</li>
+          <li>plugin files;</li>
+          <li>preserved configuration;</li>
+          <li>shared directories;</li>
+          <li>activity history.</li>
+        </ul>
+        <p>Do not treat the presence of a preserved configuration file as proof that the module remains installed.</p>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

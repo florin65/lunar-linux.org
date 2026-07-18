@@ -311,6 +311,7 @@ expand_variables() {
 write_html_head() {
   title="$1"
   description="$2"
+  root_prefix="${3:-}"
 
   cat <<EOF_PAGE
 <!doctype html>
@@ -321,8 +322,8 @@ write_html_head() {
   <title>$(html_attr_escape "$title")</title>
   <meta name="description" content="$(html_attr_escape "$description")">
 
-  <link rel="icon" href="assets/logo/favicon.ico">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="${root_prefix}assets/logo/favicon.ico">
+  <link rel="stylesheet" href="${root_prefix}css/style.css">
 </head>
 <body>
 EOF_PAGE
@@ -637,7 +638,7 @@ prepare_archive_values() {
   archive_commits_file=$(mktemp)
   archive_news_file=$(mktemp)
 
-  if [ -x "$TOOLS/build-archive-index.sh" ]; then
+  if [ "$UPDATE_ARCHIVE" = "yes" ] && [ -x "$TOOLS/build-archive-index.sh" ]; then
     ARCHIVE_ROOT="$ARCHIVE" \
     CACHE_DIR="$BUILD" \
       "$TOOLS/build-archive-index.sh" "$ARCHIVE_COMMITS" "$ARCHIVE_NEWS"
@@ -836,16 +837,35 @@ expand_template_file() {
 
 write_page() (
   md="$1"
+  rel=${md#"$SRC"/}
+  rel_no_ext=${rel%.md}
   name=$(basename -- "$md" .md)
-  out="$PUBLIC/$name.html"
+  out="$PUBLIC/$rel_no_ext.html"
+  out_dir=$(dirname -- "$out")
   expanded=
   rendered=
   page_tmp=
+  root_prefix=
+  renderer_page="$name"
+
+  case "$rel_no_ext" in
+    */*)
+      renderer_page=documentation
+      remainder="$rel_no_ext"
+      while [ "${remainder#*/}" != "$remainder" ]; do
+        root_prefix="../$root_prefix"
+        remainder=${remainder#*/}
+      done
+      ;;
+  esac
+
+  mkdir -p "$out_dir"
 
   cleanup_page_files() {
     [ -n "$expanded" ] && rm -f "$expanded"
     [ -n "$rendered" ] && rm -f "$rendered"
     [ -n "$page_tmp" ] && rm -f "$page_tmp"
+    return 0
   }
 
   trap cleanup_page_files EXIT
@@ -853,7 +873,7 @@ write_page() (
 
   expanded=$(mktemp "$BUILD/.page-expanded.XXXXXX")
   rendered=$(mktemp "$BUILD/.page-rendered.XXXXXX")
-  page_tmp=$(mktemp "$PUBLIC/.page-output.XXXXXX")
+  page_tmp=$(mktemp "$out_dir/.page-output.XXXXXX")
 
   title=$(get_meta title "$md")
   description=$(get_meta description "$md")
@@ -863,11 +883,11 @@ write_page() (
 
   expand_variables "$md" > "$expanded"
 
-  sh "$RENDERER"     "$name"     "$expanded"     "$PROJECT_ROOT"     > "$rendered"
+  sh "$RENDERER"     "$renderer_page"     "$expanded"     "$PROJECT_ROOT"     > "$rendered"
 
   {
-    write_html_head "$title" "$description"
-    sed 's#{{root}}##g' "$HEADER"
+    write_html_head "$title" "$description" "$root_prefix"
+    sed "s#{{root}}#$root_prefix#g" "$HEADER"
     expand_template_file "$rendered"
     cat "$FOOTER"
 
@@ -1128,6 +1148,10 @@ update_archive() {
 }
 
 publish_archive_assets() (
+  if [ "$UPDATE_ARCHIVE" != "yes" ]; then
+    return 0
+  fi
+
   src="$ARCHIVE"
   dst="$PUBLIC/archive"
   archive_tar=
@@ -1209,6 +1233,7 @@ write_redirect_page() (
 
   cleanup_redirect_file() {
     [ -n "$redirect_tmp" ] && rm -f "$redirect_tmp"
+    return 0
   }
 
   trap cleanup_redirect_file EXIT
@@ -1285,19 +1310,26 @@ main() {
   prepare_archive_values
   prepare_archive_link_values
 
-  for md in "$SRC"/*.md; do
-    [ -f "$md" ] || continue
+  page_list=$(mktemp "$BUILD/.page-list.XXXXXX")
+  if ! find "$SRC" -type f -name '*.md' | sort > "$page_list"; then
+    printf 'could not enumerate page sources: %s\n' "$SRC" >&2
+    rm -f "$page_list"
+    exit 1
+  fi
 
-    name=$(basename -- "$md" .md)
+  while IFS= read -r md; do
+    rel=${md#"$SRC"/}
 
-    case "$name" in
-      news|archive)
+    case "$rel" in
+      news.md|archive.md)
         continue
         ;;
     esac
 
     write_page "$md"
-  done
+  done < "$page_list"
+
+  rm -f "$page_list"
 
   write_redirect_page news info.html
   write_redirect_page archive info.html

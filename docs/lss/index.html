@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;Lunar Script System Documentation&quot;</title>
+  <meta name="description" content="&quot;Documentation for using, administering, extending, debugging, and recovering Lunar Linux systems with LSS.&quot;">
+
+  <link rel="icon" href="../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../index.html">
+        <img src="../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../info.html">Info</a>
+      <a href="../download.html">Download</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../lur.html">LUR</a>
+      <a href="../community.html">Community</a>
+    <a href="../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Lunar Script System Documentation</h1>
+      <p class="hero-description">The Lunar Script System (LSS) is Lunar Linux's source-based package management and software build system.</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <p>LSS uses Moonbase modules to describe how software is obtained, verified, configured, built, installed, rebuilt, and removed. It also records package state, dependency relationships, ownership manifests, checksums, compile logs, activity history, and reusable package caches.</p>
+        <h2 id="operating-model">Operating model</h2>
+        <p>Use the same sequence for routine administration and troubleshooting:</p>
+        <pre><code>understand module intent
+→ inspect current state
+→ perform one controlled operation
+→ verify ownership and persistent state
+→ verify the filesystem and runtime result
+</code></pre>
+        <p>The main information layers are:</p>
+        <pre><code>Moonbase
+→ module intent and build policy
+
+compile logs and raw installwatch activity
+→ observed execution
+
+install manifest
+→ final package ownership
+
+packages and depends
+→ persistent package and dependency state
+
+filesystem and runtime
+→ the actual system result
+</code></pre>
+        <p>No single layer answers every question.</p>
+        <pre><code>raw installwatch event
+→ something happened
+
+final manifest entry
+→ LSS claims final ownership
+</code></pre>
+        <h2 id="documentation-map">Documentation map</h2>
+        <h3 id="user-guide"><a href="user-guide/index.html">User Guide</a></h3>
+        <p>Normal installation, rebuild, removal, dependencies, configuration, policy states, inspection, and system updates.</p>
+        <h3 id="administrator-and-recovery-guide"><a href="administrator-guide/index.html">Administrator and Recovery Guide</a></h3>
+        <p>Configuration preservation, rollback, inconsistent state, and conservative system repair.</p>
+        <h3 id="module-author-guide"><a href="module-author-guide/index.html">Module Author Guide</a></h3>
+        <p>Moonbase module structure, lifecycle boundaries, hooks, dependencies, and validation.</p>
+        <h3 id="debugging-and-inspection-guide"><a href="debugging-guide/index.html">Debugging and Inspection Guide</a></h3>
+        <p>Logs, manifests, raw installwatch activity, installed-size analysis, ownership questions, and advanced evidence collection.</p>
+        <h3 id="plugin-and-extension-guide"><a href="plugin-guide/index.html">Plugin and Extension Guide</a></h3>
+        <p>Plugin control flow, ordering, reload behavior, testing, and extension safety.</p>
+        <h3 id="command-and-state-reference"><a href="reference/index.html">Command and State Reference</a></h3>
+        <p>Commands, paths, record formats, state semantics, and plugin return values.</p>
+        <h2 id="information-status-labels">Information-status labels</h2>
+        <p>Some implementation details are marked when the distinction matters:</p>
+        <pre><code>Validated behavior
+→ confirmed by runtime observation
+
+Source-derived behavior
+→ established from current LSS source code
+
+Recommended practice
+→ operational guidance
+</code></pre>
+        <p>The public documentation is limited to Lunar Linux, LSS, Moonbase, and directly relevant technical behavior.</p>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

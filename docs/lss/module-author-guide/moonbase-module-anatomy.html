@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;Moonbase Module Anatomy&quot;</title>
+  <meta name="description" content="&quot;The purpose of common files in a Moonbase module.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Moonbase Module Anatomy</h1>
+      <p class="hero-description">Common files include:</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <pre><code>DETAILS
+BUILD
+DEPENDS
+CONFIGURE
+OPTIONS
+PRE_BUILD
+POST_BUILD
+POST_INSTALL
+PRE_REMOVE
+POST_REMOVE
+CONFLICTS
+</code></pre>
+        <h2 id="details">DETAILS</h2>
+        <p>Defines source identity, version, source URLs, checksums, descriptions, and metadata.</p>
+        <p>Version alone is not complete build identity. Options, providers, compiler, patches, and local Moonbase changes also matter.</p>
+        <h2 id="build">BUILD</h2>
+        <p>Defines the build and installation procedure.</p>
+        <p>Review:</p>
+        <ul class="simple-list">
+          <li>command ordering;</li>
+          <li>configure and build flags;</li>
+          <li>destination paths;</li>
+          <li>patches and generated files;</li>
+          <li>cleanup behavior;</li>
+          <li>whether installation begins only after <code>prepare_install</code>.</li>
+        </ul>
+        <h2 id="depends">DEPENDS</h2>
+        <p>Defines required and optional relationships. Optional dependencies may also encode build choices.</p>
+        <h2 id="configure-and-options">CONFIGURE and OPTIONS</h2>
+        <p>These establish module-specific choices and switches passed to the underlying build system.</p>
+        <h2 id="hooks">Hooks</h2>
+        <p>Lifecycle hooks may update services, indexes, generated state, boot metadata, or other system-wide resources. Treat them as executable package policy.</p>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

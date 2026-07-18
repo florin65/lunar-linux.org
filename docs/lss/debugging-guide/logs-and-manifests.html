@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;Logs and Manifests&quot;</title>
+  <meta name="description" content="&quot;How to interpret LSS logs, ownership manifests, checksums, and persistent state.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>Logs and Manifests</h1>
+      <p class="hero-description">LSS exposes several complementary records.</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <pre><code>/var/log/lunar/compile
+→ build output
+
+/var/log/lunar/install
+→ final ownership manifests
+
+/var/log/lunar/md5sum
+→ installed checksums
+
+/var/log/lunar/activity
+→ operation history
+
+/var/state/lunar/packages
+→ package and policy state
+
+/var/state/lunar/depends
+→ dependency state
+
+/var/cache/lunar
+→ reusable package archives
+</code></pre>
+        <p>No single record answers every question.</p>
+        <h2 id="compile-logs">Compile logs</h2>
+        <p>Typical location:</p>
+        <pre><code>/var/log/lunar/compile/module-version.xz
+</code></pre>
+        <p>Read:</p>
+        <pre><code>xzless /var/log/lunar/compile/module-version.xz
+</code></pre>
+        <p>Search common errors:</p>
+        <pre><code>xzgrep -n -i \
+  -E 'error|failed|fatal|undefined|not found|cannot' \
+  /var/log/lunar/compile/module-version.xz
+</code></pre>
+        <p>Find the first meaningful failure, not only the final cascade.</p>
+        <h2 id="install-manifests">Install manifests</h2>
+        <p>Typical location:</p>
+        <pre><code>/var/log/lunar/install/module-version
+</code></pre>
+        <p>The manifest is the final ownership record used by removal.</p>
+        <pre><code>cat /var/log/lunar/install/module-version
+</code></pre>
+        <p>It may contain:</p>
+        <ul class="simple-list">
+          <li>regular files;</li>
+          <li>symlinks;</li>
+          <li>shared directories;</li>
+          <li>module-specific directories;</li>
+          <li>documentation;</li>
+          <li>manual pages;</li>
+          <li>Lunar-generated logs.</li>
+        </ul>
+        <h2 id="md5-logs">MD5 logs</h2>
+        <p>Typical location:</p>
+        <pre><code>/var/log/lunar/md5sum/module-version
+</code></pre>
+        <p>They support checksum comparison, especially for <code>/etc</code>.</p>
+        <pre><code>md5sum /etc/module.conf
+
+grep '/etc/module.conf' \
+  /var/log/lunar/md5sum/module-version
+</code></pre>
+        <h2 id="activity-log">Activity log</h2>
+        <pre><code>/var/log/lunar/activity
+</code></pre>
+        <p>Use it to correlate install, rebuild, and removal history.</p>
+        <pre><code>grep 'module' /var/log/lunar/activity
+tail -f /var/log/lunar/activity
+</code></pre>
+        <h2 id="persistent-state">Persistent state</h2>
+        <p>Package record form:</p>
+        <pre><code>module:YYYYMMDD:state-list:version:size
+</code></pre>
+        <p>Dependency record form:</p>
+        <pre><code>module:dependency:status:type:field5:field6
+</code></pre>
+        <p>Inspect:</p>
+        <pre><code>grep '^module:' /var/state/lunar/packages
+
+grep -E '^module:|^[^:]+:module:' \
+  /var/state/lunar/depends
+</code></pre>
+        <h2 id="before-and-after-capture">Before and after capture</h2>
+        <pre><code>MODULE=name
+BASE=/root/lss-debug/$MODULE
+
+mkdir -p "$BASE/before" "$BASE/after"
+
+cp -a /var/state/lunar/packages \
+  "$BASE/before/packages"
+
+cp -a /var/state/lunar/depends \
+  "$BASE/before/depends"
+
+lin -c "$MODULE" 2&gt;&amp;1 |
+  tee "$BASE/rebuild-console.log"
+
+cp -a /var/state/lunar/packages \
+  "$BASE/after/packages"
+
+cp -a /var/state/lunar/depends \
+  "$BASE/after/depends"
+
+diff -u "$BASE/before/packages" "$BASE/after/packages"
+diff -u "$BASE/before/depends" "$BASE/after/depends"
+</code></pre>
+        <h2 id="manifest-versus-filesystem">Manifest versus filesystem</h2>
+        <p>Check missing paths:</p>
+        <pre><code>while IFS= read -r path; do
+  [ -e "$path" ] || [ -L "$path" ] ||
+    echo "missing: $path"
+done &lt; /var/log/lunar/install/module-version
+</code></pre>
+        <p>Search ownership of one path:</p>
+        <pre><code>grep -R -F -x '/path' \
+  /var/log/lunar/install 2&gt;/dev/null
+</code></pre>
+        <p>Multiple matches may indicate shared or overlapping ownership and require review.</p>
+        <h2 id="troubleshooting-order">Troubleshooting order</h2>
+        <pre><code>define the exact failure
+→ preserve console output
+→ read the first real build error
+→ inspect the active Moonbase module
+→ inspect package and dependency state
+→ compare manifest and filesystem
+→ determine whether a cache was used
+→ reproduce one controlled operation
+→ test runtime behavior
+</code></pre>
+        <p>Do not edit state databases as a troubleshooting shortcut.</p>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&quot;LSS Plugin and Extension Guide&quot;</title>
+  <meta name="description" content="&quot;Plugin control flow, ordering, reload behavior, and safe extension practices.&quot;">
+
+  <link rel="icon" href="../../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../info.html">Info</a>
+      <a href="../../download.html">Download</a>
+      <a href="../../docs.html">Docs</a>
+      <a href="../../lur.html">LUR</a>
+      <a href="../../community.html">Community</a>
+    <a href="../../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main documentation-main">
+  <section class="page-hero documentation-hero">
+    <div class="container">
+      <h1>LSS Plugin and Extension Guide</h1>
+      <p class="hero-description">Plugins extend LSS lifecycle behavior and run with package-management authority.</p>
+    </div>
+  </section>
+  <section class="content-section documentation-section">
+    <div class="container documentation-layout">
+      <article class="documentation-article">
+        <h2 id="return-value-contract">Return-value contract</h2>
+        <pre><code>0
+→ handled successfully; stop
+
+1
+→ handled unsuccessfully; stop
+
+2
+→ not handled; continue
+</code></pre>
+        <p>This is a control-flow contract, not only a shell success/failure convention.</p>
+        <h2 id="chaining-example">Chaining example</h2>
+        <pre><code>plugin A returns 2
+→ plugin B runs
+
+plugin B returns 0
+→ chain stops successfully
+
+default implementation
+→ not called
+</code></pre>
+        <p>Failure case:</p>
+        <pre><code>plugin A returns 1
+→ chain stops as failure
+</code></pre>
+        <p>Fallback case:</p>
+        <pre><code>all plugins return 2
+→ default LSS implementation may run
+</code></pre>
+        <h2 id="ordering">Ordering</h2>
+        <p>Registration order matters.</p>
+        <p>An earlier general plugin can handle an operation and prevent a later specialized plugin from running.</p>
+        <p>A plugin that appears inactive may be shadowed rather than broken.</p>
+        <h2 id="installation-and-reload">Installation and reload</h2>
+        <p>Modules may install plugin files.</p>
+        <p>A running LSS process may already have loaded plugin code even after the file is replaced or removed.</p>
+        <p>Source-derived behavior: current source includes <code>USR1</code>-based plugin reload behavior.</p>
+        <p>Treat reload as advanced and implementation-specific. Verify the active LSS version before relying on it.</p>
+        <p>Do not change plugin files during active package operations.</p>
+        <h2 id="safe-plugin-design">Safe plugin design</h2>
+        <p>A plugin should:</p>
+        <ul class="simple-list">
+          <li>have one narrow responsibility;</li>
+          <li>return <code>2</code> when it does not handle a case;</li>
+          <li>preserve LSS error semantics;</li>
+          <li>quote paths and data safely;</li>
+          <li>avoid untracked payload writes;</li>
+          <li>avoid undocumented dependence on mutable core globals;</li>
+          <li>leave useful diagnostic evidence;</li>
+          <li>preserve ownership and state expectations.</li>
+        </ul>
+        <p>Returning <code>0</code> means the plugin accepts responsibility for successful completion.</p>
+        <h2 id="test-matrix">Test matrix</h2>
+        <p>A plugin is incomplete until all paths are tested.</p>
+        <h3 id="success">Success</h3>
+        <pre><code>eligible case
+→ plugin handles operation
+→ returns 0
+→ expected state and runtime result exist
+</code></pre>
+        <h3 id="failure">Failure</h3>
+        <pre><code>eligible case
+→ plugin cannot complete safely
+→ returns 1
+→ chain stops
+→ failure evidence is clear
+</code></pre>
+        <h3 id="not-handled">Not handled</h3>
+        <pre><code>ineligible case
+→ plugin returns 2
+→ next plugin or default implementation runs
+</code></pre>
+        <h2 id="ownership-warning">Ownership warning</h2>
+        <p>If a plugin writes files outside normal tracked installation, those paths may not appear in a module manifest.</p>
+        <p>A plugin that changes installation behavior must preserve LSS ownership guarantees or document the boundary explicitly.</p>
+        <h2 id="removal-safety">Removal safety</h2>
+        <p>Before removing a module that installed a plugin:</p>
+        <ol class="simple-list ordered-list">
+          <li>identify active <code>lin</code> processes;</li>
+          <li>identify the plugin file and owning manifest;</li>
+          <li>inspect fallback behavior;</li>
+          <li>allow active operations to finish;</li>
+          <li>remove the module;</li>
+          <li>verify the plugin directory;</li>
+          <li>run a low-risk LSS command.</li>
+        </ol>
+        <h2 id="hook-or-plugin">Hook or plugin?</h2>
+        <p>Use a module hook for package-specific lifecycle work.</p>
+        <p>Use a plugin for reusable LSS-wide interception.</p>
+        <p>Avoid moving fundamental package-state correctness into optional plugin behavior.</p>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
