@@ -58,7 +58,7 @@ cp -a /var/log/lunar/md5sum/${MODULE}-* "$BASE/" 2>/dev/null || true
 cp -a /var/log/lunar/compile/${MODULE}-* "$BASE/" 2>/dev/null || true
 ```
 
-Also preserve the active module definition and Moonbase revision when possible.
+Also preserve the active module definition, Moonbase revision, configuration choices, and toolchain environment when possible.
 
 ## Inconsistency matrix
 
@@ -159,6 +159,58 @@ present on disk
 
 Keep, archive, compare, or remove it deliberately.
 
+## Drift that affects recovery
+
+Recovery must account for more than files and records.
+
+### Policy drift
+
+Preserve the full state list, including:
+
+```text
+held
+exiled
+enforced
+```
+
+Restoring a module as merely `installed` may change administrator intent.
+
+### Moonbase drift
+
+The current Moonbase definition may differ from the one that produced the damaged installation.
+
+Preserve:
+
+```bash
+git -C /var/lib/lunar/moonbase rev-parse HEAD
+git -C /var/lib/lunar/moonbase diff
+```
+
+A rebuild from a changed recipe may repair the module while changing its behavior.
+
+### Optional-feature and provider drift
+
+A reinstall with different options or provider choices can produce a valid but semantically different package.
+
+Inspect saved dependency state and module configuration before recovery.
+
+### Toolchain drift
+
+A new compiler or linker may change ABI, generated code, or build behavior.
+
+Record:
+
+```text
+CC
+CXX
+CFLAGS
+CXXFLAGS
+LDFLAGS
+toolchain versions
+```
+
+Use a trusted cache when exact reproduction is required and a matching rebuild environment is unavailable.
+
 ## Preferred repair order
 
 Use the least invasive supported path:
@@ -207,6 +259,28 @@ modified configuration remains
 
 Use the surviving manifest, a saved manifest, a trusted cache, or a test reinstall to reconstruct ownership. Avoid broad manual deletion.
 
+## Manual manifest reconstruction
+
+Manual reconstruction is a last resort.
+
+Use it only when:
+
+- rebuild is impossible;
+- no trusted cache exists;
+- no coherent backup exists;
+- ownership must be recovered from strong evidence.
+
+Possible evidence includes:
+
+- a saved package cache;
+- an old manifest;
+- another identical system;
+- upstream installation lists;
+- filesystem timestamps;
+- activity history.
+
+A guessed manifest can cause destructive removal.
+
 ## Manual state repair
 
 Manual editing is a last resort.
@@ -228,6 +302,44 @@ A valid manual repair requires:
 - preservation of `held`, `exiled`, and `enforced` policy;
 - immediate before/after comparison;
 - filesystem and runtime verification.
+
+## Recovery checkpoints
+
+After each major repair step:
+
+```bash
+cp -a /var/state/lunar/packages \
+  "$BASE/packages.checkpoint-N"
+
+cp -a /var/state/lunar/depends \
+  "$BASE/depends.checkpoint-N"
+```
+
+Do not perform several major repairs without intermediate checkpoints.
+
+## System-wide audit ideas
+
+Check installed records without matching manifests:
+
+```bash
+awk -F: '$3 ~ /installed/ {print $1 ":" $4}' \
+  /var/state/lunar/packages |
+while IFS=: read -r module version; do
+  test -f "/var/log/lunar/install/${module}-${version}" ||
+    echo "missing manifest: ${module}-${version}"
+done
+```
+
+Treat audit output as a lead, not automatic proof. Historical or naming exceptions may exist.
+
+Check missing paths in one manifest:
+
+```bash
+while IFS= read -r path; do
+  [ -e "$path" ] || [ -L "$path" ] ||
+    echo "missing: $path"
+done < /var/log/lunar/install/module-version
+```
 
 ## Verification after repair
 
@@ -259,4 +371,6 @@ ldd /usr/bin/program
 program --version
 ```
 
-A repair is complete only when state, ownership, filesystem, and runtime agree.
+A repair is complete only when state, ownership, filesystem, policy, configuration, and runtime agree.
+
+See [Caches and Rollback](caches-and-rollback.html) and [Advanced Inspection](../debugging-guide/advanced-inspection.html).
