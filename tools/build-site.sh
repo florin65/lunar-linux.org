@@ -41,6 +41,8 @@ GENERATE_NEWS_JSON=${GENERATE_NEWS_JSON:-yes}
 UPDATE_DYNAMIC_DATA=${UPDATE_DYNAMIC_DATA:-yes}
 UPDATE_ARCHIVE=${UPDATE_ARCHIVE:-yes}
 STRICT_ARCHIVE=${STRICT_ARCHIVE:-no}
+STRICT_BUILD=${STRICT_BUILD:-no}
+FORCE_REBUILD=${FORCE_REBUILD:-no}
 
 abs_path() {
   case "$1" in
@@ -62,6 +64,8 @@ PUBLIC=$(abs_path "$PUBLIC_DIR")
 DATA=$(abs_path "$DATA_DIR")
 BUILD=$(abs_path "$BUILD_DIR")
 BUILD_REPORT_FILE=$(abs_path "$BUILD_REPORT")
+PAGE_SIGNATURE_DIR="$BUILD/page-signatures"
+PAGE_STATS_FILE="$BUILD/page-build-stats.tsv"
 ARCHIVE=$(abs_path "$ARCHIVE_DIR")
 TEMPLATES=$(abs_path "$TEMPLATES_DIR")
 TOOLS=$(abs_path "$TOOLS_DIR")
@@ -70,6 +74,7 @@ HEADER="$TEMPLATES/header.html"
 FOOTER="$TEMPLATES/footer.html"
 RENDERER="$TOOLS/render-page.sh"
 ARCHIVE_LINKS_COMPONENT="$COMPONENTS/archive-links.sh"
+FINALIZE_BUILD_STATE="$TOOLS/finalize-build-state.sh"
 MOONBASE_STATS=$(abs_path "$MOONBASE_STATS_JSON")
 DAILY_ISO=$(abs_path "$DAILY_ISO_JSON")
 NEWS_OUT=$(abs_path "$NEWS_JSON")
@@ -80,7 +85,7 @@ ARCHIVE_NEWS_HTML=${ARCHIVE_NEWS_HTML:-$BUILD_DIR/archive-news.html}
 ARCHIVE_COMMITS=$(abs_path "$ARCHIVE_COMMITS_HTML")
 ARCHIVE_NEWS=$(abs_path "$ARCHIVE_NEWS_HTML")
 
-mkdir -p "$PUBLIC" "$DATA" "$BUILD"
+mkdir -p "$PUBLIC" "$DATA" "$BUILD" "$PAGE_SIGNATURE_DIR"
 
 html_attr_escape() {
   printf '%s' "$1" | sed \
@@ -851,6 +856,72 @@ expand_template_file() {
     ' "$file"
 }
 
+
+page_signature_path() {
+  page_rel=$1
+  printf '%s/%s.sha256
+' "$PAGE_SIGNATURE_DIR" "$page_rel"
+}
+
+page_build_signature() {
+  expanded_file=$1
+  renderer_page_name=$2
+  page_root_prefix=$3
+
+  {
+    printf 'renderer-page=%s
+' "$renderer_page_name"
+    printf 'root-prefix=%s
+' "$page_root_prefix"
+    printf '%s
+' '--- expanded source ---'
+    cat "$expanded_file"
+    printf '%s
+' '--- renderer ---'
+    cat "$RENDERER"
+    printf '%s
+' '--- header ---'
+    cat "$HEADER"
+    printf '%s
+' '--- footer ---'
+    cat "$FOOTER"
+    printf '%s
+' '--- archive links component ---'
+    cat "$ARCHIVE_LINKS_COMPONENT"
+  } | sha256sum | awk '{ print $1 }'
+}
+
+record_page_result() {
+  page_result=$1
+  page_rel=$2
+  printf '%s	%s
+' "$page_result" "$page_rel" >> "$PAGE_STATS_FILE"
+}
+
+append_page_report() {
+  generated_count=0
+  unchanged_count=0
+  failed_count=0
+
+  if [ -f "$PAGE_STATS_FILE" ]; then
+    generated_count=$(awk -F '	' '$1 == "generated" { n++ } END { print n + 0 }' "$PAGE_STATS_FILE")
+    unchanged_count=$(awk -F '	' '$1 == "unchanged" { n++ } END { print n + 0 }' "$PAGE_STATS_FILE")
+    failed_count=$(awk -F '	' '$1 == "failed" { n++ } END { print n + 0 }' "$PAGE_STATS_FILE")
+  fi
+
+  {
+    printf '
+Pages
+'
+    printf '  generated: %s
+' "$generated_count"
+    printf '  unchanged: %s
+' "$unchanged_count"
+    printf '  failed: %s
+' "$failed_count"
+  } >> "$BUILD_REPORT_FILE"
+}
+
 write_page() (
   md="$1"
   rel=${md#"$SRC"/}
@@ -863,6 +934,10 @@ write_page() (
   page_tmp=
   root_prefix=
   renderer_page="$name"
+  signature_file=
+  signature_tmp=
+  current_signature=
+  previous_signature=
 
   case "$rel_no_ext" in
     */*)
@@ -881,6 +956,7 @@ write_page() (
     [ -n "$expanded" ] && rm -f "$expanded"
     [ -n "$rendered" ] && rm -f "$rendered"
     [ -n "$page_tmp" ] && rm -f "$page_tmp"
+    [ -n "$signature_tmp" ] && rm -f "$signature_tmp"
     return 0
   }
 
@@ -898,6 +974,24 @@ write_page() (
   [ -n "$description" ] || description="Lunar Linux website page."
 
   expand_variables "$md" > "$expanded"
+
+  signature_file=$(page_signature_path "$rel_no_ext")
+  mkdir -p "$(dirname -- "$signature_file")"
+  current_signature=$(page_build_signature "$expanded" "$renderer_page" "$root_prefix")
+
+  if [ -f "$signature_file" ]; then
+    previous_signature=$(cat "$signature_file")
+  fi
+
+  if [ "$FORCE_REBUILD" != "yes" ] &&
+     [ -f "$out" ] &&
+     [ -n "$previous_signature" ] &&
+     [ "$current_signature" = "$previous_signature" ]; then
+    record_page_result unchanged "$(rel_from_project "$out")"
+    printf 'unchanged %s
+' "$(rel_from_project "$out")"
+    exit 0
+  fi
 
   sh "$RENDERER"     "$renderer_page"     "$expanded"     "$PROJECT_ROOT"     > "$rendered"
 
@@ -920,6 +1014,20 @@ EOF_PAGE
   fi
 
   page_tmp=
+
+  signature_tmp=$(mktemp "$(dirname -- "$signature_file")/.page-signature.XXXXXX")
+  printf '%s
+' "$current_signature" > "$signature_tmp"
+
+  if ! mv "$signature_tmp" "$signature_file"; then
+    printf 'could not publish page signature: %s
+' "$signature_file" >&2
+    record_page_result failed "$(rel_from_project "$out")"
+    exit 1
+  fi
+
+  signature_tmp=
+  record_page_result generated "$(rel_from_project "$out")"
 
   printf 'generated %s
 ' "$(rel_from_project "$out")"
@@ -1130,6 +1238,8 @@ build_news_json() (
 
 
 initialize_build_report() {
+  : > "$PAGE_STATS_FILE"
+
   {
     printf 'Website build report\n'
     printf 'Date: %s\n' "$(date '+%F %T')"
@@ -1464,6 +1574,7 @@ main() {
   process_archive_last
   write_archive_pages
   print_build_summary
+  append_page_report
 
   if [ "${archive_status:-skipped}" = "warning" ]; then
     finalize_build_report "completed with warnings"
@@ -1471,18 +1582,38 @@ main() {
     finalize_build_report "completed"
   fi
 
-  if [ -f "$BUILD_REPORT_FILE" ]; then
-    printf '\n'
-    cat "$BUILD_REPORT_FILE"
+  phase4_status=0
+
+  if [ -x "$FINALIZE_BUILD_STATE" ]; then
+    if ! PROJECT_ROOT="$PROJECT_ROOT"       SRC="$SRC"       NEWS_SRC="$NEWS_SRC"       PUBLIC="$PUBLIC"       BUILD="$BUILD"       BUILD_REPORT_FILE="$BUILD_REPORT_FILE"       PAGE_SIGNATURE_DIR="$PAGE_SIGNATURE_DIR"       NEWS_SIGNATURE_DIR="${NEWS_SIGNATURE_DIR:-$BUILD/news-signatures}"       ARCHIVE_NEWS_SIGNATURE_DIR="${ARCHIVE_NEWS_SIGNATURE_DIR:-$BUILD/archive-news-signatures}"       STRICT_BUILD="$STRICT_BUILD"       "$FINALIZE_BUILD_STATE"
+    then
+      phase4_status=$?
+    fi
   else
-    printf 'build report missing: %s\n' \
-      "$(rel_from_project "$BUILD_REPORT_FILE")" >&2
+    printf 'build finalizer missing: %s
+'       "$(rel_from_project "$FINALIZE_BUILD_STATE")" >&2
+    phase4_status=1
   fi
 
-  if [ "${archive_status:-skipped}" = "warning" ] &&      [ "$STRICT_ARCHIVE" = "yes" ]; then
+  if [ -f "$BUILD_REPORT_FILE" ]; then
+    printf '
+'
+    cat "$BUILD_REPORT_FILE"
+  else
+    printf 'build report missing: %s
+'       "$(rel_from_project "$BUILD_REPORT_FILE")" >&2
+    phase4_status=1
+  fi
+
+  if [ "${archive_status:-skipped}" = "warning" ] &&
+     [ "$STRICT_ARCHIVE" = "yes" ]; then
     printf 'STRICT_ARCHIVE=yes: failing after the active Website build completed.
 ' >&2
     return 1
+  fi
+
+  if [ "$phase4_status" -ne 0 ]; then
+    return "$phase4_status"
   fi
 }
 
