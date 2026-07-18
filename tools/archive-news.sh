@@ -49,35 +49,25 @@ json_escape() {
 
 valid_news_date() {
   value=$1
-  day=${value%% *}
-  hour=
-  minute=
+  normalized=
 
   case "$value" in
-    "$day "*)
-      time_part=${value#"$day "}
-      hour=${time_part%:*}
-      minute=${time_part#*:}
+    [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9])
+      normalized=$(
+        date -d "$value 00:00:00" '+%F' 2>/dev/null
+      ) || return 1
+      [ "$normalized" = "$value" ]
+      ;;
+    [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]' '[0-9][0-9]:[0-9][0-9])
+      normalized=$(
+        date -d "$value:00" '+%F %H:%M' 2>/dev/null
+      ) || return 1
+      [ "$normalized" = "$value" ]
+      ;;
+    *)
+      return 1
       ;;
   esac
-
-  if ! date -d "$day" '+%F' 2>/dev/null | grep -qxF "$day"; then
-    return 1
-  fi
-
-  if [ -n "$hour" ]; then
-    case "$hour" in
-      0[0-9]|1[0-9]|2[0-3]) ;;
-      *) return 1 ;;
-    esac
-
-    case "$minute" in
-      [0-5][0-9]) ;;
-      *) return 1 ;;
-    esac
-  fi
-
-  return 0
 }
 
 count=0

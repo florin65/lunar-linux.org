@@ -188,9 +188,11 @@
         <h2 id="adding-dependencies">Adding Dependencies</h2>
         <p>If your module requires other modules, create a DEPENDS file:</p>
         <pre><code># /var/lib/lunar/moonbase/zlocal/mymodule/DEPENDS
+
 # Required dependencies
 depends gcc
 depends make
+
 # Optional dependencies
 optional_depends "gtk+" \
     "--with-gtk" \
@@ -205,6 +207,7 @@ optional_depends "gtk+" \
       <h2 id="creating-a-build-script" class="section-title">Creating a BUILD Script</h2>
       <p>If the default build process doesn't work, create a BUILD script:</p>
       <pre><code># /var/lib/lunar/moonbase/zlocal/mymodule/BUILD
+
 ./configure --prefix=/usr \
             --sysconfdir=/etc \
             $OPTS &amp;&amp;

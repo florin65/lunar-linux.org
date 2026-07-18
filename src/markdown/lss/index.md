@@ -1,7 +1,6 @@
 ---
 title: "Lunar Script System Documentation"
 description: "Documentation for using, administering, extending, debugging, and recovering Lunar Linux systems with LSS."
-status: "Draft 0.4"
 ---
 
 # Lunar Script System Documentation

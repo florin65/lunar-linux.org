@@ -261,7 +261,18 @@ get_meta() {
       split($0, a, ":")
       if (a[1] == key) {
         sub("^[^:]*:[[:space:]]*", "")
-        print
+
+        if ($0 ~ /^"([^"\\]|\\.)*"$/) {
+          value = substr($0, 2, length($0) - 2)
+          gsub(/\\"/, "\"", value)
+          gsub(/\\\\/, "\\", value)
+          print value
+        } else if ($0 ~ /^'\''[^'\'']*'\''$/) {
+          print substr($0, 2, length($0) - 2)
+        } else {
+          print
+        }
+
         exit
       }
     }

@@ -1068,8 +1068,16 @@ function render_lss(    about, documentation, principles, architecture) {
     render_feature_grid_actions("Documentation", documentation + 1, section_end(documentation), 1)
 
   principles = section_index("Principles")
-  if (principles)
-    render_split_section("Principles", principles + 1, section_end(principles), "content-section")
+  if (principles) {
+    print "  <section class=\"content-section\">"
+    print "    <div class=\"container split-content\">"
+    print "      <article>"
+    print "        <h2 id=\"principles\">Principles</h2>"
+    render_blocks(principles + 1, section_end(principles), "        ", 0, 0)
+    print "      </article>"
+    print "    </div>"
+    print "  </section>"
+  }
 
   architecture = section_index("Architecture")
   if (architecture)
