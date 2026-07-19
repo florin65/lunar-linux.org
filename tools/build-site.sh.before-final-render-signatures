@@ -931,7 +931,6 @@ write_page() (
   out_dir=$(dirname -- "$out")
   expanded=
   rendered=
-  final_rendered=
   page_tmp=
   root_prefix=
   renderer_page="$name"
@@ -956,7 +955,6 @@ write_page() (
   cleanup_page_files() {
     [ -n "$expanded" ] && rm -f "$expanded"
     [ -n "$rendered" ] && rm -f "$rendered"
-    [ -n "$final_rendered" ] && rm -f "$final_rendered"
     [ -n "$page_tmp" ] && rm -f "$page_tmp"
     [ -n "$signature_tmp" ] && rm -f "$signature_tmp"
     return 0
@@ -967,7 +965,6 @@ write_page() (
 
   expanded=$(mktemp "$BUILD/.page-expanded.XXXXXX")
   rendered=$(mktemp "$BUILD/.page-rendered.XXXXXX")
-  final_rendered=$(mktemp "$BUILD/.page-final-rendered.XXXXXX")
   page_tmp=$(mktemp "$out_dir/.page-output.XXXXXX")
 
   title=$(get_meta title "$md")
@@ -978,13 +975,9 @@ write_page() (
 
   expand_variables "$md" > "$expanded"
 
-  sh "$RENDERER"     "$renderer_page"     "$expanded"     "$PROJECT_ROOT"     > "$rendered"
-
-  expand_template_file "$rendered" > "$final_rendered"
-
   signature_file=$(page_signature_path "$rel_no_ext")
   mkdir -p "$(dirname -- "$signature_file")"
-  current_signature=$(page_build_signature "$final_rendered" "$renderer_page" "$root_prefix")
+  current_signature=$(page_build_signature "$expanded" "$renderer_page" "$root_prefix")
 
   if [ -f "$signature_file" ]; then
     previous_signature=$(cat "$signature_file")
@@ -1000,10 +993,12 @@ write_page() (
     exit 0
   fi
 
+  sh "$RENDERER"     "$renderer_page"     "$expanded"     "$PROJECT_ROOT"     > "$rendered"
+
   {
     write_html_head "$title" "$description" "$root_prefix"
     sed "s#{{root}}#$root_prefix#g" "$HEADER"
-    cat "$final_rendered"
+    expand_template_file "$rendered"
     cat "$FOOTER"
 
     cat <<EOF_PAGE
