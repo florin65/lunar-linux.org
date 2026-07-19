@@ -44,6 +44,7 @@
      -------------------------------------------------- */
 
   --content-width: 1280px;
+  --documentation-width: 1080px;
   --container-side-gap: 56px;
   --container-side-gap-small: 28px;
 
@@ -2276,7 +2277,7 @@ h1 {
 }
 
 .documentation-article {
-  width: min(100%, 860px);
+  width: min(100%, var(--documentation-width));
   margin: 0 auto;
 }
 

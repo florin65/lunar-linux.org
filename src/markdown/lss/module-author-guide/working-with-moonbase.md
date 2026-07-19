@@ -62,17 +62,21 @@ find "$MODULE_DIR" -maxdepth 2 -type f -print | sort
 Before a significant update:
 
 ```bash
-git -C /var/lib/lunar/moonbase rev-parse HEAD   > /root/moonbase-revision.before
+git -C /var/lib/lunar/moonbase rev-parse HEAD \
+  > /root/moonbase-revision.before
 
-git -C /var/lib/lunar/moonbase branch --show-current   > /root/moonbase-branch.before
+git -C /var/lib/lunar/moonbase branch --show-current \
+  > /root/moonbase-branch.before
 
-git -C /var/lib/lunar/moonbase status --short   > /root/moonbase-status.before
+git -C /var/lib/lunar/moonbase status --short \
+  > /root/moonbase-status.before
 ```
 
 Preserve local changes:
 
 ```bash
-git -C /var/lib/lunar/moonbase diff   > /root/moonbase-local-changes.patch
+git -C /var/lib/lunar/moonbase diff \
+  > /root/moonbase-local-changes.patch
 ```
 
 Do not update over unknown local modifications.
@@ -167,13 +171,19 @@ grep -R -n -F 'dependency-name'   /var/lib/lunar/moonbase
 Find hooks:
 
 ```bash
-find /var/lib/lunar/moonbase   -type f   \( -name PRE_BUILD -o -name POST_BUILD      -o -name POST_INSTALL -o -name PRE_REMOVE      -o -name POST_REMOVE \)   -print
+find /var/lib/lunar/moonbase -type f \
+  \( -name PRE_BUILD -o -name POST_BUILD \
+     -o -name POST_INSTALL -o -name PRE_REMOVE \
+     -o -name POST_REMOVE \) \
+  -print
 ```
 
 Find patches:
 
 ```bash
-find /var/lib/lunar/moonbase   -type f   \( -name '*.patch' -o -name '*.diff' \)   -print
+find /var/lib/lunar/moonbase -type f \
+  \( -name '*.patch' -o -name '*.diff' \) \
+  -print
 ```
 
 Find plugin-related modules:
@@ -190,7 +200,8 @@ For an important build, preserve:
 OUT=/root/lss-build-record
 mkdir -p "$OUT"
 
-git -C /var/lib/lunar/moonbase rev-parse HEAD   > "$OUT/moonbase-revision"
+git -C /var/lib/lunar/moonbase rev-parse HEAD \
+  > "$OUT/moonbase-revision"
 
 git -C /var/lib/lunar/moonbase status --short   > "$OUT/moonbase-status"
 

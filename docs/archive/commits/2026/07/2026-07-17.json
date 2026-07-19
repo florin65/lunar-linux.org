@@ -1,4 +1,7 @@
 [
   {"date":"2026-07-17","category":"Moonbase","repository":"other","module":"skim","version":"5.1.3","commit":"e8d9921d7c2b3bd29a55a6776e8bb52066dfddbb","title":"skim updated to 5.1.3","summary":"version bumped to 5.1.3"},
-  {"date":"2026-07-17","category":"Moonbase","repository":"other","module":"libphonenumber","version":"9.0.35","commit":"3ca1702e50ee57e963486cbdb7650c702bd07a31","title":"libphonenumber updated to 9.0.35","summary":"version bumped to 9.0.35"}
+  {"date":"2026-07-17","category":"Moonbase","repository":"other","module":"libphonenumber","version":"9.0.35","commit":"3ca1702e50ee57e963486cbdb7650c702bd07a31","title":"libphonenumber updated to 9.0.35","summary":"version bumped to 9.0.35"},
+  {"date":"2026-07-17","category":"Moonbase","repository":"kde","module":"kdiff","version":"1.12.5.","commit":"501c624015c925d864da0f1475163dfcfa248ccb","title":"kdiff updated to 1.12.5.","summary":"bump to 1.12.5."},
+  {"date":"2026-07-17","category":"Moonbase","repository":"kde","module":"kirigami-addons","version":"1.13.0.","commit":"b47ccd86c28070fe5fdbaee6e8940d6452fa52d4","title":"kirigami-addons updated to 1.13.0.","summary":"bump to 1.13.0."},
+  {"date":"2026-07-17","category":"Moonbase","repository":"other","module":"dosbox-x","version":"2026.07.02","commit":"29cf0c201a4287d8378c40d5c2418033537942c7","title":"dosbox-x updated to 2026.07.02","summary":"version bumped to 2026.07.02"}
 ]

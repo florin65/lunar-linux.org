@@ -55,9 +55,11 @@
         <p>Use staged updates rather than one undifferentiated system change.</p>
         <h2 id="before-updating-moonbase">Before updating Moonbase</h2>
         <pre><code>git -C /var/lib/lunar/moonbase status --short
-git -C /var/lib/lunar/moonbase rev-parse HEAD   &gt; /root/moonbase-revision.before
+git -C /var/lib/lunar/moonbase rev-parse HEAD \
+  &gt; /root/moonbase-revision.before
 
-git -C /var/lib/lunar/moonbase diff   &gt; /root/moonbase-local-changes.patch
+git -C /var/lib/lunar/moonbase diff \
+  &gt; /root/moonbase-local-changes.patch
 </code></pre>
         <p>Preserve package and dependency state:</p>
         <pre><code>cp -a /var/state/lunar/packages   /root/packages.before-update

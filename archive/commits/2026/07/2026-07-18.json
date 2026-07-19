@@ -11,8 +11,5 @@
   {"date":"2026-07-18","category":"Moonbase","repository":"other","module":"libdwarf","version":"2.3.2 + disable static lib","commit":"ca0ebc493a2d91ab3354397282389a0595e73778","title":"libdwarf updated to 2.3.2 + disable static lib","summary":"version bumped to 2.3.2 + disable static lib"},
   {"date":"2026-07-18","category":"Moonbase","repository":"other","module":"openal","version":"1.25.2","commit":"dd1d4de27ca4d4bb4e3c692aa022f8d8d6313595","title":"openal updated to 1.25.2","summary":"version bumped to 1.25.2"},
   {"date":"2026-07-18","category":"Moonbase","repository":"other","module":"kitty","version":"0.48.0","commit":"f561ab08a4cb3a9f0f23f0ee729672c35f5ce32d","title":"kitty updated to 0.48.0","summary":"version bumped to 0.48.0"},
-  {"date":"2026-07-18","category":"Moonbase","repository":"xorg","module":"xclock","version":"1.2.1","commit":"37a4cdb5313562231682ebe811a0e6f710206c24","title":"xclock updated to 1.2.1","summary":"version bumped to 1.2.1"},
-  {"date":"2026-07-17","category":"Moonbase","repository":"kde","module":"kdiff","version":"1.12.5.","commit":"501c624015c925d864da0f1475163dfcfa248ccb","title":"kdiff updated to 1.12.5.","summary":"bump to 1.12.5."},
-  {"date":"2026-07-17","category":"Moonbase","repository":"kde","module":"kirigami-addons","version":"1.13.0.","commit":"b47ccd86c28070fe5fdbaee6e8940d6452fa52d4","title":"kirigami-addons updated to 1.13.0.","summary":"bump to 1.13.0."},
-  {"date":"2026-07-17","category":"Moonbase","repository":"other","module":"dosbox-x","version":"2026.07.02","commit":"29cf0c201a4287d8378c40d5c2418033537942c7","title":"dosbox-x updated to 2026.07.02","summary":"version bumped to 2026.07.02"}
+  {"date":"2026-07-18","category":"Moonbase","repository":"xorg","module":"xclock","version":"1.2.1","commit":"37a4cdb5313562231682ebe811a0e6f710206c24","title":"xclock updated to 1.2.1","summary":"version bumped to 1.2.1"}
 ]

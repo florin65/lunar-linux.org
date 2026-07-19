@@ -22,9 +22,11 @@ Use staged updates rather than one undifferentiated system change.
 
 ```bash
 git -C /var/lib/lunar/moonbase status --short
-git -C /var/lib/lunar/moonbase rev-parse HEAD   > /root/moonbase-revision.before
+git -C /var/lib/lunar/moonbase rev-parse HEAD \
+  > /root/moonbase-revision.before
 
-git -C /var/lib/lunar/moonbase diff   > /root/moonbase-local-changes.patch
+git -C /var/lib/lunar/moonbase diff \
+  > /root/moonbase-local-changes.patch
 ```
 
 Preserve package and dependency state:

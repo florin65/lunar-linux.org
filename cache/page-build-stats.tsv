@@ -9,9 +9,9 @@ unchanged	./docs/docs-moonbase.html
 unchanged	./docs/docs-package-management.html
 unchanged	./docs/docs-writing-modules.html
 unchanged	./docs/docs.html
-unchanged	./docs/download.html
+generated	./docs/download.html
 unchanged	./docs/history.html
-unchanged	./docs/index.html
+generated	./docs/index.html
 unchanged	./docs/info.html
 unchanged	./docs/lss.html
 unchanged	./docs/lss/administrator-guide/caches-and-rollback.html

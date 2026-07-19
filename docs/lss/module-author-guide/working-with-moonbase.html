@@ -76,14 +76,18 @@ printf '%s
 </code></pre>
         <h2 id="record-the-current-revision">Record the current revision</h2>
         <p>Before a significant update:</p>
-        <pre><code>git -C /var/lib/lunar/moonbase rev-parse HEAD   &gt; /root/moonbase-revision.before
+        <pre><code>git -C /var/lib/lunar/moonbase rev-parse HEAD \
+  &gt; /root/moonbase-revision.before
 
-git -C /var/lib/lunar/moonbase branch --show-current   &gt; /root/moonbase-branch.before
+git -C /var/lib/lunar/moonbase branch --show-current \
+  &gt; /root/moonbase-branch.before
 
-git -C /var/lib/lunar/moonbase status --short   &gt; /root/moonbase-status.before
+git -C /var/lib/lunar/moonbase status --short \
+  &gt; /root/moonbase-status.before
 </code></pre>
         <p>Preserve local changes:</p>
-        <pre><code>git -C /var/lib/lunar/moonbase diff   &gt; /root/moonbase-local-changes.patch
+        <pre><code>git -C /var/lib/lunar/moonbase diff \
+  &gt; /root/moonbase-local-changes.patch
 </code></pre>
         <p>Do not update over unknown local modifications.</p>
         <h2 id="compare-revisions">Compare revisions</h2>
@@ -146,10 +150,16 @@ local/services
         <pre><code>grep -R -n -F 'dependency-name'   /var/lib/lunar/moonbase
 </code></pre>
         <p>Find hooks:</p>
-        <pre><code>find /var/lib/lunar/moonbase   -type f   \( -name PRE_BUILD -o -name POST_BUILD      -o -name POST_INSTALL -o -name PRE_REMOVE      -o -name POST_REMOVE \)   -print
+        <pre><code>find /var/lib/lunar/moonbase -type f \
+  \( -name PRE_BUILD -o -name POST_BUILD \
+     -o -name POST_INSTALL -o -name PRE_REMOVE \
+     -o -name POST_REMOVE \) \
+  -print
 </code></pre>
         <p>Find patches:</p>
-        <pre><code>find /var/lib/lunar/moonbase   -type f   \( -name '*.patch' -o -name '*.diff' \)   -print
+        <pre><code>find /var/lib/lunar/moonbase -type f \
+  \( -name '*.patch' -o -name '*.diff' \) \
+  -print
 </code></pre>
         <p>Find plugin-related modules:</p>
         <pre><code>grep -R -n -E 'plugin\.d|\.plugin'   /var/lib/lunar/moonbase
@@ -159,7 +169,8 @@ local/services
         <pre><code>OUT=/root/lss-build-record
 mkdir -p "$OUT"
 
-git -C /var/lib/lunar/moonbase rev-parse HEAD   &gt; "$OUT/moonbase-revision"
+git -C /var/lib/lunar/moonbase rev-parse HEAD \
+  &gt; "$OUT/moonbase-revision"
 
 git -C /var/lib/lunar/moonbase status --short   &gt; "$OUT/moonbase-status"
 

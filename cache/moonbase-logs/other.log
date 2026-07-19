@@ -1,2 +1,13 @@
-2026-07-17|3ca1702e50ee57e963486cbdb7650c702bd07a31|libphonenumber: Version bumped to 9.0.35
-2026-07-17|e8d9921d7c2b3bd29a55a6776e8bb52066dfddbb|skim: Version bumped to 5.1.3
+2026-07-18|1addc16801f647ac709e8388d89dcfcff8bb1911|linux-lts: Version bumped to 6.18.39
+2026-07-18|93ebd35f1ff0a55f516c8390790351af3e8b2cf1|htop: Version bumped to 3.5.2
+2026-07-18|5df1b5f0de78d80bc2591bacf444ffc70aa63049|libgit2: Version bumped to 1.9.6
+2026-07-18|9120bae33b08dc08c23c792f0724f72037fe2fb6|libgit2: Version bumped to 1.9.5
+2026-07-18|a7eab3757e98f7aeb7c4efa032abb3cb65c23dd4|fzf: Version bumped to 0.74.1
+2026-07-18|0402fda004fc9cc6c9b6167006ef3802467be7c1|rsyslog: version bumped to 8.2606.0 + new protobuf-c/snappy optional deps
+2026-07-18|bf05b0384a8548f16c3c1d11da2e5e8cf0cc16db|skim: Version bumped to 5.2.0
+2026-07-18|dd1d4de27ca4d4bb4e3c692aa022f8d8d6313595|openal: Version bumped to 1.25.2
+2026-07-18|ca0ebc493a2d91ab3354397282389a0595e73778|libdwarf: version bumped to 2.3.2 + disable static lib
+2026-07-18|f561ab08a4cb3a9f0f23f0ee729672c35f5ce32d|kitty: Version bumped to 0.48.0
+2026-07-18|79ffeed9187df6c08c55806b27fd51b3d756f2c8|umockdev: Version bumped to 0.19.8
+2026-07-18|907b0e2cf4760ac897be077fff9dece9ab0d9716|alembic: Version bumped to 1.8.12
+2026-07-17|29cf0c201a4287d8378c40d5c2418033537942c7|dosbox-x: version bumped to 2026.07.02
