@@ -52,17 +52,10 @@ The installer will guide you through disk partitioning.
 */dev/sda2 4G Swap*
 */dev/sda3 Rest Root filesystem (/)*
 
-### 4. Select Installation Profile
-Choose your installation profile:
-
-- **Minimal** - Basic system only
-- **Desktop** - Includes X11 and desktop environment
-- **Server** - Optimized for server use
-
-### 5. Configure Network
+### 4. Configure Network
 Configure your network connection for package downloads during installation.
 
-### 6. Install Base System
+### 5. Install Base System
 The installer will:
 
 - Format partitions
@@ -71,16 +64,16 @@ The installer will:
 
 This may take 30-60 minutes depending on your system and internet speed.
 
-### 7. Set Root Password
+### 6. Set Root Password
 When prompted, set a secure root password.
 
-### 8. Create User Account
+### 7. Create User Account
 Create your primary user account:
 
 *useradd -m -G wheel username*
 *passwd username*
 
-### 9. Reboot
+### 8. Reboot
 Once installation completes:
 
 *reboot*
