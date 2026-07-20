@@ -1,13 +1,10 @@
-2026-07-18|1addc16801f647ac709e8388d89dcfcff8bb1911|linux-lts: Version bumped to 6.18.39
-2026-07-18|93ebd35f1ff0a55f516c8390790351af3e8b2cf1|htop: Version bumped to 3.5.2
-2026-07-18|5df1b5f0de78d80bc2591bacf444ffc70aa63049|libgit2: Version bumped to 1.9.6
-2026-07-18|9120bae33b08dc08c23c792f0724f72037fe2fb6|libgit2: Version bumped to 1.9.5
-2026-07-18|a7eab3757e98f7aeb7c4efa032abb3cb65c23dd4|fzf: Version bumped to 0.74.1
-2026-07-18|0402fda004fc9cc6c9b6167006ef3802467be7c1|rsyslog: version bumped to 8.2606.0 + new protobuf-c/snappy optional deps
-2026-07-18|bf05b0384a8548f16c3c1d11da2e5e8cf0cc16db|skim: Version bumped to 5.2.0
-2026-07-18|dd1d4de27ca4d4bb4e3c692aa022f8d8d6313595|openal: Version bumped to 1.25.2
-2026-07-18|ca0ebc493a2d91ab3354397282389a0595e73778|libdwarf: version bumped to 2.3.2 + disable static lib
-2026-07-18|f561ab08a4cb3a9f0f23f0ee729672c35f5ce32d|kitty: Version bumped to 0.48.0
-2026-07-18|79ffeed9187df6c08c55806b27fd51b3d756f2c8|umockdev: Version bumped to 0.19.8
-2026-07-18|907b0e2cf4760ac897be077fff9dece9ab0d9716|alembic: Version bumped to 1.8.12
-2026-07-17|29cf0c201a4287d8378c40d5c2418033537942c7|dosbox-x: version bumped to 2026.07.02
+2026-07-19|280c5acfeb87b475c78db5392279155950c24e21|aalib: remove gcc/c23 fix about a gpm call in aacurkbd.c
+2026-07-19|79a4217d8caa99814d35f31c4aeff0258a1b707d|libpqxx: Bump to 8.0.2.
+2026-07-19|f5b235e634a096f791290f4213d1118470d8c00a|iana-etc: refresh hash
+2026-07-19|fc0aaa8a8079a4f8a8be135ad795da7ce3a1cc73|screen: version bumped to 5.0.2
+2026-07-19|2033a5ae86ec17da7c12e5bf03623e2172e58b60|ruby: version bumed to 6.0.6
+2026-07-19|f486ce804ada89e62813e4be975b25b0f87ee4e5|lighttpd: version bumped to 1.4.85
+2026-07-19|831131c4bac18c561975f89e723c1f38b80000da|freerdp: version bumped to 3.30.0
+2026-07-19|7653584b87ed8695cdd2a6ee30de529b53bca52e|cargo-c: version bumped to 0.10.24
+2026-07-19|037f3a4513bd3f4c8608e6ef5bdc9c90f6f54b02|llvm: add a patch form Arch Linux
+2026-07-19|c073693ed6ee86dc5cd3b40801ecefc2858d8901|nss: version bumped to 3.126

@@ -9,6 +9,5 @@
   {"date":"2026-07-19","category":"Moonbase","repository":"other","module":"lighttpd","version":"1.4.85","commit":"f486ce804ada89e62813e4be975b25b0f87ee4e5","title":"lighttpd updated to 1.4.85","summary":"version bumped to 1.4.85"},
   {"date":"2026-07-19","category":"Moonbase","repository":"other","module":"","version":"","commit":"f5b235e634a096f791290f4213d1118470d8c00a","title":"iana-etc: refresh hash","summary":"iana-etc: refresh hash"},
   {"date":"2026-07-19","category":"Moonbase","repository":"other","module":"screen","version":"5.0.2","commit":"fc0aaa8a8079a4f8a8be135ad795da7ce3a1cc73","title":"screen updated to 5.0.2","summary":"version bumped to 5.0.2"},
-  {"date":"2026-07-19","category":"Moonbase","repository":"xorg","module":"mesa-lib","version":"26.1.5","commit":"bdfc6776e663abcf1fc2d085e8020f0bfbb54b87","title":"mesa-lib updated to 26.1.5","summary":"version bumped to 26.1.5"},
-  {"date":"2026-07-18","category":"Moonbase","repository":"xorg","module":"NVIDIA","version":"610.43.03.","commit":"70119b1a423b1ec6dcaa92ecca1bd34d019b452a","title":"NVIDIA updated to 610.43.03.","summary":"bump to 610.43.03."}
+  {"date":"2026-07-19","category":"Moonbase","repository":"xorg","module":"mesa-lib","version":"26.1.5","commit":"bdfc6776e663abcf1fc2d085e8020f0bfbb54b87","title":"mesa-lib updated to 26.1.5","summary":"version bumped to 26.1.5"}
 ]
