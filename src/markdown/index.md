@@ -22,6 +22,7 @@ Designed for administrators who want to stay close to the hardware and Linux sys
 
 [Download](pages/download.html)
 [Documentation](pages/docs.html)
+[Latest News](pages/info.html)
 
 ## Latest News
 
