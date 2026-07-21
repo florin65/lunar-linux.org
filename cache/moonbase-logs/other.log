@@ -1,10 +1,4 @@
-2026-07-19|280c5acfeb87b475c78db5392279155950c24e21|aalib: remove gcc/c23 fix about a gpm call in aacurkbd.c
-2026-07-19|79a4217d8caa99814d35f31c4aeff0258a1b707d|libpqxx: Bump to 8.0.2.
-2026-07-19|f5b235e634a096f791290f4213d1118470d8c00a|iana-etc: refresh hash
-2026-07-19|fc0aaa8a8079a4f8a8be135ad795da7ce3a1cc73|screen: version bumped to 5.0.2
-2026-07-19|2033a5ae86ec17da7c12e5bf03623e2172e58b60|ruby: version bumed to 6.0.6
-2026-07-19|f486ce804ada89e62813e4be975b25b0f87ee4e5|lighttpd: version bumped to 1.4.85
-2026-07-19|831131c4bac18c561975f89e723c1f38b80000da|freerdp: version bumped to 3.30.0
-2026-07-19|7653584b87ed8695cdd2a6ee30de529b53bca52e|cargo-c: version bumped to 0.10.24
-2026-07-19|037f3a4513bd3f4c8608e6ef5bdc9c90f6f54b02|llvm: add a patch form Arch Linux
-2026-07-19|c073693ed6ee86dc5cd3b40801ecefc2858d8901|nss: version bumped to 3.126
+2026-07-20|2ef021fdd27d8d1ee77c61abf1dffa02ee02ed71|skim: Version bumped to 5.3.1
+2026-07-20|b4b0c67e9a8bb5ada0498cfbff8773dd92c3abac|libwacom: Version bumped to 2.19.1
+2026-07-20|b59bf6cf33d5ccae284d0dede022cf036e75692e|weechat: Version bumped to 4.9.4
+2026-07-20|8b3acd954a29f4a58c636c07bc92aa3f5e0a8fa0|bat: new module: a syntax-highlighting fancy cat
