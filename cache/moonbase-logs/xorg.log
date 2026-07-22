@@ -1,5 +1,0 @@
-2026-07-20|51c43d54e1924d1a880e7f50848037f0bf3b1b83|xload: version bumped to 1.2.1 + switch to meson
-2026-07-20|57c96edf024ec901b8cda213f56fd6ae5ec7c426|xclipboard: version bumped to 1.1.6
-2026-07-20|dfd23a28577db8288919072ae7b4e01a3e20e209|xmodmap: set TYPE in DETAILS
-2026-07-20|560c1714a1ebc38e9f9cf921c727a2b0493bf18c|xmodmap: version bumped to 1.0.12 + switch to meson
-2026-07-20|7276168e11975a4a9e78213e05f1489466ddf9ed|xwininfo: version bumped to 1.1.7 + switch to meson

@@ -1,4 +1,5 @@
-2026-07-20|2ef021fdd27d8d1ee77c61abf1dffa02ee02ed71|skim: Version bumped to 5.3.1
-2026-07-20|b4b0c67e9a8bb5ada0498cfbff8773dd92c3abac|libwacom: Version bumped to 2.19.1
-2026-07-20|b59bf6cf33d5ccae284d0dede022cf036e75692e|weechat: Version bumped to 4.9.4
-2026-07-20|8b3acd954a29f4a58c636c07bc92aa3f5e0a8fa0|bat: new module: a syntax-highlighting fancy cat
+2026-07-21|35e0357d291a1a8ee205fd4d9ac0309b251e4bfa|taglib: Bump to 2.3.1.
+2026-07-21|f6e3a636a0f05d15449597a62e70820704045875|libdvdread: Bump to 7.1.1.
+2026-07-21|5ad9a4fe258a4d28411e607aea6215e0efea776f|srt: Version bumped to 1.5.6
+2026-07-21|5f1e18d9fb32bbdcb4f48fcf70b98620546f1bee|skim: Version bumped to 5.3.2
+2026-07-21|181ab8a62fd793f7f774bfc8d8485a6620d1cc8b|brave-bin: Version bumped to 1.92.141

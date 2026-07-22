@@ -1,0 +1,3 @@
+2026-07-21|fe7c6a9cf095e4fb919cd1f04b59cca69baff6cb|gedit: repush
+2026-07-21|5baf88b25b3d30e4bc8605ee24ca6b54271342c0|gedit: add tepl-4 as required dependency
+2026-07-21|b14ca9c94baba4a5adb98fb8ff0fb2449d0c22d5|tepl-4: new module needed by gedit 3.36.2

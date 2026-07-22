@@ -7,5 +7,6 @@
   {"date":"2026-07-20","category":"Moonbase","repository":"xorg","module":"xmodmap","version":"1.0.12 + switch to meson","commit":"560c1714a1ebc38e9f9cf921c727a2b0493bf18c","title":"xmodmap updated to 1.0.12 + switch to meson","summary":"version bumped to 1.0.12 + switch to meson"},
   {"date":"2026-07-20","category":"Moonbase","repository":"xorg","module":"xclipboard","version":"1.1.6","commit":"57c96edf024ec901b8cda213f56fd6ae5ec7c426","title":"xclipboard updated to 1.1.6","summary":"version bumped to 1.1.6"},
   {"date":"2026-07-20","category":"Moonbase","repository":"xorg","module":"xwininfo","version":"1.1.7 + switch to meson","commit":"7276168e11975a4a9e78213e05f1489466ddf9ed","title":"xwininfo updated to 1.1.7 + switch to meson","summary":"version bumped to 1.1.7 + switch to meson"},
-  {"date":"2026-07-20","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"dfd23a28577db8288919072ae7b4e01a3e20e209","title":"xmodmap: set TYPE in DETAILS","summary":"xmodmap: set TYPE in DETAILS"}
+  {"date":"2026-07-20","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"dfd23a28577db8288919072ae7b4e01a3e20e209","title":"xmodmap: set TYPE in DETAILS","summary":"xmodmap: set TYPE in DETAILS"},
+  {"date":"2026-07-20","category":"Moonbase","repository":"kde","module":"kirigam-addons","version":"1.13.1.","commit":"aa2ac778e43248dfd3e5b1612ea151d2ced2f7ea","title":"kirigam-addons updated to 1.13.1.","summary":"bump to 1.13.1."}
 ]
