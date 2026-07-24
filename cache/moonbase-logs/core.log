@@ -1,0 +1,4 @@
+2026-07-17|67e8bdfe34d603d877583700656e5f2af39d633e|python-pefile: new module required by systemd 261.1
+2026-07-19|0ad229b79dfe9da826673391492049a23e18635e|openssh: version bumped to 10.4p1
+2026-07-21|39d71857baf966ea896102254d8c24bc124c3aca|dracut: fixed sha256sum, build directory
+2026-07-21|19161e18c4653b48417baab819933c8da6986fd9|linux: version bumped to 7.1.4
