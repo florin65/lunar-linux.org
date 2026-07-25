@@ -7,8 +7,5 @@
   {"date":"2026-07-24","category":"Moonbase","repository":"other","module":"node","version":"26.5.0","commit":"b58045544afa3832d78299eee2e27990ed39af39","title":"node updated to 26.5.0","summary":"version bumped to 26.5.0"},
   {"date":"2026-07-24","category":"Moonbase","repository":"other","module":"cython","version":"3.2.9","commit":"c099ea354d64ecbac94d3dcdb8d37a31003549b0","title":"cython updated to 3.2.9","summary":"version bumped to 3.2.9"},
   {"date":"2026-07-24","category":"Moonbase","repository":"other","module":"redis","version":"8.8.1","commit":"f1118971db897abf4d34401e9f354ca5cbf4e6b5","title":"redis updated to 8.8.1","summary":"version bumped to 8.8.1"},
-  {"date":"2026-07-24","category":"Moonbase","repository":"other","module":"kitty","version":"0.48.1","commit":"fe0832f894bd299eb6acc217f131c7388f8cad90","title":"kitty updated to 0.48.1","summary":"version bumped to 0.48.1"},
-  {"date":"2026-07-23","category":"Moonbase","repository":"kde","module":"qgpgme","version":"2.2.0.","commit":"1a6f15935055a4e8d2c51e5b976e0c7a6bf599a7","title":"qgpgme updated to 2.2.0.","summary":"bump to 2.2.0."},
-  {"date":"2026-07-23","category":"Moonbase","repository":"other","module":"ncmpc","version":"0.53","commit":"48d2b58b4ef74dc5077bf0b15c851df1326307f6","title":"ncmpc updated to 0.53","summary":"version bumped to 0.53"},
-  {"date":"2026-07-23","category":"Moonbase","repository":"other","module":"libraqm","version":"0.11.0","commit":"ad21212c840ae47a5ec16ac34690f6008ee735b4","title":"libraqm updated to 0.11.0","summary":"version bumped to 0.11.0"}
+  {"date":"2026-07-24","category":"Moonbase","repository":"other","module":"kitty","version":"0.48.1","commit":"fe0832f894bd299eb6acc217f131c7388f8cad90","title":"kitty updated to 0.48.1","summary":"version bumped to 0.48.1"}
 ]

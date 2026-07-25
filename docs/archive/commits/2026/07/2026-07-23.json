@@ -2,5 +2,8 @@
   {"date":"2026-07-23","category":"Moonbase","repository":"kde","module":"kdiff","version":"1.12.6.","commit":"69ca26c7d31e3c331a0e7d2dd7a277d1bc78fe96","title":"kdiff updated to 1.12.6.","summary":"bump to 1.12.6."},
   {"date":"2026-07-23","category":"Moonbase","repository":"other","module":"logwatch","version":"7.15","commit":"0e5a439d8137060b7cf6be574afb3e3b260040e6","title":"logwatch updated to 7.15","summary":"version bumped to 7.15"},
   {"date":"2026-07-23","category":"Moonbase","repository":"other","module":"exim","version":"4.99.5","commit":"984bb55fd103332708e8e402d1286108a21ba4a9","title":"exim updated to 4.99.5","summary":"version bumped to 4.99.5"},
-  {"date":"2026-07-23","category":"Moonbase","repository":"other","module":"podman","version":"6.0.2","commit":"f693f66750edf05a45eb27bc55fc598cb3d639e0","title":"podman updated to 6.0.2","summary":"version bumped to 6.0.2"}
+  {"date":"2026-07-23","category":"Moonbase","repository":"other","module":"podman","version":"6.0.2","commit":"f693f66750edf05a45eb27bc55fc598cb3d639e0","title":"podman updated to 6.0.2","summary":"version bumped to 6.0.2"},
+  {"date":"2026-07-23","category":"Moonbase","repository":"kde","module":"qgpgme","version":"2.2.0.","commit":"1a6f15935055a4e8d2c51e5b976e0c7a6bf599a7","title":"qgpgme updated to 2.2.0.","summary":"bump to 2.2.0."},
+  {"date":"2026-07-23","category":"Moonbase","repository":"other","module":"ncmpc","version":"0.53","commit":"48d2b58b4ef74dc5077bf0b15c851df1326307f6","title":"ncmpc updated to 0.53","summary":"version bumped to 0.53"},
+  {"date":"2026-07-23","category":"Moonbase","repository":"other","module":"libraqm","version":"0.11.0","commit":"ad21212c840ae47a5ec16ac34690f6008ee735b4","title":"libraqm updated to 0.11.0","summary":"version bumped to 0.11.0"}
 ]

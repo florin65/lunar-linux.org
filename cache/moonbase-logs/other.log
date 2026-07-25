@@ -1,3 +1,11 @@
-2026-07-23|f693f66750edf05a45eb27bc55fc598cb3d639e0|podman: version bumped to 6.0.2
-2026-07-23|984bb55fd103332708e8e402d1286108a21ba4a9|exim: version bumped to 4.99.5
-2026-07-23|0e5a439d8137060b7cf6be574afb3e3b260040e6|logwatch: version bumped to 7.15
+2026-07-24|475ca5c4fee1cd31a5cb8a1f2b963aa5c45db7db|gdal: Bump to 3.13.2.
+2026-07-24|fe0832f894bd299eb6acc217f131c7388f8cad90|kitty: Version bumped to 0.48.1
+2026-07-24|21135a0bbed4302712b70119948559e723c0e408|py3status: version bumped to 3.64
+2026-07-24|b58045544afa3832d78299eee2e27990ed39af39|node: Version bumped to 26.5.0
+2026-07-24|c099ea354d64ecbac94d3dcdb8d37a31003549b0|cython: Version bumped to 3.2.9
+2026-07-24|f1118971db897abf4d34401e9f354ca5cbf4e6b5|redis: version bumped to 8.8.1
+2026-07-24|5d7a205de6f33e85fc3db53a6df5484f9c5ba375|YAML: version bumped to 1.321
+2026-07-24|8551411f986ae7998b6a4c8027c48d0603f8ce0e|brave-bin: Version bumped to 1.92.143
+2026-07-24|68401d53b187a3ae4df67e053fec66c9d73af261|jenkins: version bumped to 2.574
+2026-07-23|48d2b58b4ef74dc5077bf0b15c851df1326307f6|ncmpc: Version bumped to 0.53
+2026-07-23|ad21212c840ae47a5ec16ac34690f6008ee735b4|libraqm: Version bumped to 0.11.0
