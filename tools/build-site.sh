@@ -87,6 +87,8 @@ ARCHIVE_NEWS=$(abs_path "$ARCHIVE_NEWS_HTML")
 
 mkdir -p "$PUBLIC" "$DATA" "$BUILD" "$PAGE_SIGNATURE_DIR"
 
+dynamic_data_warnings=0
+
 html_attr_escape() {
   printf '%s' "$1" | sed \
     -e 's/&/\&amp;/g' \
@@ -1268,6 +1270,21 @@ finalize_build_report() {
   mv "$report_tmp" "$BUILD_REPORT_FILE"
 }
 
+record_dynamic_data_warning() {
+  warning_message=$1
+  dynamic_data_warnings=$((dynamic_data_warnings + 1))
+
+  printf '  dynamic data: %s\n' "$warning_message" >> "$BUILD_REPORT_FILE"
+  printf 'dynamic data warning: %s\n' "$warning_message" >&2
+}
+
+append_dynamic_data_report() {
+  {
+    printf '\nDynamic Data\n'
+    printf '  warnings: %s\n' "$dynamic_data_warnings"
+  } >> "$BUILD_REPORT_FILE"
+}
+
 update_dynamic_data() {
   if [ "$UPDATE_DYNAMIC_DATA" != "yes" ]; then
     return 0
@@ -1275,7 +1292,22 @@ update_dynamic_data() {
 
   printf 'updating dynamic data...\n'
   "$TOOLS/count-moonbase.sh"
-  "$TOOLS/get-iso-file-date.sh"
+
+  if "$TOOLS/get-iso-file-date.sh"; then
+    :
+  else
+    iso_status=$?
+
+    if [ -s "$DAILY_ISO" ]; then
+      record_dynamic_data_warning \
+        "daily ISO metadata refresh failed (exit $iso_status); preserving $(rel_from_project "$DAILY_ISO")"
+    else
+      printf 'daily ISO metadata refresh failed and no previous metadata exists: %s\n' \
+        "$(rel_from_project "$DAILY_ISO")" >&2
+      return "$iso_status"
+    fi
+  fi
+
   "$TOOLS/build-moonbase-logs.sh"
   "$TOOLS/build-moonbase-news.sh"
   "$TOOLS/build-community-news.sh"
@@ -1539,6 +1571,7 @@ main() {
   initialize_build_report
 
   update_dynamic_data
+  append_dynamic_data_report
 
   if [ "$GENERATE_NEWS_JSON" = "yes" ]; then
     build_news_json
@@ -1581,7 +1614,8 @@ main() {
   print_build_summary
   append_page_report
 
-  if [ "${archive_status:-skipped}" = "warning" ]; then
+  if [ "${archive_status:-skipped}" = "warning" ] ||
+     [ "$dynamic_data_warnings" -gt 0 ]; then
     finalize_build_report "completed with warnings"
   else
     finalize_build_report "completed"
