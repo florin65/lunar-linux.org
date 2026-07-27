@@ -483,7 +483,7 @@ The specification should not grow ahead of implementation.
 
 ## 24. Baseline statement
 
-A Website 3.2 component is a small, explicit and reusable presentation unit extracted from real repetition.
+A Website 3.3 component is a small, explicit and reusable presentation unit extracted from real repetition.
 
 It receives prepared input.
 

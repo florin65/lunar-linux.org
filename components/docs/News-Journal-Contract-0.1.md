@@ -413,7 +413,7 @@ Creation of `components/news-journal.sh` is justified only if the implementation
 
 ## 17. Decision statement
 
-The News Journal boundary is accepted as a candidate because two independent producers already generate the same semantic presentation.
+The News Journal boundary is accepted and implemented because two independent producers generate the same semantic presentation through the shared component.
 
 The intended architecture is:
 
