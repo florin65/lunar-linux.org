@@ -1,10 +1,10 @@
-# Action Links Contract 0.1-draft
+# Action Links Contract 0.1
 
-**Version:** 0.1-draft  
-**Date:** 2026-07-27  
-**Project:** Lunar Linux Website 3.3  
-**Phase:** Componentization Phase 2 — Step 1  
-**Status:** Working contract; no output change authorized by this document
+**Version:** 0.1
+**Date:** 2026-07-27
+**Project:** Lunar Linux Website 3.3
+**Phase:** Componentization Phase 2 — Step 1
+**Status:** Active semantic contract
 
 ## 1. Purpose
 
@@ -299,3 +299,22 @@ shared semantic contract
 ```
 
 This preserves component consistency without adding subprocess coupling or a premature component framework.
+
+
+## 16. Acceptance outcome
+
+Contract 0.1 is accepted for Website 3.3.
+
+The active implementation model remains deliberately dual:
+
+```text
+renderer-owned Action Links
+→ tools/render-page.sh
+
+prepared Archive Links
+→ components/archive-links.sh
+```
+
+The complete-archive action groups were aligned with the shared renderer
+primitive without introducing a shell subprocess per Markdown action group.
+No standalone `components/action-links.sh` is currently justified.

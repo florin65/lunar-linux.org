@@ -1,9 +1,9 @@
 # Website Component Specification 0.1
 
-**Version:** 0.1  
-**Date:** 2026-07-12  
-**Status:** Draft baseline for implementation  
-**Project:** Lunar Linux Website 3.2 — The Next Generation
+**Version:** 0.1
+**Date:** 2026-07-27
+**Status:** Active implementation baseline
+**Project:** Lunar Linux Website 3.3
 
 ## 1. Purpose
 
@@ -139,8 +139,10 @@ The initial structure may remain simple:
 ```text
 components/
 ├── archive-links.sh
-├── footer.html
-└── navigation.html
+├── commit-journal.sh
+├── news-journal.sh
+├── docs/
+└── tests/
 ```
 
 Subdirectories should be added only when the number or type of components makes them useful.
@@ -490,3 +492,29 @@ It produces predictable HTML.
 It owns one responsibility.
 
 It introduces less complexity than the duplication it replaces.
+
+
+## 19. Website 3.3 implementation baseline
+
+Componentization Phase 2 established the following active standalone components:
+
+```text
+archive-links.sh
+news-journal.sh
+commit-journal.sh
+```
+
+The two journal components receive prepared TSV records, preserve input order,
+escape dynamic values, and write deterministic HTML to standard output.
+
+Their direct executable tests are stored under:
+
+```text
+components/tests/
+```
+
+Renderer-owned primitives such as page heroes, Markdown Action Links and page
+composition remain in `tools/render-page.sh`. This is intentional: reusable
+semantic behavior does not require one universal executable implementation.
+
+Further extraction requires new observed duplication and a focused contract.

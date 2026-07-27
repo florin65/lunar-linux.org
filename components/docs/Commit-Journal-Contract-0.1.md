@@ -1,10 +1,10 @@
-# Commit Journal Contract 0.1-draft
+# Commit Journal Contract 0.1
 
-**Version:** 0.1-draft  
-**Date:** 2026-07-27  
-**Project:** Lunar Linux Website 3.3  
-**Phase:** Componentization Phase 2 — Step 3  
-**Status:** Working contract; implementation not yet accepted
+**Version:** 0.1
+**Date:** 2026-07-27
+**Project:** Lunar Linux Website 3.3
+**Phase:** Componentization Phase 2 — Step 3
+**Status:** Active implementation contract
 
 ## 1. Purpose
 
@@ -16,7 +16,7 @@ Its responsibility is:
 
 It does not parse source JSON, inspect Git or manage archive material.
 
-## 2. Invocation candidate
+## 2. Invocation
 
 ```sh
 components/commit-journal.sh current prepared-commits.tsv
@@ -445,3 +445,29 @@ archive commit preparation ───┘
 ```
 
 Contract 0.1 deliberately captures the proven Lunar Moonbase use case and nothing broader.
+
+
+## 18. Acceptance evidence
+
+Contract 0.1 is implemented by:
+
+```text
+components/commit-journal.sh
+```
+
+Direct validation is provided by:
+
+```text
+components/tests/test-commit-journal.sh
+```
+
+Integrated producers:
+
+```text
+tools/build-site.sh
+tools/build-archive-index.sh
+```
+
+The current and archive integrations were validated independently. Producer
+exit status was checked before output comparison, and the resulting HTML was
+byte-identical to the pre-extraction output.

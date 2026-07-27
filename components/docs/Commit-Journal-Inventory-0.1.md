@@ -1,10 +1,10 @@
-# Commit Journal Inventory 0.1-draft
+# Commit Journal Inventory 0.1
 
-**Version:** 0.1-draft  
-**Date:** 2026-07-27  
-**Project:** Lunar Linux Website 3.3  
-**Phase:** Componentization Phase 2 — Step 3  
-**Status:** Working inventory; no implementation baseline
+**Version:** 0.1
+**Date:** 2026-07-27
+**Project:** Lunar Linux Website 3.3
+**Phase:** Componentization Phase 2 — Step 3
+**Status:** Accepted inventory evidence; implementation outcome recorded
 
 ## 1. Purpose
 
@@ -21,9 +21,9 @@ The purpose is not to generalize tables. It is to determine whether the repeated
 
 ### 2.1 Current Moonbase Commit Journal
 
-**Producer and renderer:** `tools/build-site.sh`, function `prepare_moonbase_values()`  
-**Input:** `docs/data/moonbase-news.json`  
-**Generated intermediate:** temporary `moonbase_commits_file`  
+**Producer and renderer:** `tools/build-site.sh`, function `prepare_moonbase_values()`
+**Input:** `docs/data/moonbase-news.json`
+**Generated intermediate:** temporary `moonbase_commits_file`
 **Consumer:** active website page rendering
 
 Root structure:
@@ -74,9 +74,9 @@ The renderer preserves the input order supplied by `moonbase-news.json`.
 
 ### 2.2 Archived Commit Journal
 
-**Producer and renderer:** `tools/build-archive-index.sh`, function `build_commits_fragment()`  
-**Input:** preserved archive JSON or compressed JSON  
-**Generated fragment:** `cache/archive-commits.html`  
+**Producer and renderer:** `tools/build-archive-index.sh`, function `build_commits_fragment()`
+**Input:** preserved archive JSON or compressed JSON
+**Generated fragment:** `cache/archive-commits.html`
 **Consumers:** archive pages through `{{ archive_commits_html }}`
 
 Root structure:
@@ -444,3 +444,18 @@ prepared ordered commit records
 ```
 
 The component should remain Lunar Moonbase-specific in Contract 0.1. A generic table component is not justified by the current evidence.
+
+
+## Implementation outcome
+
+The candidate boundary documented by this inventory was implemented as:
+
+```text
+components/commit-journal.sh
+```
+
+Its current and archive variants were integrated one producer at a time. Direct
+fixture tests passed and generated output remained byte-identical.
+
+This inventory remains evidence of the implementation state observed before
+extraction. Historical differences and risks are intentionally preserved.

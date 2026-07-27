@@ -1,10 +1,10 @@
-# News Journal Contract 0.1-draft
+# News Journal Contract 0.1
 
-**Version:** 0.1-draft  
-**Date:** 2026-07-27  
-**Project:** Lunar Linux Website 3.3  
-**Phase:** Componentization Phase 2 — Step 2  
-**Status:** Working contract; implementation not yet accepted
+**Version:** 0.1
+**Date:** 2026-07-27
+**Project:** Lunar Linux Website 3.3
+**Phase:** Componentization Phase 2 — Step 2
+**Status:** Active implementation contract
 
 ## 1. Purpose
 
@@ -16,7 +16,7 @@ Its responsibility is:
 
 It does not discover, validate or archive source material.
 
-## 2. Invocation candidate
+## 2. Invocation
 
 ```sh
 components/news-journal.sh current prepared-news.tsv
@@ -43,7 +43,7 @@ archive
 
 ## 3. Prepared record format
 
-The candidate input is UTF-8 tab-separated text, one record per line:
+The input is UTF-8 tab-separated text, one record per line:
 
 ```text
 date_display<TAB>date_datetime<TAB>category<TAB>title<TAB>href<TAB>secondary_text
@@ -428,3 +428,29 @@ archive news preparation ─┘
 ```
 
 Implementation remains subject to direct fixture tests and generated-output comparison.
+
+
+## 18. Acceptance evidence
+
+Contract 0.1 is implemented by:
+
+```text
+components/news-journal.sh
+```
+
+Direct validation is provided by:
+
+```text
+components/tests/test-news-journal.sh
+```
+
+Integrated producers:
+
+```text
+tools/build-community-news.sh
+tools/build-archive-index.sh
+```
+
+The current and archive integrations were validated independently. Producer
+exit status was checked before output comparison, and the resulting HTML was
+byte-identical to the pre-extraction output.

@@ -1,10 +1,10 @@
-# News Journal Inventory 0.1-draft
+# News Journal Inventory 0.1
 
-**Version:** 0.1-draft  
-**Date:** 2026-07-27  
-**Project:** Lunar Linux Website 3.3  
-**Phase:** Componentization Phase 2 — Step 2  
-**Status:** Working inventory; no implementation baseline
+**Version:** 0.1
+**Date:** 2026-07-27
+**Project:** Lunar Linux Website 3.3
+**Phase:** Componentization Phase 2 — Step 2
+**Status:** Accepted inventory evidence; implementation outcome recorded
 
 ## 1. Purpose
 
@@ -16,8 +16,8 @@ It is based on the active website generator and its generated fragments. It does
 
 ### 2.1 Current News Journal
 
-**Producer:** `tools/build-community-news.sh`  
-**Generated fragment:** `cache/community-news.html`  
+**Producer:** `tools/build-community-news.sh`
+**Generated fragment:** `cache/community-news.html`
 **Consumer:** Info page through `{{ community_news_html }}`
 
 Root structure:
@@ -64,8 +64,8 @@ Assessment: data preparation, page generation and journal rendering currently co
 
 ### 2.2 Archived News Journal
 
-**Producer:** `tools/build-archive-index.sh`, function `build_news_fragment()`  
-**Generated fragment:** `cache/archive-news.html`  
+**Producer:** `tools/build-archive-index.sh`, function `build_news_fragment()`
+**Generated fragment:** `cache/archive-news.html`
 **Consumers:** general Archive page and dedicated News Archive page through `{{ archive_news_html }}`
 
 Root structure:
@@ -373,3 +373,18 @@ prepared records
 ```
 
 The producers remain responsible for turning source or archive material into prepared records.
+
+
+## Implementation outcome
+
+The candidate boundary documented by this inventory was implemented as:
+
+```text
+components/news-journal.sh
+```
+
+Its current and archive variants were integrated one producer at a time. Direct
+fixture tests passed and generated output remained byte-identical.
+
+This inventory remains evidence of the implementation state observed before
+extraction. Historical differences and risks are intentionally preserved.

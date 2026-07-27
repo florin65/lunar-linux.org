@@ -1,10 +1,10 @@
-# Website Component Inventory 0.1-draft
+# Website Component Inventory 0.1
 
-**Version:** 0.1-draft  
-**Date:** 2026-07-27  
-**Project:** Lunar Linux Website 3.3  
-**Phase:** Componentization Phase 2 — Step 1  
-**Status:** Working inventory; no implementation baseline
+**Version:** 0.1
+**Date:** 2026-07-27
+**Project:** Lunar Linux Website 3.3
+**Phase:** Componentization Phase 2 — Step 1
+**Status:** Accepted inventory evidence; outcomes recorded
 
 ## 1. Purpose
 
@@ -40,8 +40,8 @@ The renderer remains the semantic interpretation layer. A component may share a 
 
 ### 3.1 Archive Links
 
-**Source:** `components/archive-links.sh`  
-**Status:** Implemented and in active use  
+**Source:** `components/archive-links.sh`
+**Status:** Implemented and in active use
 **Responsibility:** Render a prepared ordered set of archive-related links as website buttons.
 
 Current input:
@@ -82,23 +82,23 @@ templates/header.html
 templates/footer.html
 ```
 
-**Status:** Existing shared document-frame templates  
+**Status:** Existing shared document-frame templates
 **Responsibility:** Provide common site framing.
 
 Assessment: already shared and stable. No Phase 2 extraction is required now.
 
 ### 3.3 Page hero renderer primitive
 
-**Source:** `render_hero()` in `tools/render-page.sh`  
-**Status:** Internal renderer primitive  
+**Source:** `render_hero()` in `tools/render-page.sh`
+**Status:** Internal renderer primitive
 **Responsibility:** Render a page hero from a prepared title, description and optional stable class variant.
 
 Assessment: this is a valid internal component-like primitive. It does not need to become a standalone shell component. Its correct owner is the semantic renderer.
 
 ### 3.4 News section renderer primitive
 
-**Source:** `render_news_section()` in `tools/render-page.sh`  
-**Status:** Internal renderer primitive  
+**Source:** `render_news_section()` in `tools/render-page.sh`
+**Status:** Internal renderer primitive
 **Responsibility:** Compose a prepared news section from title, description, content HTML and action HTML.
 
 Assessment: retain internally for now. It has not yet demonstrated a need for an external component interface.
@@ -256,3 +256,27 @@ Action Links
 ```
 
 Archive Links is a specialized Action Links variant already proven in production. News Journal and Commit Journal remain candidates awaiting a focused record-and-variant inventory.
+
+
+## 10. Implementation outcome
+
+The focused inventories completed after this document confirmed both journal
+boundaries. Componentization Phase 2 produced:
+
+```text
+Action Links
+→ accepted shared semantic contract
+
+News Journal
+→ components/news-journal.sh
+
+Commit Journal
+→ components/commit-journal.sh
+```
+
+Both journals were integrated into their current and archive producers with
+byte-identical output. The generic-table candidate remained rejected.
+
+This inventory is preserved as evidence of the pre-extraction state. Its
+candidate language records what was known at Step 1 and is not rewritten as if
+the later implementations had already existed.
