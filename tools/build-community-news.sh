@@ -109,9 +109,15 @@ OUT=$(abs_path "$COMMUNITY_NEWS_HTML")
 MANIFEST=$(abs_path "$COMMUNITY_NEWS_MANIFEST")
 NEWS_PAGES=$(abs_path "$NEWS_ARTICLES_DIR")
 NEWS_ARTICLE_RENDERER="$TOOLS/render-news-article.sh"
+NEWS_JOURNAL_RENDERER="$PROJECT_ROOT/components/news-journal.sh"
 
 if [ ! -x "$NEWS_ARTICLE_RENDERER" ]; then
   printf 'missing news article renderer: %s\n' "$(rel_from_project "$NEWS_ARTICLE_RENDERER")" >&2
+  exit 1
+fi
+
+if [ ! -x "$NEWS_JOURNAL_RENDERER" ]; then
+  printf 'missing news journal renderer: %s\n' "$(rel_from_project "$NEWS_JOURNAL_RENDERER")" >&2
   exit 1
 fi
 
@@ -121,8 +127,9 @@ rows=$(mktemp)
 new_manifest=$(mktemp)
 slug_registry=$(mktemp -d)
 staged_pages=$(mktemp -d "$NEWS_PAGES/.community-news-stage.XXXXXX")
+prepared=
 tmp=
-trap 'rm -f "$rows" "$new_manifest" ${tmp:+"$tmp"}; rm -rf "$slug_registry" "$staged_pages"' EXIT HUP INT TERM
+trap 'rm -f "$rows" "$new_manifest" ${prepared:+"$prepared"} ${tmp:+"$tmp"}; rm -rf "$slug_registry" "$staged_pages"' EXIT HUP INT TERM
 
 : > "$rows"
 : > "$new_manifest"
@@ -266,53 +273,18 @@ for file in "$NEWS_SRC"/*.md; do
   printf 'staged %s\n' "$(rel_from_project "$NEWS_PAGES/$page_name")"
 done
 
+prepared=$(mktemp)
 tmp=$(mktemp)
 
-{
-  printf '      <div class="community-news-journal">\n'
-  printf '        <table class="community-news-table compact-news-table">\n'
-  printf '          <colgroup>\n'
-  printf '            <col class="community-news-col-meta">\n'
-  printf '            <col class="community-news-col-content">\n'
-  printf '          </colgroup>\n'
-  printf '          <thead>\n'
-  printf '            <tr>\n'
-  printf '              <th>Date</th>\n'
-  printf '              <th>News</th>\n'
-  printf '            </tr>\n'
-  printf '          </thead>\n'
-  printf '          <tbody>\n'
+if [ -s "$rows" ]; then
+  sort -r "$rows" |
+    awk -F '	' 'BEGIN { OFS = "\t" } { print $1, $2, $4, $5, $7, $6 }' > "$prepared"
+else
+  : > "$prepared"
+fi
 
-  if [ -s "$rows" ]; then
-    sort -r "$rows" | while IFS='	' read -r date date_html date_short category title summary href; do
-      printf '            <tr>\n'
-      printf '              <td class="news-meta">\n'
-      printf '                <time datetime="%s">%s</time>\n' \
-        "$(html_attr_escape "$date_html")" \
-        "$(html_attr_escape "$date")"
-      printf '                <span>%s</span>\n' \
-        "$(html_attr_escape "$category")"
-      printf '              </td>\n'
-      printf '              <td class="news-content">\n'
-      printf '                <a class="news-title-link" href="%s">%s</a>\n' \
-        "$(html_attr_escape "$href")" \
-        "$(html_attr_escape "$title")"
-      printf '                <p>%s</p>\n' \
-        "$(html_attr_escape "$summary")"
-      printf '              </td>\n'
-      printf '            </tr>\n'
-    done
-  fi
-
-  printf '          </tbody>\n'
-  printf '        </table>\n'
-
-  if [ ! -s "$rows" ]; then
-    printf '        <p>No valid community or project news entries were found.</p>\n'
-  fi
-
-  printf '      </div>\n'
-} > "$tmp"
+NEWS_JOURNAL_INDENT='      ' \
+  "$NEWS_JOURNAL_RENDERER" current "$prepared" > "$tmp"
 
 while IFS= read -r generated; do
   [ -n "$generated" ] || continue

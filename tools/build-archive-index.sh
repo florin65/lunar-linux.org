@@ -13,6 +13,7 @@ PUBLIC_DIR=${PUBLIC_DIR:-$PROJECT_ROOT/docs}
 NEWS_DIR=${NEWS_DIR:-$PROJECT_ROOT/src/news}
 BUILD_REPORT=${BUILD_REPORT:-$CACHE_DIR/build-report.txt}
 NEWS_ARTICLE_RENDERER=${NEWS_ARTICLE_RENDERER:-$SCRIPT_DIR/render-news-article.sh}
+NEWS_JOURNAL_RENDERER=${NEWS_JOURNAL_RENDERER:-$PROJECT_ROOT/components/news-journal.sh}
 
 commits_out=${1:-$CACHE_DIR/archive-commits.html}
 news_out=${2:-$CACHE_DIR/archive-news.html}
@@ -25,6 +26,9 @@ archive_mkdir "$(dirname -- "$BUILD_REPORT")"
 
 [ -x "$NEWS_ARTICLE_RENDERER" ] ||
   archive_die "missing news article renderer: $NEWS_ARTICLE_RENDERER"
+
+[ -x "$NEWS_JOURNAL_RENDERER" ] ||
+  archive_die "missing news journal renderer: $NEWS_JOURNAL_RENDERER"
 
 tmpdir=$(mktemp -d)
 trap 'rm -rf "$tmpdir"' EXIT HUP INT TERM
@@ -284,31 +288,22 @@ build_news_fragment() {
     done < "$objects"
   done < "$files"
 
-  {
-    echo '      <div class="community-news-journal archive-journal">'
-    echo '        <table class="community-news-table archive-news-table">'
-    echo '          <thead><tr><th>Date</th><th>News</th></tr></thead>'
-    echo '          <tbody>'
+  prepared="$tmpdir/news-journal.tsv"
 
-    if [ -s "$data" ]; then
-      sort -r "$data" |
-      while IFS="$tab" read -r date category title slug id rel; do
-        short_id=$(printf '%s' "$id" | cut -c1-12)
-        echo '            <tr>'
-        printf '              <td class="news-meta"><time datetime="%s">%s</time><span>%s</span></td>\n' \
-          "$(html_escape "$date")" "$(html_escape "$date")" "$(html_escape "$category")"
-        printf '              <td class="news-content"><a class="news-title-link" href="%s">%s</a><p>Archive id: <code>%s</code></p></td>\n' \
-          "$(html_escape "$rel")" "$(html_escape "$title")" "$(html_escape "$short_id")"
-        echo '            </tr>'
-      done
-    else
-      echo '            <tr><td colspan="2" class="news-content">No valid archived news entries were found.</td></tr>'
-    fi
+  if [ -s "$data" ]; then
+    sort -r "$data" |
+      awk -F '\t' 'BEGIN { OFS = "\t" }
+        {
+          short_id = substr($5, 1, 12)
+          print $1, $1, $2, $3, $6, short_id
+        }
+      ' > "$prepared"
+  else
+    : > "$prepared"
+  fi
 
-    echo '          </tbody>'
-    echo '        </table>'
-    echo '      </div>'
-  } > "$fragment"
+  NEWS_JOURNAL_INDENT='      ' \
+    "$NEWS_JOURNAL_RENDERER" archive "$prepared" > "$fragment"
 
   find "$stage" -type f | sort |
   while IFS= read -r staged_file; do
