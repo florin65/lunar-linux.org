@@ -297,19 +297,34 @@ function render_blocks(a, b, indent, skip_quote, skip_links,    i, items, c, j) 
   }
 }
 
-function render_actions(s, indent,    items, c, j, label, url, p, cls) {
+function render_action_group(s, indent, first_class, group_classes, normalize_pages, rich_labels,    items, c, j, label, url, p, cls, rendered_label) {
+  if (s == "") return
+
   c = split_items(s, items)
 
-  print indent "<div class=\"hero-actions\">"
+  print indent "<div class=\"" group_classes "\">"
   for (j = 1; j <= c; j++) {
     p = index(items[j], LINKSEP)
     label = substr(items[j], 1, p - 1)
     url = substr(items[j], p + length(LINKSEP))
-    gsub(/^pages\//, "", url)
-    cls = (j == 1 ? "button primary" : "button secondary")
-    print indent "  <a class=\"" cls "\" href=\"" attr(url) "\">" inline(label) "</a>"
+
+    if (normalize_pages)
+      gsub(/^pages\//, "", url)
+
+    cls = (j == 1 ? "button " first_class : "button secondary")
+    rendered_label = (rich_labels ? inline(label) : esc(label))
+
+    print indent "  <a class=\"" cls "\" href=\"" attr(url) "\">" rendered_label "</a>"
   }
   print indent "</div>"
+}
+
+function render_actions(s, indent) {
+  render_action_group(s, indent, "primary", "hero-actions", 1, 1)
+}
+
+function render_prepared_actions(s, indent, first_class, group_classes) {
+  render_action_group(s, indent, first_class, group_classes, 0, 0)
 }
 
 function render_hero(title, desc, extra_class,    section_class) {
@@ -983,9 +998,7 @@ function render_archive(    overview, toc, commits, news, docs, lur) {
   print "      <h2 class=\"section-title\">Commit archive</h2>"
   if (commits) render_blocks(commits + 1, section_end(commits), "      ", 0, 1)
   print "{{ archive_commits_html }}"
-  print "      <div class=\"hero-actions archive-section-actions\">"
-  print "        <a class=\"button primary\" href=\"archive/commits/\">View complete commit archive →</a>"
-  print "      </div>"
+  render_prepared_actions("View complete commit archive →" LINKSEP "archive/commits/", "      ", "primary", "hero-actions archive-section-actions")
   print "    </div>"
   print "  </section>"
 
@@ -995,9 +1008,7 @@ function render_archive(    overview, toc, commits, news, docs, lur) {
   print "      <h2 class=\"section-title\">News archive</h2>"
   if (news) render_blocks(news + 1, section_end(news), "      ", 0, 1)
   print "{{ archive_news_html }}"
-  print "      <div class=\"hero-actions archive-section-actions\">"
-  print "        <a class=\"button primary\" href=\"archive/news/\">View complete news archive →</a>"
-  print "      </div>"
+  render_prepared_actions("View complete news archive →" LINKSEP "archive/news/", "      ", "primary", "hero-actions archive-section-actions")
   print "    </div>"
   print "  </section>"
 
