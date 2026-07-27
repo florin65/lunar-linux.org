@@ -1,9 +1,9 @@
 # Lunar Linux Website Architecture
 
-**Version:** 0.1  
-**Date:** 2026-07-12  
-**Status:** Current architecture baseline  
-**Project:** Lunar Linux Website 3.2 — The Next Generation
+**Version:** 0.1
+**Date:** 2026-07-27
+**Status:** Current architecture baseline
+**Project:** Lunar Linux Website 3.3
 
 ## 1. Purpose
 
@@ -46,6 +46,7 @@ The primary source areas are:
 src/markdown/
 src/news/
 templates/
+components/
 tools/
 site.conf
 ```
@@ -72,7 +73,8 @@ Markdown + data + templates
             ├── news index generation
             ├── archive update
             ├── variable expansion
-            ├── page rendering
+            ├── semantic page rendering
+            ├── prepared fragment rendering
             └── page composition
             │
             ▼
@@ -149,6 +151,24 @@ The shared header and footer are inserted into generated pages.
 
 Page templates provide page-specific composition hooks where required.
 
+### `components/`
+
+Contains small standalone presentation components with explicit semantic contracts.
+
+Current components include:
+
+```text
+components/archive-links.sh
+components/news-journal.sh
+components/commit-journal.sh
+components/tests/
+components/docs/
+```
+
+Components receive prepared input and emit deterministic HTML fragments.
+
+They do not discover source material, choose ordering policy, recover archives, publish pages or update build reports.
+
 ### `tools/`
 
 Contains the generator and support utilities.
@@ -198,10 +218,12 @@ Its responsibilities currently include:
 6. publishing archive assets;
 7. loading dynamic values;
 8. preparing generated fragments;
-9. rendering Markdown pages;
-10. composing the final HTML document;
-11. generating compatibility redirects;
-12. cleaning temporary files.
+9. preparing dynamic and archive fragments;
+10. rendering Markdown pages;
+11. composing the final HTML document;
+12. generating compatibility redirects;
+13. finalizing build state and maintenance reports;
+14. cleaning temporary files.
 
 This file is functional but carries several responsibilities.
 
@@ -306,7 +328,7 @@ These define common page framing and visual presentation.
 
 ## 9. Information architecture
 
-Website 3.2 uses domain ownership instead of a central Archive domain.
+Website 3.3 uses domain ownership instead of a central Archive domain.
 
 The current top-level navigation is:
 
@@ -410,6 +432,22 @@ The composition step belongs to `build-site.sh`.
 
 The semantic page body belongs to `render-page.sh`.
 
+Prepared repeated presentation records may be rendered by standalone components under `components/`.
+
+The established boundary is:
+
+```text
+source or archive material
+        ↓
+producer validation and policy
+        ↓
+prepared ordered records
+        ↓
+deterministic component renderer
+        ↓
+HTML fragment
+```
+
 This separation should be preserved.
 
 ## 13. Redirects
@@ -477,6 +515,9 @@ The existing system already provides:
 - deterministic local generation;
 - inspectable shell tools;
 - a semantic renderer;
+- small deterministic presentation components;
+- direct fixture tests for journal components;
+- incremental page signatures and build-state maintenance;
 - dynamic project data;
 - generated news and archives;
 - compatibility redirects;
@@ -487,13 +528,12 @@ The existing system already provides:
 
 The current system also has real limits:
 
-- `build-site.sh` owns too many responsibilities;
-- `render-page.sh` contains several page-specific rendering paths;
-- reusable page fragments are not yet formalized as components;
+- `build-site.sh` remains the main orchestration point and still owns several responsibilities;
+- `render-page.sh` contains page-specific semantic rendering paths;
 - some behavior is selected by page name;
-- shared presentation elements are only partially componentized;
-- project documentation has lagged behind implementation;
-- generated and source assets coexist in ways that require discipline.
+- standalone components currently cover only responsibilities proven by repeated implementation;
+- source, cache and generated public assets coexist and require clear ownership discipline;
+- dynamic remote data can introduce controlled warnings or unrelated refresh changes.
 
 These are reasons for incremental cleanup, not reasons for a complete rewrite.
 
@@ -512,25 +552,25 @@ A new abstraction is justified only when:
 ## 19. Current development phase
 
 ```text
-Website 3.2
-Alpha 1 — architecture cleanup completed
-Alpha 2 Sprint A — content integration completed
-Alpha 2 Sprint B — component foundation active
+Website 3.3
+architecture cleanup completed
+content integration completed
+incremental build and archive consolidation completed
+Componentization Phase 2 completed and accepted
+maintenance and evidence-driven evolution active
 ```
 
-The next architectural work is:
+The accepted standalone component layer is:
 
 ```text
-Component Specification 0.1
-        ↓
-Archive Links component
-        ↓
-Footer component
-        ↓
-Navigation component
-        ↓
-incremental generator cleanup
+Archive Links
+News Journal
+Commit Journal
 ```
+
+No additional standalone component is currently justified.
+
+The next architectural work must arise from new observed repetition, a concrete maintenance need or a feature that exposes a stable responsibility boundary.
 
 ## 20. Architectural baseline statement
 
@@ -544,4 +584,4 @@ Templates provide shared framing.
 
 The `docs/` directory contains public output.
 
-The system should become more componentized only where real repetition proves that a reusable boundary exists.
+The system should become more componentized only where new real repetition proves that a reusable boundary exists. Componentization Phase 2 established a healthy stopping point for Website 3.3.
