@@ -14,6 +14,7 @@ NEWS_DIR=${NEWS_DIR:-$PROJECT_ROOT/src/news}
 BUILD_REPORT=${BUILD_REPORT:-$CACHE_DIR/build-report.txt}
 NEWS_ARTICLE_RENDERER=${NEWS_ARTICLE_RENDERER:-$SCRIPT_DIR/render-news-article.sh}
 NEWS_JOURNAL_RENDERER=${NEWS_JOURNAL_RENDERER:-$PROJECT_ROOT/components/news-journal.sh}
+COMMIT_JOURNAL_RENDERER=${COMMIT_JOURNAL_RENDERER:-$PROJECT_ROOT/components/commit-journal.sh}
 
 commits_out=${1:-$CACHE_DIR/archive-commits.html}
 news_out=${2:-$CACHE_DIR/archive-news.html}
@@ -29,6 +30,9 @@ archive_mkdir "$(dirname -- "$BUILD_REPORT")"
 
 [ -x "$NEWS_JOURNAL_RENDERER" ] ||
   archive_die "missing news journal renderer: $NEWS_JOURNAL_RENDERER"
+
+[ -x "$COMMIT_JOURNAL_RENDERER" ] ||
+  archive_die "missing commit journal renderer: $COMMIT_JOURNAL_RENDERER"
 
 tmpdir=$(mktemp -d)
 trap 'rm -rf "$tmpdir"' EXIT HUP INT TERM
@@ -113,29 +117,18 @@ build_commits_fragment() {
     done < "$objects"
   done < "$files"
 
-  {
-    echo '      <div class="moonbase-journal archive-journal">'
-    echo '        <table class="moonbase-table archive-commits-table">'
-    echo '          <thead><tr><th>Commit</th><th>Repository</th><th>Module</th><th>Comment</th></tr></thead>'
-    echo '          <tbody>'
+  prepared="$tmpdir/commit-journal.tsv"
 
-    if [ -s "$data" ]; then
-      sort -r "$data" |
-      while IFS="$tab" read -r date commit repo module summary; do
-        url="https://github.com/lunar-linux/moonbase-$repo/commit/$commit"
-        printf '            <tr><td class="commit-id"><a href="%s" target="_blank" rel="noopener" title="%s">%s</a></td><td class="repository-name">%s</td><td class="module-name">%s</td><td class="commit-comment">%s</td></tr>\n' \
-          "$(html_escape "$url")" "$(html_escape "$date")" \
-          "$(html_escape "$commit")" "$(html_escape "$repo")" \
-          "$(html_escape "$module")" "$(html_escape "$summary")"
-      done
-    else
-      echo '            <tr><td colspan="4" class="commit-comment">No archived commits were found.</td></tr>'
-    fi
+  if [ -s "$data" ]; then
+    sort -r "$data" |
+      awk -F '\t' 'BEGIN { OFS = "\t" } { print $2, $3, $4, $5, $1 }' \
+      > "$prepared"
+  else
+    : > "$prepared"
+  fi
 
-    echo '          </tbody>'
-    echo '        </table>'
-    echo '      </div>'
-  } > "$fragment"
+  COMMIT_JOURNAL_INDENT='      ' \
+    "$COMMIT_JOURNAL_RENDERER" archive "$prepared" > "$fragment"
 
   mv "$fragment" "$commits_out"
 }

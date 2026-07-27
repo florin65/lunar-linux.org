@@ -74,6 +74,7 @@ HEADER="$TEMPLATES/header.html"
 FOOTER="$TEMPLATES/footer.html"
 RENDERER="$TOOLS/render-page.sh"
 ARCHIVE_LINKS_COMPONENT="$COMPONENTS/archive-links.sh"
+COMMIT_JOURNAL_COMPONENT="$COMPONENTS/commit-journal.sh"
 FINALIZE_BUILD_STATE="$TOOLS/finalize-build-state.sh"
 MOONBASE_STATS=$(abs_path "$MOONBASE_STATS_JSON")
 DAILY_ISO=$(abs_path "$DAILY_ISO_JSON")
@@ -362,6 +363,13 @@ prepare_moonbase_values() {
   moonbase_other_commits=0
 
   moonbase_commits_file=$(mktemp)
+  moonbase_commits_data=$(mktemp)
+
+  if [ ! -x "$COMMIT_JOURNAL_COMPONENT" ]; then
+    printf 'missing commit journal component: %s\n' \
+      "$(rel_from_project "$COMMIT_JOURNAL_COMPONENT")" >&2
+    return 1
+  fi
 
   if [ ! -f "$MOONBASE_NEWS" ]; then
     cat > "$moonbase_commits_file" <<EOF_MOONBASE
@@ -493,19 +501,6 @@ EOF_MOONBASE
   [ "$moonbase_other_commits" -ge 0 ] || moonbase_other_commits=0
 
   awk '
-    function esc(s) {
-      gsub(/&/, "\\&amp;", s)
-      gsub(/</, "\\&lt;", s)
-      gsub(/>/, "\\&gt;", s)
-      return s
-    }
-
-    function attr(s) {
-      s = esc(s)
-      gsub(/"/, "\\&quot;", s)
-      return s
-    }
-
     function json_decode(s,    out, i, c) {
       out = ""
 
@@ -538,7 +533,6 @@ EOF_MOONBASE
         } else if (c == "t") {
           out = out "\t"
         } else {
-          # Preserve unsupported escapes such as \uXXXX verbatim.
           out = out "\\" c
         }
       }
@@ -549,9 +543,9 @@ EOF_MOONBASE
     function field(line, key,    pat, start, rest, raw, i, c) {
       pat = "\"" key "\":\""
       start = index(line, pat)
-      if (!start) {
+
+      if (!start)
         return ""
-      }
 
       rest = substr(line, start + length(pat))
       raw = ""
@@ -570,9 +564,8 @@ EOF_MOONBASE
           continue
         }
 
-        if (c == "\"") {
+        if (c == "\"")
           return json_decode(raw)
-        }
 
         raw = raw c
       }
@@ -580,26 +573,12 @@ EOF_MOONBASE
       return json_decode(raw)
     }
 
-    BEGIN {
-      count = 0
-      print "      <div class=\"moonbase-journal\">"
-      print "        <table class=\"moonbase-table\">"
-      print "          <colgroup>"
-      print "            <col class=\"moonbase-col-commit\">"
-      print "            <col class=\"moonbase-col-repository\">"
-      print "            <col class=\"moonbase-col-module\">"
-      print "            <col class=\"moonbase-col-comment\">"
-      print "          </colgroup>"
-      print "          <thead>"
-      print "            <tr>"
-      print "              <th>Commit</th>"
-      print "              <th>Repository</th>"
-      print "              <th>Module</th>"
-      print "              <th>Comment</th>"
-      print "            </tr>"
-      print "          </thead>"
-      print "          <tbody>"
+    function tsv_value(s) {
+      gsub(/[\t\r\n]/, " ", s)
+      return s
     }
+
+    BEGIN { OFS = "\t" }
 
     {
       category = field($0, "category")
@@ -618,29 +597,13 @@ EOF_MOONBASE
         sub(/:.*/, "", module)
       }
 
-      url = "https://github.com/lunar-linux/moonbase-" repo "/commit/" commit
-
-      print "            <tr>"
-      print "              <td class=\"commit-id\"><a href=\"" attr(url) "\" target=\"_blank\" rel=\"noopener\">" esc(commit) "</a></td>"
-      print "              <td class=\"repository-name\">" esc(repo) "</td>"
-      print "              <td class=\"module-name\">" esc(module) "</td>"
-      print "              <td class=\"commit-comment\">" esc(summary) "</td>"
-      print "            </tr>"
-
-      count++
+      print tsv_value(commit), tsv_value(repo), tsv_value(module), tsv_value(summary), ""
     }
+  ' "$MOONBASE_NEWS" > "$moonbase_commits_data"
 
-    END {
-      print "          </tbody>"
-      print "        </table>"
-
-      if (count == 0) {
-        print "        <p>No Moonbase commits were found for the selected period.</p>"
-      }
-
-      print "      </div>"
-    }
-  ' "$MOONBASE_NEWS" > "$moonbase_commits_file"
+  COMMIT_JOURNAL_INDENT='      ' \
+    "$COMMIT_JOURNAL_COMPONENT" current "$moonbase_commits_data" \
+    > "$moonbase_commits_file"
 }
 
 
@@ -727,6 +690,10 @@ prepare_archive_link_values() {
 cleanup_temp_files() {
   if [ -n "${moonbase_commits_file:-}" ]; then
     rm -f "$moonbase_commits_file"
+  fi
+
+  if [ -n "${moonbase_commits_data:-}" ]; then
+    rm -f "$moonbase_commits_data"
   fi
 
   if [ -n "${community_news_file:-}" ]; then
