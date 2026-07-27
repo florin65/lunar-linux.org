@@ -1,5 +1,5 @@
 Website build report
-Date: 2026-07-27 03:24:46
+Date: 2026-07-27 03:30:37
 Status: completed with warnings
 
 Problems
@@ -15,8 +15,8 @@ Archive
   warnings: 0
 
 Pages
-  generated: 44
-  unchanged: 0
+  generated: 0
+  unchanged: 44
   failed: 0
 
 Maintenance
