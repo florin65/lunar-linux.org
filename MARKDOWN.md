@@ -1,22 +1,22 @@
 # Lunar Linux Markdown source format
 
-This repository keeps human-edited page sources in Markdown and generates
-static HTML into `public/`.
+The repository keeps human-edited page and news sources in Markdown and generates static HTML under `docs/`.
 
 ## Directory layout
 
 ```text
 src/markdown/    main page sources
-src/news/        individual news entries
+src/news/        editorial news entries
 templates/       shared HTML fragments
+components/      deterministic presentation components
 tools/           build and helper scripts
-public/          generated/public website
-public/data/     generated or refreshed JSON files
+docs/            generated public website
+docs/data/       generated or refreshed JSON data
 ```
 
-## Page front matter
+## Main page front matter
 
-Each source page in `src/markdown/` starts with a small YAML-like header:
+Each source page in `src/markdown/` begins with a small YAML-like header:
 
 ```yaml
 ---
@@ -27,42 +27,72 @@ permalink: download.html
 ---
 ```
 
-The current bash prototype mainly uses `title` and `description`.
-The future Nim generator can use the rest.
+The generator uses page metadata together with the Markdown body to select and compose the final page.
 
-## News front matter
+## News metadata
 
-News entries live in `src/news/`:
+Editorial news entries live in `src/news/` and use three required metadata lines:
 
-```yaml
----
-date: 2026-06-04
-title: Download page refreshed
-category: Website
----
+```text
+Date: 2026-06-06 19:30
+Category: Project
+Title: Website 3.3 released
+
+The article body starts after the first empty line.
 ```
 
-The bash prototype writes these entries to `public/data/news.json`.
-A future News page can read that JSON, or the Nim generator can build a fully
-static `news.html` page directly.
+Accepted date forms are:
+
+```text
+YYYY-MM-DD
+YYYY-MM-DD HH:MM
+```
+
+A news source is rejected when required metadata is missing, the date is invalid or the body is empty. Rejected entries produce build warnings and are excluded from generated output.
+
+Valid entries contribute to:
+
+```text
+docs/data/news.json
+docs/news.html
+docs/news/<entry>.html
+archive/news/
+```
+
+## Supported Markdown
+
+The renderer supports the subset used by the current website content, including:
+
+- headings;
+- paragraphs;
+- ordered and unordered lists;
+- block quotations;
+- fenced code blocks;
+- inline code;
+- links;
+- accepted HTML blocks;
+- page include markers used by the generator.
+
+The renderer is intentionally project-focused rather than a general-purpose Markdown implementation.
+
+## Semantic rendering
+
+`tools/render-page.sh` interprets source meaning and produces the semantic page body.
+
+Repeated prepared records may be handed to standalone renderers under `components/`. Those components receive validated and ordered input; they do not discover source material or select publishing policy.
 
 ## Build
 
+Run:
+
 ```sh
-./tools/build-site.sh
+./build-site.sh
 ```
 
-The script converts `src/markdown/*.md` to `public/*.html` and refreshes
-`public/data/news.json`.
+For a local deterministic build that does not refresh remote data or archives:
 
-## Supported Markdown subset in the bash prototype
+```sh
+UPDATE_DYNAMIC_DATA=no UPDATE_ARCHIVE=no ./build-site.sh
+```
 
-- `#`, `##`, `###` headings
-- paragraphs
-- unordered lists using `- item`
-- blockquotes using `> text`
-- inline code using backticks
-- simple links using `[label](url)`
-
-This is intentionally small. The bash version is a prototype for the future
-Nim implementation.
+Generated files under `docs/` are deployment output. Edit an authoritative source under `src/`, `templates/`, `components/` or `tools/` whenever one exists instead of editing generated HTML directly.

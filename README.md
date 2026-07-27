@@ -1,199 +1,145 @@
 # Lunar Linux Website
 
-Modern static website for the Lunar Linux project.
+The official static website generator for the Lunar Linux project.
+
+**Current version:** Website 3.3
+**State:** Active maintenance and evidence-driven evolution
 
 ## Philosophy
 
 The website follows the same principles as Lunar Linux itself:
 
-* Simplicity
-* Transparency
-* Maintainability
-* Performance
-* User control
+- simplicity;
+- transparency;
+- maintainability;
+- performance;
+- user control.
 
-No unnecessary complexity.
-No heavyweight infrastructure.
-Just static content, Git repositories and automation where it makes sense.
+It uses plain text, standard Unix tools, static output and Git-based history. Automation is introduced only where it provides clear and verifiable value.
 
----
+## Current architecture
 
-## Project Goals
+The repository contains both authoritative source material and generated public output.
 
-* Modern and responsive design
-* Lightweight and fast loading
-* Static-site architecture
-* Git-based workflow
-* Easy maintenance
-* Community-friendly contribution model
-* Preserve the traditional Lunar Linux identity
+```text
+src/markdown/      main page content
+src/news/          editorial news entries
+templates/         shared HTML templates
+components/        deterministic presentation components
+tools/             generator and maintenance scripts
+archive/           long-term commit and news memory
+cache/             local build state and generated fragments
+docs/              GitHub Pages output
+site.conf           central configuration
+```
 
----
+The build entry point is:
 
-## Current Status
+```sh
+./build-site.sh
+```
 
-### Release Status
+The root command resolves to `tools/build-site.sh`.
 
-**Version:** 2.5
+## Website 3.3 baseline
 
-**State:** Stable
+Website 3.3 completed a major internal evolution while preserving the static shell-based architecture.
 
-The public release has been completed and published for the community evaluation.
+The current generator provides:
 
----
+- Markdown-driven page and news generation;
+- dynamic Moonbase and daily ISO data;
+- domain-owned news and commit archives;
+- deterministic incremental page rebuilding;
+- persistent page and news signatures;
+- controlled cleanup of stale generated output;
+- tolerant archive recovery with optional strict validation;
+- persistent administrative build reports;
+- compatibility redirects;
+- direct fixture tests for extracted journal components.
 
-## Completed
+## Component layer
 
-### Foundation
+Componentization Phase 2 is complete and accepted.
 
-* [✓] Repository created
-* [✓] Project structure defined
-* [✓] Visual assets imported
-* [✓] Site navigation implemented
+The standalone component layer currently contains:
 
-### Content
+```text
+components/archive-links.sh
+components/news-journal.sh
+components/commit-journal.sh
+```
 
-* [✓] Homepage completed
-* [✓] About section completed
-* [✓] Download section completed
-* [✓] Documentation section completed
-* [✓] Community section completed
-* [✓] Development section completed
+Their contracts, inventories and phase checkpoint are stored under:
 
-### Design
+```text
+components/docs/
+```
 
-* [✓] Responsive layout
-* [✓] Visual modernization
-* [✓] Lunar Linux branding refresh
-* [✓] GitHub Pages deployment
+Direct component tests are stored under:
 
-### Community
+```text
+components/tests/
+```
 
-* [✓] Public evaluation announced
-* [✓] Initial community feedback received
+No additional standalone component is currently justified. Future extraction must be based on newly observed repetition or a concrete maintenance need.
 
-### News System
+## Building
 
-* [✓] Create News page
-* [✓] Transform the website to a dynamic one, based on markdown pages
-* [✓] Create individual news entries
-* [✓] Generate News automatically from Git activity
+Normal build:
 
-### Automation
+```sh
+./build-site.sh
+```
 
-* [✓] Markdown-driven content workflow
-* [✓] Static page generation
-* [✓] Automated site updates from repository activity
-* [✓] Add "Latest Activity" panel on Home
-* [✓] Add a personal Lunar related projects page for the community members
+Deterministic local build without dynamic-data or archive refresh:
 
----
+```sh
+UPDATE_DYNAMIC_DATA=no UPDATE_ARCHIVE=no ./build-site.sh
+```
 
-## Roadmap
+Force regeneration of eligible output:
 
-### Activity Tracking
+```sh
+FORCE_REBUILD=yes ./build-site.sh
+```
 
-* [✓] Add a Lunar Linux project history page
-* [✓] More automation added to the site 
-* [✓] The great plan can be summarizen in a simple way like this: 
+Strict validation modes are available through `STRICT_BUILD=yes` and `STRICT_ARCHIVE=yes`.
 
-* [ ] Add a page to centralize the community related projects (a Lunar Users Repository)
+See `USAGE.md` for operational details.
 
-                 Archive
-                     ▲
-                     │
-                     │
-     Docs ◄──────────┼──────────► News
-       ▲             │              ▲
-       │             │              │
-       │             │              │
-Development ◄──── Website ────► Community
-       │                            ▲
-       │                            │
-       ▼                            │
-      LUR ──────────────────────────┘
+## Documentation
 
----
+```text
+USAGE.md                    build, preview and maintenance workflow
+MARKDOWN.md                 supported source format
+ARCHIVE.md                  archive layout and policy
+CHANGELOG-3.3.md             Website 3.3 release summary
+docs/Website-Architecture.md current architecture baseline
+components/docs/             component contracts and checkpoints
+```
 
-## Long-Term Vision
+## Development direction
 
-The website should reflect the real-time heartbeat of the Lunar Linux project.
-Repositories already contain the project's history:
+Website 3.3 is at a healthy architectural stopping point.
 
-* commits
-* releases
-* documentation updates
-* Moonbase activity
+The next change should not be selected from an old speculative roadmap. It should arise from:
 
-The website should expose this information automatically rather than requiring manual duplication.
+- a real maintenance problem;
+- new repeated implementation;
+- a stable feature boundary;
+- verified community or project needs.
 
----
+## Project URL
 
-## Architecture
+```text
+https://florin65.github.io/lunar-linux.org/
+```
 
-``````
-
-                Home
-                  │
-          ┌───────┴────────┐
-          │                │
-       About            Download
-          │
-          │
-    ┌─────┴─────┐
-    │           │
-  News        LUR
-    │           │
-    ▼           ▼
- Latest      Projects
-    │           │
-    └─────┬─────┘
-          ▼
-       Archive
-          │
- ┌────────┼───────────┐
- │        │           │
-News   Commits    Documentation
- │        │           │
- ▼        ▼           ▼
-History Timeline   Memory
-
----
-
-## Guiding Principle
+## Guiding principle
 
 > Less complexity. More satisfaction.
 
-                build-site.sh
-                    │
-               (balansier)
-                    │
-    ┌───────────────┼──────────────┐
-    │               │              │
-    ▼               ▼              ▼
-moonbase       news.json       docs.md
-commits            │               │
-    │              │               │
-    ▼              ▼               ▼
-archive-      archive-         generator
-commits       news                │
-    │              │              │
-    └──────┬───────┴───────┬──────┘
-           ▼               ▼
-        archive/         docs/
-           │               │
-           └──────┬────────┘
-                  ▼
-           GitHub Pages
-
----
-
-## Project URLs
-
-Website project page:  https://florin65.github.io/lunar-linux.org/
-
----
-
 ## Lunar Linux
 
-"It's out of this world!"
+> It's out of this world!
