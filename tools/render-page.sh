@@ -542,7 +542,7 @@ function render_index(    title, meta, offer, closing, actions, latest, facts, i
   print "        <article class=\"info-box compact\">"
   print "          <h2>Latest Updates</h2>"
   print "          <ul class=\"update-list\">"
-  print "            <li><span>date</span> {{ latest_iso_date }}</li>"
+  print "            <li><span>date</span> {{ latest_updates_date }}</li>"
   print "            <li><span>modules</span> {{ moonbase_modules }}</li>"
   print "            <li><span>repos</span> {{ moonbase_repositories_changed }}</li>"
   print "            <li><span>commits</span> {{ moonbase_commits_count }}</li>"

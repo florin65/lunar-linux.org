@@ -1,0 +1,25 @@
+Website build report
+Date: 2026-07-27 03:24:46
+Status: completed with warnings
+
+Problems
+  dynamic data: daily ISO metadata refreshed through the temporary insecure TLS exception
+
+Dynamic Data
+  warnings: 1
+
+Archive
+  generated: 10
+  preserved: 0
+  skipped: 0
+  warnings: 0
+
+Pages
+  generated: 44
+  unchanged: 0
+  failed: 0
+
+Maintenance
+  stale outputs removed: 0
+  stale signatures removed: 0
+  warnings: 0

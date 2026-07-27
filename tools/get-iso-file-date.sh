@@ -23,6 +23,7 @@ SITE_ROOT=${SITE_ROOT:-.}
 PUBLIC_DIR=${PUBLIC_DIR:-docs}
 DATA_DIR=${DATA_DIR:-$PUBLIC_DIR/data}
 ISO_BASE_URL=${ISO_BASE_URL:-https://lunar.lart.ca/latest}
+ALLOW_INSECURE_ISO_FETCH=${ALLOW_INSECURE_ISO_FETCH:-no}
 DAILY_ISO_JSON=${DAILY_ISO_JSON:-$DATA_DIR/daily-iso.json}
 
 abs_path() {
@@ -93,7 +94,25 @@ mkdir -p "$OUT_DIR"
 HTML=$(mktemp)
 OUT_TMP=$(mktemp "$OUT_DIR/.daily-iso.XXXXXX")
 
-curl -fsSL "$URL" -o "$HTML"
+if curl -fsSL "$URL" -o "$HTML"; then
+  :
+else
+  strict_status=$?
+
+  if [ "$ALLOW_INSECURE_ISO_FETCH" != "yes" ]; then
+    exit "$strict_status"
+  fi
+
+  printf 'warning: insecure daily ISO fetch used: %s\n' "$URL" >&2
+
+  if curl --insecure -fsSL "$URL" -o "$HTML"; then
+    :
+  else
+    insecure_status=$?
+    printf 'insecure daily ISO fetch also failed: %s\n' "$URL" >&2
+    exit "$insecure_status"
+  fi
+fi
 
 ISO_URL=$(
   awk '

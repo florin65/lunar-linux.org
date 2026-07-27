@@ -293,6 +293,7 @@ load_dynamic_values() {
   latest_iso_file=$(json_get_string iso_file "$DAILY_ISO")
   latest_iso_url=$(json_get_string iso_url "$DAILY_ISO")
   latest_iso_date=$(json_get_string iso_date "$DAILY_ISO")
+  latest_updates_date=$(date '+%F')
   moonbase_modules=$(json_get_number modules "$MOONBASE_STATS")
 
   [ -n "$latest_iso_file" ] || latest_iso_file="unavailable"
@@ -317,12 +318,14 @@ expand_variables() {
     -v latest_iso_display="$latest_iso_display" \
     -v latest_iso_url="$latest_iso_url" \
     -v latest_iso_date="$latest_iso_date" \
+    -v latest_updates_date="$latest_updates_date" \
     -v moonbase_modules="$moonbase_modules" '
       {
         gsub(/\{\{[[:space:]]*latest_iso_file[[:space:]]*\}\}/, latest_iso_file)
         gsub(/\{\{[[:space:]]*latest_iso_display[[:space:]]*\}\}/, latest_iso_display)
         gsub(/\{\{[[:space:]]*latest_iso_url[[:space:]]*\}\}/, latest_iso_url)
         gsub(/\{\{[[:space:]]*latest_iso_date[[:space:]]*\}\}/, latest_iso_date)
+        gsub(/\{\{[[:space:]]*latest_updates_date[[:space:]]*\}\}/, latest_updates_date)
         gsub(/\{\{[[:space:]]*moonbase_modules[[:space:]]*\}\}/, moonbase_modules)
         print
       }
@@ -764,6 +767,7 @@ expand_template_file() {
     -v latest_iso_display="$latest_iso_display" \
     -v latest_iso_url="$latest_iso_url" \
     -v latest_iso_date="$latest_iso_date" \
+    -v latest_updates_date="$latest_updates_date" \
     -v moonbase_modules="$moonbase_modules" \
     -v moonbase_commits_count="$moonbase_commits_count" \
     -v moonbase_repositories_changed="$moonbase_repositories_changed" \
@@ -847,6 +851,7 @@ expand_template_file() {
         gsub(/\{\{[[:space:]]*latest_iso_display[[:space:]]*\}\}/, latest_iso_display)
         gsub(/\{\{[[:space:]]*latest_iso_url[[:space:]]*\}\}/, latest_iso_url)
         gsub(/\{\{[[:space:]]*latest_iso_date[[:space:]]*\}\}/, latest_iso_date)
+        gsub(/\{\{[[:space:]]*latest_updates_date[[:space:]]*\}\}/, latest_updates_date)
         gsub(/\{\{[[:space:]]*moonbase_modules[[:space:]]*\}\}/, moonbase_modules)
         gsub(/\{\{[[:space:]]*moonbase_commits_count[[:space:]]*\}\}/, moonbase_commits_count)
         gsub(/\{\{[[:space:]]*moonbase_repositories_changed[[:space:]]*\}\}/, moonbase_repositories_changed)
@@ -1293,20 +1298,31 @@ update_dynamic_data() {
   printf 'updating dynamic data...\n'
   "$TOOLS/count-moonbase.sh"
 
-  if "$TOOLS/get-iso-file-date.sh"; then
-    :
+  iso_fetch_log=$(mktemp)
+
+  if "$TOOLS/get-iso-file-date.sh" 2>"$iso_fetch_log"; then
+    cat "$iso_fetch_log" >&2
+
+    if grep -q '^warning: insecure daily ISO fetch used:' "$iso_fetch_log"; then
+      record_dynamic_data_warning \
+        "daily ISO metadata refreshed through the temporary insecure TLS exception"
+    fi
   else
     iso_status=$?
+    cat "$iso_fetch_log" >&2
 
     if [ -s "$DAILY_ISO" ]; then
       record_dynamic_data_warning \
         "daily ISO metadata refresh failed (exit $iso_status); preserving $(rel_from_project "$DAILY_ISO")"
     else
+      rm -f "$iso_fetch_log"
       printf 'daily ISO metadata refresh failed and no previous metadata exists: %s\n' \
         "$(rel_from_project "$DAILY_ISO")" >&2
       return "$iso_status"
     fi
   fi
+
+  rm -f "$iso_fetch_log"
 
   "$TOOLS/build-moonbase-logs.sh"
   "$TOOLS/build-moonbase-news.sh"
