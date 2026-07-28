@@ -9,10 +9,10 @@ unchanged	./docs/docs-moonbase.html
 unchanged	./docs/docs-package-management.html
 unchanged	./docs/docs-writing-modules.html
 unchanged	./docs/docs.html
-unchanged	./docs/download.html
+generated	./docs/download.html
 unchanged	./docs/history.html
-unchanged	./docs/index.html
-unchanged	./docs/info.html
+generated	./docs/index.html
+generated	./docs/info.html
 unchanged	./docs/lss.html
 unchanged	./docs/lss/administrator-guide/caches-and-rollback.html
 unchanged	./docs/lss/administrator-guide/index.html
@@ -41,4 +41,4 @@ unchanged	./docs/lss/user-guide/policy-states.html
 unchanged	./docs/lss/user-guide/updating-safely.html
 unchanged	./docs/lur.html
 unchanged	./docs/news-archive.html
-unchanged	./docs/commits-archive.html
+generated	./docs/commits-archive.html
