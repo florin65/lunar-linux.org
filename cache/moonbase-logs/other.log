@@ -1,6 +1,6 @@
-2026-07-27|d40bfa77f919cd1a44d62c8015c06f1fe74ede9a|imath: Adjust BUILD.
-2026-07-27|ca21a977168ce6e3fa1bc32be9e0dc135f565ebb|lager: Bump to 0.1.3.
-2026-07-27|e4f43a2d5232930dd657fd77a01bedeed8f871c6|ImageMagick: version bumped to 7.1.2-28
-2026-07-27|9163bd6b5958d48a42bdb8ff5b9f68669620c94b|openjph: Version bumped to 0.31.0
-2026-07-27|b55b56717a50f58232925888b4cbd2d7a0f8c862|screen: version bumped to 5.0.2
-2026-07-27|c471707994e386a384b43f83a1cd638f4708db92|libdvdcss: version bumped to 1.6.0
+2026-07-28|c6df1aad0b29f3c8ae5bd5d0c4b90f1a011c7a94|sun-jdk: Bump to 25.0.4.
+2026-07-28|07b5ac38097bebd1c0b9562c4332f8a8cc20a69d|blosc2: Version bumped to 3.3.0
+2026-07-28|0e0e246a9cea5d88c5bbc7b2d890af125c583875|ocl-icd: Version bumped to 2.3.5
+2026-07-28|5b5a8b5787675a6db3da6c63c40196492c14891b|weechat: version bumped to 4.9.5
+2026-07-28|62fda410d9c74191ecb7255e6576acaf979e0f77|openexr: Adding a comment to DEPENDS.
+2026-07-28|9c56c77fcbcdbee557f83defb5e2eadce25fc44c|intel-tbb: Bump to 2023.1.0.

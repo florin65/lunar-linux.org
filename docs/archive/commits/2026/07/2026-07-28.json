@@ -5,7 +5,5 @@
   {"date":"2026-07-28","category":"Moonbase","repository":"other","module":"weechat","version":"4.9.5","commit":"5b5a8b5787675a6db3da6c63c40196492c14891b","title":"weechat updated to 4.9.5","summary":"version bumped to 4.9.5"},
   {"date":"2026-07-28","category":"Moonbase","repository":"other","module":"","version":"","commit":"62fda410d9c74191ecb7255e6576acaf979e0f77","title":"openexr: Adding a comment to DEPENDS.","summary":"openexr: Adding a comment to DEPENDS."},
   {"date":"2026-07-28","category":"Moonbase","repository":"other","module":"intel-tbb","version":"2023.1.0.","commit":"9c56c77fcbcdbee557f83defb5e2eadce25fc44c","title":"intel-tbb updated to 2023.1.0.","summary":"bump to 2023.1.0."},
-  {"date":"2026-07-28","category":"Moonbase","repository":"other","module":"sun-jdk","version":"25.0.4.","commit":"c6df1aad0b29f3c8ae5bd5d0c4b90f1a011c7a94","title":"sun-jdk updated to 25.0.4.","summary":"bump to 25.0.4."},
-  {"date":"2026-07-25","category":"Moonbase","repository":"core","module":"linux","version":"7.1.5","commit":"fccf2e293ce4e4e1dd2241560f987bd92e6fa208","title":"linux updated to 7.1.5","summary":"version bumped to 7.1.5"},
-  {"date":"2026-07-24","category":"Moonbase","repository":"core","module":"","version":"","commit":"df642b905f10617235a269e01bdf781965d69afc","title":"dracut: Version bump to 110","summary":"dracut: Version bump to 110"}
+  {"date":"2026-07-28","category":"Moonbase","repository":"other","module":"sun-jdk","version":"25.0.4.","commit":"c6df1aad0b29f3c8ae5bd5d0c4b90f1a011c7a94","title":"sun-jdk updated to 25.0.4.","summary":"bump to 25.0.4."}
 ]
