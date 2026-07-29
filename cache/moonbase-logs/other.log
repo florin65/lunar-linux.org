@@ -1,4 +1,8 @@
+2026-07-28|11abff3765ddb0bf301962b713974346b5a8a69b|Vulkan-Loader: Bump to 1.4.357.
+2026-07-28|3a0c183e02ed8f1e5f44bc42738b168596794070|Vulkan-Headers: Bump to 1.4.357.
+2026-07-28|dc86c02e55f2b83833ea5ec7667efa6ba7f063f6|libarchive: Version bumped to 3.8.9
 2026-07-28|c6df1aad0b29f3c8ae5bd5d0c4b90f1a011c7a94|sun-jdk: Bump to 25.0.4.
+2026-07-28|716b1a658b212aa40988c75abc370f9b16a3bd8d|astyle: Version bumped to 3.6.17
 2026-07-28|07b5ac38097bebd1c0b9562c4332f8a8cc20a69d|blosc2: Version bumped to 3.3.0
 2026-07-28|0e0e246a9cea5d88c5bbc7b2d890af125c583875|ocl-icd: Version bumped to 2.3.5
 2026-07-28|5b5a8b5787675a6db3da6c63c40196492c14891b|weechat: version bumped to 4.9.5
