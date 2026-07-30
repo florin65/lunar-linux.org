@@ -12,5 +12,6 @@
   {"date":"2026-07-28","category":"Moonbase","repository":"other","module":"libarchive","version":"3.8.9","commit":"dc86c02e55f2b83833ea5ec7667efa6ba7f063f6","title":"libarchive updated to 3.8.9","summary":"version bumped to 3.8.9"},
   {"date":"2026-07-28","category":"Moonbase","repository":"xorg","module":"glslang","version":"16.4.0.","commit":"8c7f57920b4ba3c0d6cbcff180e6121ba90f61a0","title":"glslang updated to 16.4.0.","summary":"bump to 16.4.0."},
   {"date":"2026-07-28","category":"Moonbase","repository":"xorg","module":"spirv-headers","version":"1.4.357.0.","commit":"b30cc5c072c743c817c6a9f9cd5592a95b592df0","title":"spirv-headers updated to 1.4.357.0.","summary":"bump to 1.4.357.0."},
-  {"date":"2026-07-28","category":"Moonbase","repository":"xorg","module":"spirv-tools","version":"1.4.357.0.","commit":"e99c0a7e9b12aa9b97e5c1e5deb53a0a6f8ad834","title":"spirv-tools updated to 1.4.357.0.","summary":"bump to 1.4.357.0."}
+  {"date":"2026-07-28","category":"Moonbase","repository":"xorg","module":"spirv-tools","version":"1.4.357.0.","commit":"e99c0a7e9b12aa9b97e5c1e5deb53a0a6f8ad834","title":"spirv-tools updated to 1.4.357.0.","summary":"bump to 1.4.357.0."},
+  {"date":"2026-07-28","category":"Moonbase","repository":"xorg","module":"spirv-llvm-translator","version":"22.1.4.","commit":"1bb36568f8420936a355d11ad4acda333ae0d43d","title":"spirv-llvm-translator updated to 22.1.4.","summary":"bump to 22.1.4."}
 ]

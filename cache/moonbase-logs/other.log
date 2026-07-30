@@ -1,10 +1,6 @@
-2026-07-28|11abff3765ddb0bf301962b713974346b5a8a69b|Vulkan-Loader: Bump to 1.4.357.
-2026-07-28|3a0c183e02ed8f1e5f44bc42738b168596794070|Vulkan-Headers: Bump to 1.4.357.
-2026-07-28|dc86c02e55f2b83833ea5ec7667efa6ba7f063f6|libarchive: Version bumped to 3.8.9
-2026-07-28|c6df1aad0b29f3c8ae5bd5d0c4b90f1a011c7a94|sun-jdk: Bump to 25.0.4.
-2026-07-28|716b1a658b212aa40988c75abc370f9b16a3bd8d|astyle: Version bumped to 3.6.17
-2026-07-28|07b5ac38097bebd1c0b9562c4332f8a8cc20a69d|blosc2: Version bumped to 3.3.0
-2026-07-28|0e0e246a9cea5d88c5bbc7b2d890af125c583875|ocl-icd: Version bumped to 2.3.5
-2026-07-28|5b5a8b5787675a6db3da6c63c40196492c14891b|weechat: version bumped to 4.9.5
-2026-07-28|62fda410d9c74191ecb7255e6576acaf979e0f77|openexr: Adding a comment to DEPENDS.
-2026-07-28|9c56c77fcbcdbee557f83defb5e2eadce25fc44c|intel-tbb: Bump to 2023.1.0.
+2026-07-29|20380874d7bcb8c53be47e58592ab567c7d61b4b|libmicrohttpd: Version bumped to 1.0.8
+2026-07-29|f32447114bf24c6556d742ac5a6493c2d94953d6|firefox: version bumped to 153.0.1
+2026-07-29|512cc88983c8a720a6c6c421fd2f035b81df4083|nss: also build and install libfreeblpriv3.so for recent firefox 153.0.1
+2026-07-29|a71ebe292d429b4923be1f145ccad72d80740a40|faac: Version bumped to 2.0
+2026-07-29|ef7f6ec101f1e64380d17306038445208a8b5e2f|tailscale: Version bumped to 1.98.10
+2026-07-29|6736beda6628e1d745812fca73c3ef64081a71c7|firefox-bin: version bumped to 153.0.1
