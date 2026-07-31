@@ -89,6 +89,9 @@ ARCHIVE_NEWS=$(abs_path "$ARCHIVE_NEWS_HTML")
 mkdir -p "$PUBLIC" "$DATA" "$BUILD" "$PAGE_SIGNATURE_DIR"
 
 dynamic_data_warnings=0
+editorial_news_warnings=0
+editorial_news_log=
+editorial_news_warning_file=
 
 html_attr_escape() {
   printf '%s' "$1" | sed \
@@ -723,6 +726,14 @@ cleanup_temp_files() {
   if [ -n "${info_commits_archive_actions_file:-}" ]; then
     rm -f "$info_commits_archive_actions_file"
   fi
+
+  if [ -n "${editorial_news_log:-}" ]; then
+    rm -f "$editorial_news_log"
+  fi
+
+  if [ -n "${editorial_news_warning_file:-}" ]; then
+    rm -f "$editorial_news_warning_file"
+  fi
 }
 
 
@@ -1257,6 +1268,71 @@ append_dynamic_data_report() {
   } >> "$BUILD_REPORT_FILE"
 }
 
+record_editorial_news_warning() {
+  warning_message=$1
+  editorial_news_warnings=$((editorial_news_warnings + 1))
+
+  printf '  editorial news: %s\n' "$warning_message" >> "$BUILD_REPORT_FILE"
+}
+
+append_editorial_news_report() {
+  {
+    printf '\nEditorial News\n'
+    printf '  warnings: %s\n' "$editorial_news_warnings"
+  } >> "$BUILD_REPORT_FILE"
+}
+
+build_editorial_news() {
+  editorial_news_log=$(mktemp "$BUILD/.editorial-news.XXXXXX")
+  editorial_news_warning_file=$(mktemp "$BUILD/.editorial-news-warnings.XXXXXX")
+  : > "$editorial_news_log"
+
+  if "$TOOLS/build-community-news.sh" 2>>"$editorial_news_log"; then
+    :
+  else
+    editorial_news_status=$?
+    cat "$editorial_news_log" >&2
+    rm -f "$editorial_news_log" "$editorial_news_warning_file"
+    editorial_news_log=
+    editorial_news_warning_file=
+    return "$editorial_news_status"
+  fi
+
+  if [ "$GENERATE_NEWS_JSON" = "yes" ]; then
+    if build_news_json 2>>"$editorial_news_log"; then
+      :
+    else
+      editorial_news_status=$?
+      cat "$editorial_news_log" >&2
+      rm -f "$editorial_news_log" "$editorial_news_warning_file"
+      editorial_news_log=
+      editorial_news_warning_file=
+      return "$editorial_news_status"
+    fi
+  fi
+
+  cat "$editorial_news_log" >&2
+
+  awk '
+    /^warning:[[:space:]]*/ {
+      message = $0
+      sub(/^warning:[[:space:]]*/, "", message)
+
+      if (!seen[message]++)
+        print message
+    }
+  ' "$editorial_news_log" > "$editorial_news_warning_file"
+
+  while IFS= read -r warning_message; do
+    [ -n "$warning_message" ] || continue
+    record_editorial_news_warning "$warning_message"
+  done < "$editorial_news_warning_file"
+
+  rm -f "$editorial_news_log" "$editorial_news_warning_file"
+  editorial_news_log=
+  editorial_news_warning_file=
+}
+
 update_dynamic_data() {
   if [ "$UPDATE_DYNAMIC_DATA" != "yes" ]; then
     return 0
@@ -1553,15 +1629,14 @@ main() {
   initialize_build_report
 
   update_dynamic_data
+
+  # Editorial news is authoritative local content. It is regenerated
+  # independently of remote dynamic-data refresh policy, and its tolerated
+  # validation warnings are preserved in the administrative build report.
+  build_editorial_news
+
   append_dynamic_data_report
-
-  # Editorial news is authoritative local content. It must be regenerated
-  # independently of remote dynamic-data refresh policy.
-  "$TOOLS/build-community-news.sh"
-
-  if [ "$GENERATE_NEWS_JSON" = "yes" ]; then
-    build_news_json
-  fi
+  append_editorial_news_report
 
   load_dynamic_values
   prepare_moonbase_values
@@ -1601,7 +1676,8 @@ main() {
   append_page_report
 
   if [ "${archive_status:-skipped}" = "warning" ] ||
-     [ "$dynamic_data_warnings" -gt 0 ]; then
+     [ "$dynamic_data_warnings" -gt 0 ] ||
+     [ "$editorial_news_warnings" -gt 0 ]; then
     finalize_build_report "completed with warnings"
   else
     finalize_build_report "completed"
@@ -1610,8 +1686,10 @@ main() {
   phase4_status=0
 
   if [ -x "$FINALIZE_BUILD_STATE" ]; then
-    if ! PROJECT_ROOT="$PROJECT_ROOT"       SRC="$SRC"       NEWS_SRC="$NEWS_SRC"       PUBLIC="$PUBLIC"       BUILD="$BUILD"       BUILD_REPORT_FILE="$BUILD_REPORT_FILE"       PAGE_SIGNATURE_DIR="$PAGE_SIGNATURE_DIR"       NEWS_SIGNATURE_DIR="${NEWS_SIGNATURE_DIR:-$BUILD/news-signatures}"       ARCHIVE_NEWS_SIGNATURE_DIR="${ARCHIVE_NEWS_SIGNATURE_DIR:-$BUILD/archive-news-signatures}"       STRICT_BUILD="$STRICT_BUILD"       "$FINALIZE_BUILD_STATE"
+    if PROJECT_ROOT="$PROJECT_ROOT"       SRC="$SRC"       NEWS_SRC="$NEWS_SRC"       PUBLIC="$PUBLIC"       BUILD="$BUILD"       BUILD_REPORT_FILE="$BUILD_REPORT_FILE"       PAGE_SIGNATURE_DIR="$PAGE_SIGNATURE_DIR"       NEWS_SIGNATURE_DIR="${NEWS_SIGNATURE_DIR:-$BUILD/news-signatures}"       ARCHIVE_NEWS_SIGNATURE_DIR="${ARCHIVE_NEWS_SIGNATURE_DIR:-$BUILD/archive-news-signatures}"       STRICT_BUILD="$STRICT_BUILD"       "$FINALIZE_BUILD_STATE"
     then
+      :
+    else
       phase4_status=$?
     fi
   else
