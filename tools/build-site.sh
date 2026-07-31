@@ -1293,7 +1293,6 @@ update_dynamic_data() {
 
   "$TOOLS/build-moonbase-logs.sh"
   "$TOOLS/build-moonbase-news.sh"
-  "$TOOLS/build-community-news.sh"
 }
 
 update_archive() {
@@ -1555,6 +1554,10 @@ main() {
 
   update_dynamic_data
   append_dynamic_data_report
+
+  # Editorial news is authoritative local content. It must be regenerated
+  # independently of remote dynamic-data refresh policy.
+  "$TOOLS/build-community-news.sh"
 
   if [ "$GENERATE_NEWS_JSON" = "yes" ]; then
     build_news_json
