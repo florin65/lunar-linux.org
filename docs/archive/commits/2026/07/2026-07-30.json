@@ -11,8 +11,5 @@
   {"date":"2026-07-30","category":"Moonbase","repository":"other","module":"swayidle","version":"1.9.0","commit":"a71cc687b9a697a1a18f3f671d5ab49eecde104f","title":"swayidle updated to 1.9.0","summary":"version bumped to 1.9.0"},
   {"date":"2026-07-30","category":"Moonbase","repository":"other","module":"swaybg","version":"1.2.2","commit":"b0c01cd48893a98f7e8111dd85f34ebe7f150f3b","title":"swaybg updated to 1.2.2","summary":"version bumped to 1.2.2"},
   {"date":"2026-07-30","category":"Moonbase","repository":"other","module":"nghttp2","version":"1.70.0","commit":"be5d8d41ef5ab33a3248452ef7df93bdb9cdb0a0","title":"nghttp2 updated to 1.70.0","summary":"version bumped to 1.70.0"},
-  {"date":"2026-07-30","category":"Moonbase","repository":"other","module":"gst-plugins-base","version":"1.29.2.","commit":"f7dd15559fb3eb07311a3ce46d15466d89d1c9a2","title":"gst-plugins-base updated to 1.29.2.","summary":"bump to 1.29.2."},
-  {"date":"2026-07-29","category":"Moonbase","repository":"other","module":"brave-bin","version":"1.92.144","commit":"5850b38f861e0d8a3984fcc0c73df0598d9466bc","title":"brave-bin updated to 1.92.144","summary":"version bumped to 1.92.144"},
-  {"date":"2026-07-29","category":"Moonbase","repository":"other","module":"wayland","version":"1.26.0","commit":"e8a0469986f05e8e313b6d5022a5cc57b886352d","title":"wayland updated to 1.26.0","summary":"version bumped to 1.26.0"},
-  {"date":"2026-07-29","category":"Moonbase","repository":"xorg","module":"mesa-lib","version":"26.1.6","commit":"6cad6cd6bb6a935b94f6d04847b1c8bdb46e2671","title":"mesa-lib updated to 26.1.6","summary":"version bumped to 26.1.6"}
+  {"date":"2026-07-30","category":"Moonbase","repository":"other","module":"gst-plugins-base","version":"1.29.2.","commit":"f7dd15559fb3eb07311a3ce46d15466d89d1c9a2","title":"gst-plugins-base updated to 1.29.2.","summary":"bump to 1.29.2."}
 ]

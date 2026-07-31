@@ -4,5 +4,8 @@
   {"date":"2026-07-29","category":"Moonbase","repository":"other","module":"firefox-bin","version":"153.0.1","commit":"6736beda6628e1d745812fca73c3ef64081a71c7","title":"firefox-bin updated to 153.0.1","summary":"version bumped to 153.0.1"},
   {"date":"2026-07-29","category":"Moonbase","repository":"other","module":"faac","version":"2.0","commit":"a71ebe292d429b4923be1f145ccad72d80740a40","title":"faac updated to 2.0","summary":"version bumped to 2.0"},
   {"date":"2026-07-29","category":"Moonbase","repository":"other","module":"tailscale","version":"1.98.10","commit":"ef7f6ec101f1e64380d17306038445208a8b5e2f","title":"tailscale updated to 1.98.10","summary":"version bumped to 1.98.10"},
-  {"date":"2026-07-29","category":"Moonbase","repository":"other","module":"firefox","version":"153.0.1","commit":"f32447114bf24c6556d742ac5a6493c2d94953d6","title":"firefox updated to 153.0.1","summary":"version bumped to 153.0.1"}
+  {"date":"2026-07-29","category":"Moonbase","repository":"other","module":"firefox","version":"153.0.1","commit":"f32447114bf24c6556d742ac5a6493c2d94953d6","title":"firefox updated to 153.0.1","summary":"version bumped to 153.0.1"},
+  {"date":"2026-07-29","category":"Moonbase","repository":"other","module":"brave-bin","version":"1.92.144","commit":"5850b38f861e0d8a3984fcc0c73df0598d9466bc","title":"brave-bin updated to 1.92.144","summary":"version bumped to 1.92.144"},
+  {"date":"2026-07-29","category":"Moonbase","repository":"other","module":"wayland","version":"1.26.0","commit":"e8a0469986f05e8e313b6d5022a5cc57b886352d","title":"wayland updated to 1.26.0","summary":"version bumped to 1.26.0"},
+  {"date":"2026-07-29","category":"Moonbase","repository":"xorg","module":"mesa-lib","version":"26.1.6","commit":"6cad6cd6bb6a935b94f6d04847b1c8bdb46e2671","title":"mesa-lib updated to 26.1.6","summary":"version bumped to 26.1.6"}
 ]
