@@ -6,7 +6,5 @@
   {"date":"2026-07-31","category":"Moonbase","repository":"other","module":"buildah","version":"1.45.0","commit":"d7bcd175bd5f9f1bcf79148c2e51037d6b6cc4eb","title":"buildah updated to 1.45.0","summary":"version bumped to 1.45.0"},
   {"date":"2026-07-31","category":"Moonbase","repository":"other","module":"redis","version":"8.10.0","commit":"f3fa3d25d223dc50bc593b32e5afc26ac67d4bdc","title":"redis updated to 8.10.0","summary":"version bumped to 8.10.0"},
   {"date":"2026-07-31","category":"Moonbase","repository":"other","module":"thunderbird","version":"153.0.1.","commit":"f83b8041561787a74e47966e888a35fabb8b6bbe","title":"thunderbird updated to 153.0.1.","summary":"bump to 153.0.1."},
-  {"date":"2026-07-31","category":"Moonbase","repository":"xfce","module":"xfce4-panel","version":"4.20.8","commit":"11e27bd263968aafa2e5801dfee4e22e836a2d56","title":"xfce4-panel updated to 4.20.8","summary":"version bumped to 4.20.8"},
-  {"date":"2026-07-30","category":"Moonbase","repository":"other","module":"ugrep","version":"7.8.3","commit":"09ccba4de84732ef7c376fb58f2ec44ae584f2fb","title":"ugrep updated to 7.8.3","summary":"version bumped to 7.8.3"},
-  {"date":"2026-07-30","category":"Moonbase","repository":"other","module":"php","version":"8.5.9","commit":"46942fee5460c22ee7b89394a5039e5eafaf19a8","title":"php updated to 8.5.9","summary":"version bumped to 8.5.9"}
+  {"date":"2026-07-31","category":"Moonbase","repository":"xfce","module":"xfce4-panel","version":"4.20.8","commit":"11e27bd263968aafa2e5801dfee4e22e836a2d56","title":"xfce4-panel updated to 4.20.8","summary":"version bumped to 4.20.8"}
 ]

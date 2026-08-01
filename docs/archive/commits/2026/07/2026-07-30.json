@@ -11,5 +11,7 @@
   {"date":"2026-07-30","category":"Moonbase","repository":"other","module":"swayidle","version":"1.9.0","commit":"a71cc687b9a697a1a18f3f671d5ab49eecde104f","title":"swayidle updated to 1.9.0","summary":"version bumped to 1.9.0"},
   {"date":"2026-07-30","category":"Moonbase","repository":"other","module":"swaybg","version":"1.2.2","commit":"b0c01cd48893a98f7e8111dd85f34ebe7f150f3b","title":"swaybg updated to 1.2.2","summary":"version bumped to 1.2.2"},
   {"date":"2026-07-30","category":"Moonbase","repository":"other","module":"nghttp2","version":"1.70.0","commit":"be5d8d41ef5ab33a3248452ef7df93bdb9cdb0a0","title":"nghttp2 updated to 1.70.0","summary":"version bumped to 1.70.0"},
-  {"date":"2026-07-30","category":"Moonbase","repository":"other","module":"gst-plugins-base","version":"1.29.2.","commit":"f7dd15559fb3eb07311a3ce46d15466d89d1c9a2","title":"gst-plugins-base updated to 1.29.2.","summary":"bump to 1.29.2."}
+  {"date":"2026-07-30","category":"Moonbase","repository":"other","module":"gst-plugins-base","version":"1.29.2.","commit":"f7dd15559fb3eb07311a3ce46d15466d89d1c9a2","title":"gst-plugins-base updated to 1.29.2.","summary":"bump to 1.29.2."},
+  {"date":"2026-07-30","category":"Moonbase","repository":"other","module":"ugrep","version":"7.8.3","commit":"09ccba4de84732ef7c376fb58f2ec44ae584f2fb","title":"ugrep updated to 7.8.3","summary":"version bumped to 7.8.3"},
+  {"date":"2026-07-30","category":"Moonbase","repository":"other","module":"php","version":"8.5.9","commit":"46942fee5460c22ee7b89394a5039e5eafaf19a8","title":"php updated to 8.5.9","summary":"version bumped to 8.5.9"}
 ]

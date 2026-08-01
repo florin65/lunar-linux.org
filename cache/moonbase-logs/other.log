@@ -1,15 +1,9 @@
-2026-07-30|0340229f929a11864eadcb69625c84802097d079|swayshot: update source and website URLs
-2026-07-30|6b37a3d4b04d96a9af3de1c9cefdafe3dcb5734b|swaylock: Version bumped to 1.8.6
-2026-07-30|b0c01cd48893a98f7e8111dd85f34ebe7f150f3b|swaybg: Version bumped to 1.2.2
-2026-07-30|a71cc687b9a697a1a18f3f671d5ab49eecde104f|swayidle: version bumped to 1.9.0
-2026-07-30|99001b2a8908af1f6c0bf28a091ebe0f30a0564f|linux-lts: Version bumped to 6.18.41
-2026-07-30|be5d8d41ef5ab33a3248452ef7df93bdb9cdb0a0|nghttp2: Version bumped to 1.70.0
-2026-07-30|2d67d1a03bf5f52db1d1e7f69845aeb8729f0841|kitty: Version bumped to 0.48.2
-2026-07-30|2d38314cf6d6242c7fd16833eaff3b413cda65d4|gst-plugins-ugly: Bump to 1.29.2.
-2026-07-30|182b1b5d82959a4003b8609024be157f73108407|gst-python: Bump to 1.29.2.
-2026-07-30|4ff13d0ca4d217c034092f8f1a545f3bce172edb|gst-plugins-bad: Bump to 1.29.2.
-2026-07-30|286bb374f367270dedd9c2cce92c3224be42b3b7|gst-plugins-good: Bump to 1.29.2.
-2026-07-30|f7dd15559fb3eb07311a3ce46d15466d89d1c9a2|gst-plugins-base: Bump to 1.29.2.
-2026-07-30|a0578fda8ae5c9329ac227dd655fd7e8046fbf62|gstreamer: Bump to 1.29.2.
-2026-07-29|e8a0469986f05e8e313b6d5022a5cc57b886352d|wayland: version bumped to 1.26.0
-2026-07-29|5850b38f861e0d8a3984fcc0c73df0598d9466bc|brave-bin: Version bumped to 1.92.144
+2026-07-31|d7bcd175bd5f9f1bcf79148c2e51037d6b6cc4eb|buildah: version bumped to 1.45.0
+2026-07-31|61be4c611d36b6f85caad3724991330b119f2fc2|qemu: version bumped to 11.0.3
+2026-07-31|f3fa3d25d223dc50bc593b32e5afc26ac67d4bdc|redis: version bumped to 8.10.0
+2026-07-31|f83b8041561787a74e47966e888a35fabb8b6bbe|thunderbird: Bump to 153.0.1.
+2026-07-31|3f001be95f00ec04a094f32f6ec7101e4370d9e1|hwdata: Version bumped to 0.410
+2026-07-31|ca0502f8eeaf07651fa9b2311e29058ba2afdde8|lf: Version bumped to r42
+2026-07-31|5966abe53fdb3fca1c2c81ac57fe4ad60411fe4c|libmicrohttpd: Version bumped to 1.0.9
+2026-07-30|46942fee5460c22ee7b89394a5039e5eafaf19a8|php: Version bumped to 8.5.9
+2026-07-30|09ccba4de84732ef7c376fb58f2ec44ae584f2fb|ugrep: Version bumped to 7.8.3

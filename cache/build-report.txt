@@ -1,11 +1,14 @@
 Website build report
-Date: 2026-07-31 17:54:07
+Date: 2026-08-01 19:39:29
 Status: completed
 
 Problems
 
   none
 Dynamic Data
+  warnings: 0
+
+Editorial News
   warnings: 0
 
 Archive
@@ -15,8 +18,8 @@ Archive
   warnings: 0
 
 Pages
-  generated: 2
-  unchanged: 42
+  generated: 4
+  unchanged: 40
   failed: 0
 
 Maintenance
