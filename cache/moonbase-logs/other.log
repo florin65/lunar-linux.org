@@ -1,9 +1,9 @@
-2026-07-31|d7bcd175bd5f9f1bcf79148c2e51037d6b6cc4eb|buildah: version bumped to 1.45.0
-2026-07-31|61be4c611d36b6f85caad3724991330b119f2fc2|qemu: version bumped to 11.0.3
-2026-07-31|f3fa3d25d223dc50bc593b32e5afc26ac67d4bdc|redis: version bumped to 8.10.0
-2026-07-31|f83b8041561787a74e47966e888a35fabb8b6bbe|thunderbird: Bump to 153.0.1.
-2026-07-31|3f001be95f00ec04a094f32f6ec7101e4370d9e1|hwdata: Version bumped to 0.410
-2026-07-31|ca0502f8eeaf07651fa9b2311e29058ba2afdde8|lf: Version bumped to r42
-2026-07-31|5966abe53fdb3fca1c2c81ac57fe4ad60411fe4c|libmicrohttpd: Version bumped to 1.0.9
-2026-07-30|46942fee5460c22ee7b89394a5039e5eafaf19a8|php: Version bumped to 8.5.9
-2026-07-30|09ccba4de84732ef7c376fb58f2ec44ae584f2fb|ugrep: Version bumped to 7.8.3
+2026-08-01|a6402d29d54a54783bc82746b62f472049ce0518|bpftop: correct install command
+2026-08-01|6b4455b56b5ef618654c2c282306d07de912ea92|bpftop: new module for eBPF program stats monitoring
+2026-08-01|2b16ce84b60c02399e7d4573f29f2210f93b6296|simdjson: Version bumped to 4.6.6
+2026-08-01|a2a6ed4bd5c1da77f1dc5c30e07f8fdd718a8675|pdfjs: version bumped to 6.2.108
+2026-08-01|2d5723b01fde5b1b60544cfb213fb612761ceb11|fzf: Version bumped to 0.74.2
+2026-08-01|3ce56c96622e7f8ea245d908cf452025aa11e2a8|jenkins: version bumped to 2.575
+2026-08-01|28fcf23e6ff0a002df13f05e4a49559e612cdfff|samba: version bumped to 4.24.5
+2026-08-01|971f220771f9e06231f352185b3c45dbcaefc6a8|clojure: version bumped to 1.12.5.1664
+2026-08-01|fcf4d3dcff3e584863e8cc670665b5692de18cfd|libssh: version bumped to 0.12.2
