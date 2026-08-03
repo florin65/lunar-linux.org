@@ -1,9 +1,21 @@
-2026-08-01|a6402d29d54a54783bc82746b62f472049ce0518|bpftop: correct install command
-2026-08-01|6b4455b56b5ef618654c2c282306d07de912ea92|bpftop: new module for eBPF program stats monitoring
-2026-08-01|2b16ce84b60c02399e7d4573f29f2210f93b6296|simdjson: Version bumped to 4.6.6
-2026-08-01|a2a6ed4bd5c1da77f1dc5c30e07f8fdd718a8675|pdfjs: version bumped to 6.2.108
-2026-08-01|2d5723b01fde5b1b60544cfb213fb612761ceb11|fzf: Version bumped to 0.74.2
-2026-08-01|3ce56c96622e7f8ea245d908cf452025aa11e2a8|jenkins: version bumped to 2.575
-2026-08-01|28fcf23e6ff0a002df13f05e4a49559e612cdfff|samba: version bumped to 4.24.5
-2026-08-01|971f220771f9e06231f352185b3c45dbcaefc6a8|clojure: version bumped to 1.12.5.1664
-2026-08-01|fcf4d3dcff3e584863e8cc670665b5692de18cfd|libssh: version bumped to 0.12.2
+2026-08-02|54c4e7496063f6a4c56b7799857a730f4401dc81|libindi: Version bumped to 2.2.4.1
+2026-08-02|6d43f377396926598191d9e1c701daca468217a6|slstatus: A status monitor for window managers
+2026-08-02|cf3fbffb6cfaadb832e0fa7819bc7e631bcfde77|menu-calc: remove it from the moonbase
+2026-08-02|1cd97d011e3558dedd91323a620fc040acd828ae|kpmenu: version bumped to 1.4.1
+2026-08-02|85bc2b8650434693a4af14ace938140893269e4e|wmctrl: fix the source url and the sha256 sum.
+2026-08-02|52160cc13446ac1bea28f707cf8a1913a15d1dab|wmctrl: fix the sha256 sum.
+2026-08-02|ac906d68ca39af41b2951dc187cf5bd1c42400b4|wmctrl: ipdate the date
+2026-08-02|00a10b786845b8019367c499e9506bc30882520f|dmenu-rs: remove it from the moonbase
+2026-08-02|ff025d49148cae0304658477ded4b2aa06440dc5|dmenu-rs: remove it from the moonbase
+2026-08-02|7d3064b17b06d6027fcb8b50e771a17d1593b062|slock: version bumped to 1.7
+2026-08-02|f4b0de874b5a06e0daf372dd9848f3dd63b23e09|dwm: version bumped to 6.8
+2026-08-02|e8661271e72bda044e1d2f6ed80a8782587eb753|herfbuzz: version bumped to 14.3.0
+2026-08-02|cb5252463b6e3cba0c80773971e6a3ee8daebada|ipython: version bumped to 9.16.0
+2026-08-02|19c42304a2e506c64afda6f8c58befc568dea7ec|shaderc: version bumped to 2026.3
+2026-08-02|7e63ed5aef6f11ed4a123dd9694a7bf2f02764e1|msmtp: version bumped to 1.8.34
+2026-08-02|b3bff7c870960417c2cabbeff35fcd482654e699|noto-fonts: version bumped to 2026.08.01
+2026-08-02|bc447e1f62cef039237648b2bb1bdaa9391b6362|skim: Version bumped to 5.6.1
+2026-08-02|538ab93d1b001cbd0e28696e97ab1e4355fd217c|gh: Version bumped to 2.97.0
+2026-08-02|e20b01dba8b12ab0fbded7a636f790208ed44547|libindi: Version bumped to 2.2.4
+2026-08-02|2f57ad144d298ccc8935aed2c70ab215f180cea0|libphonenumber: Version bumped to 9.0.36
+2026-08-02|32e2f6d2450b3c28d86fe793e8259ce4343f17d3|libpsl: Version bumped to 0.23.1
