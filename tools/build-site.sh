@@ -806,9 +806,6 @@ page_build_signature() {
     printf '%s
 ' '--- footer ---'
     cat "$FOOTER"
-    printf '%s
-' '--- archive links component ---'
-    cat "$ARCHIVE_LINKS_COMPONENT"
   } | sha256sum | awk '{ print $1 }'
 }
 
