@@ -4,7 +4,7 @@
 **Date:** 2026-08-03
 **Project:** Lunar Linux Website 3.3
 **Phase:** Architecture audit and controlled refinement
-**Status:** Proposed acceptance checkpoint
+**Status:** Accepted architecture checkpoint
 **Accepted code baseline:** `6731de487c96691f7413f0bcc142b0881b6cfe04` — `Refine page signature dependencies`
 
 ## 1. Purpose
