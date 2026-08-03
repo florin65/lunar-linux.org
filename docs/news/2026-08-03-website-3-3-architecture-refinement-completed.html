@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lunar Linux Website 3.3 architecture refinement completed</title>
+  <meta name="description" content="The architecture-refinement cycle for Lunar Linux Website 3.3 has been completed.">
+
+  <link rel="icon" href="../assets/logo/favicon.ico">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a class="brand" href="../index.html">
+        <img src="../assets/logo/lunar-logo.svg" alt="Lunar Linux">
+      </a>
+
+      <p class="brand-slogan">It's out of this world!</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../info.html">Info</a>
+      <a href="../download.html">Download</a>
+      <a href="../docs.html">Docs</a>
+      <a href="../lur.html">LUR</a>
+      <a href="../community.html">Community</a>
+    <a href="../development.html">Development</a>
+    </nav>
+  </div>
+</header>
+<main class="page-main">
+  <section class="page-hero">
+    <div class="container">
+      <p class="meta-line">Project · <time datetime="2026-08-03T22:00:00">2026-08-03 22:00</time></p>
+      <h1>Lunar Linux Website 3.3 architecture refinement completed</h1>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container content-card wide generated-page news-article-page">
+          <p>The architecture-refinement cycle for Lunar Linux Website 3.3 has been completed.</p>
+          <p>The work began with a read-only audit of the generator's responsibilities, runtime dependencies, shared state, failure behavior and generated-output ownership. Changes were introduced only where the audit identified a clear correctness or maintainability benefit.</p>
+          <p>The editorial news lifecycle is now independent of remote dynamic-data refresh, accepted editorial warnings are recorded in the persistent build report, and Moonbase page data is prepared through a single parsing pass with a clearer separation between data preparation and orchestration.</p>
+          <p>Page signatures were also refined to depend on effective rendered output rather than unrelated implementation details. This prevents unnecessary full-site regeneration while preserving correct rebuilding whenever public content changes.</p>
+          <p>All accepted refinements passed component tests, deterministic and incremental build checks, strict validation and byte-for-byte comparison of the generated public website. The visible website output remained unchanged throughout the architecture work.</p>
+          <p>Website 3.3 now returns to maintenance, content development and evidence-driven evolution. The generator remains shell-based, transparent and deliberately free of heavyweight frameworks or premature abstraction layers.</p>
+          <p>&gt; Website 3.3 is now not only incremental and recoverable, but also better understood, more precisely structured and easier to evolve responsibly.</p>
+      <div class="hero-actions">
+        <a class="button secondary" href="../news.html">Back to News</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="centered-paragraph">© Lunar Linux Project. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
