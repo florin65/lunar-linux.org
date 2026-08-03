@@ -358,152 +358,11 @@ EOF_PAGE
 }
 
 
-prepare_moonbase_values() {
-  moonbase_commits_count=0
-  moonbase_repositories_changed=0
-  moonbase_modules_changed=0
-  moonbase_version_bumps=0
-  moonbase_other_commits=0
+prepare_moonbase_page_data() {
+  input=$1
+  output=$2
 
-  moonbase_commits_file=$(mktemp)
-  moonbase_commits_data=$(mktemp)
-
-  if [ ! -x "$COMMIT_JOURNAL_COMPONENT" ]; then
-    printf 'missing commit journal component: %s\n' \
-      "$(rel_from_project "$COMMIT_JOURNAL_COMPONENT")" >&2
-    return 1
-  fi
-
-  if [ ! -f "$MOONBASE_NEWS" ]; then
-    cat > "$moonbase_commits_file" <<EOF_MOONBASE
-      <div class="moonbase-journal empty">
-        <p>No Moonbase commits were found for the selected period.</p>
-      </div>
-EOF_MOONBASE
-    return 0
-  fi
-
-  moonbase_stats=$(
-    awk '
-      function json_decode(s,    out, i, c) {
-        out = ""
-
-        for (i = 1; i <= length(s); i++) {
-          c = substr(s, i, 1)
-
-          if (c != "\\") {
-            out = out c
-            continue
-          }
-
-          i++
-          if (i > length(s)) {
-            out = out "\\"
-            break
-          }
-
-          c = substr(s, i, 1)
-
-          if (c == "\"") {
-            out = out "\""
-          } else if (c == "\\") {
-            out = out "\\"
-          } else if (c == "/") {
-            out = out "/"
-          } else if (c == "n") {
-            out = out "\n"
-          } else if (c == "r") {
-            out = out "\r"
-          } else if (c == "t") {
-            out = out "\t"
-          } else {
-            out = out "\\" c
-          }
-        }
-
-        return out
-      }
-
-      function field(line, key,    pat, start, rest, raw, i, c) {
-        pat = "\"" key "\":\""
-        start = index(line, pat)
-
-        if (!start)
-          return ""
-
-        rest = substr(line, start + length(pat))
-        raw = ""
-
-        for (i = 1; i <= length(rest); i++) {
-          c = substr(rest, i, 1)
-
-          if (c == "\\") {
-            raw = raw c
-
-            if (i < length(rest)) {
-              i++
-              raw = raw substr(rest, i, 1)
-            }
-
-            continue
-          }
-
-          if (c == "\"")
-            return json_decode(raw)
-
-          raw = raw c
-        }
-
-        return json_decode(raw)
-      }
-
-      {
-        category = field($0, "category")
-
-        if (category != "Moonbase")
-          next
-
-        commits++
-
-        repository = field($0, "repository")
-        module = field($0, "module")
-        summary = tolower(field($0, "summary"))
-
-        if (repository != "" && !repositories[repository]++)
-          repository_count++
-
-        if (module != "" && !modules[module]++)
-          module_count++
-
-        if (summary ~ /version bumped to|bump to/)
-          version_bumps++
-      }
-
-      END {
-        print commits + 0, repository_count + 0, module_count + 0, version_bumps + 0
-      }
-    ' "$MOONBASE_NEWS"
-  ) || {
-    printf 'could not calculate Moonbase statistics: %s\n' "$MOONBASE_NEWS" >&2
-    return 1
-  }
-
-  set -- $moonbase_stats
-
-  if [ "$#" -ne 4 ]; then
-    printf 'invalid Moonbase statistics output: %s\n' "$moonbase_stats" >&2
-    return 1
-  fi
-
-  moonbase_commits_count=$1
-  moonbase_repositories_changed=$2
-  moonbase_modules_changed=$3
-  moonbase_version_bumps=$4
-
-  moonbase_other_commits=$((moonbase_commits_count - moonbase_version_bumps))
-  [ "$moonbase_other_commits" -ge 0 ] || moonbase_other_commits=0
-
-  awk '
+  awk -v output="$output" '
     function json_decode(s,    out, i, c) {
       out = ""
 
@@ -589,25 +448,102 @@ EOF_MOONBASE
       if (category != "Moonbase")
         next
 
-      repo = field($0, "repository")
+      commits++
+
+      repository = field($0, "repository")
       module = field($0, "module")
       commit = field($0, "commit")
       summary = field($0, "summary")
+      summary_lower = tolower(summary)
 
-      if (module == "") {
+      if (repository != "" && !repositories[repository]++)
+        repository_count++
+
+      if (module != "" && !modules[module]++)
+        module_count++
+
+      if (summary_lower ~ /version bumped to|bump to/)
+        version_bumps++
+
+      journal_module = module
+
+      if (journal_module == "") {
         title = field($0, "title")
-        module = title
-        sub(/:.*/, "", module)
+        journal_module = title
+        sub(/:.*/, "", journal_module)
       }
 
-      print tsv_value(commit), tsv_value(repo), tsv_value(module), tsv_value(summary), ""
+      print \
+        tsv_value(commit), \
+        tsv_value(repository), \
+        tsv_value(journal_module), \
+        tsv_value(summary), \
+        "" > output
     }
-  ' "$MOONBASE_NEWS" > "$moonbase_commits_data"
+
+    END {
+      print \
+        commits + 0, \
+        repository_count + 0, \
+        module_count + 0, \
+        version_bumps + 0
+    }
+  ' "$input"
+}
+
+
+prepare_moonbase_values() {
+  moonbase_commits_count=0
+  moonbase_repositories_changed=0
+  moonbase_modules_changed=0
+  moonbase_version_bumps=0
+  moonbase_other_commits=0
+
+  moonbase_commits_file=$(mktemp)
+  moonbase_commits_data=$(mktemp)
+
+  if [ ! -x "$COMMIT_JOURNAL_COMPONENT" ]; then
+    printf 'missing commit journal component: %s\n' \
+      "$(rel_from_project "$COMMIT_JOURNAL_COMPONENT")" >&2
+    return 1
+  fi
+
+  if [ ! -f "$MOONBASE_NEWS" ]; then
+    cat > "$moonbase_commits_file" <<EOF_MOONBASE
+      <div class="moonbase-journal empty">
+        <p>No Moonbase commits were found for the selected period.</p>
+      </div>
+EOF_MOONBASE
+    return 0
+  fi
+
+  moonbase_stats=$(
+    prepare_moonbase_page_data "$MOONBASE_NEWS" "$moonbase_commits_data"
+  ) || {
+    printf 'could not calculate Moonbase statistics: %s\n' "$MOONBASE_NEWS" >&2
+    return 1
+  }
+
+  set -- $moonbase_stats
+
+  if [ "$#" -ne 4 ]; then
+    printf 'invalid Moonbase statistics output: %s\n' "$moonbase_stats" >&2
+    return 1
+  fi
+
+  moonbase_commits_count=$1
+  moonbase_repositories_changed=$2
+  moonbase_modules_changed=$3
+  moonbase_version_bumps=$4
+
+  moonbase_other_commits=$((moonbase_commits_count - moonbase_version_bumps))
+  [ "$moonbase_other_commits" -ge 0 ] || moonbase_other_commits=0
 
   COMMIT_JOURNAL_INDENT='      ' \
     "$COMMIT_JOURNAL_COMPONENT" current "$moonbase_commits_data" \
     > "$moonbase_commits_file"
 }
+
 
 
 prepare_community_values() {
