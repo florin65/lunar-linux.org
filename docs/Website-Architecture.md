@@ -1,7 +1,7 @@
 # Lunar Linux Website Architecture
 
-**Version:** 0.1
-**Date:** 2026-07-27
+**Version:** 0.2
+**Date:** 2026-08-03
 **Status:** Current architecture baseline
 **Project:** Lunar Linux Website 3.3
 
@@ -212,18 +212,19 @@ Its responsibilities currently include:
 
 1. loading configuration;
 2. resolving project paths;
-3. updating dynamic data;
-4. generating the news index;
-5. updating archives;
-6. publishing archive assets;
+3. updating remote and repository-derived dynamic data when enabled;
+4. regenerating authoritative local editorial news;
+5. recording Dynamic Data and Editorial News results separately;
+6. generating the optional news JSON index;
 7. loading dynamic values;
-8. preparing generated fragments;
-9. preparing dynamic and archive fragments;
+8. preparing Moonbase page data and generated fragments;
+9. preparing dynamic and archive action fragments;
 10. rendering Markdown pages;
 11. composing the final HTML document;
 12. generating compatibility redirects;
-13. finalizing build state and maintenance reports;
-14. cleaning temporary files.
+13. updating and publishing archives last;
+14. finalizing build state and maintenance reports;
+15. cleaning temporary files.
 
 This file is functional but carries several responsibilities.
 
@@ -361,27 +362,34 @@ This distinction is architectural, not cosmetic.
 
 Archive is a temporal dimension of a domain, not a domain itself.
 
-## 10. News generation flow
+## 10. Editorial news generation flow
+
+The Markdown files in `src/news/` are authoritative local editorial content.
+
+Their current public outputs are regenerated independently of remote dynamic-data refresh policy:
 
 ```text
 src/news/*.md
       │
       ▼
-build_news_json()
+build_editorial_news()
       │
-      ▼
-docs/data/news.json
+      ├── tools/build-community-news.sh
+      │   ├── docs/news/*.html
+      │   ├── cache/community-news.html
+      │   └── cache/community-news-pages.list
       │
-      ├── Info index
-      ├── individual news pages
-      └── news archive
+      └── build_news_json() when GENERATE_NEWS_JSON=yes
+          └── docs/data/news.json
 ```
 
-The JSON index is generated output.
+This keeps the current article pages, current journal and optional JSON index in one local-content lifecycle.
 
-It must not be edited manually.
+`UPDATE_DYNAMIC_DATA=no` does not suppress editorial news regeneration. It suppresses only the remote or repository-derived refresh phase.
 
-The Markdown files in `src/news/` are the authoritative editorial sources.
+The JSON index is generated output and must not be edited manually.
+
+Current editorial validation is tolerant for individually rejected entries, but accepted warnings are captured, deduplicated and written to the persistent build report under `Editorial News`. Fatal producer errors still stop the build.
 
 ## 11. Dynamic data flow
 
@@ -393,6 +401,19 @@ Important switches include:
 UPDATE_DYNAMIC_DATA
 UPDATE_ARCHIVE
 GENERATE_NEWS_JSON
+```
+
+Their ownership is distinct:
+
+```text
+UPDATE_DYNAMIC_DATA
+→ Moonbase and daily ISO refresh
+
+UPDATE_ARCHIVE
+→ archive preservation, publication and regeneration
+
+GENERATE_NEWS_JSON
+→ optional current editorial JSON index
 ```
 
 This permits two useful build modes.
@@ -414,7 +435,9 @@ GENERATE_NEWS_JSON=no \
 ./tools/build-site.sh
 ```
 
-The distinction is important because content changes should not be mixed unnecessarily with unrelated dynamic refreshes.
+In this mode, authoritative local editorial pages and their current journal are still regenerated. Only their optional JSON index is suppressed by `GENERATE_NEWS_JSON=no`.
+
+The distinction is important because local content changes should not be mixed unnecessarily with unrelated remote refreshes.
 
 ## 12. Page composition
 
@@ -449,6 +472,50 @@ HTML fragment
 ```
 
 This separation should be preserved.
+
+### Moonbase page-data preparation
+
+Current Moonbase page preparation uses an internal domain boundary inside `tools/build-site.sh`:
+
+```text
+docs/data/moonbase-news.json
+→ prepare_moonbase_page_data()
+  ├── page statistics
+  └── prepared five-field Commit Journal TSV
+→ prepare_moonbase_values()
+  ├── fallback and validation policy
+  ├── derived values
+  └── Commit Journal invocation
+```
+
+The page-data function parses the generated Moonbase records once. It is not a standalone presentation component because it owns domain interpretation rather than HTML rendering.
+
+### Incremental page signatures
+
+Ordinary page signatures are derived from:
+
+```text
+renderer page identity
+root prefix
+fully expanded and fragment-injected rendered body
+tools/render-page.sh
+shared header
+shared footer
+```
+
+The fully rendered body is the dependency authority for prepared component output. Component source files are not hashed separately when their rendered output is already embedded in that body.
+
+Therefore:
+
+```text
+component change that changes page HTML
+→ rendered body changes
+→ affected page signature changes
+
+component implementation change with identical HTML
+→ rendered body unchanged
+→ no unnecessary page rebuild
+```
 
 ## 13. Redirects
 
@@ -517,7 +584,9 @@ The existing system already provides:
 - a semantic renderer;
 - small deterministic presentation components;
 - direct fixture tests for journal components;
-- incremental page signatures and build-state maintenance;
+- incremental page signatures based on actual rendered dependencies;
+- persistent build-state maintenance;
+- separate persistent warning accounting for Dynamic Data and Editorial News;
 - dynamic project data;
 - generated news and archives;
 - compatibility redirects;
@@ -533,7 +602,9 @@ The current system also has real limits:
 - some behavior is selected by page name;
 - standalone components currently cover only responsibilities proven by repeated implementation;
 - source, cache and generated public assets coexist and require clear ownership discipline;
-- dynamic remote data can introduce controlled warnings or unrelated refresh changes.
+- dynamic remote data can introduce controlled warnings or unrelated refresh changes;
+- domain result wiring still uses explicit globals, temporary files and known placeholders;
+- several low-priority cleanup candidates remain intentionally postponed.
 
 These are reasons for incremental cleanup, not reasons for a complete rewrite.
 
@@ -557,6 +628,7 @@ architecture cleanup completed
 content integration completed
 incremental build and archive consolidation completed
 Componentization Phase 2 completed and accepted
+architecture audit and controlled refinement completed
 maintenance and evidence-driven evolution active
 ```
 
@@ -570,7 +642,23 @@ Commit Journal
 
 No additional standalone component is currently justified.
 
-The next architectural work must arise from new observed repetition, a concrete maintenance need or a feature that exposes a stable responsibility boundary.
+The accepted architecture-refinement code baseline is:
+
+```text
+6731de487c96691f7413f0bcc142b0881b6cfe04
+Refine page signature dependencies
+```
+
+It includes four closed boundaries:
+
+```text
+Editorial News Lifecycle
+Editorial Warning and Report
+Moonbase Page-Data Preparation
+Signature Precision
+```
+
+The next architectural work must arise from new observed repetition, a reproducible maintenance problem or a feature that exposes a stable responsibility boundary. Audit findings that were explicitly postponed are not automatic implementation tasks.
 
 ## 20. Architectural baseline statement
 
@@ -584,4 +672,4 @@ Templates provide shared framing.
 
 The `docs/` directory contains public output.
 
-The system should become more componentized only where new real repetition proves that a reusable boundary exists. Componentization Phase 2 established a healthy stopping point for Website 3.3.
+The system should become more componentized only where new real repetition proves that a reusable boundary exists. Componentization Phase 2 established a healthy component stopping point, and the later architecture audit established a healthy refactoring stopping point for Website 3.3.
