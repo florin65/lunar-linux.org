@@ -1,6 +1,5 @@
 [
   {"date":"2026-08-04","category":"Moonbase","repository":"kde","module":"plasma","version":"6.7.4.","commit":"84fbc3ffc3c308c8e0aebb4804326d68a8e39043","title":"plasma updated to 6.7.4.","summary":"bump to 6.7.4."},
   {"date":"2026-08-04","category":"Moonbase","repository":"xfce","module":"","version":"","commit":"e5c8587cd17270c4d6bbdc70acf4cf32437eee20","title":"xfce4-terminal: add a Gentoo patch to fix building with recent vte3","summary":"xfce4-terminal: add a Gentoo patch to fix building with recent vte3"},
-  {"date":"2026-08-04","category":"Moonbase","repository":"xorg","module":"NVIDIA","version":"610.57.04.","commit":"f0e1555e94c781d2c7d72d0aeafe73289a3a73f2","title":"NVIDIA updated to 610.57.04.","summary":"bump to 610.57.04."},
-  {"date":"2026-07-14","category":"Moonbase","repository":"other","module":"","version":"","commit":"2a28a70ac5313d1b07b0526ab4ec4568fc7e9abf","title":"git: Fix the NO_RUST flag","summary":"git: Fix the NO_RUST flag"}
+  {"date":"2026-08-04","category":"Moonbase","repository":"xorg","module":"NVIDIA","version":"610.57.04.","commit":"f0e1555e94c781d2c7d72d0aeafe73289a3a73f2","title":"NVIDIA updated to 610.57.04.","summary":"bump to 610.57.04."}
 ]
