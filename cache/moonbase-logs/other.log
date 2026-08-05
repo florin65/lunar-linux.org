@@ -1,1 +1,49 @@
-2026-07-14|2a28a70ac5313d1b07b0526ab4ec4568fc7e9abf|git: Fix the NO_RUST flag
+2026-08-05|0e771f936803948c5c8b1663ed5303daad35b7eb|nspr: version bumped to 4.40
+2026-08-05|1d0381ec5420f90a5031372734c916c80b6f6f04|ugrep: version bumped to 7.8.4
+2026-08-05|e1481957e6a3026efa50192a248d71663fe2105f|firefox: version bumped to 153.0.3
+2026-08-05|8f7676b9aabac6522aa887bb12237a29bc460fb7|sg3_utils: version bumped to 1.49
+2026-08-05|1b72ce040e7ca78885869bfa1181d17dfb2a819a|crda: moved to crater
+2026-08-05|779754a90cacffb2f2c650162307a7aaf896e11e|oggconvert: move it to crater
+2026-08-05|48cc6005d73299a1803c4dd5d1d524fcb60da6dc|pilot-link: move it to crater
+2026-08-05|9eed8507affff78f68858e9b5963ead34a69d805|speedfreq: move it to crater
+2026-08-05|4f0ebe97257fd13b1ecd39d1bc2f5c8181b2f61a|obexftp: move it to crater
+2026-08-05|2c7d90b6729f2a98d095b705ca940020a7feba52|Move python2 depending modules to crater
+2026-08-05|4dcfd34b0ed4c23dcd83d674d002e167cfa9a3be|MySQL-python: move it to crater
+2026-08-05|4a23e5181f3559c90f46ab7d68bf8509c4a5e4dd|lcms: move it to crater
+2026-08-05|64167a4d8624c80a1b99418329f0222a61a4e938|mailmen: moved to crater
+2026-08-05|8c79c406e1486253fabd1ab4508a22e954850696|libaccounts-glib: improvements
+2026-08-05|0ef532e35893ed623019d27ac280a453689e523c|iksemel: version bumped to 1.6.2
+2026-08-05|31a9f01ed6583855ba553a14d70217c774ef59d2|ibus: versionb bumped to 1.5.34
+2026-08-05|eaa44797998f6602682157d8fb4527716750e0b7|spring: version bumped to 106.0
+2026-08-05|13eee98549808310668813e8ddf6cc959adfc93a|dumb: Reworking module.
+2026-08-05|0b2d27606d3d1e5d53a75b55f0961127d587cb1a|allegro: Adjusting DEPENDS.
+2026-08-05|668acf0cb9ddf3d3a586e06e33cc1f1ee2e3b613|liquidwar: version bumped to 5.6.5
+2026-08-05|77d7eddc1d0c350bed3487b9159b6e85053c9629|allegreo-4: fix the build
+2026-08-05|52ac39f8ef0a6098c2a3c637ad31b8047888f2f2|paintown: move it to crater
+2026-08-05|cb601f20e350d311ad0da9a6e0208a505d9db385|swing: comment on the python2 optional depend
+2026-08-05|167e14309422a40f5929daefe1b48bb5ae370763|epydoc: move it to crater
+2026-08-05|1ec40329bbf105f227b4f6cc6368e4631679a269|bzrtools: move it to crater
+2026-08-05|ed56884372f175362c6d1ab9af3bf1cd5e1d6377|bzr: move it to crater
+2026-08-05|3c1603d64f8696fe441a5b0caa91234622ce0f1f|libftdi1: move it to crater
+2026-08-05|a2c5afbac3d28e47de75bfb085fc52b54767ba1a|beecrypt: move it to crater
+2026-08-05|6dc664fb6aa81603a86d209540fbf08799e60015|cython: small tweak
+2026-08-05|085e8ecb2301cdeff265bd9a4d25707848bff760|mozjs60: move it to crater
+2026-08-05|cf120a25dcbec019417c3c9ece1c4a0fb5a0a5af|lash: move it to crater
+2026-08-05|9de100ee853f354429c5a9a2c687017a26600e79|libmusicbrainz, libmusicbrainz3: remove the optional python2 depend
+2026-08-05|c544adc38ea27de1a4be5490eb6f0493e95e9af7|sord: version bunmped to 0.16.22
+2026-08-05|b27db2337a1f5b555cd795d33fdc0eaadd9ceeb2|python2*: moved to crater
+2026-08-05|67d22c7b0bfb6ee333d2d0a06ae4c445e4db6839|tailscale: version bumped to 1.1-2.2
+2026-08-05|c0f7abcc1a758435442a67bd5b92394f357f1307|libdvdcss: Comment source sha.
+2026-08-05|d3d720782a10f46efdbb30c037d1e7b0bd9dc3d2|brave-bin: Bump to 1.93.129.
+2026-08-05|6b9168dbb060eaea642e6bd40e61f9c8ca3d2c51|mpg123: version bumped to 1.33.7
+2026-08-05|72339c2bd0a167e6d3a81cfb78a6255a0587c35b|SDL3: version bumped to 3.4.14
+2026-08-05|e9e16f2663e22691564d5713611c2166d5c66c0c|pango: version bumped to 1.58.1
+2026-08-05|a676bddaeac4df20055763507c4c32850b418499|fiefox-bin: version bumped to 153.0.3
+2026-08-05|b8858f8f0cd4b862d73624e4f395d918c9c491ac|pythin-cffi: version bumped to 2.1.1
+2026-08-05|21be2fbde27317e88436cd3c9ca369a5a5ab94f6|libvirt: version bumped to 12.6.0
+2026-08-05|d9b3a37539932cded623f6c9ec78df022bc040f1|talloc: version bumped to 2.5.0
+2026-08-05|f7046d51a6b008d39ed34f036c6ff64df585d835|just: version bumped to 1.58.0
+2026-08-05|e67ab084030ff54981f472c01701d9feb498a2be|python-pip: version bumped to 26.2
+2026-08-05|995f76664242ed5a9effb4d3067de0f61f5f1b01|weechat: version bumped to 4.10.0
+2026-08-05|04d31bab2976596bee0c21c1c3ae7bfa2022e1b5|tailscale: vbersion bumped to 1.102.1
+2026-08-05|3980d6649d8f9eaca9fefad9c44787ad63b7f57d|lua: version bumped to 5.5.1
