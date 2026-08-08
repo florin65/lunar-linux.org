@@ -1,6 +1,21 @@
-2026-08-06|9e1eef5b44c1499c6140a60c57aa425805322396|rtorrent: Bump to 0.16.20.
-2026-08-06|c2ebd8aaeb4b518d97721b87601dcc4f44bfb3ba|libtorrent: Bump to 0.16.20.
-2026-08-06|1d58779afaff45dbf76eef53e1f8eb8b6a0400f1|libindi: Bump to 2.2.4.2.
-2026-08-06|0e97a52feab2b0d3464e5de30e37d1014c16eb91|pango: Bump to 1.58.2.
-2026-08-06|146547848f6a13ac5a3adb0605e91a4d25e76009|GraphicMagick: Bump to 1.3.48.
-2026-08-06|756e7727b5f7c14130ea2292a3b5f6b4dc74f7a4|wayland-utils: Adding.
+2026-08-07|def0076ec92874753b1b6bbd56c5af256d7d38c3|linux-lts: version bumped to 6.18.43
+2026-08-07|70d887e3d84903fd91bbdf13164d1904ea05f98d|live555: Bump to 2026.08.07.
+2026-08-07|cf7de2ee32b0236e2ec2baad2dd3f3d89d8c4d87|iana-etc: version bumped to 20260807
+2026-08-07|88a30e36661b0c1bbb237b809020e04aa1d6873e|python-apsw: Bump to 3.53.4.0.
+2026-08-07|7d62690a44b5f091e7e962b227a03c4ff6755d01|graphviz: version buimped to 1.1.1
+2026-08-07|37c358880dab26937853d4dd8d0586f5c9c57b6a|libostree: version bumped to 2026.3
+2026-08-07|912ff30204ff4b407f1ff97221e78a647affc1b7|p11-kit: version bumped to 0.26.5
+2026-08-07|4c264af6ee40624e131a42d94db53220676f56f5|apr-util: version bumped to 1.6.4
+2026-08-07|9975729e8237693c992a865fb3adf61747ad68fb|x265: version bumped to 4.3
+2026-08-07|5d749f80f62e6009012f660814cde6d4ecd4fa2a|jenkins: version bumped to 2.576
+2026-08-07|8b973a516edefb770059fd67ca60deb05b3f1554|gst-python: version bumped to 1.28.6
+2026-08-07|f621ae05f592301bb80c22d6d45e62c2e47b40b4|gst-libav: version bumped to 1.28.6
+2026-08-07|f6344a43e22c12b1a09ca029e4618c5fe274259c|gst-plugins-ugly: version bumped to 1.28.6
+2026-08-07|8101f6216fe520f35e61a63e958f276293bfc852|gst-plugins-bad: version bumped to 1.28.6
+2026-08-07|df44b85f2a984cb056d7990c6371cc5f1e4db5da|gst-plugins-good: version bumped to stable 1.28.6
+2026-08-07|39c3b2a1f25eab0f6d2e891c7355e45b04f754e8|gst-plugins-base: version bumped to stable 1.28.6
+2026-08-07|bdfd22e45749c3d9feb3dbfdce0aea95c3e852b9|gstreamer: version bumped to stable 1.28.6
+2026-08-07|d779c9bc28265a3e1e6f4df9376c9573ab42ef88|blosc2: Bump to 3.3.2.
+2026-08-07|2c8b2ba0b5a48b1c8f57e6d089c6f279cd65a7ec|python-pycairo: Bump to 1.29.1.
+2026-08-07|83e520e4f77c75911adf066fc1fc9a2d6d4510c5|File-ShareDir-Install: Bump to 0.14.
+2026-08-07|3e4a611a3b0a7c91637cf79505b79eebca569915|swig: version bumped to 4.5.0

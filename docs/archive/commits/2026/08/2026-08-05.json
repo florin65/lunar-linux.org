@@ -51,5 +51,6 @@
   {"date":"2026-08-05","category":"Moonbase","repository":"other","module":"spring","version":"106.0","commit":"eaa44797998f6602682157d8fb4527716750e0b7","title":"spring updated to 106.0","summary":"version bumped to 106.0"},
   {"date":"2026-08-05","category":"Moonbase","repository":"other","module":"","version":"","commit":"ed56884372f175362c6d1ab9af3bf1cd5e1d6377","title":"bzr: move it to crater","summary":"bzr: move it to crater"},
   {"date":"2026-08-05","category":"Moonbase","repository":"other","module":"just","version":"1.58.0","commit":"f7046d51a6b008d39ed34f036c6ff64df585d835","title":"just updated to 1.58.0","summary":"version bumped to 1.58.0"},
-  {"date":"2026-08-05","category":"Moonbase","repository":"xorg","module":"libXfont2","version":"2.0.9","commit":"cf1fa130e0f591e168b9b60920c7abe609a87b59","title":"libXfont2 updated to 2.0.9","summary":"version bumped to 2.0.9"}
+  {"date":"2026-08-05","category":"Moonbase","repository":"xorg","module":"libXfont2","version":"2.0.9","commit":"cf1fa130e0f591e168b9b60920c7abe609a87b59","title":"libXfont2 updated to 2.0.9","summary":"version bumped to 2.0.9"},
+  {"date":"2026-08-05","category":"Moonbase","repository":"core","module":"perl","version":"5.44.0","commit":"80dda26605d3cfac03430b22b34e6e7acabf100f","title":"perl updated to 5.44.0","summary":"version bumped to 5.44.0"}
 ]
