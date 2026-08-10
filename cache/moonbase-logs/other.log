@@ -1,7 +1,10 @@
-2026-08-08|cdb02b177f703d625d42a00e4887c9927108dc3c|radare2: version bumped to 6.2.0
-2026-08-08|8d8ed48f5bfd22ba1930c459fcd696f5da52267b|capstone: version bumped to 5.0.9
-2026-08-08|277c0eefd7ef5cacd7e91bdfce7f2590a051d0c5|tree-sitter: version bumped to 0.26.12
-2026-08-08|559b10422b1d447c7f333a3e5d08aac6af643470|libmicrohttpd: version bumped to 1.0.10
-2026-08-08|bdc6523831d4c6cf818bdd8502e7b3420be62f54|ImageMagick: version bumped to 7.1.2.29
-2026-08-08|135b6be461bdeb6f7235238babab71e50564bc8a|babl: version bumped to 0.1.128
-2026-08-08|2cf84d7049812a25b46359ed369a5015283d38cd|cri-o: version bumped to 1.36.3
+2026-08-09|3f0eae1b6664fb77bc1099eac030646cc981c055|linux-lts: version bumped to 6.18.44
+2026-08-09|a8dd03e6de3bfa92a341e90f2f11082bbf0a9061|brightnessctl: new module for screen brightness control
+2026-08-09|986ea2a4d3c1bd5715f74c11857fce0b08d2317a|File-ShareDir-Install: moved to core
+2026-08-09|9a1aaa8b0f2d8c03f1ae9368ce47f01cba9dd26a|Test-Pod-Coverage: Moved to core.
+2026-08-09|4a87df1f898166e6619e2760d5f8a6233e10ab0f|Test-Pod: Moved to core.
+2026-08-09|c4e9ea57c9366c396948a0793d81d0fec42f454f|hdf5: Bump to 2.2.0.
+2026-08-09|1250a45047427edbecefbc7222b462f0c0d44b34|openldap: version bumped to 2.6.14
+2026-08-09|f1dc46a4d47f5a10af68e7e8c8231f786efe658a|openvpn: version bumped to 2.7.6
+2026-08-09|8801e9b3361229330e482f7ff9495d29c008dcf3|clamav: version bumped to 1.5.4
+2026-08-08|e996c1fa223d6927a1c8eb65714b0544b4598ee2|openexr: version bumped to 3.4.14
