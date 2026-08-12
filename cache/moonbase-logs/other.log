@@ -1,10 +1,5 @@
-2026-08-09|3f0eae1b6664fb77bc1099eac030646cc981c055|linux-lts: version bumped to 6.18.44
-2026-08-09|a8dd03e6de3bfa92a341e90f2f11082bbf0a9061|brightnessctl: new module for screen brightness control
-2026-08-09|986ea2a4d3c1bd5715f74c11857fce0b08d2317a|File-ShareDir-Install: moved to core
-2026-08-09|9a1aaa8b0f2d8c03f1ae9368ce47f01cba9dd26a|Test-Pod-Coverage: Moved to core.
-2026-08-09|4a87df1f898166e6619e2760d5f8a6233e10ab0f|Test-Pod: Moved to core.
-2026-08-09|c4e9ea57c9366c396948a0793d81d0fec42f454f|hdf5: Bump to 2.2.0.
-2026-08-09|1250a45047427edbecefbc7222b462f0c0d44b34|openldap: version bumped to 2.6.14
-2026-08-09|f1dc46a4d47f5a10af68e7e8c8231f786efe658a|openvpn: version bumped to 2.7.6
-2026-08-09|8801e9b3361229330e482f7ff9495d29c008dcf3|clamav: version bumped to 1.5.4
-2026-08-08|e996c1fa223d6927a1c8eb65714b0544b4598ee2|openexr: version bumped to 3.4.14
+2026-08-11|cad33f359aad25c6c02b84292350d2260d14875f|python-pygments: Disabling python bytecode.
+2026-08-11|77e00110e39b4ac99d2ac30b75ee7c71517da378|python-pillow: Disabling python bytecode.
+2026-08-11|9ca8bba2de617d326f3f0f1c14b9f565af042d32|glad: Diabling python bytecode.
+2026-08-11|d29f9c8682409cd10e4e48c6f0ea1f2bf7670a3f|ansible-core: vbersion bumped to 2.21.3
+2026-08-11|a0b7c39b6422b65b44a6aca377656f4a3ba03815|crun: version bumped to 1.29
