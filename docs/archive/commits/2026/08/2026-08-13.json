@@ -1,0 +1,8 @@
+[
+  {"date":"2026-08-13","category":"Moonbase","repository":"other","module":"intel-ucode","version":"20260812","commit":"071d4be17685ad48c3c2207bff195d5d8de88790","title":"intel-ucode updated to 20260812","summary":"version bumped to 20260812"},
+  {"date":"2026-08-13","category":"Moonbase","repository":"other","module":"rsync","version":"3.5.0","commit":"114b93e2181bea7e37993024d78120c5eb1d9cd6","title":"rsync updated to 3.5.0","summary":"version bumped to 3.5.0"},
+  {"date":"2026-08-13","category":"Moonbase","repository":"other","module":"harfbuzz","version":"14.3.1.","commit":"a278a1125264fff19e47eaf159c3e875a40e6c5a","title":"harfbuzz updated to 14.3.1.","summary":"bump to 14.3.1."},
+  {"date":"2026-08-13","category":"Moonbase","repository":"other","module":"qemu","version":"11.1.0","commit":"ca0e16a8d9d4503657403440a6640921a44dc224","title":"qemu updated to 11.1.0","summary":"version bumped to 11.1.0"},
+  {"date":"2026-08-13","category":"Moonbase","repository":"other","module":"apr-util","version":"1.6.5","commit":"d0fdc18d7d21c759ebd1f0492d84124b3732eb99","title":"apr-util updated to 1.6.5","summary":"version bumped to 1.6.5"},
+  {"date":"2026-08-13","category":"Moonbase","repository":"other","module":"","version":"","commit":"e7b072cbc62692d978a9ab7e0c177464a5d05ebf","title":"intel-ucode: add a note about the difference with the \"microcode\" module","summary":"intel-ucode: add a note about the difference with the \"microcode\" module"}
+]

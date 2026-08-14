@@ -1,0 +1,7 @@
+[
+  {"date":"2026-08-10","category":"Moonbase","repository":"core","module":"os-prober","version":"1.85","commit":"35fb1b49a690cec6ef09bdc84ac6c49c751cd548","title":"os-prober updated to 1.85","summary":"version bumped to 1.85"},
+  {"date":"2026-08-10","category":"Moonbase","repository":"core","module":"gettext","version":"1.0 This version works with glibc 2.41 (current) and 2.44 (future)","commit":"4974154e09663c80b096290903875a54d9e8f5e7","title":"gettext updated to 1.0 This version works with glibc 2.41 (current) and 2.44 (future)","summary":"version bumped to 1.0 This version works with glibc 2.41 (current) and 2.44 (future)"},
+  {"date":"2026-08-10","category":"Moonbase","repository":"core","module":"","version":"","commit":"4d0c536b7c4cc9cd2de395b0b95261b9d3924af7","title":"File-ShareDir: move to core","summary":"File-ShareDir: move to core"},
+  {"date":"2026-08-10","category":"Moonbase","repository":"core","module":"python","version":"3.14.7","commit":"56801cd2d2d65f681277a7000ae55f6b392c8ffe","title":"python updated to 3.14.7","summary":"version bumped to 3.14.7"},
+  {"date":"2026-08-10","category":"Moonbase","repository":"core","module":"dhcpcd","version":"10.5.0","commit":"6431b49086e731eab941ede27790f1597f2b4387","title":"dhcpcd updated to 10.5.0","summary":"version bumped to 10.5.0"}
+]

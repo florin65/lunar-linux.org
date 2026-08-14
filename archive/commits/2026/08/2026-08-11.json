@@ -4,5 +4,6 @@
   {"date":"2026-08-11","category":"Moonbase","repository":"other","module":"","version":"","commit":"9ca8bba2de617d326f3f0f1c14b9f565af042d32","title":"glad: Diabling python bytecode.","summary":"glad: Diabling python bytecode."},
   {"date":"2026-08-11","category":"Moonbase","repository":"other","module":"crun","version":"1.29","commit":"a0b7c39b6422b65b44a6aca377656f4a3ba03815","title":"crun updated to 1.29","summary":"version bumped to 1.29"},
   {"date":"2026-08-11","category":"Moonbase","repository":"other","module":"","version":"","commit":"cad33f359aad25c6c02b84292350d2260d14875f","title":"python-pygments: Disabling python bytecode.","summary":"python-pygments: Disabling python bytecode."},
-  {"date":"2026-08-11","category":"Moonbase","repository":"other","module":"","version":"","commit":"d29f9c8682409cd10e4e48c6f0ea1f2bf7670a3f","title":"ansible-core: vbersion bumped to 2.21.3","summary":"ansible-core: vbersion bumped to 2.21.3"}
+  {"date":"2026-08-11","category":"Moonbase","repository":"other","module":"","version":"","commit":"d29f9c8682409cd10e4e48c6f0ea1f2bf7670a3f","title":"ansible-core: vbersion bumped to 2.21.3","summary":"ansible-core: vbersion bumped to 2.21.3"},
+  {"date":"2026-08-11","category":"Moonbase","repository":"core","module":"","version":"","commit":"d74578e730182139e2d05fe686a3a6f62d4d4fc0","title":"libidn2: Adding export PYTHONDONTWRITEBYTECODE=1 to BUILD.","summary":"libidn2: Adding export PYTHONDONTWRITEBYTECODE=1 to BUILD."}
 ]

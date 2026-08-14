@@ -1,5 +1,6 @@
-2026-08-11|cad33f359aad25c6c02b84292350d2260d14875f|python-pygments: Disabling python bytecode.
-2026-08-11|77e00110e39b4ac99d2ac30b75ee7c71517da378|python-pillow: Disabling python bytecode.
-2026-08-11|9ca8bba2de617d326f3f0f1c14b9f565af042d32|glad: Diabling python bytecode.
-2026-08-11|d29f9c8682409cd10e4e48c6f0ea1f2bf7670a3f|ansible-core: vbersion bumped to 2.21.3
-2026-08-11|a0b7c39b6422b65b44a6aca377656f4a3ba03815|crun: version bumped to 1.29
+2026-08-13|e7b072cbc62692d978a9ab7e0c177464a5d05ebf|intel-ucode: add a note about the difference with the "microcode" module
+2026-08-13|ca0e16a8d9d4503657403440a6640921a44dc224|qemu: version bumped to 11.1.0
+2026-08-13|071d4be17685ad48c3c2207bff195d5d8de88790|intel-ucode: version bumped to 20260812
+2026-08-13|114b93e2181bea7e37993024d78120c5eb1d9cd6|rsync: version bumped to 3.5.0
+2026-08-13|a278a1125264fff19e47eaf159c3e875a40e6c5a|harfbuzz: Bump to 14.3.1.
+2026-08-13|d0fdc18d7d21c759ebd1f0492d84124b3732eb99|apr-util: version bumped to 1.6.5
