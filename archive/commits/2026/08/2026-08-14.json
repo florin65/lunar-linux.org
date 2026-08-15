@@ -1,0 +1,5 @@
+[
+  {"date":"2026-08-14","category":"Moonbase","repository":"other","module":"simdjson","version":"4.6.7.","commit":"3c221e71a808f4dd70c000f07bc1e9f488105533","title":"simdjson updated to 4.6.7.","summary":"bump to 4.6.7."},
+  {"date":"2026-08-14","category":"Moonbase","repository":"other","module":"texstudio","version":"4.9.7.","commit":"afc913e4930a0f859b45f3c8794303f66558b953","title":"texstudio updated to 4.9.7.","summary":"bump to 4.9.7."},
+  {"date":"2026-08-14","category":"Moonbase","repository":"other","module":"libpsl","version":"0.23.3","commit":"f50f44b8caa2a6c4436549bca6179bbe08715bba","title":"libpsl updated to 0.23.3","summary":"version bumped to 0.23.3"}
+]
