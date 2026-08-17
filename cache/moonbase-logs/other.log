@@ -1,12 +1,12 @@
-2026-08-15|2b3e53e0e71a7e3f1bc4b8f3175da3104c6d4248|xapian-core: version bumped to 2.1.0
-2026-08-15|6a8e908b34576e53a24c696ebfbb0a56c552be55|graphviz: version bumped to 16.0.0
-2026-08-15|61bfe37fbc8d2d7b749e355f3eb4043f773b63f2|ansible: version bumped to 14.3.1
-2026-08-15|5967dfac7361b26201c1a1c5ec62980836e60f06|crun: version bumped to 1.29.1
-2026-08-15|7da21192738eb6de1a4ab0d0884462bf0ca8bbb6|brave-bin: Bump to 1.93.136.
-2026-08-15|1d8484e91b511abeff864307ecdc982145711904|postfix: version bumped to 3.11.6
-2026-08-14|f50f44b8caa2a6c4436549bca6179bbe08715bba|libpsl: version bumped to 0.23.3
-2026-08-15|f76889d7a44f9f4a8606ccb5d40716999fdf229d|netdata: version bumped to 2.11.0
-2026-08-15|0a24fbdef0fe4ac671665dc5903ee9d5641f715e|postgresql: version bumped to 18.6
-2026-08-14|3c221e71a808f4dd70c000f07bc1e9f488105533|simdjson: Bump to 4.6.7.
-2026-08-14|afc913e4930a0f859b45f3c8794303f66558b953|texstudio: Bump to 4.9.7.
-2026-08-15|31aca857d0cc912aa649f74c4317dc3596a256fc|go: version bumped to 1.26.6
+2026-08-16|337bb1771233bee4e72be46ca929ca9cc4066d99|ansible-lint: version bumped to 26.8.0
+2026-08-16|b1adad84b8110a84bf85e6a6688e84af7c05aaba|samba: version bumped to 4.24.6
+2026-08-16|a0a00c13837d5377083b3e5b12283d76126bb7ba|python-sip: Bump to 6.16.1.
+2026-08-16|b7edb53e21da06b9410d3737d174a5b0ad70e052|frei0r-plugins: Bump to 3.3.0.
+2026-08-16|065ac95abe2f49f8e0d452cd4038b922781dbf89|freetds: Bump to 1.5.19.
+2026-08-16|426d0eb732baf8e5f8bcfb81443421da11461053|libical: Bump to 4.0.5.
+2026-08-16|8f1a44d494a65822b6d49d6fa0a8565852d6197a|highlight: Bump to 4.21 and moving to meson build.
+2026-08-16|42dcff6afb48169da1cf62266941bdbd2eabe340|doxygen: Bump to 1.18.0.
+2026-08-16|9e2f14a1f8b6de7a7679f4d09ee9f8976ff9a0b6|exfatprogs: version bumped to 1.4.3
+2026-08-15|e0b93399f8d2d5563314bd954c49636f6c579c26|nnn: version bumped to 5.3
+2026-08-16|e56c1cfa2122dade98c0d522a153c7507a147d18|DBI: version bumped to 1.652
+2026-08-16|fc0cf51020f0798c6e4d16f9f05f1891755e8280|librsvg: version bumped to 2.62.91

@@ -10,5 +10,6 @@
   {"date":"2026-08-15","category":"Moonbase","repository":"other","module":"ansible","version":"14.3.1","commit":"61bfe37fbc8d2d7b749e355f3eb4043f773b63f2","title":"ansible updated to 14.3.1","summary":"version bumped to 14.3.1"},
   {"date":"2026-08-15","category":"Moonbase","repository":"other","module":"graphviz","version":"16.0.0","commit":"6a8e908b34576e53a24c696ebfbb0a56c552be55","title":"graphviz updated to 16.0.0","summary":"version bumped to 16.0.0"},
   {"date":"2026-08-15","category":"Moonbase","repository":"other","module":"brave-bin","version":"1.93.136.","commit":"7da21192738eb6de1a4ab0d0884462bf0ca8bbb6","title":"brave-bin updated to 1.93.136.","summary":"bump to 1.93.136."},
-  {"date":"2026-08-15","category":"Moonbase","repository":"other","module":"netdata","version":"2.11.0","commit":"f76889d7a44f9f4a8606ccb5d40716999fdf229d","title":"netdata updated to 2.11.0","summary":"version bumped to 2.11.0"}
+  {"date":"2026-08-15","category":"Moonbase","repository":"other","module":"netdata","version":"2.11.0","commit":"f76889d7a44f9f4a8606ccb5d40716999fdf229d","title":"netdata updated to 2.11.0","summary":"version bumped to 2.11.0"},
+  {"date":"2026-08-15","category":"Moonbase","repository":"other","module":"nnn","version":"5.3","commit":"e0b93399f8d2d5563314bd954c49636f6c579c26","title":"nnn updated to 5.3","summary":"version bumped to 5.3"}
 ]
