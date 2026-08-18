@@ -1,0 +1,5 @@
+[
+  {"date":"2026-08-17","category":"Moonbase","repository":"gnome","module":"","version":"","commit":"fe57567ced5f3a27c75037337aa640867a60796f","title":"libbonobo: Adding a patch and rework DETAILS.","summary":"libbonobo: Adding a patch and rework DETAILS."},
+  {"date":"2026-08-17","category":"Moonbase","repository":"other","module":"","version":"","commit":"2210121fab2910575592276729c7f562471bb2c9","title":"unifdef: Adding a couple of patches.","summary":"unifdef: Adding a couple of patches."},
+  {"date":"2026-08-17","category":"Moonbase","repository":"other","module":"","version":"","commit":"9f2198be8ba8b376b0b280240bd0c3336577bb0c","title":"woff2: Adding a couple of patches.","summary":"woff2: Adding a couple of patches."}
+]

@@ -9,5 +9,7 @@
   {"date":"2026-08-16","category":"Moonbase","repository":"other","module":"samba","version":"4.24.6","commit":"b1adad84b8110a84bf85e6a6688e84af7c05aaba","title":"samba updated to 4.24.6","summary":"version bumped to 4.24.6"},
   {"date":"2026-08-16","category":"Moonbase","repository":"other","module":"frei0r-plugins","version":"3.3.0.","commit":"b7edb53e21da06b9410d3737d174a5b0ad70e052","title":"frei0r-plugins updated to 3.3.0.","summary":"bump to 3.3.0."},
   {"date":"2026-08-16","category":"Moonbase","repository":"other","module":"DBI","version":"1.652","commit":"e56c1cfa2122dade98c0d522a153c7507a147d18","title":"DBI updated to 1.652","summary":"version bumped to 1.652"},
-  {"date":"2026-08-16","category":"Moonbase","repository":"other","module":"librsvg","version":"2.62.91","commit":"fc0cf51020f0798c6e4d16f9f05f1891755e8280","title":"librsvg updated to 2.62.91","summary":"version bumped to 2.62.91"}
+  {"date":"2026-08-16","category":"Moonbase","repository":"other","module":"librsvg","version":"2.62.91","commit":"fc0cf51020f0798c6e4d16f9f05f1891755e8280","title":"librsvg updated to 2.62.91","summary":"version bumped to 2.62.91"},
+  {"date":"2026-08-16","category":"Moonbase","repository":"other","module":"SuiteSparse","version":"7.14.0.","commit":"21735fa4f2f793d223acf85658b950da0c0e2d7a","title":"SuiteSparse updated to 7.14.0.","summary":"bump to 7.14.0."},
+  {"date":"2026-08-16","category":"Moonbase","repository":"other","module":"","version":"","commit":"65aa60906d833b116905a3fccb03dfb889eb46e7","title":"graphviz: Adjusting BUILD as noted therein.","summary":"graphviz: Adjusting BUILD as noted therein."}
 ]
