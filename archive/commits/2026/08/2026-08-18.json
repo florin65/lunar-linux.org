@@ -24,7 +24,5 @@
   {"date":"2026-08-18","category":"Moonbase","repository":"other","module":"wxMaxima","version":"26.08.0.","commit":"fc1383aa8355740f9c1ac4ae2f07b743a56aa827","title":"wxMaxima updated to 26.08.0.","summary":"bump to 26.08.0."},
   {"date":"2026-08-18","category":"Moonbase","repository":"xorg","module":"xload","version":"1.2.2","commit":"8cf7a29ceb1e17caaff4cde612956d6196f7dee7","title":"xload updated to 1.2.2","summary":"version bumped to 1.2.2"},
   {"date":"2026-08-18","category":"Moonbase","repository":"xorg","module":"xpr","version":"1.2.1","commit":"a5c83b621c582e475db2f2909dae8a960d4726f1","title":"xpr updated to 1.2.1","summary":"version bumped to 1.2.1"},
-  {"date":"2026-08-18","category":"Moonbase","repository":"xorg","module":"libevdev","version":"1.13.7.","commit":"dcdab1f627fd9150fe82ec88ca236aef348c319a","title":"libevdev updated to 1.13.7.","summary":"bump to 1.13.7."},
-  {"date":"2026-08-17","category":"Moonbase","repository":"other","module":"","version":"","commit":"2363f48cbf95dda5c4dd554e351bcedfb49263ad","title":"wxWidgets: Removing a depends.","summary":"wxWidgets: Removing a depends."},
-  {"date":"2026-08-17","category":"Moonbase","repository":"other","module":"tmux","version":"3.7c","commit":"7aa8b78a0b1e47dea0fe1c9e2c83aa464378dd39","title":"tmux updated to 3.7c","summary":"version bumped to 3.7c"}
+  {"date":"2026-08-18","category":"Moonbase","repository":"xorg","module":"libevdev","version":"1.13.7.","commit":"dcdab1f627fd9150fe82ec88ca236aef348c319a","title":"libevdev updated to 1.13.7.","summary":"bump to 1.13.7."}
 ]

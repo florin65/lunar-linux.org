@@ -1,4 +1,25 @@
-2026-08-17|9f2198be8ba8b376b0b280240bd0c3336577bb0c|woff2: Adding a couple of patches.
-2026-08-17|2210121fab2910575592276729c7f562471bb2c9|unifdef: Adding a couple of patches.
-2026-08-16|21735fa4f2f793d223acf85658b950da0c0e2d7a|SuiteSparse: Bump to 7.14.0.
-2026-08-16|65aa60906d833b116905a3fccb03dfb889eb46e7|graphviz: Adjusting BUILD as noted therein.
+2026-08-18|d72ad6de2587ae4a6c406b8296e8ddedb966245b|wesnoth: version bumped to 1.18.8
+2026-08-18|12031cbe38d1522c97dc57c40baa257cf47981c3|firefox-bin: version bumped to 154.0
+2026-08-18|16890092607b19b8cca005cf2d260684cb767ec8|firefox: version bumped to 154.0
+2026-08-18|c2828165696f004944664d1384b581fad9d692af|faac: Bump to 2.1.
+2026-08-18|5800183b0f7a9648eeac0907cee65b90d78cb9d4|frei0r-plugins: Bump to 3.4.0.
+2026-08-18|5ce12246d8c6069eeedf997dcadd4ceaca20d6d2|jenkind: version bumped to 2.578
+2026-08-18|7894a920219651bcfa982a95f4dadeeda327ad0e|fail2ban: version bumped to 1.1.1
+2026-08-18|285f24613486cb4c33a73cc93f354dd8a8caba8b|redis: version bumped to 8.10.1
+2026-08-18|8350c737acba04dc36030eefd7d60ee30aa4faae|htop: version bumped to 3.5.3
+2026-08-18|99174a145fca2ab672d5bf7d88083fcea6b846bc|fzf: version bumped to 0.74.3
+2026-08-18|f90765b383532e6692897b27c0a1d7451e4dada1|xapian-core: Fixing UPDATED.
+2026-08-18|4a3eaebecba7ee9095aaf72e4aef4e8f2ef2c3b9|thunderbird: Disabling bype compiling.
+2026-08-18|edf91c309fd0497eb55fd50fda125122c2adf3ff|python-xxhash: Bump to 4.0.1.
+2026-08-18|c76ada592c2e706777f3fd6296c197dfd25a9827|samba: Adjusting BUILD with a few more sedits for smb.conf.default.
+2026-08-18|725169e527137925e0d4c4bce0b293708f04ef85|thunderbird: Bump to 153.0.3.
+2026-08-18|36b431d7d18f4968f1b6bd4baf12a4d4537754fe|qpdf: Bump to 12.4.0.
+2026-08-18|36dc4fe0dc3501da27aeb19450fd5f21866c5ba5|python-pip: Disabling byte compiling.
+2026-08-18|81eba99ed4791af271817901222a295b3064d138|python-pythran: Bump to 0.19.0.
+2026-08-18|1c4b9ccda4be70f6e3c732c11f1295227393a67d|frei0r-plugins: Bump to 3.3.2.
+2026-08-18|cbd56a8755b88718334b0e60cbe68870548d4d8a|lmdb: Bump to 1.0.1.
+2026-08-18|fc1383aa8355740f9c1ac4ae2f07b743a56aa827|wxMaxima: Bump to 26.08.0.
+2026-08-18|81e864064db146dbea462b55ce97b47a0348bf71|wxWidgets: Bump to 3.2.11.
+2026-08-18|e6de5fd2eb0edbac66443bb9e880daf77c1b2c69|maxima: Bump to 5.50.0.
+2026-08-17|7aa8b78a0b1e47dea0fe1c9e2c83aa464378dd39|tmux: version bumped to 3.7c
+2026-08-17|2363f48cbf95dda5c4dd554e351bcedfb49263ad|wxWidgets: Removing a depends.
