@@ -4,8 +4,5 @@
   {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"watchexec","version":"2.6.1","commit":"187bb2bef2724c89896dc682c91ec252857acbd1","title":"watchexec updated to 2.6.1","summary":"version bumped to 2.6.1"},
   {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"wine","version":"11.16","commit":"2b7fa40ee4981cca5d794cf4ab071aa536a0f54f","title":"wine updated to 11.16","summary":"version bumped to 11.16"},
   {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"lxde-common","version":"0.99.4","commit":"6fc5e15aa2ea6fa99787b4b4439f097cb4737558","title":"lxde-common updated to 0.99.4","summary":"version bumped to 0.99.4"},
-  {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"wasi-libc","version":"33.","commit":"99ba77195b42f98a00015541faafc9d9e8c3ea4b","title":"wasi-libc updated to 33.","summary":"bump to 33."},
-  {"date":"2026-08-22","category":"Moonbase","repository":"other","module":"","version":"","commit":"a18cd797430b8c227bbffcff85393ec64e5f008f","title":"boost: Adding another entry to POST_INSTALL.","summary":"boost: Adding another entry to POST_INSTALL."},
-  {"date":"2026-08-22","category":"Moonbase","repository":"other","module":"","version":"","commit":"ba58d6284df1a59b72e87132c0b538deb3be0cb9","title":"boost: Another POST_INSTALL entry.","summary":"boost: Another POST_INSTALL entry."},
-  {"date":"2026-08-22","category":"Moonbase","repository":"other","module":"libdeflate","version":"1.26.","commit":"d5409d362aa2a65e005fd477d62af35058c3535f","title":"libdeflate updated to 1.26.","summary":"bump to 1.26."}
+  {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"wasi-libc","version":"33.","commit":"99ba77195b42f98a00015541faafc9d9e8c3ea4b","title":"wasi-libc updated to 33.","summary":"bump to 33."}
 ]
