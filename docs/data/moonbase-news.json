@@ -1,11 +1,7 @@
 [
-  {"date":"2026-08-23","category":"Moonbase","repository":"kde","module":"mlt-7","version":"7.40.0.","commit":"b50cd26b58744820fe1d2ca3f5bc6c6d21b6d256","title":"mlt-7 updated to 7.40.0.","summary":"bump to 7.40.0."},
-  {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"","version":"","commit":"0fe95098370459c9da4d707f816a39b0fbfe222a","title":"watchexec: improve the buils a bit","summary":"watchexec: improve the buils a bit"},
-  {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"watchexec","version":"2.6.1","commit":"187bb2bef2724c89896dc682c91ec252857acbd1","title":"watchexec updated to 2.6.1","summary":"version bumped to 2.6.1"},
-  {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"wine","version":"11.16","commit":"2b7fa40ee4981cca5d794cf4ab071aa536a0f54f","title":"wine updated to 11.16","summary":"version bumped to 11.16"},
-  {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"lxde-common","version":"0.99.4","commit":"6fc5e15aa2ea6fa99787b4b4439f097cb4737558","title":"lxde-common updated to 0.99.4","summary":"version bumped to 0.99.4"},
-  {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"wasi-libc","version":"33.","commit":"99ba77195b42f98a00015541faafc9d9e8c3ea4b","title":"wasi-libc updated to 33.","summary":"bump to 33."},
-  {"date":"2026-08-22","category":"Moonbase","repository":"other","module":"","version":"","commit":"a18cd797430b8c227bbffcff85393ec64e5f008f","title":"boost: Adding another entry to POST_INSTALL.","summary":"boost: Adding another entry to POST_INSTALL."},
-  {"date":"2026-08-22","category":"Moonbase","repository":"other","module":"","version":"","commit":"ba58d6284df1a59b72e87132c0b538deb3be0cb9","title":"boost: Another POST_INSTALL entry.","summary":"boost: Another POST_INSTALL entry."},
-  {"date":"2026-08-22","category":"Moonbase","repository":"other","module":"libdeflate","version":"1.26.","commit":"d5409d362aa2a65e005fd477d62af35058c3535f","title":"libdeflate updated to 1.26.","summary":"bump to 1.26."}
+  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"mapnik","version":"4.3.0.","commit":"32e7925b9b237bbb5b90accd0fd20690a86ebf01","title":"mapnik updated to 4.3.0.","summary":"bump to 4.3.0."},
+  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"uthash","version":"2.4.0.","commit":"3b63202e182ed9ef34fd4fd172c11666d4e93048","title":"uthash updated to 2.4.0.","summary":"bump to 2.4.0."},
+  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"sox","version":"14.8.0.1.","commit":"b4697f48c8118a730ac2e4fb16d8909bf330116f","title":"sox updated to 14.8.0.1.","summary":"bump to 14.8.0.1."},
+  {"date":"2026-08-23","category":"Moonbase","repository":"kde","module":"","version":"","commit":"67b1aaba32f6d43be1a23cc140838bdb5dedfec9","title":"kio: Adding a patch.","summary":"kio: Adding a patch."},
+  {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"simdjson","version":"4.6.8.","commit":"09b05238433d5d454450bcd47b3eb21a170ded50","title":"simdjson updated to 4.6.8.","summary":"bump to 4.6.8."}
 ]

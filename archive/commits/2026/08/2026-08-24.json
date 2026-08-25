@@ -1,0 +1,5 @@
+[
+  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"mapnik","version":"4.3.0.","commit":"32e7925b9b237bbb5b90accd0fd20690a86ebf01","title":"mapnik updated to 4.3.0.","summary":"bump to 4.3.0."},
+  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"uthash","version":"2.4.0.","commit":"3b63202e182ed9ef34fd4fd172c11666d4e93048","title":"uthash updated to 2.4.0.","summary":"bump to 2.4.0."},
+  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"sox","version":"14.8.0.1.","commit":"b4697f48c8118a730ac2e4fb16d8909bf330116f","title":"sox updated to 14.8.0.1.","summary":"bump to 14.8.0.1."}
+]

@@ -4,5 +4,7 @@
   {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"watchexec","version":"2.6.1","commit":"187bb2bef2724c89896dc682c91ec252857acbd1","title":"watchexec updated to 2.6.1","summary":"version bumped to 2.6.1"},
   {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"wine","version":"11.16","commit":"2b7fa40ee4981cca5d794cf4ab071aa536a0f54f","title":"wine updated to 11.16","summary":"version bumped to 11.16"},
   {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"lxde-common","version":"0.99.4","commit":"6fc5e15aa2ea6fa99787b4b4439f097cb4737558","title":"lxde-common updated to 0.99.4","summary":"version bumped to 0.99.4"},
-  {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"wasi-libc","version":"33.","commit":"99ba77195b42f98a00015541faafc9d9e8c3ea4b","title":"wasi-libc updated to 33.","summary":"bump to 33."}
+  {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"wasi-libc","version":"33.","commit":"99ba77195b42f98a00015541faafc9d9e8c3ea4b","title":"wasi-libc updated to 33.","summary":"bump to 33."},
+  {"date":"2026-08-23","category":"Moonbase","repository":"kde","module":"","version":"","commit":"67b1aaba32f6d43be1a23cc140838bdb5dedfec9","title":"kio: Adding a patch.","summary":"kio: Adding a patch."},
+  {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"simdjson","version":"4.6.8.","commit":"09b05238433d5d454450bcd47b3eb21a170ded50","title":"simdjson updated to 4.6.8.","summary":"bump to 4.6.8."}
 ]
