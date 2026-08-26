@@ -1,5 +1,10 @@
 [
   {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"mapnik","version":"4.3.0.","commit":"32e7925b9b237bbb5b90accd0fd20690a86ebf01","title":"mapnik updated to 4.3.0.","summary":"bump to 4.3.0."},
   {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"uthash","version":"2.4.0.","commit":"3b63202e182ed9ef34fd4fd172c11666d4e93048","title":"uthash updated to 2.4.0.","summary":"bump to 2.4.0."},
-  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"sox","version":"14.8.0.1.","commit":"b4697f48c8118a730ac2e4fb16d8909bf330116f","title":"sox updated to 14.8.0.1.","summary":"bump to 14.8.0.1."}
+  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"sox","version":"14.8.0.1.","commit":"b4697f48c8118a730ac2e4fb16d8909bf330116f","title":"sox updated to 14.8.0.1.","summary":"bump to 14.8.0.1."},
+  {"date":"2026-08-24","category":"Moonbase","repository":"gnome","module":"gucharmap","version":"17.0.2.","commit":"16ae591a8c211da6145c92cebdf34b29433b580c","title":"gucharmap updated to 17.0.2.","summary":"bump to 17.0.2."},
+  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"include-what-you-use","version":"0.26.","commit":"0497710905b9371c0a186571664a3856e1a56e90","title":"include-what-you-use updated to 0.26.","summary":"bump to 0.26."},
+  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"frei0r-plugins","version":"3.5.0.","commit":"46a424d6d3807216acc8474d39ac6dc765a0be7f","title":"frei0r-plugins updated to 3.5.0.","summary":"bump to 3.5.0."},
+  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"protozero","version":"1.8.2.","commit":"b68b28b53714eecfe297e6103d34b0a38038150f","title":"protozero updated to 1.8.2.","summary":"bump to 1.8.2."},
+  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"bluefish","version":"2.4.2.","commit":"f0c4b3b134822cce27735a02f54a200d95e65d1f","title":"bluefish updated to 2.4.2.","summary":"bump to 2.4.2."}
 ]

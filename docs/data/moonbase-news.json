@@ -1,7 +1,13 @@
 [
-  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"mapnik","version":"4.3.0.","commit":"32e7925b9b237bbb5b90accd0fd20690a86ebf01","title":"mapnik updated to 4.3.0.","summary":"bump to 4.3.0."},
-  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"uthash","version":"2.4.0.","commit":"3b63202e182ed9ef34fd4fd172c11666d4e93048","title":"uthash updated to 2.4.0.","summary":"bump to 2.4.0."},
-  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"sox","version":"14.8.0.1.","commit":"b4697f48c8118a730ac2e4fb16d8909bf330116f","title":"sox updated to 14.8.0.1.","summary":"bump to 14.8.0.1."},
-  {"date":"2026-08-23","category":"Moonbase","repository":"kde","module":"","version":"","commit":"67b1aaba32f6d43be1a23cc140838bdb5dedfec9","title":"kio: Adding a patch.","summary":"kio: Adding a patch."},
-  {"date":"2026-08-23","category":"Moonbase","repository":"other","module":"simdjson","version":"4.6.8.","commit":"09b05238433d5d454450bcd47b3eb21a170ded50","title":"simdjson updated to 4.6.8.","summary":"bump to 4.6.8."}
+  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"glycin","version":"2.1.5.","commit":"1075081b0b2a99aff7b646f65b8f18c8443801ef","title":"glycin updated to 2.1.5.","summary":"bump to 2.1.5."},
+  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"gmic","version":"4.0.4.","commit":"9b4e7863c27c019139ca5e8fc704028e429b87b4","title":"gmic updated to 4.0.4.","summary":"bump to 4.0.4."},
+  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"","version":"","commit":"9c6a7f3c9fa2e0c9a41b29e88a140e31c1c4bbbc","title":"mariadb: version b umped to 12.3.3","summary":"mariadb: version b umped to 12.3.3"},
+  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"gmic-qt","version":"4.0.4.","commit":"d6ec926badee82f8aff920c3f6fc5f229ee1d753","title":"gmic-qt updated to 4.0.4.","summary":"bump to 4.0.4."},
+  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"glfw","version":"3.5.1.","commit":"ddd0e4b1854378349f23034ff19298cd71c4cfd0","title":"glfw updated to 3.5.1.","summary":"bump to 3.5.1."},
+  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"","version":"","commit":"f945d20b2b7e65225c22a1bd817734a1033d74f2","title":"netpbm: Adding a patch dealing with c23.","summary":"netpbm: Adding a patch dealing with c23."},
+  {"date":"2026-08-24","category":"Moonbase","repository":"gnome","module":"gucharmap","version":"17.0.2.","commit":"16ae591a8c211da6145c92cebdf34b29433b580c","title":"gucharmap updated to 17.0.2.","summary":"bump to 17.0.2."},
+  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"include-what-you-use","version":"0.26.","commit":"0497710905b9371c0a186571664a3856e1a56e90","title":"include-what-you-use updated to 0.26.","summary":"bump to 0.26."},
+  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"frei0r-plugins","version":"3.5.0.","commit":"46a424d6d3807216acc8474d39ac6dc765a0be7f","title":"frei0r-plugins updated to 3.5.0.","summary":"bump to 3.5.0."},
+  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"protozero","version":"1.8.2.","commit":"b68b28b53714eecfe297e6103d34b0a38038150f","title":"protozero updated to 1.8.2.","summary":"bump to 1.8.2."},
+  {"date":"2026-08-24","category":"Moonbase","repository":"other","module":"bluefish","version":"2.4.2.","commit":"f0c4b3b134822cce27735a02f54a200d95e65d1f","title":"bluefish updated to 2.4.2.","summary":"bump to 2.4.2."}
 ]

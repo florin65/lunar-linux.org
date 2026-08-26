@@ -1,0 +1,8 @@
+[
+  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"glycin","version":"2.1.5.","commit":"1075081b0b2a99aff7b646f65b8f18c8443801ef","title":"glycin updated to 2.1.5.","summary":"bump to 2.1.5."},
+  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"gmic","version":"4.0.4.","commit":"9b4e7863c27c019139ca5e8fc704028e429b87b4","title":"gmic updated to 4.0.4.","summary":"bump to 4.0.4."},
+  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"","version":"","commit":"9c6a7f3c9fa2e0c9a41b29e88a140e31c1c4bbbc","title":"mariadb: version b umped to 12.3.3","summary":"mariadb: version b umped to 12.3.3"},
+  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"gmic-qt","version":"4.0.4.","commit":"d6ec926badee82f8aff920c3f6fc5f229ee1d753","title":"gmic-qt updated to 4.0.4.","summary":"bump to 4.0.4."},
+  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"glfw","version":"3.5.1.","commit":"ddd0e4b1854378349f23034ff19298cd71c4cfd0","title":"glfw updated to 3.5.1.","summary":"bump to 3.5.1."},
+  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"","version":"","commit":"f945d20b2b7e65225c22a1bd817734a1033d74f2","title":"netpbm: Adding a patch dealing with c23.","summary":"netpbm: Adding a patch dealing with c23."}
+]
