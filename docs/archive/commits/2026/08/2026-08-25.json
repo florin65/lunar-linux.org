@@ -4,5 +4,7 @@
   {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"","version":"","commit":"9c6a7f3c9fa2e0c9a41b29e88a140e31c1c4bbbc","title":"mariadb: version b umped to 12.3.3","summary":"mariadb: version b umped to 12.3.3"},
   {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"gmic-qt","version":"4.0.4.","commit":"d6ec926badee82f8aff920c3f6fc5f229ee1d753","title":"gmic-qt updated to 4.0.4.","summary":"bump to 4.0.4."},
   {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"glfw","version":"3.5.1.","commit":"ddd0e4b1854378349f23034ff19298cd71c4cfd0","title":"glfw updated to 3.5.1.","summary":"bump to 3.5.1."},
-  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"","version":"","commit":"f945d20b2b7e65225c22a1bd817734a1033d74f2","title":"netpbm: Adding a patch dealing with c23.","summary":"netpbm: Adding a patch dealing with c23."}
+  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"","version":"","commit":"f945d20b2b7e65225c22a1bd817734a1033d74f2","title":"netpbm: Adding a patch dealing with c23.","summary":"netpbm: Adding a patch dealing with c23."},
+  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"","version":"","commit":"6a26e13fe9632e444873dbed64a7268a0451f144","title":"firefox: Here's the patch.","summary":"firefox: Here's the patch."},
+  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"firefox","version":"154.0.1 and adding a patch.","commit":"a216d95b4a94ce5bd92c43c7cf0a1c0ed1e30a03","title":"firefox updated to 154.0.1 and adding a patch.","summary":"bump to 154.0.1 and adding a patch."}
 ]

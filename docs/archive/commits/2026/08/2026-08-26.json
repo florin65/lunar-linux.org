@@ -3,7 +3,5 @@
   {"date":"2026-08-26","category":"Moonbase","repository":"other","module":"libreoffice-bin","version":"26.8.0.3.","commit":"5c48b4ac6943a18b9a5d053e7cf53931c3c3ed30","title":"libreoffice-bin updated to 26.8.0.3.","summary":"bump to 26.8.0.3."},
   {"date":"2026-08-26","category":"Moonbase","repository":"other","module":"rtorrent","version":"0.16.21.","commit":"83b635993c99d678c907e09dbadaae87597497ee","title":"rtorrent updated to 0.16.21.","summary":"bump to 0.16.21."},
   {"date":"2026-08-26","category":"Moonbase","repository":"other","module":"faad2","version":"2.11.3","commit":"b68237473486f7b331a4a94a2525e7226bdbfd4b","title":"faad2 updated to 2.11.3","summary":"version bumped to 2.11.3"},
-  {"date":"2026-08-26","category":"Moonbase","repository":"other","module":"libtorrent","version":"0.16.21.","commit":"f8426325f33140c2d893299d8fd0a453c2d8cf87","title":"libtorrent updated to 0.16.21.","summary":"bump to 0.16.21."},
-  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"","version":"","commit":"6a26e13fe9632e444873dbed64a7268a0451f144","title":"firefox: Here's the patch.","summary":"firefox: Here's the patch."},
-  {"date":"2026-08-25","category":"Moonbase","repository":"other","module":"firefox","version":"154.0.1 and adding a patch.","commit":"a216d95b4a94ce5bd92c43c7cf0a1c0ed1e30a03","title":"firefox updated to 154.0.1 and adding a patch.","summary":"bump to 154.0.1 and adding a patch."}
+  {"date":"2026-08-26","category":"Moonbase","repository":"other","module":"libtorrent","version":"0.16.21.","commit":"f8426325f33140c2d893299d8fd0a453c2d8cf87","title":"libtorrent updated to 0.16.21.","summary":"bump to 0.16.21."}
 ]
