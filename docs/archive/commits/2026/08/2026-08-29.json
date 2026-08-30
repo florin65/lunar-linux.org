@@ -8,7 +8,5 @@
   {"date":"2026-08-29","category":"Moonbase","repository":"other","module":"sun-jdk","version":"25.0.4.1","commit":"a080ace90be4e8cb7bac0a653ffbe24b35200810","title":"sun-jdk updated to 25.0.4.1","summary":"version bumped to 25.0.4.1"},
   {"date":"2026-08-29","category":"Moonbase","repository":"other","module":"pdfjs","version":"6.3.289","commit":"b4e44b4ac0e95dfc46031311ab2d9f02a094c804","title":"pdfjs updated to 6.3.289","summary":"version bumped to 6.3.289"},
   {"date":"2026-08-29","category":"Moonbase","repository":"other","module":"libcdio","version":"2.4.0","commit":"c9e9d626bb34253a03734dd5b3df77c20ba580ab","title":"libcdio updated to 2.4.0","summary":"version bumped to 2.4.0"},
-  {"date":"2026-08-29","category":"Moonbase","repository":"other","module":"libvpx","version":"1.17.0","commit":"d49602c2f7fd984b77f29e3eb5f24fa68c115d4d","title":"libvpx updated to 1.17.0","summary":"version bumped to 1.17.0"},
-  {"date":"2026-08-28","category":"Moonbase","repository":"other","module":"","version":"","commit":"a6a35f7966a5ea0d8285314032fa564b156df5f5","title":"squashfs: linting.","summary":"squashfs: linting."},
-  {"date":"2026-08-28","category":"Moonbase","repository":"other","module":"squashfs","version":"4.7.5.","commit":"fde68006b1fd5816d490620afab731e2ef4be13d","title":"squashfs updated to 4.7.5.","summary":"bump to 4.7.5."}
+  {"date":"2026-08-29","category":"Moonbase","repository":"other","module":"libvpx","version":"1.17.0","commit":"d49602c2f7fd984b77f29e3eb5f24fa68c115d4d","title":"libvpx updated to 1.17.0","summary":"version bumped to 1.17.0"}
 ]

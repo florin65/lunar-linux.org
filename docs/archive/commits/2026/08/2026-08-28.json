@@ -1,0 +1,4 @@
+[
+  {"date":"2026-08-28","category":"Moonbase","repository":"other","module":"","version":"","commit":"a6a35f7966a5ea0d8285314032fa564b156df5f5","title":"squashfs: linting.","summary":"squashfs: linting."},
+  {"date":"2026-08-28","category":"Moonbase","repository":"other","module":"squashfs","version":"4.7.5.","commit":"fde68006b1fd5816d490620afab731e2ef4be13d","title":"squashfs updated to 4.7.5.","summary":"bump to 4.7.5."}
+]
