@@ -1,0 +1,5 @@
+[
+  {"date":"2026-09-20","category":"Moonbase","repository":"other","module":"cpp-utilities","version":"5.36.0","commit":"4c2df83b6e4f1043d7a45e861afe1ed3a722a6f5","title":"cpp-utilities updated to 5.36.0","summary":"version bumped to 5.36.0"},
+  {"date":"2026-09-20","category":"Moonbase","repository":"other","module":"stress-ng","version":"0.22.01","commit":"5b32030fd1c1f8ebebe78d1c5d1929aaf9828772","title":"stress-ng updated to 0.22.01","summary":"version bumped to 0.22.01"},
+  {"date":"2026-09-20","category":"Moonbase","repository":"other","module":"wakatime-cli","version":"2.26.4","commit":"77048aea1ffb77e8d557df26f51e6b4d50646f6e","title":"wakatime-cli updated to 2.26.4","summary":"version bumped to 2.26.4"}
+]

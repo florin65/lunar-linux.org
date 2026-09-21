@@ -1,12 +1,12 @@
 Website build report
-Date: 2026-08-30 08:31:43
-Status: completed
+Date: 2026-09-21 08:01:01
+Status: completed with warnings
 
 Problems
+  dynamic data: daily ISO metadata refresh failed (exit 7); preserving ./docs/data/daily-iso.json
 
-  none
 Dynamic Data
-  warnings: 0
+  warnings: 1
 
 Editorial News
   warnings: 0
@@ -18,8 +18,8 @@ Archive
   warnings: 0
 
 Pages
-  generated: 4
-  unchanged: 40
+  generated: 3
+  unchanged: 41
   failed: 0
 
 Maintenance

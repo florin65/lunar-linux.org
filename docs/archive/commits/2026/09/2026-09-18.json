@@ -1,0 +1,5 @@
+[
+  {"date":"2026-09-18","category":"Moonbase","repository":"core","module":"less","version":"710","commit":"af09fbb7219093df7967aabc82ac952814030a7e","title":"less updated to 710","summary":"version bumped to 710"},
+  {"date":"2026-09-18","category":"Moonbase","repository":"core","module":"libpcap","version":"1.11.0","commit":"be28cf3c9e0e31bdf1dab88f64ef3d34f6919a65","title":"libpcap updated to 1.11.0","summary":"version bumped to 1.11.0"},
+  {"date":"2026-09-18","category":"Moonbase","repository":"core","module":"expat","version":"2.8.4","commit":"d9f949f8c01e406887c5403087634ec8424facf1","title":"expat updated to 2.8.4","summary":"version bumped to 2.8.4"}
+]

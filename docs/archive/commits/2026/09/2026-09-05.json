@@ -1,0 +1,6 @@
+[
+  {"date":"2026-09-05","category":"Moonbase","repository":"core","module":"","version":"","commit":"5aaeeec6e3496faea6db0a40c65ffc4d6bed9eb2","title":"gzip: move to /usr","summary":"gzip: move to /usr"},
+  {"date":"2026-09-05","category":"Moonbase","repository":"core","module":"","version":"","commit":"5b90a48c08b06fd721f068ecba3f2db19536c521","title":"zlib: move to /usr","summary":"zlib: move to /usr"},
+  {"date":"2026-09-05","category":"Moonbase","repository":"core","module":"","version":"","commit":"aa45b04cd4bc6ae9a400cf5ede4931ec8721cb2d","title":"mdadm: move to /usr","summary":"mdadm: move to /usr"},
+  {"date":"2026-09-05","category":"Moonbase","repository":"core","module":"","version":"","commit":"b28fa6a969a6d503ef19f40ca2fb24d26b5c12cf","title":"mdadm: adjust update date","summary":"mdadm: adjust update date"}
+]
