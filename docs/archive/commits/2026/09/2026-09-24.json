@@ -1,0 +1,5 @@
+[
+  {"date":"2026-09-24","category":"Moonbase","repository":"kde","module":"","version":"","commit":"8329b2974463087a05a530952ccee98700d36208","title":"kde-applications: Commenting kdenlive.","summary":"kde-applications: Commenting kdenlive."},
+  {"date":"2026-09-24","category":"Moonbase","repository":"kde","module":"qt-creator","version":"20.0.2.","commit":"c3620da918439b9ebf829f7a3bb2a9626e274ec8","title":"qt-creator updated to 20.0.2.","summary":"bump to 20.0.2."},
+  {"date":"2026-09-24","category":"Moonbase","repository":"other","module":"php","version":"8.5.11","commit":"64b43a54409c7b258fcb5a377c5e8fb4d83ba0e8","title":"php updated to 8.5.11","summary":"version bumped to 8.5.11"}
+]

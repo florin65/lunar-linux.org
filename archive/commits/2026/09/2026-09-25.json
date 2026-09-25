@@ -5,10 +5,5 @@
   {"date":"2026-09-25","category":"Moonbase","repository":"other","module":"blosc2","version":"3.3.5","commit":"91bb62364b3bd2d3ac09f3c9f388e80b12acf327","title":"blosc2 updated to 3.3.5","summary":"version bumped to 3.3.5"},
   {"date":"2026-09-25","category":"Moonbase","repository":"other","module":"foot","version":"1.28.0","commit":"b22a66df90126d63742b8d687e807c9ea244933a","title":"foot updated to 1.28.0","summary":"version bumped to 1.28.0"},
   {"date":"2026-09-25","category":"Moonbase","repository":"other","module":"libutf8proc","version":"2.12.0 + simplify build","commit":"c8916d2f9d2c2c3126ef645d2ef43029e86d5714","title":"libutf8proc updated to 2.12.0 + simplify build","summary":"version bumped to 2.12.0 + simplify build"},
-  {"date":"2026-09-25","category":"Moonbase","repository":"xorg","module":"python-xcfflib","version":"1.12.0.","commit":"e05e226c97f1a283d405d49202969c04736d8fd7","title":"python-xcfflib updated to 1.12.0.","summary":"bump to 1.12.0."},
-  {"date":"2026-09-24","category":"Moonbase","repository":"kde","module":"","version":"","commit":"8329b2974463087a05a530952ccee98700d36208","title":"kde-applications: Commenting kdenlive.","summary":"kde-applications: Commenting kdenlive."},
-  {"date":"2026-09-24","category":"Moonbase","repository":"kde","module":"qt-creator","version":"20.0.2.","commit":"c3620da918439b9ebf829f7a3bb2a9626e274ec8","title":"qt-creator updated to 20.0.2.","summary":"bump to 20.0.2."},
-  {"date":"2026-09-24","category":"Moonbase","repository":"other","module":"php","version":"8.5.11","commit":"64b43a54409c7b258fcb5a377c5e8fb4d83ba0e8","title":"php updated to 8.5.11","summary":"version bumped to 8.5.11"},
-  {"date":"2026-09-23","category":"Moonbase","repository":"core","module":"expat","version":"2.8.5","commit":"37b7c9146a5e703d34baa78163534690f2cfe171","title":"expat updated to 2.8.5","summary":"version bumped to 2.8.5"},
-  {"date":"2026-09-23","category":"Moonbase","repository":"core","module":"meson","version":"1.12.1","commit":"c6385dac22411c338b14ef1d657f1be506c60778","title":"meson updated to 1.12.1","summary":"version bumped to 1.12.1"}
+  {"date":"2026-09-25","category":"Moonbase","repository":"xorg","module":"python-xcfflib","version":"1.12.0.","commit":"e05e226c97f1a283d405d49202969c04736d8fd7","title":"python-xcfflib updated to 1.12.0.","summary":"bump to 1.12.0."}
 ]
