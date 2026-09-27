@@ -15,6 +15,5 @@
   {"date":"2026-09-26","category":"Moonbase","repository":"other","module":"linux-lts","version":"6.18.54","commit":"bf7c46eb0b3a9df008c12cb48ff00659f38cec4c","title":"linux-lts updated to 6.18.54","summary":"version bumped to 6.18.54"},
   {"date":"2026-09-26","category":"Moonbase","repository":"other","module":"intel-ucode","version":"20260925","commit":"c0627b27aa8f9417f8642d55a0f3e47ee3ca709d","title":"intel-ucode updated to 20260925","summary":"version bumped to 20260925"},
   {"date":"2026-09-26","category":"Moonbase","repository":"other","module":"libuv","version":"1.53.0","commit":"d9f9b3edba38be8fa99474031557b158e4df19c0","title":"libuv updated to 1.53.0","summary":"version bumped to 1.53.0"},
-  {"date":"2026-09-26","category":"Moonbase","repository":"other","module":"","version":"","commit":"f5b560cbbadc0afab669de2fabc68b9de83542d5","title":"poppler: Adjust BUILD.","summary":"poppler: Adjust BUILD."},
-  {"date":"2026-09-25","category":"Moonbase","repository":"other","module":"[ython-pyqt6-webengine","version":"6.11.0.","commit":"8f4cc388f3d4ef12dc71dbb092f37bb96d3b05c5","title":"[ython-pyqt6-webengine updated to 6.11.0.","summary":"bump to 6.11.0."}
+  {"date":"2026-09-26","category":"Moonbase","repository":"other","module":"","version":"","commit":"f5b560cbbadc0afab669de2fabc68b9de83542d5","title":"poppler: Adjust BUILD.","summary":"poppler: Adjust BUILD."}
 ]

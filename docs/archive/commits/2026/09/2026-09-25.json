@@ -5,5 +5,6 @@
   {"date":"2026-09-25","category":"Moonbase","repository":"other","module":"blosc2","version":"3.3.5","commit":"91bb62364b3bd2d3ac09f3c9f388e80b12acf327","title":"blosc2 updated to 3.3.5","summary":"version bumped to 3.3.5"},
   {"date":"2026-09-25","category":"Moonbase","repository":"other","module":"foot","version":"1.28.0","commit":"b22a66df90126d63742b8d687e807c9ea244933a","title":"foot updated to 1.28.0","summary":"version bumped to 1.28.0"},
   {"date":"2026-09-25","category":"Moonbase","repository":"other","module":"libutf8proc","version":"2.12.0 + simplify build","commit":"c8916d2f9d2c2c3126ef645d2ef43029e86d5714","title":"libutf8proc updated to 2.12.0 + simplify build","summary":"version bumped to 2.12.0 + simplify build"},
-  {"date":"2026-09-25","category":"Moonbase","repository":"xorg","module":"python-xcfflib","version":"1.12.0.","commit":"e05e226c97f1a283d405d49202969c04736d8fd7","title":"python-xcfflib updated to 1.12.0.","summary":"bump to 1.12.0."}
+  {"date":"2026-09-25","category":"Moonbase","repository":"xorg","module":"python-xcfflib","version":"1.12.0.","commit":"e05e226c97f1a283d405d49202969c04736d8fd7","title":"python-xcfflib updated to 1.12.0.","summary":"bump to 1.12.0."},
+  {"date":"2026-09-25","category":"Moonbase","repository":"other","module":"[ython-pyqt6-webengine","version":"6.11.0.","commit":"8f4cc388f3d4ef12dc71dbb092f37bb96d3b05c5","title":"[ython-pyqt6-webengine updated to 6.11.0.","summary":"bump to 6.11.0."}
 ]
