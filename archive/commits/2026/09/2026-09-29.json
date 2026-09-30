@@ -1,0 +1,4 @@
+[
+  {"date":"2026-09-29","category":"Moonbase","repository":"other","module":"bluez-5","version":"5.87.","commit":"2354fd6cbad85487d83871bcf4dcba57e5fbf19c","title":"bluez-5 updated to 5.87.","summary":"bump to 5.87."},
+  {"date":"2026-09-29","category":"Moonbase","repository":"other","module":"sbc","version":"2.2","commit":"eeda87d02236c97e2b9b67a845cb44d56a4913ee","title":"sbc updated to 2.2","summary":"version bumped to 2.2"}
+]
