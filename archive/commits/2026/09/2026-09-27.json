@@ -17,5 +17,6 @@
   {"date":"2026-09-27","category":"Moonbase","repository":"other","module":"python-pycurl","version":"7.48.0.","commit":"bde7959581bb8b61eb1c0560787728fb1ed13e63","title":"python-pycurl updated to 7.48.0.","summary":"bump to 7.48.0."},
   {"date":"2026-09-27","category":"Moonbase","repository":"other","module":"","version":"","commit":"c54aaa23184a8a9599531cbad47a50531a4cf587","title":"python-zstandard: Rework DEPENDS.","summary":"python-zstandard: Rework DEPENDS."},
   {"date":"2026-09-27","category":"Moonbase","repository":"other","module":"hunspell","version":"1.7.4","commit":"c74f13d69a1891d9d348170352fef6dcfcf21245","title":"hunspell updated to 1.7.4","summary":"version bumped to 1.7.4"},
-  {"date":"2026-09-27","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"3c5f6f6c2533355974c9e66a09c20f59c737f05a","title":"mesa-lib: small tweaks","summary":"mesa-lib: small tweaks"}
+  {"date":"2026-09-27","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"3c5f6f6c2533355974c9e66a09c20f59c737f05a","title":"mesa-lib: small tweaks","summary":"mesa-lib: small tweaks"},
+  {"date":"2026-09-27","category":"Moonbase","repository":"core","module":"linux","version":"7.2.8","commit":"988edc23c4031aa3255c5855cbe77ff96a0f8599","title":"linux updated to 7.2.8","summary":"version bumped to 7.2.8"}
 ]

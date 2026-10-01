@@ -1,3 +1,5 @@
 [
-  {"date":"2026-09-28","category":"Moonbase","repository":"other","module":"netpbm","version":"10.86.51","commit":"104cd770fa09d16dce55c0c2a59a54d846a014d0","title":"netpbm updated to 10.86.51","summary":"version bumped to 10.86.51"}
+  {"date":"2026-09-28","category":"Moonbase","repository":"other","module":"netpbm","version":"10.86.51","commit":"104cd770fa09d16dce55c0c2a59a54d846a014d0","title":"netpbm updated to 10.86.51","summary":"version bumped to 10.86.51"},
+  {"date":"2026-09-28","category":"Moonbase","repository":"core","module":"","version":"","commit":"34ffa450b567425b326dbc2c03c1e6bb18a801df","title":"ccache:Update ccache version","summary":"ccache:Update ccache version"},
+  {"date":"2026-09-28","category":"Moonbase","repository":"core","module":"lsof","version":"4.99.7","commit":"37408b052cb7a8fb10e291495aba0036857b3c53","title":"lsof updated to 4.99.7","summary":"version bumped to 4.99.7"}
 ]
