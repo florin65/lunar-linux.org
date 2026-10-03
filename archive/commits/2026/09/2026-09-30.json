@@ -4,5 +4,6 @@
   {"date":"2026-09-30","category":"Moonbase","repository":"other","module":"firefox","version":"157.0","commit":"a188c0b2e4b1718e5f560e648b9eac029a609277","title":"firefox updated to 157.0","summary":"version bumped to 157.0"},
   {"date":"2026-09-30","category":"Moonbase","repository":"other","module":"conky","version":"1.25.1","commit":"b13fe8f5abcb6954f869045f2ba4a79434f1a0a2","title":"conky updated to 1.25.1","summary":"version bumped to 1.25.1"},
   {"date":"2026-09-30","category":"Moonbase","repository":"other","module":"iperf3","version":"3.22","commit":"bce579850a9d3f314aadbdf8e39b63071fb02d41","title":"iperf3 updated to 3.22","summary":"version bumped to 3.22"},
-  {"date":"2026-09-30","category":"Moonbase","repository":"other","module":"gh","version":"2.102.0","commit":"bf341655a97779098b23d6d9abd6331e01a63135","title":"gh updated to 2.102.0","summary":"version bumped to 2.102.0"}
+  {"date":"2026-09-30","category":"Moonbase","repository":"other","module":"gh","version":"2.102.0","commit":"bf341655a97779098b23d6d9abd6331e01a63135","title":"gh updated to 2.102.0","summary":"version bumped to 2.102.0"},
+  {"date":"2026-09-30","category":"Moonbase","repository":"core","module":"openssl","version":"3.6.5","commit":"113bb24bb17d0e7aa267cde9b3fcbf3ee6f8b789","title":"openssl updated to 3.6.5","summary":"version bumped to 3.6.5"}
 ]

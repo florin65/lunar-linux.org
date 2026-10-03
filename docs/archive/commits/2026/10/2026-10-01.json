@@ -8,5 +8,7 @@
   {"date":"2026-10-01","category":"Moonbase","repository":"other","module":"patchelf","version":"0.19.2","commit":"3bda19ca8a54fc35fb992d36141a8031df880ae1","title":"patchelf updated to 0.19.2","summary":"version bumped to 0.19.2"},
   {"date":"2026-10-01","category":"Moonbase","repository":"other","module":"librsvg","version":"stable 2.62.4","commit":"a1fb260da887a7076d79f035f063ba992a83dec4","title":"librsvg updated to stable 2.62.4","summary":"version bumped to stable 2.62.4"},
   {"date":"2026-10-01","category":"Moonbase","repository":"other","module":"freerdp","version":"3.32.1","commit":"b7f9256090db883e0ca47997e1cf40d3eacd0a52","title":"freerdp updated to 3.32.1","summary":"version bumped to 3.32.1"},
-  {"date":"2026-10-01","category":"Moonbase","repository":"other","module":"libindi","version":"2.2.5","commit":"cae6c6d9cef7d8e3914c1ea67c77f8897bb390ef","title":"libindi updated to 2.2.5","summary":"version bumped to 2.2.5"}
+  {"date":"2026-10-01","category":"Moonbase","repository":"other","module":"libindi","version":"2.2.5","commit":"cae6c6d9cef7d8e3914c1ea67c77f8897bb390ef","title":"libindi updated to 2.2.5","summary":"version bumped to 2.2.5"},
+  {"date":"2026-10-01","category":"Moonbase","repository":"core","module":"linux-firmware","version":"20261001.","commit":"1a4a35505946087b19ea605891f5bcafa346b890","title":"linux-firmware updated to 20261001.","summary":"bump to 20261001."},
+  {"date":"2026-10-01","category":"Moonbase","repository":"other","module":"","version":"","commit":"d6daef563b8806c60c3f05e9e9d875ccf382024d","title":"libfps: Change source url.","summary":"libfps: Change source url."}
 ]

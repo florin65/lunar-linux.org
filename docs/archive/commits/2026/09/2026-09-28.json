@@ -1,5 +1,9 @@
 [
   {"date":"2026-09-28","category":"Moonbase","repository":"other","module":"netpbm","version":"10.86.51","commit":"104cd770fa09d16dce55c0c2a59a54d846a014d0","title":"netpbm updated to 10.86.51","summary":"version bumped to 10.86.51"},
   {"date":"2026-09-28","category":"Moonbase","repository":"core","module":"","version":"","commit":"34ffa450b567425b326dbc2c03c1e6bb18a801df","title":"ccache:Update ccache version","summary":"ccache:Update ccache version"},
-  {"date":"2026-09-28","category":"Moonbase","repository":"core","module":"lsof","version":"4.99.7","commit":"37408b052cb7a8fb10e291495aba0036857b3c53","title":"lsof updated to 4.99.7","summary":"version bumped to 4.99.7"}
+  {"date":"2026-09-28","category":"Moonbase","repository":"core","module":"lsof","version":"4.99.7","commit":"37408b052cb7a8fb10e291495aba0036857b3c53","title":"lsof updated to 4.99.7","summary":"version bumped to 4.99.7"},
+  {"date":"2026-09-28","category":"Moonbase","repository":"core","module":"dracut","version":"112","commit":"0c6ff7a0c4930a412c0fe7451944f712d7684ce3","title":"dracut updated to 112","summary":"version bumped to 112"},
+  {"date":"2026-09-28","category":"Moonbase","repository":"core","module":"bash-completion","version":"2.18.0","commit":"58f119865977af683ec27eed76a176967e73adbe","title":"bash-completion updated to 2.18.0","summary":"version bumped to 2.18.0"},
+  {"date":"2026-09-28","category":"Moonbase","repository":"core","module":"libusb-compat","version":"0.1.9","commit":"6eaf084ec7cbe4217736f55f4159e4912d111465","title":"libusb-compat updated to 0.1.9","summary":"version bumped to 0.1.9"},
+  {"date":"2026-09-28","category":"Moonbase","repository":"core","module":"btrfs-progs","version":"7.1","commit":"a30b54c0bd3a49eb0be8bba260f4a31bc908fe1c","title":"btrfs-progs updated to 7.1","summary":"version bumped to 7.1"}
 ]
