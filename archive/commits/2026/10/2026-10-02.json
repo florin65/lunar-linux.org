@@ -5,5 +5,6 @@
   {"date":"2026-10-02","category":"Moonbase","repository":"other","module":"","version":"","commit":"958bd209f1e975d65cad485e9b789fdf241114c1","title":"git: use optional_depends_requires instead of lin in BUILD","summary":"git: use optional_depends_requires instead of lin in BUILD"},
   {"date":"2026-10-02","category":"Moonbase","repository":"other","module":"git","version":"2.56.0 + fix lint errors","commit":"b316120f7b447371973d429b95200a353308d14f","title":"git updated to 2.56.0 + fix lint errors","summary":"version bumped to 2.56.0 + fix lint errors"},
   {"date":"2026-10-02","category":"Moonbase","repository":"other","module":"hwdata","version":"0.412","commit":"c7ab874ab9183e80e69ecf269da69d8950663d4a","title":"hwdata updated to 0.412","summary":"version bumped to 0.412"},
-  {"date":"2026-10-02","category":"Moonbase","repository":"other","module":"","version":"","commit":"d5354148ff74a0a2a46754f725cc26b6926bfc5a","title":"git: fix typo in if statement","summary":"git: fix typo in if statement"}
+  {"date":"2026-10-02","category":"Moonbase","repository":"other","module":"","version":"","commit":"d5354148ff74a0a2a46754f725cc26b6926bfc5a","title":"git: fix typo in if statement","summary":"git: fix typo in if statement"},
+  {"date":"2026-10-02","category":"Moonbase","repository":"core","module":"pcre2","version":"10.49","commit":"f2db0b94d308c164007f291472339ac7804abc59","title":"pcre2 updated to 10.49","summary":"version bumped to 10.49"}
 ]

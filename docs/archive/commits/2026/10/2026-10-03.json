@@ -15,6 +15,5 @@
   {"date":"2026-10-03","category":"Moonbase","repository":"xorg","module":"mesa-lib","version":"26.2.4","commit":"066660adcf3cd4ffe182eef7c5e8a080281b350e","title":"mesa-lib updated to 26.2.4","summary":"version bumped to 26.2.4"},
   {"date":"2026-10-03","category":"Moonbase","repository":"xorg","module":"glslang","version":"16.6.0","commit":"68b566b0480c2376eba25b94688eded8488320f4","title":"glslang updated to 16.6.0","summary":"version bumped to 16.6.0"},
   {"date":"2026-10-03","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"a3e1eb1c2214e06ed25bb40995a1da0708715e99","title":"spirv-tools: version bnumped to 1.4.363.0","summary":"spirv-tools: version bnumped to 1.4.363.0"},
-  {"date":"2026-10-03","category":"Moonbase","repository":"xorg","module":"spirv-headers","version":"1.4.363.0","commit":"f57c54872fc2822368810a7e19b963bfbeb705d9","title":"spirv-headers updated to 1.4.363.0","summary":"version bumped to 1.4.363.0"},
-  {"date":"2026-10-02","category":"Moonbase","repository":"core","module":"pcre2","version":"10.49","commit":"f2db0b94d308c164007f291472339ac7804abc59","title":"pcre2 updated to 10.49","summary":"version bumped to 10.49"}
+  {"date":"2026-10-03","category":"Moonbase","repository":"xorg","module":"spirv-headers","version":"1.4.363.0","commit":"f57c54872fc2822368810a7e19b963bfbeb705d9","title":"spirv-headers updated to 1.4.363.0","summary":"version bumped to 1.4.363.0"}
 ]
