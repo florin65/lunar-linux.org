@@ -12,8 +12,5 @@
   {"date":"2026-10-04","category":"Moonbase","repository":"other","module":"hplip","version":"3.26.6 and rework some patches.","commit":"a7256b7532bf1b80cf043f227a7e33f0dbd08ce3","title":"hplip updated to 3.26.6 and rework some patches.","summary":"bump to 3.26.6 and rework some patches."},
   {"date":"2026-10-04","category":"Moonbase","repository":"other","module":"broot","version":"1.61.0","commit":"c2c4e706501dc27853777c026f6e4611678e79e3","title":"broot updated to 1.61.0","summary":"version bumped to 1.61.0"},
   {"date":"2026-10-04","category":"Moonbase","repository":"other","module":"samba","version":"4.25.0","commit":"f0e2f705c58144b8b8e95a3fd25af4f85f358cee","title":"samba updated to 4.25.0","summary":"version bumped to 4.25.0"},
-  {"date":"2026-10-04","category":"Moonbase","repository":"xorg","module":"xorgproto","version":"2026.1","commit":"d53914b76f57596f9a1f71b13cfd8eb10ecec17b","title":"xorgproto updated to 2026.1","summary":"version bumped to 2026.1"},
-  {"date":"2026-10-03","category":"Moonbase","repository":"kde","module":"mlt-7","version":"7.42.0.","commit":"be79fd3869c8577df1f9b996e501c76e9608bfa3","title":"mlt-7 updated to 7.42.0.","summary":"bump to 7.42.0."},
-  {"date":"2026-10-03","category":"Moonbase","repository":"kde","module":"kstars","version":"3.8.5.","commit":"ec61b776dba62093a50c020a1b9912dc35283d8d","title":"kstars updated to 3.8.5.","summary":"bump to 3.8.5."},
-  {"date":"2026-10-03","category":"Moonbase","repository":"other","module":"astrometry","version":"0.98.","commit":"93b92e1c10956209e2ebb35e1fb3fe3c78927879","title":"astrometry updated to 0.98.","summary":"bump to 0.98."}
+  {"date":"2026-10-04","category":"Moonbase","repository":"xorg","module":"xorgproto","version":"2026.1","commit":"d53914b76f57596f9a1f71b13cfd8eb10ecec17b","title":"xorgproto updated to 2026.1","summary":"version bumped to 2026.1"}
 ]

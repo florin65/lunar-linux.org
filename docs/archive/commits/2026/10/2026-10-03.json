@@ -15,5 +15,8 @@
   {"date":"2026-10-03","category":"Moonbase","repository":"xorg","module":"mesa-lib","version":"26.2.4","commit":"066660adcf3cd4ffe182eef7c5e8a080281b350e","title":"mesa-lib updated to 26.2.4","summary":"version bumped to 26.2.4"},
   {"date":"2026-10-03","category":"Moonbase","repository":"xorg","module":"glslang","version":"16.6.0","commit":"68b566b0480c2376eba25b94688eded8488320f4","title":"glslang updated to 16.6.0","summary":"version bumped to 16.6.0"},
   {"date":"2026-10-03","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"a3e1eb1c2214e06ed25bb40995a1da0708715e99","title":"spirv-tools: version bnumped to 1.4.363.0","summary":"spirv-tools: version bnumped to 1.4.363.0"},
-  {"date":"2026-10-03","category":"Moonbase","repository":"xorg","module":"spirv-headers","version":"1.4.363.0","commit":"f57c54872fc2822368810a7e19b963bfbeb705d9","title":"spirv-headers updated to 1.4.363.0","summary":"version bumped to 1.4.363.0"}
+  {"date":"2026-10-03","category":"Moonbase","repository":"xorg","module":"spirv-headers","version":"1.4.363.0","commit":"f57c54872fc2822368810a7e19b963bfbeb705d9","title":"spirv-headers updated to 1.4.363.0","summary":"version bumped to 1.4.363.0"},
+  {"date":"2026-10-03","category":"Moonbase","repository":"kde","module":"mlt-7","version":"7.42.0.","commit":"be79fd3869c8577df1f9b996e501c76e9608bfa3","title":"mlt-7 updated to 7.42.0.","summary":"bump to 7.42.0."},
+  {"date":"2026-10-03","category":"Moonbase","repository":"kde","module":"kstars","version":"3.8.5.","commit":"ec61b776dba62093a50c020a1b9912dc35283d8d","title":"kstars updated to 3.8.5.","summary":"bump to 3.8.5."},
+  {"date":"2026-10-03","category":"Moonbase","repository":"other","module":"astrometry","version":"0.98.","commit":"93b92e1c10956209e2ebb35e1fb3fe3c78927879","title":"astrometry updated to 0.98.","summary":"bump to 0.98."}
 ]
