@@ -2,7 +2,5 @@
   {"date":"2026-10-05","category":"Moonbase","repository":"kde","module":"","version":"","commit":"0984e799241ca1235d39b63f7307a829f135a5fb","title":"qt6-webengine: Moving here, come 6.12 it will become its own thing, see;","summary":"qt6-webengine: Moving here, come 6.12 it will become its own thing, see;"},
   {"date":"2026-10-05","category":"Moonbase","repository":"kde","module":"stellarium","version":"26.3","commit":"22bac56957a141de090fc025a6fad7bcdbbbe995","title":"stellarium updated to 26.3","summary":"version bumped to 26.3"},
   {"date":"2026-10-05","category":"Moonbase","repository":"other","module":"hunspell","version":"1.7.5","commit":"0829a026adfe604d3c50203070ea1b9db2f4f440","title":"hunspell updated to 1.7.5","summary":"version bumped to 1.7.5"},
-  {"date":"2026-10-05","category":"Moonbase","repository":"other","module":"msgpack-c","version":"7.0.2","commit":"e1830ccbc888ac9d176297956f515af11eb269dd","title":"msgpack-c updated to 7.0.2","summary":"version bumped to 7.0.2"},
-  {"date":"2026-10-04","category":"Moonbase","repository":"other","module":"","version":"","commit":"99dc99b1081d26a7fad2d2db952918b8c80a1599","title":"clisp\" Needs -std=gnu99 in BUILD.","summary":"clisp\" Needs -std=gnu99 in BUILD."},
-  {"date":"2026-10-04","category":"Moonbase","repository":"other","module":"texmaker","version":"6.0.2.","commit":"b379d9b6b78a80878d9567398e782c58b00f8f0c","title":"texmaker updated to 6.0.2.","summary":"bump to 6.0.2."}
+  {"date":"2026-10-05","category":"Moonbase","repository":"other","module":"msgpack-c","version":"7.0.2","commit":"e1830ccbc888ac9d176297956f515af11eb269dd","title":"msgpack-c updated to 7.0.2","summary":"version bumped to 7.0.2"}
 ]
