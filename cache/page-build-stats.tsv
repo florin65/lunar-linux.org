@@ -12,7 +12,7 @@ unchanged	./docs/docs.html
 generated	./docs/download.html
 unchanged	./docs/history.html
 generated	./docs/index.html
-generated	./docs/info.html
+unchanged	./docs/info.html
 unchanged	./docs/lss.html
 unchanged	./docs/lss/administrator-guide/caches-and-rollback.html
 unchanged	./docs/lss/administrator-guide/index.html
@@ -41,4 +41,4 @@ unchanged	./docs/lss/user-guide/policy-states.html
 unchanged	./docs/lss/user-guide/updating-safely.html
 unchanged	./docs/lur.html
 unchanged	./docs/news-archive.html
-generated	./docs/commits-archive.html
+unchanged	./docs/commits-archive.html
