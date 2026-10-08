@@ -10,5 +10,10 @@
   {"date":"2026-10-06","category":"Moonbase","repository":"kde","module":"qt6-webengine","version":"6.140.0-rc.","commit":"f2c49a1a9ec21ebb35399ea26589d8465982f42a","title":"qt6-webengine updated to 6.140.0-rc.","summary":"bump to 6.140.0-rc."},
   {"date":"2026-10-06","category":"Moonbase","repository":"other","module":"qemu","version":"11.1.2","commit":"10fb56485760b83f3f932d3acc1497395b4507fb","title":"qemu updated to 11.1.2","summary":"version bumped to 11.1.2"},
   {"date":"2026-10-06","category":"Moonbase","repository":"other","module":"firefox-bin","version":"157.0.1","commit":"18aaf97297696ef7704e40991e2047ac38a4525d","title":"firefox-bin updated to 157.0.1","summary":"version bumped to 157.0.1"},
-  {"date":"2026-10-06","category":"Moonbase","repository":"other","module":"python-sip","version":"6.17.0.","commit":"e5ab86c666041478282a380b0b3384d88aa55450","title":"python-sip updated to 6.17.0.","summary":"bump to 6.17.0."}
+  {"date":"2026-10-06","category":"Moonbase","repository":"other","module":"python-sip","version":"6.17.0.","commit":"e5ab86c666041478282a380b0b3384d88aa55450","title":"python-sip updated to 6.17.0.","summary":"bump to 6.17.0."},
+  {"date":"2026-10-06","category":"Moonbase","repository":"kde","module":"","version":"","commit":"4f64e7b705a2f753ce273a3d1cf34d54934fa364","title":"plasma-login-manager: Adjusting BUILD.","summary":"plasma-login-manager: Adjusting BUILD."},
+  {"date":"2026-10-06","category":"Moonbase","repository":"kde","module":"","version":"","commit":"e52dc882afb6015d25433d560ef530c0b33ccc17","title":"qt6-tools: Removing patch.","summary":"qt6-tools: Removing patch."},
+  {"date":"2026-10-06","category":"Moonbase","repository":"other","module":"vapoursynth","version":"R81.","commit":"835a2c9ff92e7dcd542bf4af4bbfeafae9dbc52c","title":"vapoursynth updated to R81.","summary":"bump to R81."},
+  {"date":"2026-10-06","category":"Moonbase","repository":"other","module":"","version":"","commit":"de800013dfe33ca556f84f545fe900822f04b33c","title":"sddm: Commenting accountsservice.","summary":"sddm: Commenting accountsservice."},
+  {"date":"2026-10-06","category":"Moonbase","repository":"other","module":"brave-bin","version":"1.96.61.","commit":"ff6a967e9218538c28edcf17edf5b6916016b2b1","title":"brave-bin updated to 1.96.61.","summary":"bump to 1.96.61."}
 ]
