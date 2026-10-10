@@ -15,5 +15,6 @@
   {"date":"2026-10-06","category":"Moonbase","repository":"kde","module":"","version":"","commit":"e52dc882afb6015d25433d560ef530c0b33ccc17","title":"qt6-tools: Removing patch.","summary":"qt6-tools: Removing patch."},
   {"date":"2026-10-06","category":"Moonbase","repository":"other","module":"vapoursynth","version":"R81.","commit":"835a2c9ff92e7dcd542bf4af4bbfeafae9dbc52c","title":"vapoursynth updated to R81.","summary":"bump to R81."},
   {"date":"2026-10-06","category":"Moonbase","repository":"other","module":"","version":"","commit":"de800013dfe33ca556f84f545fe900822f04b33c","title":"sddm: Commenting accountsservice.","summary":"sddm: Commenting accountsservice."},
-  {"date":"2026-10-06","category":"Moonbase","repository":"other","module":"brave-bin","version":"1.96.61.","commit":"ff6a967e9218538c28edcf17edf5b6916016b2b1","title":"brave-bin updated to 1.96.61.","summary":"bump to 1.96.61."}
+  {"date":"2026-10-06","category":"Moonbase","repository":"other","module":"brave-bin","version":"1.96.61.","commit":"ff6a967e9218538c28edcf17edf5b6916016b2b1","title":"brave-bin updated to 1.96.61.","summary":"bump to 1.96.61."},
+  {"date":"2026-10-06","category":"Moonbase","repository":"core","module":"linux","version":"7.2.9","commit":"61ab84b862059228c4ba7658deb13d076772f9de","title":"linux updated to 7.2.9","summary":"version bumped to 7.2.9"}
 ]
