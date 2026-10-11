@@ -1,0 +1,4 @@
+[
+  {"date":"2026-10-10","category":"Moonbase","repository":"kde","module":"","version":"","commit":"76897908c861a3c7fa2821ab6d17f696db4913cc","title":"plasma-login-manager: Some more pamd twiddling.","summary":"plasma-login-manager: Some more pamd twiddling."},
+  {"date":"2026-10-10","category":"Moonbase","repository":"other","module":"python-pycparser","version":"3.11","commit":"58d4cedfd6fb956bba7af943ca2ef917169dfa49","title":"python-pycparser updated to 3.11","summary":"version bumped to 3.11"}
+]

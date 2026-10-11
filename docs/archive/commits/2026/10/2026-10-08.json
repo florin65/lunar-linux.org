@@ -1,3 +1,4 @@
 [
-  {"date":"2026-10-08","category":"Moonbase","repository":"core","module":"openssh","version":"10.6p1","commit":"9caac1e0ba1e860d59a4d6cf8ae0d02fddc71870","title":"openssh updated to 10.6p1","summary":"version bumped to 10.6p1"}
+  {"date":"2026-10-08","category":"Moonbase","repository":"core","module":"openssh","version":"10.6p1","commit":"9caac1e0ba1e860d59a4d6cf8ae0d02fddc71870","title":"openssh updated to 10.6p1","summary":"version bumped to 10.6p1"},
+  {"date":"2026-10-08","category":"Moonbase","repository":"core","module":"expat","version":"2.9.0","commit":"1ca2c4086afa33f347d7a229b927ddf05f6f19f7","title":"expat updated to 2.9.0","summary":"version bumped to 2.9.0"}
 ]
