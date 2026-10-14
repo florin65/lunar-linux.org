@@ -15,5 +15,6 @@
   {"date":"2026-10-12","category":"Moonbase","repository":"other","module":"apache-ant","version":"1.10.18","commit":"c575a70a062f0502aeb331f77ab12859c3cfedf9","title":"apache-ant updated to 1.10.18","summary":"version bumped to 1.10.18"},
   {"date":"2026-10-12","category":"Moonbase","repository":"other","module":"ruby","version":"4.0.7","commit":"d2b6ee0d2ab020c400cccdf49da489594ece20c6","title":"ruby updated to 4.0.7","summary":"version bumped to 4.0.7"},
   {"date":"2026-10-12","category":"Moonbase","repository":"other","module":"nmap","version":"7.991","commit":"dbfc40864b555b06c9e69edc225a75e1d667b0dd","title":"nmap updated to 7.991","summary":"version bumped to 7.991"},
-  {"date":"2026-10-12","category":"Moonbase","repository":"other","module":"man-pages","version":"6.19","commit":"e9ad97a482c508461e1ccedf78f193e10666a5d2","title":"man-pages updated to 6.19","summary":"version bumped to 6.19"}
+  {"date":"2026-10-12","category":"Moonbase","repository":"other","module":"man-pages","version":"6.19","commit":"e9ad97a482c508461e1ccedf78f193e10666a5d2","title":"man-pages updated to 6.19","summary":"version bumped to 6.19"},
+  {"date":"2026-10-12","category":"Moonbase","repository":"other","module":"","version":"","commit":"aac37388944957bd17cefeabd8a0874d4864cbb9","title":"lcov: Add missing depends.","summary":"lcov: Add missing depends."}
 ]
