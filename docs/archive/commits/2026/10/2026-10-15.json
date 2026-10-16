@@ -1,0 +1,11 @@
+[
+  {"date":"2026-10-15","category":"Moonbase","repository":"kde","module":"","version":"","commit":"1a98502168f2740467eec4af7db22a0230d075dc","title":"applications: Removing an uneeded depends; kmime.","summary":"applications: Removing an uneeded depends; kmime."},
+  {"date":"2026-10-15","category":"Moonbase","repository":"kde","module":"","version":"","commit":"5cdb764b396cb7f26ce703b06686738f52b1765e","title":"kde-applications: Removing a depends from profile.","summary":"kde-applications: Removing a depends from profile."},
+  {"date":"2026-10-15","category":"Moonbase","repository":"kde","module":"","version":"","commit":"768b8d1f925317aa55df1fcdacd1c44accddc18b","title":"kf5: Adjusting DEPENDS.","summary":"kf5: Adjusting DEPENDS."},
+  {"date":"2026-10-15","category":"Moonbase","repository":"kde","module":"","version":"","commit":"b75f5e15a2094d84890783d9e82a7480c09a6749","title":"frameworks: Renaming kmime-frameworks to kmime.","summary":"frameworks: Renaming kmime-frameworks to kmime."},
+  {"date":"2026-10-15","category":"Moonbase","repository":"kde","module":"","version":"","commit":"d03d3653ee5ccc0c0bfae0c34eb069c9433c5916","title":"plasma: Adding two missing depends to the profile.","summary":"plasma: Adding two missing depends to the profile."},
+  {"date":"2026-10-15","category":"Moonbase","repository":"other","module":"just","version":"1.59.0","commit":"2f12e5d67b315f59e7b1bbcf82c5976857689eae","title":"just updated to 1.59.0","summary":"version bumped to 1.59.0"},
+  {"date":"2026-10-15","category":"Moonbase","repository":"other","module":"ImageMagick","version":"7.1.2.34","commit":"ad979147d763021608e856c68aae8bbc828b4e89","title":"ImageMagick updated to 7.1.2.34","summary":"version bumped to 7.1.2.34"},
+  {"date":"2026-10-15","category":"Moonbase","repository":"other","module":"cifs-utils","version":"7.8","commit":"db01df2014b54e385bc559dc9c5c1d21ed6a2de1","title":"cifs-utils updated to 7.8","summary":"version bumped to 7.8"},
+  {"date":"2026-10-15","category":"Moonbase","repository":"other","module":"","version":"","commit":"f4d4631e8e52d087c689178e790b06da4aa1bdb8","title":"libcap-ng: Adjusting DEPENDS. swig is required if python enabled.","summary":"libcap-ng: Adjusting DEPENDS. swig is required if python enabled."}
+]
