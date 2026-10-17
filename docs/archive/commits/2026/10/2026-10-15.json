@@ -7,5 +7,7 @@
   {"date":"2026-10-15","category":"Moonbase","repository":"other","module":"just","version":"1.59.0","commit":"2f12e5d67b315f59e7b1bbcf82c5976857689eae","title":"just updated to 1.59.0","summary":"version bumped to 1.59.0"},
   {"date":"2026-10-15","category":"Moonbase","repository":"other","module":"ImageMagick","version":"7.1.2.34","commit":"ad979147d763021608e856c68aae8bbc828b4e89","title":"ImageMagick updated to 7.1.2.34","summary":"version bumped to 7.1.2.34"},
   {"date":"2026-10-15","category":"Moonbase","repository":"other","module":"cifs-utils","version":"7.8","commit":"db01df2014b54e385bc559dc9c5c1d21ed6a2de1","title":"cifs-utils updated to 7.8","summary":"version bumped to 7.8"},
-  {"date":"2026-10-15","category":"Moonbase","repository":"other","module":"","version":"","commit":"f4d4631e8e52d087c689178e790b06da4aa1bdb8","title":"libcap-ng: Adjusting DEPENDS. swig is required if python enabled.","summary":"libcap-ng: Adjusting DEPENDS. swig is required if python enabled."}
+  {"date":"2026-10-15","category":"Moonbase","repository":"other","module":"","version":"","commit":"f4d4631e8e52d087c689178e790b06da4aa1bdb8","title":"libcap-ng: Adjusting DEPENDS. swig is required if python enabled.","summary":"libcap-ng: Adjusting DEPENDS. swig is required if python enabled."},
+  {"date":"2026-10-15","category":"Moonbase","repository":"other","module":"gmic","version":"4.0.6.","commit":"578edb425d1720fc6a48ceb2565edcb10af1d7b6","title":"gmic updated to 4.0.6.","summary":"bump to 4.0.6."},
+  {"date":"2026-10-15","category":"Moonbase","repository":"other","module":"gmic-qt","version":"4.0.6.","commit":"88b03b362c172cd470c4dff20c6f74bc7f953b98","title":"gmic-qt updated to 4.0.6.","summary":"bump to 4.0.6."}
 ]

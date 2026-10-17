@@ -1,0 +1,5 @@
+[
+  {"date":"2026-10-16","category":"Moonbase","repository":"kde","module":"krita","version":"6.0.4.1 and add a few patches.","commit":"a5771157d47fba329fc2e229fd68454e55a723df","title":"krita updated to 6.0.4.1 and add a few patches.","summary":"bump to 6.0.4.1 and add a few patches."},
+  {"date":"2026-10-16","category":"Moonbase","repository":"kde","module":"","version":"","commit":"e97b431751496d7e9fa41b477fc46c19f49b860e","title":"kscreenlocker: Mvoing some pam stuff to /etc/","summary":"kscreenlocker: Mvoing some pam stuff to /etc/"},
+  {"date":"2026-10-16","category":"Moonbase","repository":"other","module":"OpenColorIO","version":"2.6.0.","commit":"7808943803261f3fc73f5560946e708f273483b2","title":"OpenColorIO updated to 2.6.0.","summary":"bump to 2.6.0."}
+]
