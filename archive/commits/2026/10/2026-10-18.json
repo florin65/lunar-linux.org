@@ -16,5 +16,8 @@
   {"date":"2026-10-18","category":"Moonbase","repository":"other","module":"nginx","version":"1.31.7","commit":"d04673484812b3017b355896f90fc8773bf4b313","title":"nginx updated to 1.31.7","summary":"version bumped to 1.31.7"},
   {"date":"2026-10-18","category":"Moonbase","repository":"other","module":"","version":"","commit":"d0b9383dce94c32edbaea7c28f51946b53a1c4be","title":"libesmtp: Adding some patches.","summary":"libesmtp: Adding some patches."},
   {"date":"2026-10-18","category":"Moonbase","repository":"other","module":"acpica-unix","version":"20260930","commit":"d224696062d6957f3fbd4833e78c8e60636b939e","title":"acpica-unix updated to 20260930","summary":"version bumped to 20260930"},
-  {"date":"2026-10-18","category":"Moonbase","repository":"other","module":"glycin","version":"2.2.3","commit":"fc7c427cfa8eca326bc48ce1de702c9e3607b9c1","title":"glycin updated to 2.2.3","summary":"version bumped to 2.2.3"}
+  {"date":"2026-10-18","category":"Moonbase","repository":"other","module":"glycin","version":"2.2.3","commit":"fc7c427cfa8eca326bc48ce1de702c9e3607b9c1","title":"glycin updated to 2.2.3","summary":"version bumped to 2.2.3"},
+  {"date":"2026-10-18","category":"Moonbase","repository":"other","module":"","version":"","commit":"0a0f18f4e931dcb7975ff29e9b24b39ea5cc1fa3","title":"atop: Linting.","summary":"atop: Linting."},
+  {"date":"2026-10-18","category":"Moonbase","repository":"other","module":"","version":"","commit":"9941a4298a8af0b4efe7a56ee7bea8cfae277b88","title":"atop: Fix UPDATED.","summary":"atop: Fix UPDATED."},
+  {"date":"2026-10-18","category":"Moonbase","repository":"other","module":"atop","version":"2.13.0, add some patches and fiddle with BUILD.","commit":"e501d8e0465721404d61f0ee175f318393312b58","title":"atop updated to 2.13.0, add some patches and fiddle with BUILD.","summary":"bump to 2.13.0, add some patches and fiddle with BUILD."}
 ]

@@ -1,0 +1,16 @@
+[
+  {"date":"2026-10-19","category":"Moonbase","repository":"kde","module":"","version":"","commit":"2cc3fc6e8c51ab63c8268209fbccddd7bd8d31da","title":"kdenlive: Rework module.","summary":"kdenlive: Rework module."},
+  {"date":"2026-10-19","category":"Moonbase","repository":"other","module":"mkvtoolnix","version":"103.0.","commit":"4f15934e07d1d02bfbd7397725adbc566ce8fd1a","title":"mkvtoolnix updated to 103.0.","summary":"bump to 103.0."},
+  {"date":"2026-10-19","category":"Moonbase","repository":"other","module":"libebml","version":"1.4.7","commit":"564c49b98c8e3f5ba3f2958a41e04bad9bf78f9f","title":"libebml updated to 1.4.7","summary":"version bumped to 1.4.7"},
+  {"date":"2026-10-19","category":"Moonbase","repository":"other","module":"libical","version":"4.0.7","commit":"63bacc4bf44fb79371e22627b94a643defc19fea","title":"libical updated to 4.0.7","summary":"version bumped to 4.0.7"},
+  {"date":"2026-10-19","category":"Moonbase","repository":"other","module":"","version":"","commit":"6f33e1525842ece48589ec18823e985d74a6016e","title":"mjpegtools: Adding some patches.","summary":"mjpegtools: Adding some patches."},
+  {"date":"2026-10-19","category":"Moonbase","repository":"other","module":"firefox","version":"158.0","commit":"972b3add60408ecd73e4bd499015b9e1583dd1b2","title":"firefox updated to 158.0","summary":"version bumped to 158.0"},
+  {"date":"2026-10-19","category":"Moonbase","repository":"other","module":"gnupg","version":"2.5.24","commit":"b4c6db03c24b6e6ac90fc429352578634ec984db","title":"gnupg updated to 2.5.24","summary":"version bumped to 2.5.24"},
+  {"date":"2026-10-19","category":"Moonbase","repository":"other","module":"","version":"","commit":"be6e43c8c452db5cc6c8cf60fb21c21ec3e689fc","title":"opentimeline: Reworking the module.","summary":"opentimeline: Reworking the module."},
+  {"date":"2026-10-19","category":"Moonbase","repository":"other","module":"metalog","version":"20260902","commit":"e53cdc815b0affcf6edcd4c26834322ec7a0c0fc","title":"metalog updated to 20260902","summary":"version bumped to 20260902"},
+  {"date":"2026-10-19","category":"Moonbase","repository":"other","module":"python-pillow","version":"13.0.0","commit":"eec431cbe385c410cf099fcb99258b9dff0a7b58","title":"python-pillow updated to 13.0.0","summary":"version bumped to 13.0.0"},
+  {"date":"2026-10-19","category":"Moonbase","repository":"other","module":"libdisplay-info","version":"0.4.0","commit":"ffd43c8be5fe2e2c203a59834aeacd404f17014c","title":"libdisplay-info updated to 0.4.0","summary":"version bumped to 0.4.0"},
+  {"date":"2026-10-19","category":"Moonbase","repository":"xorg","module":"libXpm","version":"3.5.20","commit":"09f33bce64f5fcd0dc4552f23f7f13bbbfe1aed4","title":"libXpm updated to 3.5.20","summary":"version bumped to 3.5.20"},
+  {"date":"2026-10-19","category":"Moonbase","repository":"xorg","module":"libXi","version":"1.8.4","commit":"3424c880cab9a4c6c0299c0c7fe7702809fe7bcf","title":"libXi updated to 1.8.4","summary":"version bumped to 1.8.4"},
+  {"date":"2026-10-19","category":"Moonbase","repository":"xorg","module":"libX11","version":"1.8.14","commit":"3bcd2ba9f2234a45c6f0dd4d96e658a50d2d077d","title":"libX11 updated to 1.8.14","summary":"version bumped to 1.8.14"}
+]
