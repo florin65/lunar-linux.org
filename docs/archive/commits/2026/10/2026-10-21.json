@@ -1,0 +1,11 @@
+[
+  {"date":"2026-10-21","category":"Moonbase","repository":"core","module":"","version":"","commit":"f040e8ee1fb9c89f963f432aee32bdbf0c88bc1a","title":"ca-certificates: remove compromised certificate (emudhra 2026-10-19) (#4343)","summary":"ca-certificates: remove compromised certificate (emudhra 2026-10-19) (#4343)"},
+  {"date":"2026-10-21","category":"Moonbase","repository":"other","module":"php","version":"8.5.12","commit":"1ccac992ae60d9c8c5ff3efeb81bb050b40523a1","title":"php updated to 8.5.12","summary":"version bumped to 8.5.12"},
+  {"date":"2026-10-21","category":"Moonbase","repository":"other","module":"pv","version":"1.12.0","commit":"1def5d44659610f151cf96a926480e656d9326bf","title":"pv updated to 1.12.0","summary":"version bumped to 1.12.0"},
+  {"date":"2026-10-21","category":"Moonbase","repository":"other","module":"netcdf","version":"4.10.1.","commit":"351170f828202474441135796f47999122b2d8e3","title":"netcdf updated to 4.10.1.","summary":"bump to 4.10.1."},
+  {"date":"2026-10-21","category":"Moonbase","repository":"other","module":"cheat","version":"5.1.0","commit":"3df29a56f54bc6bedb31bf39e6314cafb77e2a0a","title":"cheat updated to 5.1.0","summary":"version bumped to 5.1.0"},
+  {"date":"2026-10-21","category":"Moonbase","repository":"other","module":"","version":"","commit":"5625c42c1b2cfc95f94da01ebe5e1252ebea7759","title":"libaec: Fix source url.","summary":"libaec: Fix source url."},
+  {"date":"2026-10-21","category":"Moonbase","repository":"other","module":"fwupd","version":"2.1.8","commit":"941294a99d627f2509a2f61808f7951cb478b55d","title":"fwupd updated to 2.1.8","summary":"version bumped to 2.1.8"},
+  {"date":"2026-10-21","category":"Moonbase","repository":"other","module":"zoxide","version":"0.10.0","commit":"b3078bead9f8c48de92dcc1018a00dbd6e5495e8","title":"zoxide updated to 0.10.0","summary":"version bumped to 0.10.0"},
+  {"date":"2026-10-21","category":"Moonbase","repository":"other","module":"firefox-bin","version":"158.0.1","commit":"c2cef6a93133e26ce2fa7c2f827f5ad7f70f4ed0","title":"firefox-bin updated to 158.0.1","summary":"version bumped to 158.0.1"}
+]

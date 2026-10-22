@@ -15,5 +15,8 @@
   {"date":"2026-10-20","category":"Moonbase","repository":"other","module":"NerdFontsSymbols","version":"3.5.1.","commit":"d57bc62e8cdc9cab0c7382178267a5f472f33e04","title":"NerdFontsSymbols updated to 3.5.1.","summary":"bump to 3.5.1."},
   {"date":"2026-10-20","category":"Moonbase","repository":"other","module":"librsvg","version":"2.63.3","commit":"df742b81335c4d3861b2af324e9656f356cd54ba","title":"librsvg updated to 2.63.3","summary":"version bumped to 2.63.3"},
   {"date":"2026-10-20","category":"Moonbase","repository":"other","module":"jasper","version":"4.2.9","commit":"f5abb73d1617c6b68679c869dcda10c5f3c6e20e","title":"jasper updated to 4.2.9","summary":"version bumped to 4.2.9"},
-  {"date":"2026-10-20","category":"Moonbase","repository":"other","module":"","version":"","commit":"f91aafb3f139b3394a333569ed50a7f5edadcb06","title":"urwfonts: Removing, it is a duplicate of gsfonts.","summary":"urwfonts: Removing, it is a duplicate of gsfonts."}
+  {"date":"2026-10-20","category":"Moonbase","repository":"other","module":"","version":"","commit":"f91aafb3f139b3394a333569ed50a7f5edadcb06","title":"urwfonts: Removing, it is a duplicate of gsfonts.","summary":"urwfonts: Removing, it is a duplicate of gsfonts."},
+  {"date":"2026-10-20","category":"Moonbase","repository":"core","module":"curl","version":"8.23.0","commit":"7b05d9a94bfc82c51c793a221fdb3c2dc212e871","title":"curl updated to 8.23.0","summary":"version bumped to 8.23.0"},
+  {"date":"2026-10-20","category":"Moonbase","repository":"core","module":"parted","version":"3.8","commit":"a26206a85d5d5483ff8e0282ec6f9c933ed8f30f","title":"parted updated to 3.8","summary":"version bumped to 3.8"},
+  {"date":"2026-10-20","category":"Moonbase","repository":"other","module":"nss","version":"3.131.1","commit":"c37fb09fbbd511631ef99d0e82eca3579793601c","title":"nss updated to 3.131.1","summary":"version bumped to 3.131.1"}
 ]

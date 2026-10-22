@@ -19,5 +19,6 @@
   {"date":"2026-10-18","category":"Moonbase","repository":"other","module":"glycin","version":"2.2.3","commit":"fc7c427cfa8eca326bc48ce1de702c9e3607b9c1","title":"glycin updated to 2.2.3","summary":"version bumped to 2.2.3"},
   {"date":"2026-10-18","category":"Moonbase","repository":"other","module":"","version":"","commit":"0a0f18f4e931dcb7975ff29e9b24b39ea5cc1fa3","title":"atop: Linting.","summary":"atop: Linting."},
   {"date":"2026-10-18","category":"Moonbase","repository":"other","module":"","version":"","commit":"9941a4298a8af0b4efe7a56ee7bea8cfae277b88","title":"atop: Fix UPDATED.","summary":"atop: Fix UPDATED."},
-  {"date":"2026-10-18","category":"Moonbase","repository":"other","module":"atop","version":"2.13.0, add some patches and fiddle with BUILD.","commit":"e501d8e0465721404d61f0ee175f318393312b58","title":"atop updated to 2.13.0, add some patches and fiddle with BUILD.","summary":"bump to 2.13.0, add some patches and fiddle with BUILD."}
+  {"date":"2026-10-18","category":"Moonbase","repository":"other","module":"atop","version":"2.13.0, add some patches and fiddle with BUILD.","commit":"e501d8e0465721404d61f0ee175f318393312b58","title":"atop updated to 2.13.0, add some patches and fiddle with BUILD.","summary":"bump to 2.13.0, add some patches and fiddle with BUILD."},
+  {"date":"2026-10-18","category":"Moonbase","repository":"core","module":"ccache","version":"4.14.2","commit":"0c621554adc44e5654b3edb046cb50177d6b148a","title":"ccache updated to 4.14.2","summary":"version bumped to 4.14.2"}
 ]

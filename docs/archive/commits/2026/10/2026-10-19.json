@@ -14,5 +14,6 @@
   {"date":"2026-10-19","category":"Moonbase","repository":"xorg","module":"libXi","version":"1.8.4","commit":"3424c880cab9a4c6c0299c0c7fe7702809fe7bcf","title":"libXi updated to 1.8.4","summary":"version bumped to 1.8.4"},
   {"date":"2026-10-19","category":"Moonbase","repository":"xorg","module":"libX11","version":"1.8.14","commit":"3bcd2ba9f2234a45c6f0dd4d96e658a50d2d077d","title":"libX11 updated to 1.8.14","summary":"version bumped to 1.8.14"},
   {"date":"2026-10-19","category":"Moonbase","repository":"other","module":"ogre","version":"14.6.1.","commit":"1a4f15abb7c087d5497ea9ff781aaec73d8f8f23","title":"ogre updated to 14.6.1.","summary":"bump to 14.6.1."},
-  {"date":"2026-10-19","category":"Moonbase","repository":"other","module":"","version":"","commit":"d086b7416ab123ca59f95706471126f3fd8b728d","title":"cups-filters: Adding a patch dealing with CVE-2025-64524.","summary":"cups-filters: Adding a patch dealing with CVE-2025-64524."}
+  {"date":"2026-10-19","category":"Moonbase","repository":"other","module":"","version":"","commit":"d086b7416ab123ca59f95706471126f3fd8b728d","title":"cups-filters: Adding a patch dealing with CVE-2025-64524.","summary":"cups-filters: Adding a patch dealing with CVE-2025-64524."},
+  {"date":"2026-10-19","category":"Moonbase","repository":"core","module":"URI","version":"5.40.","commit":"ab664d2b7fbff50d3b8779870d8b089ddb3b7aad","title":"URI updated to 5.40.","summary":"bump to 5.40."}
 ]
