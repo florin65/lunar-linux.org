@@ -1,14 +1,3 @@
 [
-  {"date":"2026-10-22","category":"Moonbase","repository":"other","module":"md4c","version":"0.6.0","commit":"117ae11690471b2b5da2891733da21f2ac223f29","title":"md4c updated to 0.6.0","summary":"bump to 0.6.0"},
-  {"date":"2026-10-22","category":"Moonbase","repository":"other","module":"vifm","version":"0.14.5","commit":"1a692909372c8dd1752cf3a47e8ad9a4aa8f6516","title":"vifm updated to 0.14.5","summary":"version bumped to 0.14.5"},
-  {"date":"2026-10-22","category":"Moonbase","repository":"other","module":"linux-lts","version":"6.18.58","commit":"28276a47ba8b633bdf5dbf58013217ae6daa652d","title":"linux-lts updated to 6.18.58","summary":"version bumped to 6.18.58"},
-  {"date":"2026-10-22","category":"Moonbase","repository":"other","module":"bind, bind-utils","version":"9.20.30","commit":"49f014a534ba33d92b125ad85b35247fd7a38dcd","title":"bind, bind-utils updated to 9.20.30","summary":"version bumped to 9.20.30"},
-  {"date":"2026-10-22","category":"Moonbase","repository":"other","module":"gh","version":"2.103.0","commit":"5ad9fe9b22fc40316e80e7ebaf79db05a20cce67","title":"gh updated to 2.103.0","summary":"version bumped to 2.103.0"},
-  {"date":"2026-10-22","category":"Moonbase","repository":"other","module":"","version":"","commit":"62eef49d5a4cf6d8627ee30b52427172b818c585","title":"glycin; small tweaks","summary":"glycin; small tweaks"},
-  {"date":"2026-10-22","category":"Moonbase","repository":"other","module":"go","version":"1.27.3","commit":"733c51f784a9740fb012e5dd5d9605404b5dccf1","title":"go updated to 1.27.3","summary":"version bumped to 1.27.3"},
-  {"date":"2026-10-22","category":"Moonbase","repository":"other","module":"tailscale","version":"1.104.2","commit":"ac9e708bf43f9bac5d29904544c6d4dfec85d8ae","title":"tailscale updated to 1.104.2","summary":"version bumped to 1.104.2"},
-  {"date":"2026-10-22","category":"Moonbase","repository":"other","module":"brotli","version":"1.2.1","commit":"bdde83718c4019cc05f23310094dc399a2e6cb1f","title":"brotli updated to 1.2.1","summary":"version bumped to 1.2.1"},
-  {"date":"2026-10-22","category":"Moonbase","repository":"other","module":"libconfig","version":"1.8.3","commit":"c9643c0a6b70999288bba7e96f9ed4455e2b157b","title":"libconfig updated to 1.8.3","summary":"version bumped to 1.8.3"},
-  {"date":"2026-10-22","category":"Moonbase","repository":"other","module":"yt-dlp","version":"2026.10.21","commit":"d1a408629b70daf90b3061876301e8a211d774d9","title":"yt-dlp updated to 2026.10.21","summary":"version bumped to 2026.10.21"},
-  {"date":"2026-10-22","category":"Moonbase","repository":"other","module":"c-ares","version":"1.34.9","commit":"fc412758cfda599d48a4b53b907d562805045e77","title":"c-ares updated to 1.34.9","summary":"version bumped to 1.34.9"}
+  {"date":"2026-10-23","category":"Moonbase","repository":"kde","module":"keepassxc","version":"2.8.0","commit":"427ce0868cc173cbe6479e753a18ecbd061b352e","title":"keepassxc updated to 2.8.0","summary":"version bumped to 2.8.0"}
 ]
