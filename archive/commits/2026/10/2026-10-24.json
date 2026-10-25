@@ -1,0 +1,14 @@
+[
+  {"date":"2026-10-24","category":"Moonbase","repository":"other","module":"libtraceevent","version":"1.9.1","commit":"120b1ed00a83e1328455d73b7b26b6ea466ffd3b","title":"libtraceevent updated to 1.9.1","summary":"version bumped to 1.9.1"},
+  {"date":"2026-10-24","category":"Moonbase","repository":"other","module":"nss","version":"3.132","commit":"1db42274e353073785802be2bc98faa23cfdd55f","title":"nss updated to 3.132","summary":"version bumped to 3.132"},
+  {"date":"2026-10-24","category":"Moonbase","repository":"other","module":"libtracefs","version":"1.8.4","commit":"35e04e3f859b667341a64bd988ffcc04249a6826","title":"libtracefs updated to 1.8.4","summary":"version bumped to 1.8.4"},
+  {"date":"2026-10-24","category":"Moonbase","repository":"other","module":"mpd","version":"0.24.17","commit":"5d8d01355c991ea2ec797b947e991f262cb185ff","title":"mpd updated to 0.24.17","summary":"version bumped to 0.24.17"},
+  {"date":"2026-10-24","category":"Moonbase","repository":"other","module":"gh","version":"2.103.2","commit":"7985e476b556342f08ab7aa6154d702a51bd194f","title":"gh updated to 2.103.2","summary":"version bumped to 2.103.2"},
+  {"date":"2026-10-24","category":"Moonbase","repository":"other","module":"nginx","version":"1.31.8","commit":"7cdf9f8e190a752d0663117f827b05b606b45acf","title":"nginx updated to 1.31.8","summary":"version bumped to 1.31.8"},
+  {"date":"2026-10-24","category":"Moonbase","repository":"other","module":"pipewire","version":"1.6.10","commit":"8b18cf31722a98f649f83286848fb652baf1e719","title":"pipewire updated to 1.6.10","summary":"version bumped to 1.6.10"},
+  {"date":"2026-10-24","category":"Moonbase","repository":"other","module":"openldap","version":"2.7.2","commit":"a7f07812364717bbc72e001e0fdd45f8dd58da9d","title":"openldap updated to 2.7.2","summary":"version bumped to 2.7.2"},
+  {"date":"2026-10-24","category":"Moonbase","repository":"other","module":"","version":"","commit":"bf2fd1e66ad008d258ac4a9740094b6fb0827c87","title":"librsvg: version vumped to 2.63.4","summary":"librsvg: version vumped to 2.63.4"},
+  {"date":"2026-10-24","category":"Moonbase","repository":"other","module":"glycin","version":"2.2.4","commit":"c594a82527f14e6a61c6f06e3f1e6c62b19cf5c7","title":"glycin updated to 2.2.4","summary":"version bumped to 2.2.4"},
+  {"date":"2026-10-24","category":"Moonbase","repository":"other","module":"harfbuzz","version":"15.0.0","commit":"d8a257ca3d7d7834818fdd1ccba957413f115246","title":"harfbuzz updated to 15.0.0","summary":"version bumped to 15.0.0"},
+  {"date":"2026-10-24","category":"Moonbase","repository":"other","module":"netdata","version":"2.12.2","commit":"f4808718fa3f0c6f281649b15d2ecc484d89cc3d","title":"netdata updated to 2.12.2","summary":"version bumped to 2.12.2"}
+]
