@@ -1,0 +1,4 @@
+[
+  {"date":"2026-10-27","category":"Moonbase","repository":"core","module":"kernel-headers","version":"7.2.1 (#4291)","commit":"a1d005af954e5f7dc4840105f5b064daa2fa82c7","title":"kernel-headers updated to 7.2.1 (#4291)","summary":"version bumped to 7.2.1 (#4291)"},
+  {"date":"2026-10-27","category":"Moonbase","repository":"core","module":"linux","version":"7.2.13 (#4347)","commit":"ec91001772102247e16f13419822f83ecf59236d","title":"linux updated to 7.2.13 (#4347)","summary":"version bumped to 7.2.13 (#4347)"}
+]

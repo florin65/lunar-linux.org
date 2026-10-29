@@ -1,0 +1,10 @@
+[
+  {"date":"2026-10-28","category":"Moonbase","repository":"core","module":"","version":"","commit":"2c11b58785ffdc2c31e0322bac990deab466c179","title":"Util-linux: Version bump to 2.42.4 (#4345)","summary":"Util-linux: Version bump to 2.42.4 (#4345)"},
+  {"date":"2026-10-28","category":"Moonbase","repository":"core","module":"glibc","version":"2.44 (#4286)","commit":"2cdce2a9adc2fdd4019d80e6e2b5dce18f7a3801","title":"glibc updated to 2.44 (#4286)","summary":"version bumped to 2.44 (#4286)"},
+  {"date":"2026-10-28","category":"Moonbase","repository":"core","module":"","version":"","commit":"f98e98ebb27c33b64aadc0a69e1cf7b1ff7ff72f","title":"systemd: Version bump to v262.1 (#4346)","summary":"systemd: Version bump to v262.1 (#4346)"},
+  {"date":"2026-10-28","category":"Moonbase","repository":"other","module":"libmikmod","version":"3.3.16","commit":"254ea7364658b48f4726f1fa44ec03fcaf89639c","title":"libmikmod updated to 3.3.16","summary":"version bumped to 3.3.16"},
+  {"date":"2026-10-28","category":"Moonbase","repository":"other","module":"firefox-bin","version":"159.0","commit":"8fa79b7e7ff865855614af33fca2aee50a211324","title":"firefox-bin updated to 159.0","summary":"version bumped to 159.0"},
+  {"date":"2026-10-28","category":"Moonbase","repository":"other","module":"partclone","version":"0.3.52","commit":"b2a3c2dd0b76850bf122fcfef0ae3244c8c5063e","title":"partclone updated to 0.3.52","summary":"version bumped to 0.3.52"},
+  {"date":"2026-10-28","category":"Moonbase","repository":"other","module":"firefox","version":"159.0","commit":"e16a1afa9d02faaba5aae6125b8cadf36d1b97f1","title":"firefox updated to 159.0","summary":"version bumped to 159.0"},
+  {"date":"2026-10-28","category":"Moonbase","repository":"xorg","module":"spirv-llvm-translator","version":"23.1.2","commit":"abb82c0a8dd6152bc75da6d107ca96699d986c71","title":"spirv-llvm-translator updated to 23.1.2","summary":"version bumped to 23.1.2"}
+]
