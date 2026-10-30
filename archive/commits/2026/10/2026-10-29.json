@@ -1,0 +1,6 @@
+[
+  {"date":"2026-10-29","category":"Moonbase","repository":"other","module":"llvm-stack","version":"23.1.4","commit":"a209a8cf34edf3012a1dfcdc2d2cd1c4bc90f5c8","title":"llvm-stack updated to 23.1.4","summary":"version bumped to 23.1.4"},
+  {"date":"2026-10-29","category":"Moonbase","repository":"other","module":"nim","version":"2.2.14","commit":"bc307d456a205a6f2aedbdab60b94206953b3608","title":"nim updated to 2.2.14","summary":"version bumped to 2.2.14"},
+  {"date":"2026-10-29","category":"Moonbase","repository":"other","module":"tailscale","version":"1.104.4","commit":"c851247cf42cecf84a56799a7620691523606cbe","title":"tailscale updated to 1.104.4","summary":"version bumped to 1.104.4"},
+  {"date":"2026-10-29","category":"Moonbase","repository":"other","module":"jenkins","version":"2.588","commit":"dd00989e190afe412639368ed628dd3c831c9ed0","title":"jenkins updated to 2.588","summary":"version bumped to 2.588"}
+]
