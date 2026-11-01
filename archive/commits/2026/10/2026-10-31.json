@@ -1,0 +1,6 @@
+[
+  {"date":"2026-10-31","category":"Moonbase","repository":"other","module":"","version":"","commit":"5c7987465a6696b91b7a4443198af71a202f1f23","title":"nim: improved the patch for a more clean compilation","summary":"nim: improved the patch for a more clean compilation"},
+  {"date":"2026-10-31","category":"Moonbase","repository":"other","module":"ipython","version":"9.18.0","commit":"a2234e4ff3ed3a6b56c00c3411a0ff86311d6d1a","title":"ipython updated to 9.18.0","summary":"version bumped to 9.18.0"},
+  {"date":"2026-10-31","category":"Moonbase","repository":"other","module":"mpd","version":"0.24.18","commit":"b1131c08ea31ee1f32ff541483d7bb7848104bec","title":"mpd updated to 0.24.18","summary":"version bumped to 0.24.18"},
+  {"date":"2026-10-31","category":"Moonbase","repository":"other","module":"wayland-protocols","version":"1.50","commit":"c2dbdbc1a5ecf9399c397d64c671346c18b71754","title":"wayland-protocols updated to 1.50","summary":"version bumped to 1.50"}
+]
