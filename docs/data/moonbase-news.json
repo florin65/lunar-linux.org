@@ -1,11 +1,10 @@
 [
-  {"date":"2026-11-01","category":"Moonbase","repository":"other","module":"openexr","version":"3.5.3","commit":"076aac719c9969f07908203291841eccfecf9bee","title":"openexr updated to 3.5.3","summary":"version bumped to 3.5.3"},
-  {"date":"2026-11-01","category":"Moonbase","repository":"other","module":"libarchive","version":"3.8.11","commit":"20d7946df5cfd5cacaee600f7cfffa219429d82c","title":"libarchive updated to 3.8.11","summary":"version bumped to 3.8.11"},
-  {"date":"2026-11-01","category":"Moonbase","repository":"other","module":"lcms2","version":"2.20","commit":"7ff0556c71f47bbba59b01312b6a57067fcecaa0","title":"lcms2 updated to 2.20","summary":"version bumped to 2.20"},
-  {"date":"2026-11-01","category":"Moonbase","repository":"other","module":"man-pages","version":"6.20","commit":"89e2f3c11d845416c0be5049a319ee3a701516ec","title":"man-pages updated to 6.20","summary":"version bumped to 6.20"},
-  {"date":"2026-11-01","category":"Moonbase","repository":"other","module":"sqlite","version":"3.54.1","commit":"c683f6bea66a08815999f42e96a8ed173cca2f48","title":"sqlite updated to 3.54.1","summary":"version bumped to 3.54.1"},
-  {"date":"2026-11-01","category":"Moonbase","repository":"other","module":"weechat","version":"4.10.2","commit":"c7726f1a5163b832a9900b1e24d070e41acbed4f","title":"weechat updated to 4.10.2","summary":"version bumped to 4.10.2"},
-  {"date":"2026-11-01","category":"Moonbase","repository":"other","module":"vnstat","version":"2.14","commit":"d79300772529d4b3ec48f402f88eff11da57498d","title":"vnstat updated to 2.14","summary":"version bumped to 2.14"},
-  {"date":"2026-11-01","category":"Moonbase","repository":"other","module":"uriparser","version":"1.0.3","commit":"f611dc9f4de56eedddca2eb85cc799841b021603","title":"uriparser updated to 1.0.3","summary":"version bumped to 1.0.3"},
-  {"date":"2026-11-01","category":"Moonbase","repository":"xorg","module":"xkeyboard-config","version":"2.49","commit":"835c3009e384b44e24aaf49f10396a9e20142528","title":"xkeyboard-config updated to 2.49","summary":"version bumped to 2.49"}
+  {"date":"2026-11-02","category":"Moonbase","repository":"other","module":"libostree","version":"2026.6","commit":"0387a89785c99af56638e2d4d4ba66a0e3c98858","title":"libostree updated to 2026.6","summary":"version bumped to 2026.6"},
+  {"date":"2026-11-02","category":"Moonbase","repository":"other","module":"mtools","version":"4.0.50","commit":"4264f926f91a21d21c91a3f56114e03668514272","title":"mtools updated to 4.0.50","summary":"version bumped to 4.0.50"},
+  {"date":"2026-11-02","category":"Moonbase","repository":"other","module":"wine","version":"11.21","commit":"5c2de8aced7d7ddcd6f23fc0f101be40b4f8f5ff","title":"wine updated to 11.21","summary":"version bumped to 11.21"},
+  {"date":"2026-11-02","category":"Moonbase","repository":"other","module":"ppp","version":"2.5.5","commit":"8dd18619985682bd0ff13faf4f47451db024ae3c","title":"ppp updated to 2.5.5","summary":"version bumped to 2.5.5"},
+  {"date":"2026-11-02","category":"Moonbase","repository":"other","module":"pdfjs","version":"6.5.438","commit":"bd0f7deda81f68c40e1410e9af2d7b82403f1525","title":"pdfjs updated to 6.5.438","summary":"version bumped to 6.5.438"},
+  {"date":"2026-11-02","category":"Moonbase","repository":"other","module":"libvirt-python","version":"12.9.0t push","commit":"c43351dbfa41ed8540438e39ff189c14fcd46ebe","title":"libvirt-python updated to 12.9.0t push","summary":"version bumped to 12.9.0t push"},
+  {"date":"2026-11-02","category":"Moonbase","repository":"other","module":"hyphen","version":"2.8.10","commit":"e748c611c6b3a7fd971f853aa2eb69a3ba71c0cc","title":"hyphen updated to 2.8.10","summary":"version bumped to 2.8.10"},
+  {"date":"2026-11-02","category":"Moonbase","repository":"other","module":"cython","version":"3.3.1","commit":"f3476ade156c44160f986ed11edca0fd8b6c090a","title":"cython updated to 3.3.1","summary":"version bumped to 3.3.1"}
 ]

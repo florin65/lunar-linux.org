@@ -1,7 +1,7 @@
 {
-  "iso_file": "lunar-1.8.0-daily-20261102-x86_64.iso",
-  "iso_url": "https://lunar.lart.ca/dl/lunar-1.8.0-daily-20261102-x86_64.iso",
-  "sha256": "fee6fe6b01a1d10d4dc841224f8f8d1e74280651ae77dd14e16620fb1e278a34",
-  "iso_date": "2026-11-02",
-  "generated_at": "2026-11-02T07:26:11Z"
+  "iso_file": "lunar-1.8.0-daily-20261103-x86_64.iso",
+  "iso_url": "https://lunar.lart.ca/dl/lunar-1.8.0-daily-20261103-x86_64.iso",
+  "sha256": "aa2510ab1ccffef1f73451a51d2c698be1947436291ced3ad73784fcb742b491",
+  "iso_date": "2026-11-03",
+  "generated_at": "2026-11-03T10:41:07Z"
 }
