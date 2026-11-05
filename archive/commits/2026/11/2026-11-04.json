@@ -1,0 +1,4 @@
+[
+  {"date":"2026-11-04","category":"Moonbase","repository":"other","module":"fd","version":"10.5.1","commit":"864b32f86872319b43f8cfddead93d4e11d57a55","title":"fd updated to 10.5.1","summary":"version bumped to 10.5.1"},
+  {"date":"2026-11-04","category":"Moonbase","repository":"other","module":"netdata","version":"2.12.3","commit":"86b86036ecbc50bac41900eb590694a704d4a919","title":"netdata updated to 2.12.3","summary":"version bumped to 2.12.3"}
+]
