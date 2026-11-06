@@ -1,0 +1,7 @@
+[
+  {"date":"2026-11-03","category":"Moonbase","repository":"core","module":"inih","version":"r63","commit":"0530f5d0b51bbfad3c3548a57ec205c62aef8586","title":"inih updated to r63","summary":"version bumped to r63"},
+  {"date":"2026-11-03","category":"Moonbase","repository":"core","module":"iproute2","version":"7.3.0","commit":"6fe62ccf2b9415f8cea76625be99ff6e2f24e8ff","title":"iproute2 updated to 7.3.0","summary":"version bumped to 7.3.0"},
+  {"date":"2026-11-03","category":"Moonbase","repository":"core","module":"ethtool","version":"7.2","commit":"d550ef29f080d65b12fbbc78f49eded09f435400","title":"ethtool updated to 7.2","summary":"version bumped to 7.2"},
+  {"date":"2026-11-03","category":"Moonbase","repository":"core","module":"btrfs-progs","version":"7.3","commit":"e92a3a74bbb2ad04eb5e2f6ac7e6da4b0213c9de","title":"btrfs-progs updated to 7.3","summary":"version bumped to 7.3"},
+  {"date":"2026-11-03","category":"Moonbase","repository":"core","module":"expat","version":"2.10.0","commit":"ee450d4a4ca182e15cb5f9e6e0aa067d69f0a25b","title":"expat updated to 2.10.0","summary":"version bumped to 2.10.0"}
+]

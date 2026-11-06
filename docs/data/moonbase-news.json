@@ -1,4 +1,17 @@
 [
-  {"date":"2026-11-04","category":"Moonbase","repository":"other","module":"fd","version":"10.5.1","commit":"864b32f86872319b43f8cfddead93d4e11d57a55","title":"fd updated to 10.5.1","summary":"version bumped to 10.5.1"},
-  {"date":"2026-11-04","category":"Moonbase","repository":"other","module":"netdata","version":"2.12.3","commit":"86b86036ecbc50bac41900eb590694a704d4a919","title":"netdata updated to 2.12.3","summary":"version bumped to 2.12.3"}
+  {"date":"2026-11-05","category":"Moonbase","repository":"other","module":"rsync","version":"3.5.2","commit":"04d275bffbe6314b85dcd3404456a528396e8234","title":"rsync updated to 3.5.2","summary":"version bumped to 3.5.2"},
+  {"date":"2026-11-05","category":"Moonbase","repository":"other","module":"openvpn","version":"2.7.9","commit":"154719b109151a74b8fa24c062a96f932c491a6c","title":"openvpn updated to 2.7.9","summary":"version bumped to 2.7.9"},
+  {"date":"2026-11-05","category":"Moonbase","repository":"other","module":"harfbuzz","version":"15.1.0","commit":"89e7245fc878bc1c41aa0348d70744168aa4bb13","title":"harfbuzz updated to 15.1.0","summary":"version bumped to 15.1.0"},
+  {"date":"2026-11-05","category":"Moonbase","repository":"other","module":"ansible","version":"14.6.0","commit":"95c14324107659dfddfe4923e9c65885f975e49f","title":"ansible updated to 14.6.0","summary":"version bumped to 14.6.0"},
+  {"date":"2026-11-05","category":"Moonbase","repository":"other","module":"wireplumber","version":"0-.5.19","commit":"ac96198878533175bbb12fbead86527b1e58037d","title":"wireplumber updated to 0-.5.19","summary":"version bumped to 0-.5.19"},
+  {"date":"2026-11-05","category":"Moonbase","repository":"other","module":"","version":"","commit":"b63f99bc501687166bce9cfa5d03f459f0566ede","title":"php: adde 2 patches.","summary":"php: adde 2 patches."},
+  {"date":"2026-11-05","category":"Moonbase","repository":"other","module":"bfs","version":"4.1.6","commit":"ce43f84759b227679c7688d28d43648357081def","title":"bfs updated to 4.1.6","summary":"version bumped to 4.1.6"},
+  {"date":"2026-11-05","category":"Moonbase","repository":"other","module":"","version":"","commit":"d200cc10a85bce96a37ee06a608114026250c59a","title":"kitty: versiomn bumped to 0.50.0","summary":"kitty: versiomn bumped to 0.50.0"},
+  {"date":"2026-11-05","category":"Moonbase","repository":"other","module":"jenkins","version":"2.589","commit":"f0c1f1d6d6a84e75d444813192ef62a1d8015a1f","title":"jenkins updated to 2.589","summary":"version bumped to 2.589"},
+  {"date":"2026-11-05","category":"Moonbase","repository":"other","module":"nss","version":"3.133","commit":"fb9f659abf7eae9b9adb6260dbdc761ef937390d","title":"nss updated to 3.133","summary":"version bumped to 3.133"},
+  {"date":"2026-11-03","category":"Moonbase","repository":"core","module":"inih","version":"r63","commit":"0530f5d0b51bbfad3c3548a57ec205c62aef8586","title":"inih updated to r63","summary":"version bumped to r63"},
+  {"date":"2026-11-03","category":"Moonbase","repository":"core","module":"iproute2","version":"7.3.0","commit":"6fe62ccf2b9415f8cea76625be99ff6e2f24e8ff","title":"iproute2 updated to 7.3.0","summary":"version bumped to 7.3.0"},
+  {"date":"2026-11-03","category":"Moonbase","repository":"core","module":"ethtool","version":"7.2","commit":"d550ef29f080d65b12fbbc78f49eded09f435400","title":"ethtool updated to 7.2","summary":"version bumped to 7.2"},
+  {"date":"2026-11-03","category":"Moonbase","repository":"core","module":"btrfs-progs","version":"7.3","commit":"e92a3a74bbb2ad04eb5e2f6ac7e6da4b0213c9de","title":"btrfs-progs updated to 7.3","summary":"version bumped to 7.3"},
+  {"date":"2026-11-03","category":"Moonbase","repository":"core","module":"expat","version":"2.10.0","commit":"ee450d4a4ca182e15cb5f9e6e0aa067d69f0a25b","title":"expat updated to 2.10.0","summary":"version bumped to 2.10.0"}
 ]
