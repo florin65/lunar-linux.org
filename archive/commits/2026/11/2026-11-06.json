@@ -1,0 +1,15 @@
+[
+  {"date":"2026-11-06","category":"Moonbase","repository":"kde","module":"calibre","version":"9.18.0","commit":"9788f1bd65ff5a5fcff31ea1c821ac1dbabe58ff","title":"calibre updated to 9.18.0","summary":"version bumped to 9.18.0"},
+  {"date":"2026-11-06","category":"Moonbase","repository":"kde","module":"smb4k","version":"4.0.8","commit":"eab21105d3129cf43bdbc304959e7cc7fa8e099f","title":"smb4k updated to 4.0.8","summary":"version bumped to 4.0.8"},
+  {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"httpd","version":"2.4.70","commit":"0573917e5beb6f8e21dfd9150242647529cdc04d","title":"httpd updated to 2.4.70","summary":"version bumped to 2.4.70"},
+  {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"squid","version":"7.8","commit":"1156fdf9adde9271ae13313bf93f70fe0a7aa166","title":"squid updated to 7.8","summary":"version bumped to 7.8"},
+  {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"libplist","version":"2.8.1","commit":"2a5217a7ddd3818f2db42a8e2ac677ab99d9e09c","title":"libplist updated to 2.8.1","summary":"version bumped to 2.8.1"},
+  {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"newsboat","version":"2.45.1","commit":"2cd8a8b9fde791d4e657898b9f78bf3a89f6b281","title":"newsboat updated to 2.45.1","summary":"version bumped to 2.45.1"},
+  {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"linux-lts","version":"6.18.62","commit":"2eee2132f6f4a149d5a75dc9f1055533ebed7361","title":"linux-lts updated to 6.18.62","summary":"version bumped to 6.18.62"},
+  {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"ImageMagick","version":"7.1.2.35","commit":"34f714a70c94373a772655af09ff4faf34c7f796","title":"ImageMagick updated to 7.1.2.35","summary":"version bumped to 7.1.2.35"},
+  {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"minizip","version":"1.4","commit":"4da0557ffefe61ea94a79d37ff6d6b80b36f8cd9","title":"minizip updated to 1.4","summary":"version bumped to 1.4"},
+  {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"mpv","version":"0.42.0","commit":"6d2fa356f935876ea4ac7edb9e093a1c9ba3d7ea","title":"mpv updated to 0.42.0","summary":"version bumped to 0.42.0"},
+  {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"bluez-5","version":"5.88","commit":"79813c8fad06be684ebb3a792936497fbf48b451","title":"bluez-5 updated to 5.88","summary":"version bumped to 5.88"},
+  {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"","version":"","commit":"a3369a0d8ec3e0daf509c1ca8c86b05ff38f35e1","title":"httpd: small tweaks","summary":"httpd: small tweaks"},
+  {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"ansible-lint","version":"26.11.0","commit":"a56d031f5f49b6d6876e0fd7122fd0c450727a47","title":"ansible-lint updated to 26.11.0","summary":"version bumped to 26.11.0"}
+]
