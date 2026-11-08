@@ -8,5 +8,6 @@
   {"date":"2026-11-05","category":"Moonbase","repository":"other","module":"bfs","version":"4.1.6","commit":"ce43f84759b227679c7688d28d43648357081def","title":"bfs updated to 4.1.6","summary":"version bumped to 4.1.6"},
   {"date":"2026-11-05","category":"Moonbase","repository":"other","module":"","version":"","commit":"d200cc10a85bce96a37ee06a608114026250c59a","title":"kitty: versiomn bumped to 0.50.0","summary":"kitty: versiomn bumped to 0.50.0"},
   {"date":"2026-11-05","category":"Moonbase","repository":"other","module":"jenkins","version":"2.589","commit":"f0c1f1d6d6a84e75d444813192ef62a1d8015a1f","title":"jenkins updated to 2.589","summary":"version bumped to 2.589"},
-  {"date":"2026-11-05","category":"Moonbase","repository":"other","module":"nss","version":"3.133","commit":"fb9f659abf7eae9b9adb6260dbdc761ef937390d","title":"nss updated to 3.133","summary":"version bumped to 3.133"}
+  {"date":"2026-11-05","category":"Moonbase","repository":"other","module":"nss","version":"3.133","commit":"fb9f659abf7eae9b9adb6260dbdc761ef937390d","title":"nss updated to 3.133","summary":"version bumped to 3.133"},
+  {"date":"2026-11-05","category":"Moonbase","repository":"core","module":"openssh","version":"10.6p2","commit":"8ea50f46bb98856142d70dd15aa7a24fd3499055","title":"openssh updated to 10.6p2","summary":"version bumped to 10.6p2"}
 ]

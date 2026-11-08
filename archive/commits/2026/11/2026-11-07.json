@@ -1,0 +1,8 @@
+[
+  {"date":"2026-11-07","category":"Moonbase","repository":"core","module":"kmod","version":"34.3","commit":"53a26f3db5d0d90c25c24908733280d1b5bd4113","title":"kmod updated to 34.3","summary":"version bumped to 34.3"},
+  {"date":"2026-11-07","category":"Moonbase","repository":"core","module":"Revert \"kmod","version":"34.3\"","commit":"c1e24fa57aefa8ec1cf48471c91c1925f5d340cb","title":"Revert \"kmod updated to 34.3\"","summary":"version bumped to 34.3\""},
+  {"date":"2026-11-07","category":"Moonbase","repository":"other","module":"fzf","version":"0.75.0","commit":"0a3fe4cab59676a7405785e02ab1ea7196f8a473","title":"fzf updated to 0.75.0","summary":"version bumped to 0.75.0"},
+  {"date":"2026-11-07","category":"Moonbase","repository":"other","module":"inotify-tools","version":"4.26.272","commit":"53162497cbd6e2ef1ef695f71e0d104cc1df4ed8","title":"inotify-tools updated to 4.26.272","summary":"version bumped to 4.26.272"},
+  {"date":"2026-11-07","category":"Moonbase","repository":"other","module":"fd","version":"10.5.2","commit":"88cc12a6394ace565f63b800773179a465ebbf8c","title":"fd updated to 10.5.2","summary":"version bumped to 10.5.2"},
+  {"date":"2026-11-07","category":"Moonbase","repository":"other","module":"tree-sitter","version":"0.27.2","commit":"d9432577c387cad145525d4bd9c9e6722fd8f849","title":"tree-sitter updated to 0.27.2","summary":"version bumped to 0.27.2"}
+]

@@ -11,5 +11,8 @@
   {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"mpv","version":"0.42.0","commit":"6d2fa356f935876ea4ac7edb9e093a1c9ba3d7ea","title":"mpv updated to 0.42.0","summary":"version bumped to 0.42.0"},
   {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"bluez-5","version":"5.88","commit":"79813c8fad06be684ebb3a792936497fbf48b451","title":"bluez-5 updated to 5.88","summary":"version bumped to 5.88"},
   {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"","version":"","commit":"a3369a0d8ec3e0daf509c1ca8c86b05ff38f35e1","title":"httpd: small tweaks","summary":"httpd: small tweaks"},
-  {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"ansible-lint","version":"26.11.0","commit":"a56d031f5f49b6d6876e0fd7122fd0c450727a47","title":"ansible-lint updated to 26.11.0","summary":"version bumped to 26.11.0"}
+  {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"ansible-lint","version":"26.11.0","commit":"a56d031f5f49b6d6876e0fd7122fd0c450727a47","title":"ansible-lint updated to 26.11.0","summary":"version bumped to 26.11.0"},
+  {"date":"2026-11-06","category":"Moonbase","repository":"core","module":"linux","version":"7.3.3","commit":"b715bc2c46d1142386c93334e7bae7b0caf9b845","title":"linux updated to 7.3.3","summary":"version bumped to 7.3.3"},
+  {"date":"2026-11-06","category":"Moonbase","repository":"core","module":"zlib","version":"1.4","commit":"bc7d85d13486f1472e94ce90a6ba0252a50a019f","title":"zlib updated to 1.4","summary":"version bumped to 1.4"},
+  {"date":"2026-11-06","category":"Moonbase","repository":"other","module":"radare2","version":"6.2.6","commit":"71b8f2ce51a171565bf1492bb9c2462da08ed6d3","title":"radare2 updated to 6.2.6","summary":"version bumped to 6.2.6"}
 ]
