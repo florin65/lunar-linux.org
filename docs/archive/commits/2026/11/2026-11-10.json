@@ -1,0 +1,4 @@
+[
+  {"date":"2026-11-10","category":"Moonbase","repository":"other","module":"atuin","version":"18.24.6","commit":"0695c3d68aeb4107fc3316e59419d24b3dc46eeb","title":"atuin updated to 18.24.6","summary":"version bumped to 18.24.6"},
+  {"date":"2026-11-10","category":"Moonbase","repository":"xorg","module":"xorg-server","version":"21.1.26","commit":"7a917ac23a7230148be4cd08c1dbd000b3eaf82d","title":"xorg-server updated to 21.1.26","summary":"version bumped to 21.1.26"}
+]
