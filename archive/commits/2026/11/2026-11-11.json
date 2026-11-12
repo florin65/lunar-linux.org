@@ -1,0 +1,10 @@
+[
+  {"date":"2026-11-11","category":"Moonbase","repository":"other","module":"mupdf","version":"1.28.6","commit":"12c398a356e4937a7f2c559e257f5d4df1730031","title":"mupdf updated to 1.28.6","summary":"version bumped to 1.28.6"},
+  {"date":"2026-11-11","category":"Moonbase","repository":"other","module":"httpd","version":"2.4.71","commit":"1c8756978879da551e19dd391d6eb6eb24aa2181","title":"httpd updated to 2.4.71","summary":"version bumped to 2.4.71"},
+  {"date":"2026-11-11","category":"Moonbase","repository":"other","module":"podman","version":"6.2.0","commit":"32f28f298995fed74d8bcb0abcaa93d4026ea0bb","title":"podman updated to 6.2.0","summary":"version bumped to 6.2.0"},
+  {"date":"2026-11-11","category":"Moonbase","repository":"other","module":"SVT-AV1","version":"4.3.0","commit":"35a716db1f9a22986484c6309c3aa8ac623683dc","title":"SVT-AV1 updated to 4.3.0","summary":"version bumped to 4.3.0"},
+  {"date":"2026-11-11","category":"Moonbase","repository":"other","module":"enkins","version":"2.590","commit":"5583156011337e59636f650bd0b2016214e4755d","title":"enkins updated to 2.590","summary":"version bumped to 2.590"},
+  {"date":"2026-11-11","category":"Moonbase","repository":"other","module":"graphviz","version":"16.1.1","commit":"b8b2121f00e834c861a46dd10af4d2f950e9ba1a","title":"graphviz updated to 16.1.1","summary":"version bumped to 16.1.1"},
+  {"date":"2026-11-11","category":"Moonbase","repository":"other","module":"exfatprogs","version":"1.4.4","commit":"d70e93aaf4589c26f097fd1b57a7105389da0a34","title":"exfatprogs updated to 1.4.4","summary":"version bumped to 1.4.4"},
+  {"date":"2026-11-11","category":"Moonbase","repository":"other","module":"buildah","version":"1.46.1","commit":"fd10070c1be116799a5407446d78f120848947f6","title":"buildah updated to 1.46.1","summary":"version bumped to 1.46.1"}
+]

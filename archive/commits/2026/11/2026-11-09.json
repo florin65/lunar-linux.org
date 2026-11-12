@@ -3,5 +3,6 @@
   {"date":"2026-11-09","category":"Moonbase","repository":"other","module":"wakatime-cli","version":"2.28.4","commit":"c2a507a72d9e51b0aaf6e9f4634eda39a66b87e4","title":"wakatime-cli updated to 2.28.4","summary":"version bumped to 2.28.4"},
   {"date":"2026-11-09","category":"Moonbase","repository":"other","module":"rofi","version":"2.1.0","commit":"c9386b83cd2ef994571319b61837c7665bd7e4b4","title":"rofi updated to 2.1.0","summary":"version bumped to 2.1.0"},
   {"date":"2026-11-09","category":"Moonbase","repository":"other","module":"bazel","version":"9.3.2","commit":"e9a2191fdad3e1d80af8986a318dc72c422979ae","title":"bazel updated to 9.3.2","summary":"version bumped to 9.3.2"},
-  {"date":"2026-11-09","category":"Moonbase","repository":"other","module":"inotify-tools","version":"4.26.275","commit":"ebaa708e8753fa141eb07edda4589fb1ae5f11bc","title":"inotify-tools updated to 4.26.275","summary":"version bumped to 4.26.275"}
+  {"date":"2026-11-09","category":"Moonbase","repository":"other","module":"inotify-tools","version":"4.26.275","commit":"ebaa708e8753fa141eb07edda4589fb1ae5f11bc","title":"inotify-tools updated to 4.26.275","summary":"version bumped to 4.26.275"},
+  {"date":"2026-11-09","category":"Moonbase","repository":"core","module":"ccache","version":"4.14.3","commit":"c59c30c190812eafff1a9bd4d1e02368569e2903","title":"ccache updated to 4.14.3","summary":"version bumped to 4.14.3"}
 ]
