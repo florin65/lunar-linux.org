@@ -1,0 +1,17 @@
+[
+  {"date":"2026-11-12","category":"Moonbase","repository":"kde","module":"","version":"","commit":"43da18267b422cea9f773288b868867c9732a776","title":"keepassxc: add a patch for botan usage","summary":"keepassxc: add a patch for botan usage"},
+  {"date":"2026-11-12","category":"Moonbase","repository":"other","module":"gh","version":"2.104.0","commit":"02296c8030be2f5fe6b4efaf488417af9196711f","title":"gh updated to 2.104.0","summary":"version bumped to 2.104.0"},
+  {"date":"2026-11-12","category":"Moonbase","repository":"other","module":"rofi","version":"2.1.1","commit":"17ff78b1fefc629c3055b73b8f51b81601079246","title":"rofi updated to 2.1.1","summary":"version bumped to 2.1.1"},
+  {"date":"2026-11-12","category":"Moonbase","repository":"other","module":"libblockdev","version":"3.6.0","commit":"2995ce182264526af82d3a9a85bc0191e0004f54","title":"libblockdev updated to 3.6.0","summary":"version bumped to 3.6.0"},
+  {"date":"2026-11-12","category":"Moonbase","repository":"other","module":"skopeo","version":"1.25.1","commit":"42ea21f1e7dcc43f82d2ed594a111a49b5700c9e","title":"skopeo updated to 1.25.1","summary":"version bumped to 1.25.1"},
+  {"date":"2026-11-12","category":"Moonbase","repository":"other","module":"libmad","version":"0.16.5","commit":"513a69aa2a2a3a568e424e9e799b63300c77d322","title":"libmad updated to 0.16.5","summary":"version bumped to 0.16.5"},
+  {"date":"2026-11-12","category":"Moonbase","repository":"other","module":"go","version":"1.27.4","commit":"65e02960ab8aa87bf19076db03fc9e0fd3d0436b","title":"go updated to 1.27.4","summary":"version bumped to 1.27.4"},
+  {"date":"2026-11-12","category":"Moonbase","repository":"other","module":"python-sip","version":"6.17.3","commit":"83782d20da83eea147007b733422dfc91678f71d","title":"python-sip updated to 6.17.3","summary":"version bumped to 6.17.3"},
+  {"date":"2026-11-12","category":"Moonbase","repository":"other","module":"git","version":"2.56.1","commit":"88c8ae98f160c7d090e5b0abae681092e56ca71a","title":"git updated to 2.56.1","summary":"version bumped to 2.56.1"},
+  {"date":"2026-11-12","category":"Moonbase","repository":"other","module":"Botan","version":"3.14.1","commit":"9f4028e128801346b8be775430e7aea255759983","title":"Botan updated to 3.14.1","summary":"version bumped to 3.14.1"},
+  {"date":"2026-11-12","category":"Moonbase","repository":"other","module":"dash","version":"0.5.13.6","commit":"bb76996cbfb782efee137aa7378417c9ae38e6cb","title":"dash updated to 0.5.13.6","summary":"version bumped to 0.5.13.6"},
+  {"date":"2026-11-12","category":"Moonbase","repository":"other","module":"intel-ucode","version":"20261110","commit":"ebd6804394830abeca3bf8bcb53d7cdf5a3d55c5","title":"intel-ucode updated to 20261110","summary":"version bumped to 20261110"},
+  {"date":"2026-11-12","category":"Moonbase","repository":"other","module":"dash_static","version":"0.5.13.6","commit":"f5703fa7e85d79c75a7effad17f0f1d7cda76512","title":"dash_static updated to 0.5.13.6","summary":"version bumped to 0.5.13.6"},
+  {"date":"2026-11-12","category":"Moonbase","repository":"other","module":"SDL3","version":"3.4.20","commit":"f896c52858717310595d6d7dabe8b7ee7e271783","title":"SDL3 updated to 3.4.20","summary":"version bumped to 3.4.20"},
+  {"date":"2026-11-12","category":"Moonbase","repository":"other","module":"krb5","version":"1.22.3.","commit":"fc44ac4e37b9d4fffb756be7786d2acf3982a9dd","title":"krb5 updated to 1.22.3.","summary":"bump to 1.22.3."}
+]
