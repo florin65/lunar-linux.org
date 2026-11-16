@@ -11,5 +11,7 @@
   {"date":"2026-11-14","category":"Moonbase","repository":"other","module":"nim","version":"2.4.2","commit":"c07c3e9fb53133a3d57b037f9e4bf3951a146224","title":"nim updated to 2.4.2","summary":"version bumped to 2.4.2"},
   {"date":"2026-11-14","category":"Moonbase","repository":"other","module":"wine","version":"11.22","commit":"c212b98a3130d6e5f1c3830f494b325964531556","title":"wine updated to 11.22","summary":"version bumped to 11.22"},
   {"date":"2026-11-14","category":"Moonbase","repository":"other","module":"","version":"","commit":"c4a7170d7bea12e064700cbeede3faabba558d18","title":"gst-plugins-bad: add the sha256sum","summary":"gst-plugins-bad: add the sha256sum"},
-  {"date":"2026-11-14","category":"Moonbase","repository":"xorg","module":"spirv-llvm-translator","version":"23.1.3","commit":"3675e007feb75ee7783303386c4e8f000868fd89","title":"spirv-llvm-translator updated to 23.1.3","summary":"version bumped to 23.1.3"}
+  {"date":"2026-11-14","category":"Moonbase","repository":"xorg","module":"spirv-llvm-translator","version":"23.1.3","commit":"3675e007feb75ee7783303386c4e8f000868fd89","title":"spirv-llvm-translator updated to 23.1.3","summary":"version bumped to 23.1.3"},
+  {"date":"2026-11-14","category":"Moonbase","repository":"other","module":"python-certifi","version":"2026.10.23.","commit":"27d6b59bc6737f7876c8d4ae05e4962329278258","title":"python-certifi updated to 2026.10.23.","summary":"bump to 2026.10.23."},
+  {"date":"2026-11-14","category":"Moonbase","repository":"other","module":"python-scikit","version":"1.9.1.","commit":"892fc2255b0ae3f93c9da82d06a7c661e7a15e78","title":"python-scikit updated to 1.9.1.","summary":"bump to 1.9.1."}
 ]

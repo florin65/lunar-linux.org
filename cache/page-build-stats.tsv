@@ -5,14 +5,15 @@ unchanged	./docs/docs-about-lunar-linux.html
 unchanged	./docs/docs-archive.html
 unchanged	./docs/docs-installation-guide.html
 unchanged	./docs/docs-lss-principles.html
-unchanged	./docs/docs.html
 unchanged	./docs/docs-moonbase.html
 unchanged	./docs/docs-package-management.html
 unchanged	./docs/docs-writing-modules.html
-generated	./docs/download.html
+unchanged	./docs/docs.html
+unchanged	./docs/download.html
 unchanged	./docs/history.html
 generated	./docs/index.html
 generated	./docs/info.html
+unchanged	./docs/lss.html
 unchanged	./docs/lss/administrator-guide/caches-and-rollback.html
 unchanged	./docs/lss/administrator-guide/index.html
 unchanged	./docs/lss/administrator-guide/recovery-and-state-repair.html
@@ -22,7 +23,6 @@ unchanged	./docs/lss/debugging-guide/index.html
 unchanged	./docs/lss/debugging-guide/logs-and-manifests.html
 unchanged	./docs/lss/debugging-guide/validated-case-studies.html
 unchanged	./docs/lss/index.html
-unchanged	./docs/lss.html
 unchanged	./docs/lss/module-author-guide/building-and-testing.html
 unchanged	./docs/lss/module-author-guide/index.html
 unchanged	./docs/lss/module-author-guide/lifecycle-and-prepare-install.html

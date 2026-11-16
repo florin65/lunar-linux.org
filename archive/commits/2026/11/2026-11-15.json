@@ -1,0 +1,13 @@
+[
+  {"date":"2026-11-15","category":"Moonbase","repository":"other","module":"assimp","version":"6.0.6","commit":"1a25a3b77b341090b913769193e359d09cb26586","title":"assimp updated to 6.0.6","summary":"version bumped to 6.0.6"},
+  {"date":"2026-11-15","category":"Moonbase","repository":"other","module":"ffmpegthumbnailer","version":"2.4.2","commit":"573ac18daf21f6aa72724a9e02a5ef12ea38966f","title":"ffmpegthumbnailer updated to 2.4.2","summary":"version bumped to 2.4.2"},
+  {"date":"2026-11-15","category":"Moonbase","repository":"other","module":"bfs","version":"4.1.7","commit":"6b62a46c4a1ce6ce6c8c14d9421a99047bcae71a","title":"bfs updated to 4.1.7","summary":"version bumped to 4.1.7"},
+  {"date":"2026-11-15","category":"Moonbase","repository":"other","module":"libcbor","version":"0.14.1","commit":"7b2203a2434419f1f41e76c718ac803a838dbb04","title":"libcbor updated to 0.14.1","summary":"version bumped to 0.14.1"},
+  {"date":"2026-11-15","category":"Moonbase","repository":"other","module":"xwayland","version":"24.1.15","commit":"94a94133efa69f9b872ccfe22fcb7256257db068","title":"xwayland updated to 24.1.15","summary":"version bumped to 24.1.15"},
+  {"date":"2026-11-15","category":"Moonbase","repository":"other","module":"gperftools","version":"2.19.3","commit":"b9fe64c5257915062a991c9705fe0d1a493d3f97","title":"gperftools updated to 2.19.3","summary":"version bumped to 2.19.3"},
+  {"date":"2026-11-15","category":"Moonbase","repository":"other","module":"libical","version":"4.0.8","commit":"c93761418d86a37d4d9745d18b33b9fb9cc0413f","title":"libical updated to 4.0.8","summary":"version bumped to 4.0.8"},
+  {"date":"2026-11-15","category":"Moonbase","repository":"other","module":"partclone","version":"0.3.54","commit":"d2b0ba31765e891a6ed3147a82a7191bf9ef4175","title":"partclone updated to 0.3.54","summary":"version bumped to 0.3.54"},
+  {"date":"2026-11-15","category":"Moonbase","repository":"other","module":"inotify-tools","version":"4.26.277","commit":"d32c8cdfb2f3ff408832bbe7d7c8a98aaa38ac95","title":"inotify-tools updated to 4.26.277","summary":"version bumped to 4.26.277"},
+  {"date":"2026-11-15","category":"Moonbase","repository":"other","module":"firefox-bin","version":"160.0","commit":"f0129f8d2504a93e7ba82e7cd9b7645d25df5866","title":"firefox-bin updated to 160.0","summary":"version bumped to 160.0"},
+  {"date":"2026-11-15","category":"Moonbase","repository":"xorg","module":"xmag","version":"1.0.9 + switch to meson","commit":"dc7d053fc664f26f139f595f9d156ff47a7ee980","title":"xmag updated to 1.0.9 + switch to meson","summary":"version bumped to 1.0.9 + switch to meson"}
+]
