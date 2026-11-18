@@ -9,5 +9,7 @@
   {"date":"2026-11-16","category":"Moonbase","repository":"other","module":"poppler","version":"26.11.0.","commit":"cc719a75e7e9725430f961534e4394cb28097533","title":"poppler updated to 26.11.0.","summary":"bump to 26.11.0."},
   {"date":"2026-11-16","category":"Moonbase","repository":"other","module":"","version":"","commit":"d3dd59143364b68e5ddf1fd657d1d594b260d986","title":"hdf5: Some adjustments to BUILD and a note in DEPENDS.","summary":"hdf5: Some adjustments to BUILD and a note in DEPENDS."},
   {"date":"2026-11-16","category":"Moonbase","repository":"other","module":"gflags","version":"2.3.1.","commit":"da29e77d376afde0e2caa743a173bd0901143a99","title":"gflags updated to 2.3.1.","summary":"bump to 2.3.1."},
-  {"date":"2026-11-16","category":"Moonbase","repository":"xorg","module":"NVIDIA","version":"620.70.06.","commit":"cd6d3a87dc7647146af24c01699e6ed0ac9f8d31","title":"NVIDIA updated to 620.70.06.","summary":"bump to 620.70.06."}
+  {"date":"2026-11-16","category":"Moonbase","repository":"xorg","module":"NVIDIA","version":"620.70.06.","commit":"cd6d3a87dc7647146af24c01699e6ed0ac9f8d31","title":"NVIDIA updated to 620.70.06.","summary":"bump to 620.70.06."},
+  {"date":"2026-11-16","category":"Moonbase","repository":"kde","module":"","version":"","commit":"10a31836c0cab32e757f31c600595076eed410cc","title":"qt6-base: Adding a few patches.","summary":"qt6-base: Adding a few patches."},
+  {"date":"2026-11-16","category":"Moonbase","repository":"other","module":"","version":"","commit":"0c4efbefe606e9dfde7503a7f674e45e5929202c","title":"podofo: Adding a patch.","summary":"podofo: Adding a patch."}
 ]

@@ -1,15 +1,7 @@
 [
-  {"date":"2026-11-16","category":"Moonbase","repository":"core","module":"grub2","version":"2.16 (#4368)","commit":"aace81f6a5447a80a9f86600ffe3a1b4c3c4adfd","title":"grub2 updated to 2.16 (#4368)","summary":"bump to 2.16 (#4368)"},
-  {"date":"2026-11-16","category":"Moonbase","repository":"gnome3","module":"","version":"","commit":"e3e0880ad307db7db2b25d0a715d8889e57216e4","title":"gexiv2: gi-docgen is a runtime dependency.","summary":"gexiv2: gi-docgen is a runtime dependency."},
-  {"date":"2026-11-16","category":"Moonbase","repository":"other","module":"proj","version":"9.9.0.","commit":"0409d07faecc3efb846d3bbbf44c53953fc3f11e","title":"proj updated to 9.9.0.","summary":"bump to 9.9.0."},
-  {"date":"2026-11-16","category":"Moonbase","repository":"other","module":"","version":"","commit":"1af739a574491fb8d5b81b84654d806a155b0375","title":"doxygen: Adjusting DEPENDS.","summary":"doxygen: Adjusting DEPENDS."},
-  {"date":"2026-11-16","category":"Moonbase","repository":"other","module":"geos","version":"3.15.0.","commit":"2e2a7dd5afb22276086423f1f0f8cb45f6223eca","title":"geos updated to 3.15.0.","summary":"bump to 3.15.0."},
-  {"date":"2026-11-16","category":"Moonbase","repository":"other","module":"inotify-tools","version":"4.26.282","commit":"5debc03df42f1a945884662e06add5f9df595d18","title":"inotify-tools updated to 4.26.282","summary":"version bumped to 4.26.282"},
-  {"date":"2026-11-16","category":"Moonbase","repository":"other","module":"","version":"","commit":"a4fe654fb4400ef2b5bc26c10d6a2f22337e810d","title":"hdf5: Nope. netcdf only likes zlib.","summary":"hdf5: Nope. netcdf only likes zlib."},
-  {"date":"2026-11-16","category":"Moonbase","repository":"other","module":"poppler","version":"26.11.0.","commit":"cc719a75e7e9725430f961534e4394cb28097533","title":"poppler updated to 26.11.0.","summary":"bump to 26.11.0."},
-  {"date":"2026-11-16","category":"Moonbase","repository":"other","module":"","version":"","commit":"d3dd59143364b68e5ddf1fd657d1d594b260d986","title":"hdf5: Some adjustments to BUILD and a note in DEPENDS.","summary":"hdf5: Some adjustments to BUILD and a note in DEPENDS."},
-  {"date":"2026-11-16","category":"Moonbase","repository":"other","module":"gflags","version":"2.3.1.","commit":"da29e77d376afde0e2caa743a173bd0901143a99","title":"gflags updated to 2.3.1.","summary":"bump to 2.3.1."},
-  {"date":"2026-11-16","category":"Moonbase","repository":"xorg","module":"NVIDIA","version":"620.70.06.","commit":"cd6d3a87dc7647146af24c01699e6ed0ac9f8d31","title":"NVIDIA updated to 620.70.06.","summary":"bump to 620.70.06."},
-  {"date":"2026-11-15","category":"Moonbase","repository":"core","module":"gzip","version":"1.15","commit":"5b4a4759c47b0fb5ba6dbeedbe443381f0e1a04c","title":"gzip updated to 1.15","summary":"version bumped to 1.15"},
-  {"date":"2026-11-15","category":"Moonbase","repository":"core","module":"nasm","version":"3.02","commit":"8d3d0bcac8d473a41a300023cb8dd5284c3efd7f","title":"nasm updated to 3.02","summary":"version bumped to 3.02"}
+  {"date":"2026-11-17","category":"Moonbase","repository":"kde","module":"qcoro","version":"0.13.0.","commit":"2df43c6543bffd3c645eadaa08e77ca834242a5a","title":"qcoro updated to 0.13.0.","summary":"bump to 0.13.0."},
+  {"date":"2026-11-17","category":"Moonbase","repository":"kde","module":"framework","version":"6.32.0.","commit":"5538c7bc3d0a9c26a42527407ba385cca378ef3b","title":"framework updated to 6.32.0.","summary":"bump to 6.32.0."},
+  {"date":"2026-11-17","category":"Moonbase","repository":"other","module":"skopeo","version":"1.25.2","commit":"bb908034be0669e826889fceb4c90e11371cabae","title":"skopeo updated to 1.25.2","summary":"version bumped to 1.25.2"},
+  {"date":"2026-11-16","category":"Moonbase","repository":"kde","module":"","version":"","commit":"10a31836c0cab32e757f31c600595076eed410cc","title":"qt6-base: Adding a few patches.","summary":"qt6-base: Adding a few patches."},
+  {"date":"2026-11-16","category":"Moonbase","repository":"other","module":"","version":"","commit":"0c4efbefe606e9dfde7503a7f674e45e5929202c","title":"podofo: Adding a patch.","summary":"podofo: Adding a patch."}
 ]
