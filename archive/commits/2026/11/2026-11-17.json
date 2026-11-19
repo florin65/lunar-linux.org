@@ -1,5 +1,8 @@
 [
   {"date":"2026-11-17","category":"Moonbase","repository":"kde","module":"qcoro","version":"0.13.0.","commit":"2df43c6543bffd3c645eadaa08e77ca834242a5a","title":"qcoro updated to 0.13.0.","summary":"bump to 0.13.0."},
   {"date":"2026-11-17","category":"Moonbase","repository":"kde","module":"framework","version":"6.32.0.","commit":"5538c7bc3d0a9c26a42527407ba385cca378ef3b","title":"framework updated to 6.32.0.","summary":"bump to 6.32.0."},
-  {"date":"2026-11-17","category":"Moonbase","repository":"other","module":"skopeo","version":"1.25.2","commit":"bb908034be0669e826889fceb4c90e11371cabae","title":"skopeo updated to 1.25.2","summary":"version bumped to 1.25.2"}
+  {"date":"2026-11-17","category":"Moonbase","repository":"other","module":"skopeo","version":"1.25.2","commit":"bb908034be0669e826889fceb4c90e11371cabae","title":"skopeo updated to 1.25.2","summary":"version bumped to 1.25.2"},
+  {"date":"2026-11-17","category":"Moonbase","repository":"kde","module":"plasma","version":"6.8.3.","commit":"83a48c263b1a4df2d395ab576b1b1d4d95a23840","title":"plasma updated to 6.8.3.","summary":"bump to 6.8.3."},
+  {"date":"2026-11-17","category":"Moonbase","repository":"other","module":"","version":"","commit":"3baee5296bfac7c0e6ea89d3856dd08bf440cec5","title":"libblockdev: Reworked DEPENDS.","summary":"libblockdev: Reworked DEPENDS."},
+  {"date":"2026-11-17","category":"Moonbase","repository":"other","module":"","version":"","commit":"ee3007ec7161b7c233168bc8d922d36bc2a56d14","title":"plotutils: Rework depends and set -std=gnu17.","summary":"plotutils: Rework depends and set -std=gnu17."}
 ]

@@ -1,7 +1,19 @@
 [
-  {"date":"2026-11-17","category":"Moonbase","repository":"kde","module":"qcoro","version":"0.13.0.","commit":"2df43c6543bffd3c645eadaa08e77ca834242a5a","title":"qcoro updated to 0.13.0.","summary":"bump to 0.13.0."},
-  {"date":"2026-11-17","category":"Moonbase","repository":"kde","module":"framework","version":"6.32.0.","commit":"5538c7bc3d0a9c26a42527407ba385cca378ef3b","title":"framework updated to 6.32.0.","summary":"bump to 6.32.0."},
-  {"date":"2026-11-17","category":"Moonbase","repository":"other","module":"skopeo","version":"1.25.2","commit":"bb908034be0669e826889fceb4c90e11371cabae","title":"skopeo updated to 1.25.2","summary":"version bumped to 1.25.2"},
-  {"date":"2026-11-16","category":"Moonbase","repository":"kde","module":"","version":"","commit":"10a31836c0cab32e757f31c600595076eed410cc","title":"qt6-base: Adding a few patches.","summary":"qt6-base: Adding a few patches."},
-  {"date":"2026-11-16","category":"Moonbase","repository":"other","module":"","version":"","commit":"0c4efbefe606e9dfde7503a7f674e45e5929202c","title":"podofo: Adding a patch.","summary":"podofo: Adding a patch."}
+  {"date":"2026-11-18","category":"Moonbase","repository":"kde","module":"haruna","version":"1.9.1.","commit":"2602e81b91091eef6fe7620709fa75fa29142a8b","title":"haruna updated to 1.9.1.","summary":"bump to 1.9.1."},
+  {"date":"2026-11-18","category":"Moonbase","repository":"kde","module":"","version":"","commit":"338e5af1f1d4af0d8fa4127f2f4e0c602166f097","title":"mlt-7: Adding some patches.","summary":"mlt-7: Adding some patches."},
+  {"date":"2026-11-18","category":"Moonbase","repository":"kde","module":"kirigami-addons","version":"1.16.1.","commit":"adf5612d716526a9f15c375b39027d51259d68b7","title":"kirigami-addons updated to 1.16.1.","summary":"bump to 1.16.1."},
+  {"date":"2026-11-18","category":"Moonbase","repository":"kde","module":"mpvqt","version":"1.2.1.","commit":"bb70b7c25f6822a8d49193ad21c141d041e1a70a","title":"mpvqt updated to 1.2.1.","summary":"bump to 1.2.1."},
+  {"date":"2026-11-18","category":"Moonbase","repository":"kde","module":"ktextaddons","version":"2.3.0.","commit":"dee72773114e44f04ac80d4189279e31724af260","title":"ktextaddons updated to 2.3.0.","summary":"bump to 2.3.0."},
+  {"date":"2026-11-18","category":"Moonbase","repository":"kde","module":"","version":"","commit":"f65a8a1cc98cf1dbc2c0a22c225195e9b8bcff0f","title":"mlt-7: Adjust BUILD.","summary":"mlt-7: Adjust BUILD."},
+  {"date":"2026-11-18","category":"Moonbase","repository":"other","module":"libbreoffice-bin","version":"26.8.3","commit":"141cc3961418e40b62c161902ac409fcd85c3451","title":"libbreoffice-bin updated to 26.8.3","summary":"version bumped to 26.8.3"},
+  {"date":"2026-11-18","category":"Moonbase","repository":"other","module":"","version":"","commit":"7b71f764ce04a5899dee039871efa79f8df22dc6","title":"newt: Change source url.","summary":"newt: Change source url."},
+  {"date":"2026-11-18","category":"Moonbase","repository":"other","module":"","version":"","commit":"9130c9045416038ff9fbd93e2dd3f2f3c3106866","title":"libmad: ADjusting DETAILS.","summary":"libmad: ADjusting DETAILS."},
+  {"date":"2026-11-18","category":"Moonbase","repository":"other","module":"nginx","version":"1.31.9","commit":"afd12f6bdd4f536f29be5347c72f00930cc07347","title":"nginx updated to 1.31.9","summary":"version bumped to 1.31.9"},
+  {"date":"2026-11-18","category":"Moonbase","repository":"other","module":"","version":"","commit":"ba0a7e16aafe56e5b2609b26f894fd0ff9389705","title":"rapidjson: Rework DETAILS.","summary":"rapidjson: Rework DETAILS."},
+  {"date":"2026-11-18","category":"Moonbase","repository":"other","module":"sox","version":"14.8.1.","commit":"f3788904599dc694608f9574c1295aa92ddbd1be","title":"sox updated to 14.8.1.","summary":"bump to 14.8.1."},
+  {"date":"2026-11-18","category":"Moonbase","repository":"other","module":"gdb","version":"18.1","commit":"fec69f7615aa2b5fc882822b041687615b53c669","title":"gdb updated to 18.1","summary":"version bumped to 18.1"},
+  {"date":"2026-11-18","category":"Moonbase","repository":"xorg","module":"libfontenc","version":"1.1.10","commit":"869ecd1271a34f150ee648b04358c93d493d34b1","title":"libfontenc updated to 1.1.10","summary":"version bumped to 1.1.10"},
+  {"date":"2026-11-17","category":"Moonbase","repository":"kde","module":"plasma","version":"6.8.3.","commit":"83a48c263b1a4df2d395ab576b1b1d4d95a23840","title":"plasma updated to 6.8.3.","summary":"bump to 6.8.3."},
+  {"date":"2026-11-17","category":"Moonbase","repository":"other","module":"","version":"","commit":"3baee5296bfac7c0e6ea89d3856dd08bf440cec5","title":"libblockdev: Reworked DEPENDS.","summary":"libblockdev: Reworked DEPENDS."},
+  {"date":"2026-11-17","category":"Moonbase","repository":"other","module":"","version":"","commit":"ee3007ec7161b7c233168bc8d922d36bc2a56d14","title":"plotutils: Rework depends and set -std=gnu17.","summary":"plotutils: Rework depends and set -std=gnu17."}
 ]
