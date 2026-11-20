@@ -12,5 +12,7 @@
   {"date":"2026-11-18","category":"Moonbase","repository":"other","module":"","version":"","commit":"ba0a7e16aafe56e5b2609b26f894fd0ff9389705","title":"rapidjson: Rework DETAILS.","summary":"rapidjson: Rework DETAILS."},
   {"date":"2026-11-18","category":"Moonbase","repository":"other","module":"sox","version":"14.8.1.","commit":"f3788904599dc694608f9574c1295aa92ddbd1be","title":"sox updated to 14.8.1.","summary":"bump to 14.8.1."},
   {"date":"2026-11-18","category":"Moonbase","repository":"other","module":"gdb","version":"18.1","commit":"fec69f7615aa2b5fc882822b041687615b53c669","title":"gdb updated to 18.1","summary":"version bumped to 18.1"},
-  {"date":"2026-11-18","category":"Moonbase","repository":"xorg","module":"libfontenc","version":"1.1.10","commit":"869ecd1271a34f150ee648b04358c93d493d34b1","title":"libfontenc updated to 1.1.10","summary":"version bumped to 1.1.10"}
+  {"date":"2026-11-18","category":"Moonbase","repository":"xorg","module":"libfontenc","version":"1.1.10","commit":"869ecd1271a34f150ee648b04358c93d493d34b1","title":"libfontenc updated to 1.1.10","summary":"version bumped to 1.1.10"},
+  {"date":"2026-11-18","category":"Moonbase","repository":"gnome3","module":"libnotify","version":"# Please enter the commit message for your changes. Lines starting","commit":"e210644a2a21e0d3df8a3ace25763442fbee867e","title":"libnotify updated to # Please enter the commit message for your changes. Lines starting","summary":"bump to # Please enter the commit message for your changes. Lines starting"},
+  {"date":"2026-11-18","category":"Moonbase","repository":"other","module":"","version":"","commit":"00f97a6622bf7ac1ea63cf4eda89f46d0bedefbb","title":"go: drop unnecessary optional deps","summary":"go: drop unnecessary optional deps"}
 ]
