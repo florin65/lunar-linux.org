@@ -23,5 +23,11 @@
   {"date":"2026-11-19","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"6a978c7e0d5376e1c430647d0c587db1178aa9e6","title":"mesa-lib: add an optional depend on lua","summary":"mesa-lib: add an optional depend on lua"},
   {"date":"2026-11-19","category":"Moonbase","repository":"xorg","module":"fontconfig","version":"2.18.4","commit":"862fc3d9be8ce781db95e74ee37eced978f92ee4","title":"fontconfig updated to 2.18.4","summary":"version bumped to 2.18.4"},
   {"date":"2026-11-19","category":"Moonbase","repository":"xorg","module":"mesa-lib","version":"26.3.1","commit":"a185574491e1f6108398bf0ee5ddf3ccb7d4ac94","title":"mesa-lib updated to 26.3.1","summary":"version bumped to 26.3.1"},
-  {"date":"2026-11-19","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"bda835e43b31dc8aea8eea1936e4040cd3a30c5a","title":"libdrm: improvement","summary":"libdrm: improvement"}
+  {"date":"2026-11-19","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"bda835e43b31dc8aea8eea1936e4040cd3a30c5a","title":"libdrm: improvement","summary":"libdrm: improvement"},
+  {"date":"2026-11-19","category":"Moonbase","repository":"kde","module":"","version":"","commit":"49d6a2768818e303a06155ab349ee764c4fd9cd7","title":"pyside6: Bump tpo 6.13.0.","summary":"pyside6: Bump tpo 6.13.0."},
+  {"date":"2026-11-19","category":"Moonbase","repository":"other","module":"dukpy","version":"0.6.0.","commit":"10f417e3218edeac42edc63bc12e7d01cd7319e8","title":"dukpy updated to 0.6.0.","summary":"bump to 0.6.0."},
+  {"date":"2026-11-19","category":"Moonbase","repository":"other","module":"","version":"","commit":"9f936812706ad83bdeca03b017a9a40f8ef43ae5","title":"vlc: Reworking and adding a few patches.","summary":"vlc: Reworking and adding a few patches."},
+  {"date":"2026-11-19","category":"Moonbase","repository":"other","module":"ytmusic","version":"1.12.3.","commit":"b3770ac9d92a3b4d7d793d05e5a7a43770288b2b","title":"ytmusic updated to 1.12.3.","summary":"bump to 1.12.3."},
+  {"date":"2026-11-19","category":"Moonbase","repository":"other","module":"harfbuzz","version":"15.2.0.","commit":"cd4eb57d93b1900440775512e515706ce16033ae","title":"harfbuzz updated to 15.2.0.","summary":"bump to 15.2.0."},
+  {"date":"2026-11-19","category":"Moonbase","repository":"other","module":"fdk-aac","version":"3.0.0.","commit":"df4c28b8b3979f496eeacdf0111381d2b2a8eb07","title":"fdk-aac updated to 3.0.0.","summary":"bump to 3.0.0."}
 ]
