@@ -29,5 +29,6 @@
   {"date":"2026-11-19","category":"Moonbase","repository":"other","module":"","version":"","commit":"9f936812706ad83bdeca03b017a9a40f8ef43ae5","title":"vlc: Reworking and adding a few patches.","summary":"vlc: Reworking and adding a few patches."},
   {"date":"2026-11-19","category":"Moonbase","repository":"other","module":"ytmusic","version":"1.12.3.","commit":"b3770ac9d92a3b4d7d793d05e5a7a43770288b2b","title":"ytmusic updated to 1.12.3.","summary":"bump to 1.12.3."},
   {"date":"2026-11-19","category":"Moonbase","repository":"other","module":"harfbuzz","version":"15.2.0.","commit":"cd4eb57d93b1900440775512e515706ce16033ae","title":"harfbuzz updated to 15.2.0.","summary":"bump to 15.2.0."},
-  {"date":"2026-11-19","category":"Moonbase","repository":"other","module":"fdk-aac","version":"3.0.0.","commit":"df4c28b8b3979f496eeacdf0111381d2b2a8eb07","title":"fdk-aac updated to 3.0.0.","summary":"bump to 3.0.0."}
+  {"date":"2026-11-19","category":"Moonbase","repository":"other","module":"fdk-aac","version":"3.0.0.","commit":"df4c28b8b3979f496eeacdf0111381d2b2a8eb07","title":"fdk-aac updated to 3.0.0.","summary":"bump to 3.0.0."},
+  {"date":"2026-11-19","category":"Moonbase","repository":"core","module":"linux","version":"7.3.5","commit":"68fc42344ec7f372d13120250b24db88f0bf6f87","title":"linux updated to 7.3.5","summary":"version bumped to 7.3.5"}
 ]

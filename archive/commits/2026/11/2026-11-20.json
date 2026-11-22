@@ -12,5 +12,8 @@
   {"date":"2026-11-20","category":"Moonbase","repository":"other","module":"simdutf","version":"9.4.0.","commit":"d4bc01ce214852bc79a4bba892d63a24782a8036","title":"simdutf updated to 9.4.0.","summary":"bump to 9.4.0."},
   {"date":"2026-11-20","category":"Moonbase","repository":"other","module":"","version":"","commit":"e471baaf05c47f2968f94a917c5b1af0178cd09b","title":"libxmi: Needs -std=gnu17.","summary":"libxmi: Needs -std=gnu17."},
   {"date":"2026-11-20","category":"Moonbase","repository":"other","module":"","version":"","commit":"e518aa3ca4236e6b8ebd7eb608cd5a4792000ff2","title":"plotutils: optional_depends libxmi is fine now.","summary":"plotutils: optional_depends libxmi is fine now."},
-  {"date":"2026-11-20","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"4f05d23eaa9ce5e6654e64b05c56b4899c15266e","title":"mesa-lib: Adding a patch.","summary":"mesa-lib: Adding a patch."}
+  {"date":"2026-11-20","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"4f05d23eaa9ce5e6654e64b05c56b4899c15266e","title":"mesa-lib: Adding a patch.","summary":"mesa-lib: Adding a patch."},
+  {"date":"2026-11-20","category":"Moonbase","repository":"other","module":"wildmidi","version":"0.5.0.","commit":"a955ac1d8f05c7293d8980ba869d9ff7df41be31","title":"wildmidi updated to 0.5.0.","summary":"bump to 0.5.0."},
+  {"date":"2026-11-20","category":"Moonbase","repository":"other","module":"mpd","version":"0.24.20.","commit":"e8b5ed891e4eeaadc35541851909ae86d9fcbe50","title":"mpd updated to 0.24.20.","summary":"bump to 0.24.20."},
+  {"date":"2026-11-20","category":"Moonbase","repository":"other","module":"hwloc","version":"2.16.0.","commit":"f3d2de5bde75cad4040b4b3fb4da25be2789d2bc","title":"hwloc updated to 2.16.0.","summary":"bump to 2.16.0."}
 ]
