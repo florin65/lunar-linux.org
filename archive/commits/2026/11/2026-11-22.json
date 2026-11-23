@@ -1,0 +1,12 @@
+[
+  {"date":"2026-11-22","category":"Moonbase","repository":"core","module":"lunar-tools","version":"2026.11 (#4377)","commit":"7100caf0d7e9cabb78caf37f42578c823a9d97fd","title":"lunar-tools updated to 2026.11 (#4377)","summary":"version bumped to 2026.11 (#4377)"},
+  {"date":"2026-11-22","category":"Moonbase","repository":"core","module":"","version":"","commit":"7af0029bfadb108157f829080d53ea66d0cf1258","title":"gmp: switch download order","summary":"gmp: switch download order"},
+  {"date":"2026-11-22","category":"Moonbase","repository":"gnome3","module":"vte3","version":"0.84.2","commit":"3931104a9160f78f4dcacea8a127c403c946c724","title":"vte3 updated to 0.84.2","summary":"version bumped to 0.84.2"},
+  {"date":"2026-11-22","category":"Moonbase","repository":"other","module":"fluidsynth","version":"2.6.3","commit":"0e8f58424aff811e89b4535f05e4322f075cbdfa","title":"fluidsynth updated to 2.6.3","summary":"version bumped to 2.6.3"},
+  {"date":"2026-11-22","category":"Moonbase","repository":"other","module":"gpgme","version":"2.3.1","commit":"4208bb73ce117402499e772f5a78c0073b7b2887","title":"gpgme updated to 2.3.1","summary":"version bumped to 2.3.1"},
+  {"date":"2026-11-22","category":"Moonbase","repository":"other","module":"","version":"","commit":"925f811e7abd6175cdbf83e7e547b9178aadc666","title":"kmscon: DRM/KMS Linux graphic console. Added it to the moonbase","summary":"kmscon: DRM/KMS Linux graphic console. Added it to the moonbase"},
+  {"date":"2026-11-22","category":"Moonbase","repository":"other","module":"redis","version":"8.12.0","commit":"9901a101921bfb9539d1d5838effb23c43729b58","title":"redis updated to 8.12.0","summary":"version bumped to 8.12.0"},
+  {"date":"2026-11-22","category":"Moonbase","repository":"other","module":"","version":"","commit":"a18d95c4381594eec6ad0adcdbdc9742c7c51ea3","title":"kmscon: fix a typo","summary":"kmscon: fix a typo"},
+  {"date":"2026-11-22","category":"Moonbase","repository":"other","module":"graphviz","version":"16.1.2","commit":"b9c602f17211fabaaa0e4144eb7b703414def027","title":"graphviz updated to 16.1.2","summary":"version bumped to 16.1.2"},
+  {"date":"2026-11-22","category":"Moonbase","repository":"xorg","module":"NVIDIA","version":"620.73.04.","commit":"db38e1814a68c45cec02eaa549a99dcd0953a606","title":"NVIDIA updated to 620.73.04.","summary":"bump to 620.73.04."}
+]

@@ -23,5 +23,6 @@
   {"date":"2026-11-21","category":"Moonbase","repository":"other","module":"HTML-Parser","version":"3.87","commit":"f573e683656d21ae3da4c6acf2e5e68442baa823","title":"HTML-Parser updated to 3.87","summary":"version bumped to 3.87"},
   {"date":"2026-11-21","category":"Moonbase","repository":"other","module":"","version":"","commit":"f73702e1a9756ff8de50d48e1d7b78f7b27e3646","title":"nss: snall tweak","summary":"nss: snall tweak"},
   {"date":"2026-11-21","category":"Moonbase","repository":"xfce","module":"","version":"","commit":"042770d0321490fd8fe8b1fcd03fbbf9bc5b64ea","title":"ci: notify the website when modules land","summary":"ci: notify the website when modules land"},
-  {"date":"2026-11-21","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"5526a849b40b5e1cb86324c076bea7f48d1162c4","title":"ci: notify the website when modules land (#1250)","summary":"ci: notify the website when modules land (#1250)"}
+  {"date":"2026-11-21","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"5526a849b40b5e1cb86324c076bea7f48d1162c4","title":"ci: notify the website when modules land (#1250)","summary":"ci: notify the website when modules land (#1250)"},
+  {"date":"2026-11-21","category":"Moonbase","repository":"other","module":"libseccomp","version":"2.6.2 (#7610)","commit":"3c774180552a99ed8761094cf28bddccf236c4dc","title":"libseccomp updated to 2.6.2 (#7610)","summary":"version bumped to 2.6.2 (#7610)"}
 ]
