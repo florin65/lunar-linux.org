@@ -8,5 +8,7 @@
   {"date":"2026-11-22","category":"Moonbase","repository":"other","module":"redis","version":"8.12.0","commit":"9901a101921bfb9539d1d5838effb23c43729b58","title":"redis updated to 8.12.0","summary":"version bumped to 8.12.0"},
   {"date":"2026-11-22","category":"Moonbase","repository":"other","module":"","version":"","commit":"a18d95c4381594eec6ad0adcdbdc9742c7c51ea3","title":"kmscon: fix a typo","summary":"kmscon: fix a typo"},
   {"date":"2026-11-22","category":"Moonbase","repository":"other","module":"graphviz","version":"16.1.2","commit":"b9c602f17211fabaaa0e4144eb7b703414def027","title":"graphviz updated to 16.1.2","summary":"version bumped to 16.1.2"},
-  {"date":"2026-11-22","category":"Moonbase","repository":"xorg","module":"NVIDIA","version":"620.73.04.","commit":"db38e1814a68c45cec02eaa549a99dcd0953a606","title":"NVIDIA updated to 620.73.04.","summary":"bump to 620.73.04."}
+  {"date":"2026-11-22","category":"Moonbase","repository":"xorg","module":"NVIDIA","version":"620.73.04.","commit":"db38e1814a68c45cec02eaa549a99dcd0953a606","title":"NVIDIA updated to 620.73.04.","summary":"bump to 620.73.04."},
+  {"date":"2026-11-22","category":"Moonbase","repository":"kde","module":"kst","version":"3.1.1.","commit":"3d767417a58b112c74ac737e40cf674cd11d12de","title":"kst updated to 3.1.1.","summary":"bump to 3.1.1."},
+  {"date":"2026-11-22","category":"Moonbase","repository":"other","module":"netcdf-cxx","version":"4.3.2.","commit":"0f5ceb256d98a09e00fc399c01683799aefdc0c1","title":"netcdf-cxx updated to 4.3.2.","summary":"bump to 4.3.2."}
 ]
