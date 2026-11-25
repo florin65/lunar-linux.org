@@ -21,5 +21,7 @@
   {"date":"2026-11-23","category":"Moonbase","repository":"other","module":"firefox-bin","version":"161.0","commit":"e96414fce8d2c217881d69f1ad3e473ac625037f","title":"firefox-bin updated to 161.0","summary":"version bumped to 161.0"},
   {"date":"2026-11-23","category":"Moonbase","repository":"other","module":"dune","version":"0.1.9","commit":"eda63c27346b488920afe35aabdaaa10904d7880","title":"dune updated to 0.1.9","summary":"version bumped to 0.1.9"},
   {"date":"2026-11-23","category":"Moonbase","repository":"other","module":"dpkg","version":"1.23.12","commit":"f97af0e800649b44f10b3729d6dfffe072dda0f4","title":"dpkg updated to 1.23.12","summary":"version bumped to 1.23.12"},
-  {"date":"2026-11-23","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"cfe4a5918934966ea57dbeb48bf563196408f0d6","title":"mesa-lib: removed an uneeded patch","summary":"mesa-lib: removed an uneeded patch"}
+  {"date":"2026-11-23","category":"Moonbase","repository":"xorg","module":"","version":"","commit":"cfe4a5918934966ea57dbeb48bf563196408f0d6","title":"mesa-lib: removed an uneeded patch","summary":"mesa-lib: removed an uneeded patch"},
+  {"date":"2026-11-23","category":"Moonbase","repository":"kde","module":"qt6","version":"6.12.1.","commit":"170c9303454fbdab97bbcd74d7f1c512f24c995f","title":"qt6 updated to 6.12.1.","summary":"bump to 6.12.1."},
+  {"date":"2026-11-23","category":"Moonbase","repository":"other","module":"","version":"","commit":"4e2badb55dbe5424f948ecb5b770642c4cf13ecd","title":"python-owslib: It'd help if there was a BUILD.","summary":"python-owslib: It'd help if there was a BUILD."}
 ]
