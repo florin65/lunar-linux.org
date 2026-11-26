@@ -20,5 +20,10 @@
   {"date":"2026-11-24","category":"Moonbase","repository":"other","module":"exfatprogs","version":"1.4.5","commit":"cf7642da68028de29930412a9fcd7545c494ff41","title":"exfatprogs updated to 1.4.5","summary":"version bumped to 1.4.5"},
   {"date":"2026-11-24","category":"Moonbase","repository":"other","module":"python-hatchling","version":"1.33.0","commit":"dbceb2564b556f69387f680d46bba813432622de","title":"python-hatchling updated to 1.33.0","summary":"version bumped to 1.33.0"},
   {"date":"2026-11-24","category":"Moonbase","repository":"other","module":"ipython","version":"9.19.1","commit":"e8545c7d5bc623661433dc4463de2448236ea6e5","title":"ipython updated to 9.19.1","summary":"version bumped to 9.19.1"},
-  {"date":"2026-11-24","category":"Moonbase","repository":"other","module":"","version":"","commit":"f441984f7dbd1546112d73237a4b86179932feb2","title":"iotop: Reworking module.","summary":"iotop: Reworking module."}
+  {"date":"2026-11-24","category":"Moonbase","repository":"other","module":"","version":"","commit":"f441984f7dbd1546112d73237a4b86179932feb2","title":"iotop: Reworking module.","summary":"iotop: Reworking module."},
+  {"date":"2026-11-24","category":"Moonbase","repository":"core","module":"zstd","version":"1.6.0","commit":"8f4d4b707c897e740b6f44e18f0a603768bad4ed","title":"zstd updated to 1.6.0","summary":"version bumped to 1.6.0"},
+  {"date":"2026-11-24","category":"Moonbase","repository":"kde","module":"quazip-qt6","version":"1.7.2.","commit":"09a6581b5623aad6ea89d4823baa74fb6efcac11","title":"quazip-qt6 updated to 1.7.2.","summary":"bump to 1.7.2."},
+  {"date":"2026-11-24","category":"Moonbase","repository":"kde","module":"krita","version":"6.0.5.","commit":"7e0c768a98a91e0584479613a8cee3c3ab4ca153","title":"krita updated to 6.0.5.","summary":"bump to 6.0.5."},
+  {"date":"2026-11-24","category":"Moonbase","repository":"kde","module":"pyqt6","version":"6.12.1.","commit":"e0de4b6e3d6dfc5be40193944c697c60eeba94d4","title":"pyqt6 updated to 6.12.1.","summary":"bump to 6.12.1."},
+  {"date":"2026-11-24","category":"Moonbase","repository":"kde","module":"PyQt-builder","version":"1.21.0.","commit":"f82a986d1f02750fe7c7e5b6664648e401f41035","title":"PyQt-builder updated to 1.21.0.","summary":"bump to 1.21.0."}
 ]
