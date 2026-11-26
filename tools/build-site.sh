@@ -9,17 +9,8 @@ set -eu
 SCRIPT=$(readlink -f "$0")
 PROJECT_ROOT=$(dirname "$(dirname "$SCRIPT")")
 
-CONF="$PROJECT_ROOT/site.conf"
-
-if [ ! -f "$CONF" ]; then
-  printf 'missing config file: %s\n' "$CONF" >&2
-  exit 1
-fi
-
-# Configuration precedence:
-# exported environment > site.conf defaults > built-in defaults below
-# shellcheck disable=SC1090
-. "$CONF"
+# shellcheck source=tools/load-config.sh
+. "$PROJECT_ROOT/tools/load-config.sh"
 
 SITE_ROOT=${SITE_ROOT:-.}
 MARKDOWN_DIR=${MARKDOWN_DIR:-src/markdown}

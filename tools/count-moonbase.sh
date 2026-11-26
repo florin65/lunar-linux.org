@@ -10,15 +10,8 @@
 set -eu
 
 PROJECT_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
-CONF="$PROJECT_ROOT/site.conf"
-
-if [ ! -f "$CONF" ]; then
-  printf 'missing config file: %s\n' "$CONF" >&2
-  exit 1
-fi
-
-# shellcheck disable=SC1090
-. "$CONF"
+# shellcheck source=tools/load-config.sh
+. "$PROJECT_ROOT/tools/load-config.sh"
 
 SITE_ROOT=${SITE_ROOT:-.}
 PUBLIC_DIR=${PUBLIC_DIR:-docs}

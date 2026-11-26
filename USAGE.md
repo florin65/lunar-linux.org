@@ -44,25 +44,39 @@ docs/data/         generated JSON data
 
 ## Configuration
 
-The central configuration file is:
+The repository retains `site.conf` as portable defaults. The optional LET
+system configuration and personal XDG configuration are loaded by all seven
+site configuration consumers, in the following precedence order (highest first):
 
 ```text
-site.conf
+exported environment variables
+${XDG_CONFIG_HOME:-$HOME/.config}/lunar-website/site.conf
+/etc/let/lunar-website/site.conf
+repository site.conf
+built-in defaults
 ```
 
-Important settings include:
+The generator has no general command-line configuration parser; existing
+per-invocation environment overrides remain supported. An unset, empty or
+relative `XDG_CONFIG_HOME` falls back to `$HOME/.config`.
+
+Configuration files are trusted shell files, not a new configuration language.
+Use the existing default-assignment form in every layer (not unconditional
+assignments), so an already defined nonempty higher-priority setting wins.
+Set base paths before any settings that refer to them. Relative paths retain
+their existing project-root/SITE_ROOT interpretation.
+
+For example, a global or personal `site.conf` can contain only the required
+site-specific overrides:
 
 ```sh
-PUBLIC_DIR="docs"
-DATA_DIR="docs/data"
-
-MOONBASE_DIR="../moonbase"
-MOONBASE_LOG_DIR="cache/moonbase-logs"
-MOONBASE_NEWS_JSON="docs/data/moonbase-news.json"
-
-COMMUNITY_NEWS_HTML="cache/community-news.html"
-NEWS_ARTICLES_DIR="docs/news"
+: "${MOONBASE_DIR:=/path/to/local/moonbase}"
+: "${UPDATE_MOONBASE_REPOS:=no}"
 ```
+
+Neither external file is required. A clone can still build without any LET
+installation. Do not copy all repository defaults into the external files:
+keep only machine-specific or user-specific settings there.
 
 ---
 

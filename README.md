@@ -30,7 +30,7 @@ tools/             generator and maintenance scripts
 archive/           long-term commit and news memory
 cache/             local build state and generated fragments
 docs/              GitHub Pages output
-site.conf           central configuration
+site.conf           portable repository configuration defaults
 ```
 
 The build entry point is:
