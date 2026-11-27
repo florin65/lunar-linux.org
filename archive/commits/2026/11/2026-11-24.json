@@ -25,5 +25,6 @@
   {"date":"2026-11-24","category":"Moonbase","repository":"kde","module":"quazip-qt6","version":"1.7.2.","commit":"09a6581b5623aad6ea89d4823baa74fb6efcac11","title":"quazip-qt6 updated to 1.7.2.","summary":"bump to 1.7.2."},
   {"date":"2026-11-24","category":"Moonbase","repository":"kde","module":"krita","version":"6.0.5.","commit":"7e0c768a98a91e0584479613a8cee3c3ab4ca153","title":"krita updated to 6.0.5.","summary":"bump to 6.0.5."},
   {"date":"2026-11-24","category":"Moonbase","repository":"kde","module":"pyqt6","version":"6.12.1.","commit":"e0de4b6e3d6dfc5be40193944c697c60eeba94d4","title":"pyqt6 updated to 6.12.1.","summary":"bump to 6.12.1."},
-  {"date":"2026-11-24","category":"Moonbase","repository":"kde","module":"PyQt-builder","version":"1.21.0.","commit":"f82a986d1f02750fe7c7e5b6664648e401f41035","title":"PyQt-builder updated to 1.21.0.","summary":"bump to 1.21.0."}
+  {"date":"2026-11-24","category":"Moonbase","repository":"kde","module":"PyQt-builder","version":"1.21.0.","commit":"f82a986d1f02750fe7c7e5b6664648e401f41035","title":"PyQt-builder updated to 1.21.0.","summary":"bump to 1.21.0."},
+  {"date":"2026-11-24","category":"Moonbase","repository":"core","module":"libpcap","version":"1.11.1","commit":"89671f690db3bccb00e6b97d150eb939e9828550","title":"libpcap updated to 1.11.1","summary":"version bumped to 1.11.1"}
 ]
