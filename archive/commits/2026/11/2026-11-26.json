@@ -83,5 +83,7 @@
   {"date":"2026-11-26","category":"Moonbase","repository":"other","module":"libfido2","version":"1.17.0","commit":"f2e3c9c52ed7e633b0a9b093ecb37ceb4ac13a40","title":"libfido2 updated to 1.17.0","summary":"bump to 1.17.0"},
   {"date":"2026-11-26","category":"Moonbase","repository":"other","module":"coargo-c","version":"0.10.28","commit":"f6af718280008af4b304b3312bceaf862d10c15a","title":"coargo-c updated to 0.10.28","summary":"version bumped to 0.10.28"},
   {"date":"2026-11-26","category":"Moonbase","repository":"other","module":"pipewire","version":"1.6.12.","commit":"f7f920e514402fe836e0d641704afa1d0385e28f","title":"pipewire updated to 1.6.12.","summary":"bump to 1.6.12."},
-  {"date":"2026-11-26","category":"Moonbase","repository":"other","module":"rofi-calc","version":"2.5.1","commit":"f8fe91ca9d6c9c34f60cf38f25761b3df71d95e4","title":"rofi-calc updated to 2.5.1","summary":"bump to 2.5.1"}
+  {"date":"2026-11-26","category":"Moonbase","repository":"other","module":"rofi-calc","version":"2.5.1","commit":"f8fe91ca9d6c9c34f60cf38f25761b3df71d95e4","title":"rofi-calc updated to 2.5.1","summary":"bump to 2.5.1"},
+  {"date":"2026-11-26","category":"Moonbase","repository":"kde","module":"","version":"","commit":"bea6f65cad0a95a5ca0cdb7f1b1339569a07a9ba","title":"k3b: llinting.","summary":"k3b: llinting."},
+  {"date":"2026-11-26","category":"Moonbase","repository":"other","module":"hdf5","version":"2.3.0.","commit":"9505dedd7b59f9dda734636a9028eb0e7aa7aa3e","title":"hdf5 updated to 2.3.0.","summary":"bump to 2.3.0."}
 ]
